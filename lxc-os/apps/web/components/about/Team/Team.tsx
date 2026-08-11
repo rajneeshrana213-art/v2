@@ -9,6 +9,7 @@ import rajneeshImage from "@/assets/team/rajneesh Rana founder .jpg";
 import bikyImage from "@/assets/team/biky  Dev CTO.png";
 import aryanImage from "@/assets/team/aryan Designted partner and director.jpg";
 import vishalImage from "@/assets/team/vishal sharma CMO &nDesgnated partnet and director.jpeg";
+import rohitImage from "@/assets/team/team3.jpg";
 
 const teamMembers = [
   {
@@ -31,26 +32,37 @@ const teamMembers = [
       instagram: "https://www.instagram.com/sharmaaryan0191/"
     }
   },
-  // {
-  //   name: "Vishal Sharma",
-  //   role: "CMO, Designated Partner & Director",
-  //   image: vishalImage,
-  //   description: "Growth hacker accelerating market penetration and user adoption.",
-  //   socials: {
-  //     linkedin: "https://www.linkedin.com/in/vishalsharma072/",
-  //     instagram: "https://www.instagram.com/learnxchain0/"
-  //   }
-  // },
-  // {
-  //   name: "Biky Dev",
-  //   role: "Chief Technology Officer (CTO)",
-  //   image: bikyImage,
-  //   description: "Architect behind the LXC engine, ensuring robust infrastructure.",
-  //   socials: {
-  //     linkedin: "https://www.linkedin.com/in/dev-biky/",
-  //     instagram: "https://www.instagram.com/dev.biky/"
-  //   }
-  // }
+  {
+    name: "Vishal Sharma",
+    role: "Chief Marketing Officer (CMO)",
+    image: vishalImage,
+    description: "Vishal is a marketing genius who has helped Lxc to grow.",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/vishalsharma072/",
+      instagram: "https://www.instagram.com/learnxchain0/"
+    }
+  },
+  {
+    name: "Rohit Kumar Indra ",
+    role: "Chief Operating Officer (COO)",
+    image: rohitImage,
+    description: "Chief Operating Officer (COO).",
+    socials: {
+      linkedin: "hhttps://www.linkedin.com/in/rohit-kumar-0301s333/",
+      instagram: "https://www.instagram.com/imrohit_03s/"
+    }
+  },
+  {
+    name: "Biky Dev",
+    role: "Chief Technology Officer (CTO)",
+    image: bikyImage,
+    description: "Architect behind the LXC engine, ensuring robust infrastructure.",
+    socials: {
+      linkedin: "https://www.linkedin.com/in/dev-biky/",
+      instagram: "https://www.instagram.com/dev.biky/"
+    }
+  },
+  
 ];
 
 // Interactive Card Component
