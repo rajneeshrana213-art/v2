@@ -103,15 +103,15 @@ function TeamCard({ member, index }: { member: any; index: number }) {
         }}
       />
 
-      <div className="relative p-6 sm:p-8 h-full flex flex-col z-10">
+      <div className="relative p-4 sm:p-5 h-full flex flex-col z-10">
         {/* Profile Image & Background Glow */}
-        <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-8">
+        <div className="relative w-full aspect-square rounded-[1.5rem] overflow-hidden mb-5">
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent z-10" />
           <Image
             src={member.image}
             alt={member.name}
             fill
-            className="object-cover object-center filter group-hover:scale-105 transition-all duration-700 ease-in-out"
+            className="object-cover object-top filter group-hover:scale-105 transition-all duration-700 ease-in-out"
           />
 
           {/* Social Links Overlay */}
@@ -137,13 +137,13 @@ function TeamCard({ member, index }: { member: any; index: number }) {
 
         {/* Content */}
         <div className="mt-auto relative z-20">
-          <h4 className="text-2xl font-black text-gray-900 dark:text-white mb-2 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#0057C8] group-hover:to-[#1A9FFF] dark:group-hover:from-[#1A9FFF] dark:group-hover:to-[#5CDD2B] transition-all duration-300">
+          <h4 className="text-base font-black text-gray-900 dark:text-white mb-1 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#0057C8] group-hover:to-[#1A9FFF] dark:group-hover:from-[#1A9FFF] dark:group-hover:to-[#5CDD2B] transition-all duration-300">
             {member.name}
           </h4>
-          <p className="text-sm font-bold text-[#0057C8] dark:text-[#1A9FFF] mb-4 uppercase tracking-widest">
+          <p className="text-[11px] font-bold text-[#0057C8] dark:text-[#1A9FFF] mb-2 uppercase tracking-widest leading-tight">
             {member.role}
           </p>
-          <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
             {member.description}
           </p>
         </div>
