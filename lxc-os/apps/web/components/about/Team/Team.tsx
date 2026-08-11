@@ -192,7 +192,7 @@ export default function AboutTeam() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
           {teamMembers.map((member, i) => (
             <TeamCard key={i} member={member} index={i} />
           ))}
