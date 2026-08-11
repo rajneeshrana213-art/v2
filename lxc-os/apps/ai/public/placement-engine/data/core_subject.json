@@ -1,0 +1,4214 @@
+{
+  "handbookData": [
+    {
+      "id": "sec0",
+      "num": "0",
+      "title": "Section 0: Computer Fundamentals",
+      "subtitle": "Hardware, Software & System Boot",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec0",
+          "title": "Section 0: Computer Fundamentals",
+          "subtitle": "Hardware, Software & System Boot"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "An introduction to computing history, hardware components, input/output structures, and the step-by-step operating system startup sequence."
+        },
+        {
+          "type": "h3",
+          "text": "0.1 Introduction to Computing"
+        },
+        {
+          "type": "para",
+          "text": "A computer is a programmable electronic device that accepts raw data as input, processes it using arithmetic and logical instructions, and produces output information. Over decades, computing has evolved through five distinct generations: from vacuum tubes (first generation) to transistors (second), integrated circuits (third), microprocessors (fourth), and artificial intelligence/quantum computing (fifth)."
+        },
+        {
+          "type": "h3",
+          "text": "0.2 Hardware vs Software Architecture"
+        },
+        {
+          "type": "para",
+          "text": "Hardware refers to the physical components of the computer. The central motherboard houses the CPU (Central Processing Unit), RAM (Random Access Memory), storage drives (HDDs, SSDs, NVMe), and the GPU (Graphics Processing Unit). Software represents the instructions that run on this hardware, categorized into System Software (operating systems, compilers, drivers) and Application Software (browsers, word processors, games)."
+        },
+        {
+          "type": "h3",
+          "text": "0.3 What Happens When a Computer Starts?"
+        },
+        {
+          "type": "para",
+          "text": "The startup process (cold boot) is a tightly choreographed hardware-software handoff:"
+        },
+        {
+          "type": "numbered",
+          "items": [
+            "Power Supply: Pressing the power button sends electrical current to the motherboard, initializing the CPU.",
+            "BIOS/UEFI: The CPU reads firmware from the motherboard's ROM chip. It executes the Power-On Self-Test (POST) to verify RAM, keyboard, and storage devices are active.",
+            "Bootloader: Once POST succeeds, BIOS searches non-volatile storage sectors (MBR or GPT) for the bootloader (e.g. GRUB on Linux or NTLDR/Bootmgr on Windows).",
+            "Kernel Loading: The bootloader loads the operating system kernel into RAM. The kernel takes full control, mounts filesystems, initializes system drivers, and launches initial system daemons (like systemd)."
+          ]
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 800 240\" xmlns=\"http://www.w3.org/2000/svg\">\n        <defs>\n          <linearGradient id=\"blueGreen\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\">\n            <stop offset=\"0%\" stop-color=\"#10B981\" />\n            <stop offset=\"100%\" stop-color=\"#059669\" />\n          </linearGradient>\n          <filter id=\"glow-effect\" x=\"-10%\" y=\"-10%\" width=\"120%\" height=\"120%\">\n            <feGaussianBlur stdDeviation=\"4\" result=\"blur\" />\n            <feComposite in=\"SourceGraphic\" in2=\"blur\" operator=\"over\" />\n          </filter>\n        </defs>\n        <g fill=\"none\" stroke=\"var(--border)\" stroke-width=\"2\">\n          <!-- Connectors -->\n          <path d=\"M140 120 H200\" stroke-dasharray=\"4,4\" />\n          <path d=\"M320 120 H380\" />\n          <path d=\"M500 120 H560\" />\n          <path d=\"M680 120 H700\" />\n          <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n            <path d=\"M 0 2 L 10 5 L 0 8 z\" fill=\"var(--accent)\" />\n          </marker>\n        </g>\n        \n        <!-- Step 1: Power On -->\n        <rect x=\"20\" y=\"70\" width=\"120\" height=\"100\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <circle cx=\"80\" cy=\"105\" r=\"20\" fill=\"url(#blueGreen)\" filter=\"url(#glow-effect)\" />\n        <path d=\"M80 95 V115 M72 101 A10 10 0 1 1 88 101\" stroke=\"#fff\" stroke-width=\"3\" fill=\"none\" />\n        <text x=\"80\" y=\"155\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">1. POWER ON</text>\n        \n        <!-- Step 2: BIOS/UEFI -->\n        <rect x=\"200\" y=\"70\" width=\"120\" height=\"100\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"260\" y=\"105\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">BIOS / UEFI</text>\n        <text x=\"260\" y=\"130\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">POST Hardware Init</text>\n        <text x=\"260\" y=\"155\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">2. BIOS CHECK</text>\n        \n        <!-- Step 3: Bootloader -->\n        <rect x=\"380\" y=\"70\" width=\"120\" height=\"100\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"440\" y=\"105\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">GRUB / NTLDR</text>\n        <text x=\"440\" y=\"130\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Read MBR/GPT</text>\n        <text x=\"440\" y=\"155\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">3. BOOTLOADER</text>\n        \n        <!-- Step 4: Kernel Loading -->\n        <rect x=\"560\" y=\"70\" width=\"120\" height=\"100\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"620\" y=\"105\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">OS KERNEL</text>\n        <text x=\"620\" y=\"130\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Load drivers & mounts</text>\n        <text x=\"620\" y=\"155\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">4. KERNEL BOOT</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 1. The 4-step Operating System boot sequence (POST -> Bootloader -> Kernel init).</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Computer Fundamentals establishes the core components of computer systems, bridging the gap between raw hardware, boot firmware, and operating system loading."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Hardware is the physical substrate (CPU, RAM, GPU, Motherboard).",
+            "System boot sequence is: Power -> BIOS/UEFI POST -> Bootloader (MBR/GPT) -> OS Kernel Initialization.",
+            "GPUs are optimized for massive parallel execution of simple tasks, whereas CPUs are optimized for low-latency sequential operations."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the primary role of BIOS/UEFI during bootup?",
+          "choices": [
+            "To load application programs",
+            "To execute the POST hardware check and locate the bootloader",
+            "To compile source code",
+            "To partition the hard drive"
+          ],
+          "correctIndex": 1,
+          "explanation": "BIOS/UEFI performs the Power-On Self-Test (POST) to verify hardware and loads the bootloader into RAM."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between a cold boot and a warm boot.",
+          "answer": "A cold boot occurs when the computer is powered up from a completely powered-off state, triggering full POST diagnostics. A warm boot is a system restart without losing power, skipping initial hardware verification."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Confusing BIOS with the OS Kernel (BIOS only boots the system; the Kernel runs it).",
+            "Assuming RAM stores data when the computer is powered off (RAM is volatile storage)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Component",
+            "Role"
+          ],
+          "rows": [
+            [
+              "CPU",
+              "Executes system instructions sequentially"
+            ],
+            [
+              "RAM",
+              "Volatile working memory for active programs"
+            ],
+            [
+              "BIOS",
+              "Motherboard firmware for bootup and POST"
+            ],
+            [
+              "Bootloader",
+              "Locates and launches the OS Kernel"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Computer Organization and Design by Patterson & Hennessy",
+            "OSDev Wiki (wiki.osdev.org) for bootloader details"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec1",
+      "num": "1",
+      "title": "Section 1: Binary & Digital Logic",
+      "subtitle": "Number Systems & Logic Gate Circuitry",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec1",
+          "title": "Section 1: Binary & Digital Logic",
+          "subtitle": "Number Systems & Logic Gate Circuitry"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Mastering binary arithmetic, hexadecimal translations, logic gates, and building mathematical circuits like adders from scratch."
+        },
+        {
+          "type": "h3",
+          "text": "1.1 Number Systems & Representations"
+        },
+        {
+          "type": "para",
+          "text": "Computers process information in binary format (base-2) representing high and low voltages. Number systems include Binary (0-1), Octal (base-8, 0-7), Decimal (base-10, 0-9), and Hexadecimal (base-16, 0-9 and A-F). Two's complement representation is utilized to express negative numbers in binary: invert all bits of the positive representation and add 1."
+        },
+        {
+          "type": "h3",
+          "text": "1.2 Logic Gates & Boolean Algebra"
+        },
+        {
+          "type": "para",
+          "text": "Logic gates form the bedrock of digital electronics. Basic gates include AND (output 1 only if all inputs are 1), OR (output 1 if at least one input is 1), NOT (inverts the bit), NAND/NOR (universal gates that can replicate any other gate), XOR (exclusive OR, output 1 if inputs differ), and XNOR (output 1 if inputs are identical)."
+        },
+        {
+          "type": "h3",
+          "text": "1.3 Half Adders & Full Adders"
+        },
+        {
+          "type": "para",
+          "text": "An adder is a digital circuit that performs addition of numbers. A Half Adder adds two single binary digits (A and B) and outputs Sum (S = A XOR B) and Carry (C = A AND B). A Full Adder adds three digits (A, B, and Carry-In) and outputs Sum and Carry-Out, enabling cascade addition for multi-bit binary strings."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 240\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Inputs -->\n        <text x=\"30\" y=\"75\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"16\" font-weight=\"bold\">Input A</text>\n        <text x=\"30\" y=\"165\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"16\" font-weight=\"bold\">Input B</text>\n        \n        <!-- Lines from Inputs -->\n        <path d=\"M90 70 H 220\" stroke=\"var(--border)\" stroke-width=\"3\" fill=\"none\" />\n        <path d=\"M90 160 H 220\" stroke=\"var(--border)\" stroke-width=\"3\" fill=\"none\" />\n        \n        <!-- Branch connections -->\n        <circle cx=\"140\" cy=\"70\" r=\"4\" fill=\"var(--accent)\" />\n        <circle cx=\"160\" cy=\"160\" r=\"4\" fill=\"var(--accent)\" />\n        <path d=\"M140 70 V 120 H 220\" stroke=\"var(--border)\" stroke-width=\"3\" fill=\"none\" />\n        <path d=\"M160 160 V 100 H 220\" stroke=\"var(--border)\" stroke-width=\"3\" fill=\"none\" />\n        \n        <!-- XOR Gate Structure (Sum) -->\n        <g transform=\"translate(220, 45)\">\n          <path d=\"M 0 0 C 15 15, 15 35, 0 50 C 15 50, 40 45, 50 25 C 40 5, 15 0, 0 0 Z\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"3\" />\n          <path d=\"M -5 0 C 10 15, 10 35, -5 50\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"3\" />\n          <text x=\"20\" y=\"30\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">XOR</text>\n        </g>\n        \n        <!-- AND Gate Structure (Carry) -->\n        <g transform=\"translate(220, 135)\">\n          <path d=\"M 0 0 H 25 A 25 25 0 0 1 50 25 A 25 25 0 0 1 25 50 H 0 Z\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"3\" />\n          <text x=\"20\" y=\"30\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">AND</text>\n        </g>\n        \n        <!-- Output wires -->\n        <path d=\"M 270 70 H 420\" stroke=\"var(--border)\" stroke-width=\"3\" fill=\"none\" />\n        <path d=\"M 270 160 H 420\" stroke=\"var(--border)\" stroke-width=\"3\" fill=\"none\" />\n        \n        <!-- Outputs -->\n        <text x=\"440\" y=\"75\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"16\" font-weight=\"bold\">SUM (S)</text>\n        <text x=\"440\" y=\"165\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"16\" font-weight=\"bold\">CARRY (C)</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 2. Half Adder circuit using an XOR gate for summation logic and an AND gate for carry logic.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Binary and digital logic represents the mathematical abstraction mapping directly onto microelectronic circuits, using Boolean algebra to compute sum and logic values."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Binary uses base-2; Hexadecimal uses base-16. 4 binary bits equal exactly 1 hex character.",
+            "Two's complement allows signed addition without specialized subtraction circuits.",
+            "NAND and NOR gates are universal gates because they can compile any logic circuit."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the two's complement of the binary byte 00001010 (Decimal 10)?",
+          "choices": [
+            "11110101",
+            "11110110",
+            "11110100",
+            "00001011"
+          ],
+          "correctIndex": 1,
+          "explanation": "Invert bits to get 11110101, then add 1 to get 11110110."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why are NAND and NOR gates called universal gates?",
+          "answer": "Because any logic function (AND, OR, NOT, XOR) can be constructed solely using combinations of NAND or NOR gates, making chip fabrication highly standardized."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Confusing one's complement with two's complement (forgetting to add the final 1).",
+            "Mixing XOR logic with OR logic (XOR outputs 0 when both inputs are 1)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Gate",
+            "Output Formula"
+          ],
+          "rows": [
+            [
+              "AND",
+              "Y = A · B"
+            ],
+            [
+              "OR",
+              "Y = A + B"
+            ],
+            [
+              "NOT",
+              "Y = A'"
+            ],
+            [
+              "XOR",
+              "Y = A ⊕ B"
+            ],
+            [
+              "NAND",
+              "Y = (A · B)'"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Digital Design by Morris Mano",
+            "Code: The Hidden Language of Computer Hardware and Software by Charles Petzold"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec2",
+      "num": "2",
+      "title": "Section 2: Computer Organization & Architecture",
+      "subtitle": "Processor Internals, Paging & Instruction Cycles",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec2",
+          "title": "Section 2: Computer Organization & Architecture",
+          "subtitle": "Processor Internals, Paging & Instruction Cycles"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Understanding CPU internals, memory hierarchy, cache optimization, virtual memory pages, and instruction fetch-decode-execute lifecycles."
+        },
+        {
+          "type": "h3",
+          "text": "2.1 Central Processing Unit Architecture"
+        },
+        {
+          "type": "para",
+          "text": "The CPU consists of the Arithmetic Logic Unit (ALU), the Control Unit (CU) which orchestrates instruction routing, and Registers. Key registers include the Program Counter (PC, address of next instruction), Instruction Register (IR, current instruction being executed), Memory Address Register (MAR), and Memory Data Register (MDR)."
+        },
+        {
+          "type": "h3",
+          "text": "2.2 Memory Hierarchy & Cache Coherency"
+        },
+        {
+          "type": "para",
+          "text": "To resolve the speed bottleneck between CPU processing and RAM access, computer architecture relies on a hierarchy: registers (fastest, smallest), L1/L2/L3 cache, physical RAM, and disk storage. Cache memory exploits temporal and spatial locality. However, multi-core systems require cache coherency protocols (like MESI) to ensure core-local caches have matching data."
+        },
+        {
+          "type": "h3",
+          "text": "2.3 Virtual Memory, Paging, and Segmentation"
+        },
+        {
+          "type": "para",
+          "text": "Virtual Memory provides programs with an isolated memory space. Paging divides virtual memory into fixed-size pages mapped to physical frames via a Page Table. Page faults occur when a requested page is not in RAM, prompting OS disk retrieval. Segmentation divides memory into variable-sized logical segments (code, stack, heap)."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 300\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Circular Flow -->\n        <circle cx=\"300\" cy=\"150\" r=\"100\" fill=\"none\" stroke=\"var(--border)\" stroke-width=\"4\" stroke-dasharray=\"8,8\" />\n        \n        <!-- FETCH Phase -->\n        <g transform=\"translate(300, 50)\">\n          <circle cx=\"0\" cy=\"0\" r=\"35\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"3\" />\n          <text x=\"0\" y=\"5\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">FETCH</text>\n          <text x=\"0\" y=\"50\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Load PC to IR</text>\n        </g>\n        \n        <!-- DECODE Phase -->\n        <g transform=\"translate(400, 150)\">\n          <circle cx=\"0\" cy=\"0\" r=\"35\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"3\" />\n          <text x=\"0\" y=\"5\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">DECODE</text>\n          <text x=\"55\" y=\"5\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"start\">Interpret Opcode</text>\n        </g>\n        \n        <!-- EXECUTE Phase -->\n        <g transform=\"translate(200, 150)\">\n          <circle cx=\"0\" cy=\"0\" r=\"35\" fill=\"var(--bg-card)\" stroke=\"#EF4444\" stroke-width=\"3\" />\n          <text x=\"0\" y=\"5\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">EXECUTE</text>\n          <text x=\"-55\" y=\"5\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"end\">ALU calculation</text>\n        </g>\n        \n        <!-- Center Registry/Control Block -->\n        <rect x=\"250\" y=\"125\" width=\"100\" height=\"50\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"300\" y=\"145\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Registers / ALU</text>\n        <text x=\"300\" y=\"163\" fill=\"var(--text-muted)\" font-family=\"monospace\" font-size=\"9\" text-anchor=\"middle\">PC, MAR, MDR, IR</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 3. The Instruction Cycle pipeline representing the continuous Fetch-Decode-Execute state loop.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Computer Organization and Architecture bridges abstract program instructions with micro-operations, pipelines, page allocations, and cache memory levels."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "The CPU cycle consists of Fetch, Decode, and Execute phases.",
+            "Cache hit ratios depend on spatial locality (adjacent data) and temporal locality (reused data).",
+            "Virtual memory uses the Translation Lookaside Buffer (TLB) to cache page table translations."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which register stores the address of the next instruction to be fetched?",
+          "choices": [
+            "Instruction Register (IR)",
+            "Program Counter (PC)",
+            "Accumulator (AC)",
+            "Memory Data Register (MDR)"
+          ],
+          "correctIndex": 1,
+          "explanation": "The Program Counter (PC) constantly holds the address of the next instruction."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain MESI cache protocol states.",
+          "answer": "MESI stands for Modified (dirty, only in current cache), Exclusive (clean, only in current cache), Shared (clean, in multiple caches), and Invalid (stale data, must be re-fetched)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Assuming Virtual Memory size is limited by physical RAM size (it is actually limited by CPU bit architecture, e.g. 64-bit address space).",
+            "Confusing internal fragmentations (in paging) with external fragmentations (in segmentation)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Concept",
+            "Description"
+          ],
+          "rows": [
+            [
+              "PC",
+              "Program Counter - next instruction pointer"
+            ],
+            [
+              "TLB",
+              "Translation Lookaside Buffer - hardware page cache"
+            ],
+            [
+              "Page Fault",
+              "Interrupt triggered when page is missing from RAM"
+            ],
+            [
+              "Spatial Locality",
+              "Reading memory near recently accessed memory"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Structured Computer Organization by Andrew S. Tanenbaum",
+            "Computer Architecture: A Quantitative Approach by Hennessy & Patterson"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec3",
+      "num": "3",
+      "title": "Section 3: Programming Fundamentals",
+      "subtitle": "Syntax, Control Structures & Basic CLI Systems",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec3",
+          "title": "Section 3: Programming Fundamentals",
+          "subtitle": "Syntax, Control Structures & Basic CLI Systems"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Coding concepts including data types, memory scoping, flowcharts, recursion dry runs, and building command-line calculator and banking systems."
+        },
+        {
+          "type": "h3",
+          "text": "3.1 Basic Coding Mechanics"
+        },
+        {
+          "type": "para",
+          "text": "Programming languages convert high-level statements into binary machine instructions. Core mechanics include variables (named storage locations), primitive data types (integers, floats, booleans, characters), and composite types (arrays, strings, objects). Memory scopes define where a variable is accessible: local (function scope), block (enclosed in curly braces), or global (entire module)."
+        },
+        {
+          "type": "h3",
+          "text": "3.2 Control Flow & Iterations"
+        },
+        {
+          "type": "para",
+          "text": "Execution flow is modified using conditional branches (if, else-if, else, switch-case) and iteration loops (for, while, do-while). A dry run is a manual step-by-step trace of a code block's variables, which is vital for debugging loops and recursion conditions."
+        },
+        {
+          "type": "h3",
+          "text": "3.3 Code Example: Banking System State Machine"
+        },
+        {
+          "type": "para",
+          "text": "Below is a sample Javascript implementation of a bank transaction validation state machine:"
+        },
+        {
+          "type": "codeBlock",
+          "lang": "javascript",
+          "codeText": "\nfunction processTransaction(balance, amount, type) {\n  if (type === \"WITHDRAW\") {\n    if (amount <= 0) {\n      return { success: false, error: \"Invalid amount\" };\n    }\n    if (amount > balance) {\n      return { success: false, error: \"Insufficient funds\" };\n    }\n    return { success: true, newBalance: balance - amount };\n  } else if (type === \"DEPOSIT\") {\n    if (amount <= 0) {\n      return { success: false, error: \"Invalid deposit amount\" };\n    }\n    return { success: true, newBalance: balance + amount };\n  }\n  return { success: false, error: \"Unknown transaction type\" };\n}\nconsole.log(processTransaction(100, 40, \"WITHDRAW\")); // { success: true, newBalance: 60 }\n"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Programming Fundamentals establishes variables, control flow, functions, and tracing mechanics to execute logical operations and build command-line applications."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Data types determine how much memory is allocated and how bits are interpreted.",
+            "Loops must have valid termination bounds to prevent CPU-blocking infinite runs.",
+            "Stack frames track execution contexts during nested function calls."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the main difference between call-by-value and call-by-reference?",
+          "choices": [
+            "Call-by-value passes a copy of the actual variable, while call-by-reference passes the memory address.",
+            "Call-by-value is faster for objects.",
+            "Call-by-reference only works in JavaScript.",
+            "There is no difference."
+          ],
+          "correctIndex": 0,
+          "explanation": "Call-by-value isolates the function operations from modifying the original variable value."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Describe a stack overflow scenario in recursive functions.",
+          "answer": "If a recursive function lacks a base case or has invalid input that never reaches it, the system repeatedly pushes stack frames until the stack memory limit is exceeded."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Creating off-by-one errors in loop boundaries (e.g. using '<=' instead of '<' on zero-indexed arrays).",
+            "Leaving global variables un-scoped, leading to mutation bugs in multi-threaded runtime environments."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Scope Type",
+            "Visibility Limit"
+          ],
+          "rows": [
+            [
+              "Global",
+              "Across all source files / modules"
+            ],
+            [
+              "Local / Function",
+              "Only within the declaring function scope"
+            ],
+            [
+              "Block",
+              "Only inside loop or condition curly braces '{}'"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "The C Programming Language by Kernighan & Ritchie",
+            "How to Solve It by Computer by R.G. Dromey"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec4",
+      "num": "4",
+      "title": "Section 4: Object Oriented Programming",
+      "subtitle": "The 4 Pillars, UML Modeling & Dynamic Dispatch",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec4",
+          "title": "Section 4: Object Oriented Programming",
+          "subtitle": "The 4 Pillars, UML Modeling & Dynamic Dispatch"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Deep diving into Classes, objects, Encapsulation, Abstraction, Inheritance, Polymorphism, Diamond problems, and Unified Modeling Language schemas."
+        },
+        {
+          "type": "h3",
+          "text": "4.1 The Paradigms of Object-Oriented Design"
+        },
+        {
+          "type": "para",
+          "text": "Object-Oriented Programming (OOP) revolves around class blueprints containing state attributes and behavior methods. Encapsulation wraps fields and functions together, restricting direct data access using modifiers (public, private, protected). Abstraction hides background implementation details behind interfaces or abstract classes."
+        },
+        {
+          "type": "h3",
+          "text": "4.2 Inheritance & Polymorphism"
+        },
+        {
+          "type": "para",
+          "text": "Inheritance enables code reuse by deriving child classes from parents. It introduces the diamond problem when multiple base classes define identical methods, resolved in C++ via virtual inheritance and in Java/C# via single inheritance with multi-interface implementation. Polymorphism offers compile-time overloading (same name, different arguments) and runtime overriding (dynamic dispatch based on the instanced object type)."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 800 280\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Top Arch -->\n        <rect x=\"50\" y=\"20\" width=\"700\" height=\"40\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"3\" />\n        <text x=\"400\" y=\"45\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"16\" text-anchor=\"middle\" font-weight=\"bold\">OBJECT ORIENTED PROGRAMMING (OOP)</text>\n        \n        <!-- Columns / Pillars -->\n        <!-- Encapsulation -->\n        <g transform=\"translate(70, 80)\">\n          <rect x=\"0\" y=\"0\" width=\"140\" height=\"150\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"70\" y=\"30\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">Encapsulation</text>\n          <text x=\"70\" y=\"65\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Data Hiding</text>\n          <text x=\"70\" y=\"85\" fill=\"var(--text-muted)\" font-family=\"monospace\" font-size=\"9\" text-anchor=\"middle\">private / protected</text>\n          <text x=\"70\" y=\"115\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Getters & Setters</text>\n        </g>\n        \n        <!-- Abstraction -->\n        <g transform=\"translate(250, 80)\">\n          <rect x=\"0\" y=\"0\" width=\"140\" height=\"150\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"70\" y=\"30\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">Abstraction</text>\n          <text x=\"70\" y=\"65\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Hiding Complexity</text>\n          <text x=\"70\" y=\"85\" fill=\"var(--text-muted)\" font-family=\"monospace\" font-size=\"9\" text-anchor=\"middle\">interfaces / abstract</text>\n          <text x=\"70\" y=\"115\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Exposing Contract Only</text>\n        </g>\n        \n        <!-- Inheritance -->\n        <g transform=\"translate(430, 80)\">\n          <rect x=\"0\" y=\"0\" width=\"140\" height=\"150\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"70\" y=\"30\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">Inheritance</text>\n          <text x=\"70\" y=\"65\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Reusability</text>\n          <text x=\"70\" y=\"85\" fill=\"var(--text-muted)\" font-family=\"monospace\" font-size=\"9\" text-anchor=\"middle\">extends / implements</text>\n          <text x=\"70\" y=\"115\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Parent-Child Class</text>\n        </g>\n        \n        <!-- Polymorphism -->\n        <g transform=\"translate(610, 80)\">\n          <rect x=\"0\" y=\"0\" width=\"140\" height=\"150\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"70\" y=\"30\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">Polymorphism</text>\n          <text x=\"70\" y=\"65\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Many Forms</text>\n          <text x=\"70\" y=\"85\" fill=\"var(--text-muted)\" font-family=\"monospace\" font-size=\"9\" text-anchor=\"middle\">Overloading (Compile)</text>\n          <text x=\"70\" y=\"115\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Overriding (Runtime)</text>\n        </g>\n        \n        <!-- Foundation Base -->\n        <rect x=\"30\" y=\"240\" width=\"740\" height=\"20\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n      </svg>\n      <div class=\"diagram-caption\">Figure 4. The Four Pillars of Object-Oriented Programming (OOP) supporting structural design architecture.</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "4.3 UML Modeling Class Structure"
+        },
+        {
+          "type": "para",
+          "text": "Unified Modeling Language (UML) maps inheritance (solid line with hollow arrow), implementation (dashed line with hollow arrow), association (directed arrow), and composition (filled diamond)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "OOP structural principles promote code maintainability, clean encapsulation boundaries, structural inheritance hierarchies, and dynamic execution behaviors."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Encapsulation isolates data structures from arbitrary external manipulation.",
+            "Dynamic dispatch resolves overridden methods at runtime using vtables (virtual tables).",
+            "Prefer composition over inheritance to avoid tight coupling between parent and child classes."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which pillar is demonstrated by overriding a base class print() method in a child class?",
+          "choices": [
+            "Encapsulation",
+            "Inheritance",
+            "Runtime Polymorphism",
+            "Abstraction"
+          ],
+          "correctIndex": 2,
+          "explanation": "Method overriding resolved during program execution demonstrates runtime polymorphism."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the Diamond Problem and how is it resolved in Java?",
+          "answer": "The Diamond Problem occurs in multiple inheritance where a subclass inherits from two parents that both override the same grandparent method. Java avoids this by permitting class inheritance from only one parent, while allowing multiple interfaces containing default implementations that require explicit override."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Using public modifiers by default instead of private/protected (breaking encapsulation).",
+            "Over-inheriting to form deep class trees, which makes updates extremely difficult."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Pillar",
+            "Primary Implementation Mechanism"
+          ],
+          "rows": [
+            [
+              "Encapsulation",
+              "Private/Protected properties + getter/setter methods"
+            ],
+            [
+              "Abstraction",
+              "Abstract classes & Interface contracts"
+            ],
+            [
+              "Inheritance",
+              "Subclassing (extends keyword)"
+            ],
+            [
+              "Polymorphism",
+              "Virtual tables (vtable) & Method signatures"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Design Patterns: Elements of Reusable Object-Oriented Software by GoF",
+            "Clean Code: A Handbook of Agile Software Craftsmanship by Robert C. Martin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec5",
+      "num": "5",
+      "title": "Section 5: Data Structures",
+      "subtitle": "Linear & Non-Linear Structures, Traversals & Complexities",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec5",
+          "title": "Section 5: Data Structures",
+          "subtitle": "Linear & Non-Linear Structures, Traversals & Complexities"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Exposing contiguous arrays, singly/doubly linked lists, stacks, queues, binary search trees, heaps, prefix tries, and adjacency graphs."
+        },
+        {
+          "type": "h3",
+          "text": "5.1 Linear Data Structures"
+        },
+        {
+          "type": "para",
+          "text": "Linear structures arrange elements sequentially. Arrays store elements in contiguous memory slots, giving O(1) read/write by index but O(N) insertion/deletion. Linked Lists allocate nodes dynamically with pointers, enabling O(1) insertion but O(N) sequential search. Stacks operate on LIFO (Last In First Out) principles, whereas Queues operate on FIFO (First In First Out) schemes."
+        },
+        {
+          "type": "h3",
+          "text": "5.2 Non-Linear Data Structures"
+        },
+        {
+          "type": "para",
+          "text": "Non-linear structures support hierarchal or multi-directed configurations. Trees organize nodes from a single root. A Binary Search Tree (BST) enforces left-child < parent < right-child, allowing average O(log N) searches. Graphs connect vertices using edges, modeled using adjacency lists or matrices and traversed using Breadth-First Search (BFS) and Depth-First Search (DFS)."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 800 280\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Arrays Block -->\n        <g transform=\"translate(40, 30)\">\n          <text x=\"70\" y=\"20\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">Array (Contiguous)</text>\n          <rect x=\"0\" y=\"30\" width=\"30\" height=\"30\" rx=\"2\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <rect x=\"30\" y=\"30\" width=\"30\" height=\"30\" rx=\"2\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <rect x=\"60\" y=\"30\" width=\"30\" height=\"30\" rx=\"2\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <rect x=\"90\" y=\"30\" width=\"30\" height=\"30\" rx=\"2\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"15\" y=\"50\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">A</text>\n          <text x=\"45\" y=\"50\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">B</text>\n          <text x=\"75\" y=\"50\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">C</text>\n          <text x=\"105\" y=\"50\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">D</text>\n        </g>\n        \n        <!-- Linked List Block -->\n        <g transform=\"translate(40, 150)\">\n          <text x=\"70\" y=\"20\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">Linked List (Pointer)</text>\n          <rect x=\"0\" y=\"35\" width=\"40\" height=\"25\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"20\" y=\"52\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\">Head</text>\n          \n          <line x1=\"40\" y1=\"47\" x2=\"80\" y2=\"47\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n          \n          <rect x=\"80\" y=\"35\" width=\"40\" height=\"25\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"52\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\">Node</text>\n          \n          <line x1=\"120\" y1=\"47\" x2=\"160\" y2=\"47\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n          \n          <rect x=\"160\" y=\"35\" width=\"40\" height=\"25\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"180\" y=\"52\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\">Null</text>\n        </g>\n        \n        <!-- Stack Block -->\n        <g transform=\"translate(320, 30)\">\n          <text x=\"60\" y=\"20\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">Stack (LIFO)</text>\n          <rect x=\"20\" y=\"30\" width=\"80\" height=\"20\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <rect x=\"20\" y=\"50\" width=\"80\" height=\"20\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <rect x=\"20\" y=\"70\" width=\"80\" height=\"20\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"60\" y=\"45\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">Top (Push/Pop)</text>\n          <text x=\"60\" y=\"65\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">Middle</text>\n          <text x=\"60\" y=\"85\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">Base</text>\n        </g>\n        \n        <!-- Queue Block -->\n        <g transform=\"translate(320, 150)\">\n          <text x=\"60\" y=\"20\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">Queue (FIFO)</text>\n          <rect x=\"10\" y=\"35\" width=\"30\" height=\"30\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <rect x=\"40\" y=\"35\" width=\"30\" height=\"30\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <rect x=\"70\" y=\"35\" width=\"30\" height=\"30\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"-25\" y=\"53\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"9\">In (Enqueue)</text>\n          <line x1=\"-5\" y1=\"50\" x2=\"10\" y2=\"50\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n          \n          <line x1=\"100\" y1=\"50\" x2=\"115\" y2=\"50\" stroke=\"var(--secondary)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n          <text x=\"120\" y=\"53\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"9\">Out (Dequeue)</text>\n        </g>\n        \n        <!-- Tree Block -->\n        <g transform=\"translate(560, 30)\">\n          <text x=\"80\" y=\"20\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">Tree Structure</text>\n          <circle cx=\"80\" cy=\"50\" r=\"15\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n          <text x=\"80\" y=\"54\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\">Root</text>\n          \n          <line x1=\"70\" y1=\"62\" x2=\"50\" y2=\"98\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <line x1=\"90\" y1=\"62\" x2=\"110\" y2=\"98\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          \n          <circle cx=\"40\" cy=\"110\" r=\"15\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <circle cx=\"120\" cy=\"110\" r=\"15\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"40\" y=\"114\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\">L</text>\n          <text x=\"120\" y=\"114\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\">R</text>\n        </g>\n      </svg>\n      <div class=\"diagram-caption\">Figure 5. The primary Data Structure topologies (Arrays, Lists, Stacks, Queues, and Trees).</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "5.3 Complexity Matrix"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Data Structure",
+            "Access",
+            "Search",
+            "Insertion",
+            "Deletion"
+          ],
+          "rows": [
+            [
+              "Array",
+              "O(1)",
+              "O(N)",
+              "O(N)",
+              "O(N)"
+            ],
+            [
+              "Singly Linked List",
+              "O(N)",
+              "O(N)",
+              "O(1) at head",
+              "O(1) at head"
+            ],
+            [
+              "BST (Balanced)",
+              "O(log N)",
+              "O(log N)",
+              "O(log N)",
+              "O(log N)"
+            ],
+            [
+              "Hash Table",
+              "N/A",
+              "O(1) avg",
+              "O(1) avg",
+              "O(1) avg"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Data Structures represent the physical memory arrangements and data routing layouts optimized for specific storage, search, and retrieval complexities."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Arrays are memory contiguous; Linked Lists are scattered with pointer connections.",
+            "Binary trees have an in-order traversal that returns sorted values if it is a BST.",
+            "Graphs are represented via Adjacency Matrix (O(1) lookup, O(V^2) space) or Adjacency List (O(V+E) space)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the worst-case search complexity in an unbalanced Binary Search Tree?",
+          "choices": [
+            "O(1)",
+            "O(log N)",
+            "O(N)",
+            "O(N log N)"
+          ],
+          "correctIndex": 2,
+          "explanation": "In the worst case (skewed tree), a BST degrades into a linked list, requiring linear search time O(N)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "When is a Hash Table preferred over a Binary Search Tree?",
+          "answer": "A Hash Table is preferred when O(1) average constant-time insert, delete, and lookup operations are required and ordering/sorting of elements is not necessary."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Forgetting to check for null pointers when updating node links in a linked list.",
+            "Underestimating memory overhead of pointers in linked list structures compared to raw contiguous arrays."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Structure",
+            "Best Use Case"
+          ],
+          "rows": [
+            [
+              "Array",
+              "Indexed read-heavy datasets"
+            ],
+            [
+              "Stack",
+              "Call stacks, undo operations, parenthesis matching"
+            ],
+            [
+              "Queue",
+              "Task scheduling, message buffering"
+            ],
+            [
+              "Trie",
+              "Autocomplete prefix queries"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Introduction to Algorithms by Cormen, Leiserson, Rivest, and Stein (CLRS)",
+            "Algorithms by Robert Sedgewick"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec6",
+      "num": "6",
+      "title": "Section 6: Algorithms",
+      "subtitle": "Searching, Sorting, Recursion & Paradigm Frameworks",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec6",
+          "title": "Section 6: Algorithms",
+          "subtitle": "Searching, Sorting, Recursion & Paradigm Frameworks"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Analyzing searching, sorting limits, backtracking heuristics, greedy optimizations, and Dynamic Programming memorization matrices."
+        },
+        {
+          "type": "h3",
+          "text": "6.1 Sorting & Searching Algorithmic Boundaries"
+        },
+        {
+          "type": "para",
+          "text": "Searching algorithms isolate target values: Binary Search requires a pre-sorted dataset to operate in O(log N) splits. Sorting organizes arrays. Comparison-based sorting algorithms (like Merge Sort or Heap Sort) have a mathematical lower complexity bound of O(N log N). In contrast, non-comparison sorts (like Radix or Counting Sort) can achieve linear O(N) runtime by using assumptions about data distribution."
+        },
+        {
+          "type": "h3",
+          "text": "6.2 Heuristic & Decision Paradigms"
+        },
+        {
+          "type": "para",
+          "text": "Algorithms follow different paradigms:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Divide and Conquer: Split the problem into independent subproblems, solve recursively, and combine (e.g. Merge Sort).",
+            "Greedy Paradigm: Make the locally optimal choice at each step hoping it leads to a global optimum (e.g. Dijkstra's shortest path, Huffman Coding).",
+            "Dynamic Programming (DP): Solve complex problems by breaking them into overlapping subproblems, saving subproblem solutions in memoization tables to prevent redundant calculations (e.g. 0/1 Knapsack, LCS)."
+          ]
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 240\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Unsorted Array -->\n        <g transform=\"translate(200, 20)\">\n          <rect x=\"0\" y=\"0\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"20\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">[ 38, 27, 43, 3, 9, 82, 10 ]</text>\n          <text x=\"100\" y=\"-8\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">UNSORTED ARRAY</text>\n        </g>\n        \n        <!-- Divide Step -->\n        <line x1=\"250\" y1=\"50\" x2=\"150\" y2=\"100\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n        <line x1=\"350\" y1=\"50\" x2=\"450\" y2=\"100\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n        \n        <!-- Left Split -->\n        <g transform=\"translate(50, 100)\">\n          <rect x=\"0\" y=\"0\" width=\"160\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n          <text x=\"80\" y=\"20\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">[ 38, 27, 43, 3 ]</text>\n          <text x=\"80\" y=\"45\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Left Sub-array</text>\n        </g>\n        \n        <!-- Right Split -->\n        <g transform=\"translate(390, 100)\">\n          <rect x=\"0\" y=\"0\" width=\"160\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"2\" />\n          <text x=\"80\" y=\"20\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">[ 9, 82, 10 ]</text>\n          <text x=\"80\" y=\"45\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Right Sub-array</text>\n        </g>\n        \n        <!-- Merge / Sorted Step -->\n        <path d=\"M130 150 V 180 H 280\" stroke=\"var(--accent)\" stroke-width=\"2\" fill=\"none\" />\n        <path d=\"M470 150 V 180 H 320\" stroke=\"var(--secondary)\" stroke-width=\"2\" fill=\"none\" />\n        \n        <g transform=\"translate(200, 185)\">\n          <rect x=\"0\" y=\"0\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"20\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">[ 3, 9, 10, 27, 38, 43, 82 ]</text>\n          <text x=\"100\" y=\"45\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">SORTED CONQUERED ARRAY</text>\n        </g>\n      </svg>\n      <div class=\"diagram-caption\">Figure 6. Merge Sort divide-and-conquer strategy (splitting into subarrays, sorting independently, and merging).</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "6.3 Code Example: Memoized Fibonacci (DP)"
+        },
+        {
+          "type": "codeBlock",
+          "lang": "javascript",
+          "codeText": "\nfunction fibMemo(n, memo = {}) {\n  if (n in memo) return memo[n];\n  if (n <= 1) return n;\n  memo[n] = fibMemo(n - 1, memo) + fibMemo(n - 2, memo);\n  return memo[n];\n}\nconsole.log(fibMemo(50)); // Returns 12586269025 O(N) runtime instead of exponential O(2^N)\n"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Algorithms define step-by-step mathematical procedures structured to solve logical problems efficiently using optimal time and space paradigms."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Binary search reduces search spaces by half in each step.",
+            "Divide-and-Conquer partitions problems; DP stores solutions to overlapping subproblems.",
+            "Greedy algorithms do not backtrack; they make permanent choices at each node."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which paradigm saves solved subproblem results in a lookup table to avoid recalculation?",
+          "choices": [
+            "Divide & Conquer",
+            "Dynamic Programming",
+            "Greedy Method",
+            "Backtracking"
+          ],
+          "correctIndex": 1,
+          "explanation": "Dynamic Programming stores states (memoization or tabulation) to optimize overlapping calculations."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain why comparison-based sorting cannot run faster than O(N log N) in the worst case.",
+          "answer": "Comparison sorting can be modeled as a decision tree where each node represents a comparison. To distinguish all N! permutations of an array, the tree depth must be at least log(N!) ≈ N log N based on Stirling's approximation."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Writing a recursive function without a base case (generating stack overflow).",
+            "Using a greedy approach for problems that require global state search (like 0/1 Knapsack, where greedy yields suboptimal results)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Algorithm",
+            "Time Complexity",
+            "Space Complexity"
+          ],
+          "rows": [
+            [
+              "Binary Search",
+              "O(log N)",
+              "O(1) iterative"
+            ],
+            [
+              "Merge Sort",
+              "O(N log N)",
+              "O(N) aux"
+            ],
+            [
+              "Quick Sort",
+              "O(N log N) average",
+              "O(log N) stack"
+            ],
+            [
+              "Dijkstra",
+              "O((V + E) log V)",
+              "O(V)"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "The Algorithm Design Manual by Steven Skiena",
+            "Dynamic Programming: A Computational Tool by Art Lew and Holger Mauch"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec7",
+      "num": "7",
+      "title": "Section 7: Database Management Systems (DBMS)",
+      "subtitle": "ER Diagrams, SQL Queries, Transactions & ACID",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec7",
+          "title": "Section 7: Database Management Systems (DBMS)",
+          "subtitle": "ER Diagrams, SQL Queries, Transactions & ACID"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Architecting entity structures, normalized relations, SQL indexes, transactional concurrency, lock mechanisms, and ACID isolation guarantees."
+        },
+        {
+          "type": "h3",
+          "text": "7.1 Relational Architecture & ER Modeling"
+        },
+        {
+          "type": "para",
+          "text": "A Database Management System (DBMS) manages organized data. Entity-Relationship (ER) models map entities, properties, and relationships. Relational databases store data in tables (relations) with schema constraints. Normalization (1NF, 2NF, 3NF, BCNF) organizes fields to eliminate data redundancy and prevent insertion, update, and deletion anomalies."
+        },
+        {
+          "type": "h3",
+          "text": "7.2 Query Execution & B-Tree Indexing"
+        },
+        {
+          "type": "para",
+          "text": "SQL (Structured Query Language) is declarative: developers specify WHAT data is needed, and the query optimizer generates the execution plan. Indexes speed up retrievals. B-Trees are self-balancing search trees optimized for block storage, keeping search, insertion, and deletion times in O(log N) complexity."
+        },
+        {
+          "type": "h3",
+          "text": "7.3 Transactions & ACID Isolation Levels"
+        },
+        {
+          "type": "para",
+          "text": "A database transaction is a logical unit of work. To ensure integrity, databases enforce ACID:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Atomicity: Entire transaction succeeds or all operations roll back.",
+            "Consistency: Transaction transitions database from one valid state to another.",
+            "Isolation: Concurrent transactions run without interference.",
+            "Durability: Committed updates survive system crashes."
+          ]
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 700 260\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Active -->\n        <g transform=\"translate(60, 100)\">\n          <rect x=\"0\" y=\"0\" width=\"100\" height=\"50\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n          <text x=\"50\" y=\"30\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">ACTIVE</text>\n        </g>\n        \n        <!-- Arrows -->\n        <line x1=\"160\" y1=\"125\" x2=\"240\" y2=\"125\" stroke=\"var(--border)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"200\" y=\"115\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Read/Write ops</text>\n        \n        <!-- Partially Committed -->\n        <g transform=\"translate(240, 100)\">\n          <rect x=\"0\" y=\"0\" width=\"150\" height=\"50\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"2\" />\n          <text x=\"75\" y=\"30\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">PARTIALLY COMMITTED</text>\n        </g>\n        \n        <!-- Success Arrow -->\n        <line x1=\"390\" y1=\"125\" x2=\"490\" y2=\"125\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"440\" y=\"115\" fill=\"var(--accent)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Commit Done</text>\n        \n        <!-- Committed -->\n        <g transform=\"translate(490, 100)\">\n          <rect x=\"0\" y=\"0\" width=\"150\" height=\"50\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"#10B981\" stroke-width=\"3\" />\n          <text x=\"75\" y=\"30\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">COMMITTED</text>\n        </g>\n        \n        <!-- Failure Paths -->\n        <path d=\"M110 150 V 210 H 260\" stroke=\"#EF4444\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <path d=\"M315 150 V 210 H 290\" stroke=\"#EF4444\" stroke-width=\"2\" />\n        <text x=\"200\" y=\"200\" fill=\"#EF4444\" font-family=\"sans-serif\" font-size=\"9\">System Failure / Abort</text>\n        \n        <!-- Aborted -->\n        <g transform=\"translate(260, 185)\">\n          <rect x=\"0\" y=\"0\" width=\"120\" height=\"50\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"#EF4444\" stroke-width=\"2\" />\n          <text x=\"60\" y=\"30\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">ABORTED</text>\n        </g>\n      </svg>\n      <div class=\"diagram-caption\">Figure 7. Transaction state lifecycle transitions in Database Management Systems (DBMS).</div>\n    </div>\n  "
+        },
+        {
+          "type": "para",
+          "text": "Concurrency locks (Shared vs Exclusive) are managed by protocols like Two-Phase Locking (2PL). Isolation levels range from Read Uncommitted (allows dirty reads), Read Committed (prevents dirty reads), Repeatable Read (prevents non-repeatable reads), to Serializable (fully isolated, blocks phantom reads)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "DBMS ensures structured data query capabilities, normalizations, indexing lookup speedups, and robust ACID transaction isolation."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Normalization separates tables to remove duplicate records.",
+            "B-Tree indexes speed up range queries, while Hash indexes excel at point lookups.",
+            "ACID isolation levels negotiate the tradeoff between execution speed and transaction safety."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which transaction isolation level completely prevents Dirty Reads, Non-Repeatable Reads, and Phantom Reads?",
+          "choices": [
+            "Read Uncommitted",
+            "Read Committed",
+            "Repeatable Read",
+            "Serializable"
+          ],
+          "correctIndex": 3,
+          "explanation": "Serializable is the highest isolation level, executing transactions as if they were running in sequence."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between a clustered and non-clustered database index.",
+          "answer": "A clustered index defines the physical order of data rows on disk (only one allowed per table). A non-clustered index stores index pointers pointing to the physical locations of data rows."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Creating too many indexes on a write-heavy database (each index slows down insertions and updates).",
+            "Failing to implement proper transaction boundary rollbacks in software code."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Isolation Level",
+            "Dirty Reads Allowed?",
+            "Non-Repeatable Reads?",
+            "Phantom Reads?"
+          ],
+          "rows": [
+            [
+              "Read Uncommitted",
+              "Yes",
+              "Yes",
+              "Yes"
+            ],
+            [
+              "Read Committed",
+              "No",
+              "Yes",
+              "Yes"
+            ],
+            [
+              "Repeatable Read",
+              "No",
+              "No",
+              "Yes"
+            ],
+            [
+              "Serializable",
+              "No",
+              "No",
+              "No"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Database System Concepts by Silberschatz, Korth, and Sudarshan",
+            "Designing Data-Intensive Applications by Martin Kleppmann"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec8",
+      "num": "8",
+      "title": "Section 8: Operating Systems",
+      "subtitle": "Processes, Threads, Scheduling & Memory Page Replacements",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec8",
+          "title": "Section 8: Operating Systems",
+          "subtitle": "Processes, Threads, Scheduling & Memory Page Replacements"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Investigating kernels, process lifecycles, CPU scheduling, thread sync, mutex locks, semaphores, deadlocks, and page replacement policies."
+        },
+        {
+          "type": "h3",
+          "text": "8.1 Kernel & Process Management"
+        },
+        {
+          "type": "para",
+          "text": "The Operating System (OS) is the bridge between hardware and application software. The kernel runs in privileged mode, managing system calls, process scheduling, and hardware resources. A Process is an executing program instance with its own virtual memory layout. Threads are lightweight execution units within a process sharing the same address space but maintaining separate registers and stack frames."
+        },
+        {
+          "type": "h3",
+          "text": "8.2 CPU Scheduling & Synchronization"
+        },
+        {
+          "type": "para",
+          "text": "The OS schedules processes on the CPU using algorithms like First-Come First-Served (FCFS), Shortest Job First (SJF), and Round Robin (which relies on time quantums). Access to shared memory requires synchronization. Race conditions are resolved using Mutexes (mutual exclusion locks) and Semaphores (signals). Incorrect synchronization can lead to Deadlocks, characterized by Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 700 280\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- New -->\n        <circle cx=\"80\" cy=\"80\" r=\"35\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"80\" y=\"84\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">NEW</text>\n        \n        <line x1=\"115\" y1=\"80\" x2=\"195\" y2=\"80\" stroke=\"var(--border)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"155\" y=\"70\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Admitted</text>\n        \n        <!-- Ready -->\n        <circle cx=\"230\" cy=\"80\" r=\"35\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"3\" />\n        <text x=\"230\" y=\"84\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">READY</text>\n        \n        <!-- Run dispatch -->\n        <path d=\"M 265 70 C 310 50, 390 50, 435 70\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"350\" y=\"45\" fill=\"var(--accent)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Scheduler Dispatch</text>\n        \n        <!-- Running -->\n        <circle cx=\"470\" cy=\"80\" r=\"35\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"3\" />\n        <text x=\"470\" y=\"84\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">RUNNING</text>\n        \n        <!-- Interrupt return -->\n        <path d=\"M 435 90 C 390 110, 310 110, 265 90\" fill=\"none\" stroke=\"var(--border)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"350\" y=\"115\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Interrupt</text>\n        \n        <!-- Exit to Terminated -->\n        <line x1=\"505\" y1=\"80\" x2=\"595\" y2=\"80\" stroke=\"var(--border)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"550\" y=\"70\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Exit</text>\n        \n        <circle cx=\"630\" cy=\"80\" r=\"35\" fill=\"var(--bg-card)\" stroke=\"#EF4444\" stroke-width=\"2\" />\n        <text x=\"630\" y=\"84\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\">TERMINATED</text>\n        \n        <!-- Waiting path -->\n        <path d=\"M 470 115 V 200 H 370\" fill=\"none\" stroke=\"var(--border)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"480\" y=\"150\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\">I/O or Event Wait</text>\n        \n        <circle cx=\"330\" cy=\"200\" r=\"35\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"330\" y=\"204\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">WAITING</text>\n        \n        <path d=\"M 295 200 H 230 V 115\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"180\" y=\"170\" fill=\"var(--accent)\" font-family=\"sans-serif\" font-size=\"9\">I/O or Event Done</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 8. Five-state process model transitions in a multitasking operating system.</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "8.3 Memory Management Page Replacement"
+        },
+        {
+          "type": "para",
+          "text": "When virtual memory page tables reference pages not in physical frames, a page fault triggers disk read. If RAM is full, the OS replaces pages using algorithms like FIFO, LRU (Least Recently Used), or Optimal Page Replacement."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Operating Systems govern application execution, dividing CPU cores among active threads, preventing hardware access conflicts, and managing memory mappings."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Processes have private memory spaces; threads share the memory of their parent process.",
+            "Deadlock prevention requires breaking at least one of Coffman's four conditions.",
+            "Belady's Anomaly occurs in FIFO page replacement where increasing page frames causes more page faults."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the difference between a Mutex and a Semaphore?",
+          "choices": [
+            "A Mutex is a locking mechanism for a single thread; a Semaphore is a signaling mechanism handling a count.",
+            "A Mutex is managed by hardware, Semaphores by software.",
+            "Mutexes allow concurrent writes, Semaphores do not.",
+            "They are identical."
+          ],
+          "correctIndex": 0,
+          "explanation": "Mutexes enforce exclusive ownership, whereas semaphores allow access based on a slot limit."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What are the four necessary conditions for a deadlock to occur?",
+          "answer": "Mutual Exclusion (exclusive resource use), Hold and Wait (holding resources while waiting for others), No Preemption (resources cannot be forcibly taken), and Circular Wait (processes form a cycle waiting for resources)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Calling thread-unsafe code inside asynchronous routines, causing silent variable mutations.",
+            "Forgetting to release locks, causing resource starvation or deadlock."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Scheduling Algorithm",
+            "Optimization Goal",
+            "Potential Issue"
+          ],
+          "rows": [
+            [
+              "FCFS",
+              "Simple FIFO order",
+              "Convoy Effect (long processes block short ones)"
+            ],
+            [
+              "SJF",
+              "Minimum average wait time",
+              "Starvation of long processes"
+            ],
+            [
+              "Round Robin",
+              "Interactive response fairness",
+              "Context switch overhead if quantum is too small"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Operating System Concepts by Silberschatz, Galvin, and Gagne",
+            "Modern Operating Systems by Andrew S. Tanenbaum"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec9",
+      "num": "9",
+      "title": "Section 9: Computer Networks",
+      "subtitle": "OSI vs TCP/IP Stacks, Handshakes & Request Pipelines",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec9",
+          "title": "Section 9: Computer Networks",
+          "subtitle": "OSI vs TCP/IP Stacks, Handshakes & Request Pipelines"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Mapping network topologies, OSI layers, TCP sliding windows, DNS records, TLS handshakes, and WebSockets request routing pipelines."
+        },
+        {
+          "type": "h3",
+          "text": "9.1 OSI Reference Model vs TCP/IP Protocol Stack"
+        },
+        {
+          "type": "para",
+          "text": "Computer networking uses reference models to split tasks. The OSI model defines 7 conceptual layers (Physical, Data Link, Network, Transport, Session, Presentation, Application). The industry-standard TCP/IP stack condenses these into 4 functional layers (Network Interface, Internet, Transport, Application)."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 750 320\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- OSI Reference Model -->\n        <text x=\"150\" y=\"30\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">OSI Model (7 Layers)</text>\n        \n        <g transform=\"translate(50, 45)\">\n          <rect x=\"0\" y=\"0\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"20\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">7. Application</text>\n          \n          <rect x=\"0\" y=\"32\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"52\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">6. Presentation</text>\n          \n          <rect x=\"0\" y=\"64\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"84\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">5. Session</text>\n          \n          <rect x=\"0\" y=\"96\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"116\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">4. Transport</text>\n          \n          <rect x=\"0\" y=\"128\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"148\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">3. Network</text>\n          \n          <rect x=\"0\" y=\"160\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"180\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">2. Data Link</text>\n          \n          <rect x=\"0\" y=\"192\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"212\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">1. Physical</text>\n        </g>\n        \n        <!-- TCP/IP Protocol Stack -->\n        <text x=\"500\" y=\"30\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">TCP/IP Stack & Protocols</text>\n        \n        <g transform=\"translate(400, 45)\">\n          <!-- Application Layer -->\n          <rect x=\"0\" y=\"0\" width=\"200\" height=\"92\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"35\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">Application</text>\n          <text x=\"100\" y=\"65\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\">HTTP, HTTPS, DNS, SSH</text>\n          \n          <!-- Transport Layer -->\n          <rect x=\"0\" y=\"96\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"116\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">Transport (TCP / UDP)</text>\n          \n          <!-- Internet Layer -->\n          <rect x=\"0\" y=\"128\" width=\"200\" height=\"30\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"148\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">Internet (IP, ICMP)</text>\n          \n          <!-- Network Access Layer -->\n          <rect x=\"0\" y=\"160\" width=\"200\" height=\"62\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"100\" y=\"185\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">Network Interface</text>\n          <text x=\"100\" y=\"208\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\">Ethernet, Wi-Fi (802.11)</text>\n        </g>\n      </svg>\n      <div class=\"diagram-caption\">Figure 9. Comparison mapping of the 7-Layer OSI Reference Model and the 4-Layer TCP/IP protocol suite.</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "9.2 Core Protocols & Routing Mechanics"
+        },
+        {
+          "type": "para",
+          "text": "Key protocols include:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Application: HTTP/HTTPS (stateless content transfer), DNS (resolves names to IP addresses), WebSockets (persistent duplex socket connection).",
+            "Transport: TCP (connection-oriented, reliable byte stream via 3-way SYN-SYNACK-ACK handshake and global congestion control) vs UDP (connectionless, lightweight datagram stream)."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "9.3 Sequence Flow: Opening Google.com"
+        },
+        {
+          "type": "para",
+          "text": "When a browser navigates to a URL, a multi-layer sequence is executed:"
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 800 300\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Timelines -->\n        <g stroke=\"var(--border)\" stroke-width=\"2\">\n          <line x1=\"100\" y1=\"50\" x2=\"100\" y2=\"280\" stroke-dasharray=\"4,4\" />\n          <line x1=\"300\" y1=\"50\" x2=\"300\" y2=\"280\" stroke-dasharray=\"4,4\" />\n          <line x1=\"500\" y1=\"50\" x2=\"500\" y2=\"280\" stroke-dasharray=\"4,4\" />\n          <line x1=\"700\" y1=\"50\" x2=\"700\" y2=\"280\" stroke-dasharray=\"4,4\" />\n        </g>\n        \n        <!-- Header roles -->\n        <text x=\"100\" y=\"40\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">Browser</text>\n        <text x=\"300\" y=\"40\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">DNS Server</text>\n        <text x=\"500\" y=\"40\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">TCP/TLS Server</text>\n        <text x=\"700\" y=\"40\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">Web Server</text>\n        \n        <!-- Step 1: DNS Query -->\n        <path d=\"M100 80 H300\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"200\" y=\"73\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">1. Resolve google.com</text>\n        \n        <!-- Step 1b: DNS Resp -->\n        <path d=\"M300 110 H100\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"200\" y=\"103\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">IP: 142.250.190.46</text>\n        \n        <!-- Step 2: TCP Syn -->\n        <path d=\"M100 140 H500\" stroke=\"var(--secondary)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"300\" y=\"133\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">2. TCP SYN Handshake</text>\n        \n        <!-- Step 3: TLS Hello -->\n        <path d=\"M100 170 H500\" stroke=\"var(--secondary)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"300\" y=\"163\" fill=\"var(--accent)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">3. TLS Client Hello (Secure Key)</text>\n        \n        <!-- Step 4: HTTP GET -->\n        <path d=\"M100 210 H700\" stroke=\"var(--text)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"400\" y=\"203\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">GET / HTTP/2</text>\n        \n        <!-- Step 5: HTTP RESP -->\n        <path d=\"M700 250 H100\" stroke=\"var(--accent)\" stroke-width=\"2\" marker-end=\"url(#arrow)\" stroke-dasharray=\"2,2\" />\n        <text x=\"400\" y=\"243\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">200 OK (HTML/CSS/JS Assets)</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 10. Sequential operations when a user requests google.com in a web browser.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Computer Networks establish communication stacks, translating application data packages into electrical, optical, or radio wave packets across routing links."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "TCP provides reliable delivery with congestion control; UDP provides low-overhead, fast delivery.",
+            "DNS translates names to IP addresses using a hierarchical tree of resolvers and root servers.",
+            "TLS secures TCP sockets using public/private key exchanges to establish session keys."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the sequence of packets sent during a TCP Connection Handshake?",
+          "choices": [
+            "SYN -> ACK -> SYN-ACK",
+            "SYN -> SYN-ACK -> ACK",
+            "HELO -> EHLO -> OK",
+            "GET -> RESP -> CLOSE"
+          ],
+          "correctIndex": 1,
+          "explanation": "TCP connection setup begins with SYN, server responds with SYN-ACK, and client finishes with ACK."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why is UDP used for real-time video streaming instead of TCP?",
+          "answer": "UDP does not retransmit lost packets or perform slow-start congestion control, preventing transmission delays and buffering lag in live streams."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Ignoring the overhead of DNS lookups in network round-trip budgets (remedied by local caches).",
+            "Confusing TCP port numbers with IP addresses (port numbers route to local processes; IP addresses route to machines)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Protocol",
+            "Layer",
+            "Function"
+          ],
+          "rows": [
+            [
+              "HTTP / WebSocket",
+              "Application",
+              "Exchange application data"
+            ],
+            [
+              "TCP / UDP",
+              "Transport",
+              "Process-to-process data delivery"
+            ],
+            [
+              "IP",
+              "Internet / Network",
+              "Host-to-host routing"
+            ],
+            [
+              "ARP",
+              "Data Link",
+              "Maps IP address to physical MAC address"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Computer Networks by Andrew S. Tanenbaum",
+            "Computer Networking: A Top-Down Approach by Kurose & Ross"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec10",
+      "num": "10",
+      "title": "Section 10: Software Engineering",
+      "subtitle": "SDLC Models, Agile Workflows & Quality Verification",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec10",
+          "title": "Section 10: Software Engineering",
+          "subtitle": "SDLC Models, Agile Workflows & Quality Verification"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Comparing development life cycles, Agile Sprints, git branch strategies, unit testing boundaries, and automated pipeline integrations."
+        },
+        {
+          "type": "h3",
+          "text": "10.1 Software Development Life Cycle (SDLC)"
+        },
+        {
+          "type": "para",
+          "text": "SDLC represents the structured phases of software construction: Requirements analysis, design, implementation, testing, deployment, and maintenance. Methodologies dictate phase execution. The classic Waterfall model executes steps sequentially. Modern Agile methodologies build software iteratively in short sprints, adapting requirements based on constant feedback."
+        },
+        {
+          "type": "h3",
+          "text": "10.2 Quality Verification & Testing Strategies"
+        },
+        {
+          "type": "para",
+          "text": "Robust software engineering relies on continuous validation:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Unit Testing: Verifies individual functions in isolation (mocking external resources).",
+            "Integration Testing: Assesses interaction between multiple modules or databases.",
+            "System Testing: Validates the entire end-to-end software suite.",
+            "CI/CD: Continuous Integration automatically builds and tests code commits, while Continuous Deployment releases approved builds to production."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "10.3 Version Control Workflow"
+        },
+        {
+          "type": "para",
+          "text": "Teams use Git to coordinate parallel changes, typically relying on Gitflow or Trunk-Based workflows where developers commit to feature branches before merging into master via Pull Requests (PRs)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Software Engineering implements structured methodologies to manage codebases, verify requirements, automate builds, and validate quality."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Waterfall model is rigid; Agile is iterative and adaptable.",
+            "CI/CD pipelines automate building, linting, and testing to prevent regression bugs.",
+            "Write tests first (Test-Driven Development) to ensure clean code interfaces."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the primary objective of Continuous Integration?",
+          "choices": [
+            "To deploy software to production hourly",
+            "To regularly merge developer code branches into a shared main branch, running automated builds and tests",
+            "To write class diagrams automatically",
+            "To design database schemas"
+          ],
+          "correctIndex": 1,
+          "explanation": "Continuous Integration focuses on early detection of integration errors by running automated test suites on code merges."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Describe the differences between Black-Box and White-Box testing.",
+          "answer": "Black-Box testing evaluates software functionality without knowing its internal code structure or logic. White-Box testing evaluates internal paths, code blocks, and structural elements of the source code."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Writing code without any automated tests, leading to massive regressions when refactoring.",
+            "Allowing massive branch sizes in Git, making merge conflict resolution painful."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Workflow",
+            "Core Focus"
+          ],
+          "rows": [
+            [
+              "Agile / Scrum",
+              "Iterative sprints, sprint reviews, and user stories"
+            ],
+            [
+              "GitFlow",
+              "Structured branch hierarchy (feature, release, main)"
+            ],
+            [
+              "Unit Testing",
+              "Isolating code functions using mocks and stubs"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Software Engineering: A Practitioner's Approach by Roger Pressman",
+            "The Mythical Man-Month by Fred Brooks"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec11",
+      "num": "11",
+      "title": "Section 11: System Design Foundation",
+      "subtitle": "Scalability, Availability, Proxies & Caching",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec11",
+          "title": "Section 11: System Design Foundation",
+          "subtitle": "Scalability, Availability, Proxies & Caching"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Architecting horizontal scales, active-active failovers, load balancers, reverse proxies, and cache eviction policies."
+        },
+        {
+          "type": "h3",
+          "text": "11.1 Scalability & Availability Metrics"
+        },
+        {
+          "type": "para",
+          "text": "System Design addresses how systems handle growth. Vertical Scalability means upgrading machine hardware (RAM/CPU). Horizontal Scalability means adding more server nodes. Availability measures uptime, often designed using active-passive failover pairs or active-active configurations where loads are balanced across active instances."
+        },
+        {
+          "type": "h3",
+          "text": "11.2 Load Balancers & Proxies"
+        },
+        {
+          "type": "para",
+          "text": "Load Balancers distribute incoming traffic across healthy web nodes using algorithms like Round Robin, Least Connections, or IP Hashing. Reverse Proxies (like Nginx) face client queries, handle SSL termination, compress assets, and route requests to backend application servers."
+        },
+        {
+          "type": "h3",
+          "text": "11.3 Caching Topologies & Eviction"
+        },
+        {
+          "type": "para",
+          "text": "Caching stores frequently read datasets in low-latency RAM (e.g. Redis). Topologies include Cache-Aside (application queries cache, reads DB on miss, updates cache), Write-Through (updates cache and DB simultaneously), and Write-Back (writes cache first, asynchronously flushing to DB). Standard cache eviction policies include Least Recently Used (LRU) and Least Frequently Used (LFU)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "System Design Foundation focuses on building scalable, reliable, and high-performance system architectures using proxies, load balancers, and cache levels."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Horizontal scaling is cost-effective and prevents single-point-of-failure limits.",
+            "Load balancers protect downstream backends by distributing query spikes.",
+            "Caching strategies trade off write complexity for ultra-fast data reads."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which caching strategy writes updates to the cache and the primary database simultaneously?",
+          "choices": [
+            "Cache-Aside",
+            "Write-Through",
+            "Write-Back",
+            "Read-Through"
+          ],
+          "correctIndex": 1,
+          "explanation": "Write-Through updates both cache and DB synchronously, maintaining high data consistency."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between a forward proxy and a reverse proxy?",
+          "answer": "A forward proxy acts on behalf of clients to access external web assets (hiding client identity). A reverse proxy acts on behalf of servers to route, balance, and protect backend systems (hiding server infrastructure)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Introducing caching before optimizing slow database queries (leading to stale cached results).",
+            "Forgetting to design failover routes for the load balancer itself (introducing a single point of failure)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Load Balancing Algorithm",
+            "Best Used For"
+          ],
+          "rows": [
+            [
+              "Round Robin",
+              "Servers with identical hardware and processing power"
+            ],
+            [
+              "Least Connections",
+              "Varying request processing times"
+            ],
+            [
+              "IP Hash",
+              "Stateful applications requiring sticky client sessions"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "System Design Interview by Alex Xu",
+            "Scalability Rules by Martin L. Abbott and Michael T. Fisher"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec12",
+      "num": "12",
+      "title": "Section 12: Distributed Systems",
+      "subtitle": "CAP Theorem, Consistent Hashing & Consensuses",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec12",
+          "title": "Section 12: Distributed Systems",
+          "subtitle": "CAP Theorem, Consistent Hashing & Consensuses"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Diving into network partitions, replication models, consistent hashing rings, Raft leaders, and Paxos consensus state machines."
+        },
+        {
+          "type": "h3",
+          "text": "12.1 Network Partitions & CAP Theorem"
+        },
+        {
+          "type": "para",
+          "text": "A Distributed System consists of independent machines coordinating via messages. The CAP Theorem proves that when a network partition (P) occurs, a distributed database must choose between Consistency (C, every read receives the most recent write) or Availability (A, every node returns a non-error response)."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 320\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Circles -->\n        <!-- Consistency (Left) -->\n        <circle cx=\"230\" cy=\"140\" r=\"100\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"3\" />\n        <text x=\"180\" y=\"100\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">CONSISTENCY (C)</text>\n        \n        <!-- Availability (Right) -->\n        <circle cx=\"370\" cy=\"140\" r=\"100\" fill=\"none\" stroke=\"var(--secondary)\" stroke-width=\"3\" />\n        <text x=\"420\" y=\"100\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">AVAILABILITY (A)</text>\n        \n        <!-- Partition Tolerance (Bottom) -->\n        <circle cx=\"300\" cy=\"220\" r=\"100\" fill=\"none\" stroke=\"#EF4444\" stroke-width=\"3\" />\n        <text x=\"300\" y=\"300\" fill=\"#EF4444\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">PARTITION TOLERANCE (P)</text>\n        \n        <!-- Intersections labeling -->\n        <!-- CP -->\n        <rect x=\"180\" y=\"195\" width=\"50\" height=\"25\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <text x=\"205\" y=\"212\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CP</text>\n        \n        <!-- AP -->\n        <rect x=\"370\" y=\"195\" width=\"50\" height=\"25\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <text x=\"395\" y=\"212\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">AP</text>\n        \n        <!-- CA -->\n        <rect x=\"275\" y=\"75\" width=\"50\" height=\"25\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <text x=\"300\" y=\"92\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">CA</text>\n        \n        <!-- Database systems in centers -->\n        <text x=\"210\" y=\"235\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">HBase, Redis</text>\n        <text x=\"390\" y=\"235\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Cassandra, Dynamo</text>\n        <text x=\"300\" y=\"125\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">RDBMS (SQL)</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 12. CAP Theorem Venn diagram mapping Consistency, Availability, and Partition Tolerance tradeoffs.</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "12.2 Replication & Consistent Hashing"
+        },
+        {
+          "type": "para",
+          "text": "To store massive datasets, databases use replication (Master-Slave, Multi-Master, or Leaderless) and partition sharding. Consistent Hashing maps keys and database nodes onto a circular ring, minimizing data re-mapping overhead when nodes are added or removed."
+        },
+        {
+          "type": "h3",
+          "text": "12.3 Distributed Consensus: Raft & Paxos"
+        },
+        {
+          "type": "para",
+          "text": "Consensus ensures distributed nodes agree on a single data state. The Raft consensus protocol structures node states into Candidates, Followers, and Leaders, electing a single leader using election timeouts to execute log replication across follower nodes."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Distributed Systems resolve coordinator sync issues, using consensus algorithms to keep state consistent across independent servers."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "CAP theorem dictates that you cannot build a CA database across a partitioning network.",
+            "Consistent Hashing maps data to the next clockwise node on the ring.",
+            "Raft splits consensus into leader election, log replication, and safety guarantees."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "In a network partition, what does an AP database prioritize?",
+          "choices": [
+            "Ensuring all nodes have identical data",
+            "Returning local data quickly even if it is stale",
+            "Throwing read errors",
+            "Stopping database transactions"
+          ],
+          "correctIndex": 1,
+          "explanation": "An AP database remains available to handle queries, trading off data consistency."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How does Consistent Hashing minimize data movement when a new server node is added?",
+          "answer": "Because keys are mapped clockwise to the next server on the ring, adding a new node only requires re-mapping keys that lie between the new node and its counter-clockwise neighbor, leaving other nodes untouched."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Assuming network connections are reliable, instantaneous, and secure (Fallacies of Distributed Computing).",
+            "Confusing eventually consistent systems with ACID database isolation."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Consensus Protocol",
+            "Primary Mechanism",
+            "Typical Implementations"
+          ],
+          "rows": [
+            [
+              "Raft",
+              "Leader election & Log append consensus",
+              "Etcd, Consul"
+            ],
+            [
+              "Paxos",
+              "Multi-phase ballot agreement",
+              "Chubby, Cassandra (internally)"
+            ],
+            [
+              "Consistent Hashing",
+              "Virtual nodes ring mapping",
+              "DynamoDB, Cassandra"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Distributed Systems: Principles and Paradigms by Tanenbaum and Van Steen",
+            "In Search of an Understandable Consensus Algorithm (Raft Paper) by Ongaro & Ousterhout"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec13",
+      "num": "13",
+      "title": "Section 13: Compiler Design",
+      "subtitle": "Tokenizers, AST Parsing, AST Trees & Code Generators",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec13",
+          "title": "Section 13: Compiler Design",
+          "subtitle": "Tokenizers, AST Parsing, AST Trees & Code Generators"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Analyzing compiler phases, lexer tokenizations, CFG parsing, AST creations, symbol tables, and code optimization passes."
+        },
+        {
+          "type": "h3",
+          "text": "13.1 Lexical & Syntax Analysis"
+        },
+        {
+          "type": "para",
+          "text": "A compiler translates human-readable source code into machine code. The compiler pipeline operates in phases:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Lexical Analysis (Lexer): Scans character streams and compiles them into tokens (e.g. keywords, identifiers, symbols).",
+            "Syntax Analysis (Parser): Arranges tokens into an Abstract Syntax Tree (AST) based on Context-Free Grammar (CFG) rules."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "13.2 AST Parsing and Semantic Checks"
+        },
+        {
+          "type": "para",
+          "text": "Semantic Analysis traverses the AST, verifying type rules, resolving symbols via the Symbol Table, and issuing compilation errors for mismatched variables. The compiler then generates Intermediate Representation (IR) code."
+        },
+        {
+          "type": "h3",
+          "text": "13.3 Code Generation & Optimization"
+        },
+        {
+          "type": "para",
+          "text": "The final compilation phases optimize the IR (dead-code elimination, loop unrolling, register allocation) before generating target machine code (Assembly or binary)."
+        },
+        {
+          "type": "codeBlock",
+          "lang": "c",
+          "codeText": "\n// AST structure for a simple addition: 3 + 5\nstruct ASTNode {\n    char type; // '+'\n    struct ASTNode* left;  // Node representing '3'\n    struct ASTNode* right; // Node representing '5'\n};\n"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Compiler Design defines the formal languages syntax, tokenization, parsing trees, and backend code compilation optimizations."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Lexer translates code strings into structural tokens.",
+            "Parsers use Context-Free Grammars to build Abstract Syntax Trees.",
+            "Optimizations can be machine-independent (IR level) or machine-dependent (registers level)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which phase of compilation checks if array dimensions match and variables are declared before use?",
+          "choices": [
+            "Lexical Analysis",
+            "Syntax Analysis",
+            "Semantic Analysis",
+            "Code Optimization"
+          ],
+          "correctIndex": 2,
+          "explanation": "Semantic Analysis validates type checking, function signatures, and variable declarations."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is an Abstract Syntax Tree (AST)?",
+          "answer": "An AST is a hierarchical tree representation of the abstract syntactic structure of source code, where each node represents a language construct (like an operator or variable)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Mixing up Lexical errors (like bad symbols) with Syntax errors (like mismatched parentheses).",
+            "Writing ambiguous Context-Free Grammars that result in parser execution conflicts."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Compiler Phase",
+            "Input",
+            "Output"
+          ],
+          "rows": [
+            [
+              "Lexical Analyzer",
+              "Source code characters",
+              "Token stream"
+            ],
+            [
+              "Parser",
+              "Token stream",
+              "Abstract Syntax Tree (AST)"
+            ],
+            [
+              "Code Optimizer",
+              "Intermediate representation",
+              "Optimized IR"
+            ],
+            [
+              "Code Generator",
+              "Optimized IR",
+              "Machine / Assembly Code"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Compilers: Principles, Techniques, and Tools (Dragon Book) by Aho, Lam, Sethi, and Ullman",
+            "Engineering a Compiler by Keith Cooper and Linda Torczon"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec14",
+      "num": "14",
+      "title": "Section 14: Theory of Computation",
+      "subtitle": "DFAs, NFAs, Turing Machines & Decidability Limits",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec14",
+          "title": "Section 14: Theory of Computation",
+          "subtitle": "DFAs, NFAs, Turing Machines & Decidability Limits"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Constructing finite automata, regular expressions, pushdown automata, Turing tapes, halting problems, and Chomsky hierarchies."
+        },
+        {
+          "type": "h3",
+          "text": "14.1 Finite Automata & Regular Languages"
+        },
+        {
+          "type": "para",
+          "text": "Theory of Computation models what can be mathematically computed. Finite Automata process strings: Deterministic Finite Automata (DFA) change to exactly one state per input symbol. Non-Deterministic Finite Automata (NFA) can branch into multiple path choices. DFA and NFA are equivalent in power, recognizing the class of Regular Languages (expressed via regular expressions)."
+        },
+        {
+          "type": "h3",
+          "text": "14.2 Pushdown Automata & Turing Machines"
+        },
+        {
+          "type": "para",
+          "text": "Context-Free Languages (parsed using Context-Free Grammars) require a stack-based memory structure, modeled by Pushdown Automata (PDA). Turing Machines represent the ultimate theoretical computing machine, consisting of an infinite tape memory, a read-write head, and a state controller."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 650 240\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Tape Cells -->\n        <g fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"3\">\n          <rect x=\"50\" y=\"40\" width=\"50\" height=\"50\" />\n          <rect x=\"100\" y=\"40\" width=\"50\" height=\"50\" />\n          <rect x=\"150\" y=\"40\" width=\"50\" height=\"50\" />\n          <rect x=\"200\" y=\"40\" width=\"50\" height=\"50\" />\n          <rect x=\"250\" y=\"40\" width=\"50\" height=\"50\" />\n          <rect x=\"300\" y=\"40\" width=\"50\" height=\"50\" />\n          <rect x=\"350\" y=\"40\" width=\"50\" height=\"50\" />\n        </g>\n        \n        <!-- Tape Symbols -->\n        <g fill=\"var(--text)\" font-family=\"monospace\" font-size=\"18\" text-anchor=\"middle\" font-weight=\"bold\">\n          <text x=\"75\" y=\"72\">1</text>\n          <text x=\"125\" y=\"72\">0</text>\n          <text x=\"175\" y=\"72\">1</text>\n          <text x=\"225\" y=\"72\">1</text>\n          <text x=\"275\" y=\"72\">0</text>\n          <text x=\"325\" y=\"72\">B</text>\n          <text x=\"375\" y=\"72\">B</text>\n        </g>\n        \n        <text x=\"430\" y=\"70\" fill=\"var(--text-muted)\" font-family=\"monospace\" font-size=\"12\">Infinite Tape (B = Blank)</text>\n        \n        <!-- Read Write Head -->\n        <path d=\"M175 140 L160 110 H190 Z\" fill=\"var(--accent)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n        <rect x=\"115\" y=\"140\" width=\"120\" height=\"50\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"175\" y=\"165\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">Read/Write Head</text>\n        <text x=\"175\" y=\"180\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">Current State: Q1</text>\n        \n        <!-- Control Transition Table summary box -->\n        <rect x=\"420\" y=\"120\" width=\"180\" height=\"80\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"510\" y=\"140\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Transition Rules</text>\n        <text x=\"510\" y=\"160\" fill=\"var(--text-muted)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">δ(Q1, 1) = (Q2, 0, R)</text>\n        <text x=\"510\" y=\"180\" fill=\"var(--text-muted)\" font-family=\"monospace\" font-size=\"10\" text-anchor=\"middle\">δ(Q1, 0) = (Halt, 1, L)</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 11. Turing Machine architecture illustrating tape, R/W head, state register, and control logic.</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "14.3 Computability & Chomsky Hierarchy"
+        },
+        {
+          "type": "para",
+          "text": "The Chomsky Hierarchy groups languages: Regular ⊂ Context-Free ⊂ Context-Sensitive ⊂ Recursively Enumerable. Uncomputable problems (like Turing's Halting Problem) prove that there are logical problems that no computer algorithm can solve."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Theory of Computation defines the mathematical boundaries of computer processing capabilities, mapping language grammars to automata levels."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "DFAs have no memory stack; PDAs have a stack; Turing Machines have an infinite read-write tape.",
+            "The Halting Problem proves that we cannot write an algorithm that perfectly determines if any arbitrary code will loop forever.",
+            "NFA to DFA conversion uses subset construction (power set states)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which automaton possesses a stack storage mechanism enabling it to parse context-free languages?",
+          "choices": [
+            "Finite Automata (DFA)",
+            "Pushdown Automata (PDA)",
+            "Turing Machine",
+            "Linear Bounded Automata"
+          ],
+          "correctIndex": 1,
+          "explanation": "Pushdown Automata extend finite states with a LIFO stack to verify nested patterns."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "State the Halting Problem and its significance.",
+          "answer": "The Halting Problem asks whether a program will finish running or run forever on a given input. Alan Turing proved that a general algorithm to solve this for all possible program-input pairs is mathematically impossible, establishing limits on computability."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Believing that regular expressions can parse nested HTML or parentheses (HTML is context-free and requires a PDA; regular expressions have no stack memory).",
+            "Confusing undecidable problems with high-complexity (NP-hard) problems."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Grammar Type",
+            "Language Class",
+            "Recognizing Automaton"
+          ],
+          "rows": [
+            [
+              "Type 3",
+              "Regular",
+              "Finite Automata (DFA/NFA)"
+            ],
+            [
+              "Type 2",
+              "Context-Free",
+              "Pushdown Automata (PDA)"
+            ],
+            [
+              "Type 1",
+              "Context-Sensitive",
+              "Linear Bounded Automata (LBA)"
+            ],
+            [
+              "Type 0",
+              "Recursively Enumerable",
+              "Turing Machine"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Introduction to the Theory of Computation by Michael Sipser",
+            "Languages and Machines by Thomas Sudkamp"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec15",
+      "num": "15",
+      "title": "Section 15: Computer Security",
+      "subtitle": "Cryptography, Signatures & Vulnerability Defenses",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec15",
+          "title": "Section 15: Computer Security",
+          "subtitle": "Cryptography, Signatures & Vulnerability Defenses"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Implementing symmetric/asymmetric encryption, hashing algorithms, SSL handshakes, SQL injections, and cross-site scripting defenses."
+        },
+        {
+          "type": "h3",
+          "text": "15.1 Cryptographic Core Architecture"
+        },
+        {
+          "type": "para",
+          "text": "Security relies on cryptography. Symmetric Encryption uses a single shared key for encryption and decryption (e.g. AES). Asymmetric Encryption uses a Public-Private key pair: public encrypts, private decrypts (e.g. RSA). Cryptographic Hashing (like SHA-256 or bcrypt) is one-way, converting arbitrary data into fixed-size fingerprints, crucial for password storage."
+        },
+        {
+          "type": "h3",
+          "text": "15.2 Authentication & Digital Signatures"
+        },
+        {
+          "type": "para",
+          "text": "Digital Signatures provide non-repudiation: a sender hashes a message, encrypts the hash with their private key, and the receiver decrypts it with the sender's public key to verify integrity. SSL/TLS uses these mechanisms to secure internet connections."
+        },
+        {
+          "type": "h3",
+          "text": "15.3 Critical Web Vulnerabilities"
+        },
+        {
+          "type": "para",
+          "text": "Web security requires defending against common exploits:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "SQL Injection (SQLi): Attackers inject malicious SQL statements into input fields. Prevented using prepared statements / parameterized queries.",
+            "Cross-Site Scripting (XSS): Injecting scripts into websites to run in other users' browsers. Prevented by escaping input and utilizing Content Security Policies (CSP).",
+            "Cross-Site Request Forgery (CSRF): Trick users into performing unauthorized actions on logged-in sites. Prevented by anti-CSRF tokens."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Computer Security enforces authentication, data integrity, and network traffic privacy while defending applications against standard threat vectors."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Encryption is reversible (with keys); hashing is a one-way mathematical function.",
+            "Asymmetric encryption is computationally expensive, so it is typically used only to negotiate symmetric keys for data transfer.",
+            "Never concatenate strings to build database queries; always use parameterized bindings."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "How does a parameterized query prevent SQL injection?",
+          "choices": [
+            "It encrypts the database",
+            "It treats user inputs strictly as data variables, not executable SQL syntax",
+            "It blocks external traffic",
+            "It deletes invalid input characters"
+          ],
+          "correctIndex": 1,
+          "explanation": "Parametric binding separates SQL compilation from parameter evaluation, neutralizing executable payloads."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between hashing and encryption.",
+          "answer": "Hashing is a one-way, irreversible function used to verify data integrity. Encryption is a two-way, reversible process used to keep data confidential, requiring a key to decrypt the ciphertext back to plaintext."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Storing raw passwords in a database (always hash using salt and stretching, like bcrypt).",
+            "Using simple hashing functions like MD5 or SHA1 for passwords (they are vulnerable to collision attacks and GPU-accelerated brute forcing)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Threat",
+            "Core Attack Vector",
+            "Best Defense"
+          ],
+          "rows": [
+            [
+              "SQL Injection",
+              "Unsanitized user inputs in queries",
+              "Prepared statements / Parameterized queries"
+            ],
+            [
+              "XSS",
+              "Injected scripts rendering in browser",
+              "Input HTML escaping + CSP Headers"
+            ],
+            [
+              "CSRF",
+              "Session cookie hijacking via external links",
+              "Anti-CSRF tokens + SameSite cookie flags"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "OWASP Top 10 Security Guide",
+            "Applied Cryptography by Bruce Schneier"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec16",
+      "num": "16",
+      "title": "Section 16: Cloud Computing",
+      "subtitle": "Service Models, AWS Topologies & Deployment Slices",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec16",
+          "title": "Section 16: Cloud Computing",
+          "subtitle": "Service Models, AWS Topologies & Deployment Slices"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Understanding SaaS, PaaS, IaaS, AWS virtualization, network topologies, serverless deployments, and high-availability cloud setups."
+        },
+        {
+          "type": "h3",
+          "text": "16.1 Cloud Service Classification"
+        },
+        {
+          "type": "para",
+          "text": "Cloud computing replaces local servers with virtualized resources managed by providers. Services are classified into:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Infrastructure as a Service (IaaS): Provisioning raw virtual machines, storage, and networking (e.g. AWS EC2, GCP Compute Engine).",
+            "Platform as a Service (PaaS): Managing runtime platforms, removing hardware provisioning concerns (e.g. Heroku, AWS Elastic Beanstalk).",
+            "Software as a Service (SaaS): Delivering end-user web applications (e.g. Google Drive, Microsoft 365)."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "16.2 Cloud Architecture Foundations"
+        },
+        {
+          "type": "para",
+          "text": "Cloud platforms rely on Regions (geographic areas) containing isolated Availability Zones (AZs, data centers). High-availability architectures span multiple AZs, routing traffic through Load Balancers to auto-scaling server groups."
+        },
+        {
+          "type": "h3",
+          "text": "16.3 Serverless Paradigm"
+        },
+        {
+          "type": "para",
+          "text": "Serverless architectures (e.g. AWS Lambda, Cloudflare Workers) run code in response to events, automatically scaling CPU instances and charging based on execute milliseconds rather than active virtual machine hours."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Cloud Computing provides scalable on-demand access to virtualized networks, databases, and container platforms."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "IaaS offers the most customization; SaaS provides ready-to-use software products.",
+            "Availability Zones are connected via ultra-low-latency fiber networks to facilitate real-time database replication.",
+            "Serverless functions are ephemeral, starting up on demand (introducing cold start latency)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which cloud service model provides virtual machines, raw storage, and subnets?",
+          "choices": [
+            "SaaS",
+            "PaaS",
+            "IaaS",
+            "Serverless"
+          ],
+          "correctIndex": 2,
+          "explanation": "IaaS gives users direct control over virtual operating systems, subnets, and disks."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain what an Availability Zone (AZ) is in cloud infrastructure.",
+          "answer": "An Availability Zone is a physically isolated, independent data center within a geographic region, equipped with redundant power, cooling, and network links to prevent regional failures."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Exposing cloud database ports publicly instead of isolating them in a private subnet.",
+            "Leaving auto-scaling rules un-capped, which can lead to high bills from traffic spikes."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Service Model",
+            "User Management Scope",
+            "Cloud Provider Scope"
+          ],
+          "rows": [
+            [
+              "IaaS",
+              "OS, middleware, runtimes, data, app code",
+              "Physical servers, virtualization hypervisor"
+            ],
+            [
+              "PaaS",
+              "Application code & configuration data",
+              "OS, runtime, virtualization, physical network"
+            ],
+            [
+              "SaaS",
+              "Basic app configuration settings",
+              "Everything (physical servers to app frontend)"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "AWS Certified Solutions Architect Study Guide",
+            "Cloud Computing Architecture by Thomas Erl"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec17",
+      "num": "17",
+      "title": "Section 17: DevOps Fundamentals",
+      "subtitle": "Linux CLI, Docker Containers & Kubernetes Orchestration",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec17",
+          "title": "Section 17: DevOps Fundamentals",
+          "subtitle": "Linux CLI, Docker Containers & Kubernetes Orchestration"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Running Linux command terminals, Docker build containers, Kubernetes pods, and declarative CI/CD pipelines."
+        },
+        {
+          "type": "h3",
+          "text": "17.1 Linux Administration Basics"
+        },
+        {
+          "type": "para",
+          "text": "DevOps engineers manage systems via the command line interface (CLI). Core concepts include permissions (read, write, execute), process monitoring (ps, top), network checking (curl, netstat), and bash scripting to automate repetitive tasks."
+        },
+        {
+          "type": "h3",
+          "text": "17.2 Containerization with Docker"
+        },
+        {
+          "type": "para",
+          "text": "Docker packages applications and dependencies into isolated container images. Unlike virtual machines which virtualize the host hardware, Docker containers run directly on the host OS kernel using namespaces and cgroups, drastically reducing start times and resource footprints."
+        },
+        {
+          "type": "h3",
+          "text": "17.3 Orchestration with Kubernetes"
+        },
+        {
+          "type": "para",
+          "text": "Kubernetes (K8s) manages clusters of containerized applications. K8s automates deployment, scaling, and load balancing across nodes. Key objects include Pods (smallest deployable units containing containers), Services (exposing network access), and Deployments (defining replication states)."
+        },
+        {
+          "type": "codeBlock",
+          "lang": "dockerfile",
+          "codeText": "\n# Simple Dockerfile for Node.js App\nFROM node:18-alpine\nWORKDIR /app\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nEXPOSE 3000\nCMD [\"node\", \"server.js\"]\n"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "DevOps integrates code development with systems operations using shell scripting, Docker environments, and Kubernetes scaling structures."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Containers share the host kernel; virtual machines run complete guest operating systems.",
+            "Kubernetes maintains a declarative state, constantly reconciling current resources with YAML configurations.",
+            "Docker layers are cached, so order Dockerfile instructions from least-frequently changed to most-frequently changed."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the primary difference between a Docker container and a Virtual Machine?",
+          "choices": [
+            "Containers have more memory.",
+            "VMs virtualize hardware and run guest OS; containers share the host OS kernel via namespaces.",
+            "Containers run slower than VMs.",
+            "VMs only run on Windows."
+          ],
+          "correctIndex": 1,
+          "explanation": "Containers skip guest OS overhead, launching light, sandboxed applications in milliseconds."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the role of the Kubernetes Control Plane?",
+          "answer": "The Control Plane (comprising kube-apiserver, etcd, kube-scheduler, and controller-manager) manages the cluster, schedules work, monitors nodes, and keeps the cluster in the desired state."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Running Docker containers as root user (violates security containment best practices).",
+            "Hardcoding sensitive credentials in YAML configuration files (always use K8s Secrets or Vaults)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "K8s Component",
+            "Description"
+          ],
+          "rows": [
+            [
+              "Pod",
+              "Group of one or more containers sharing network namespace"
+            ],
+            [
+              "Deployment",
+              "Declarative controller managing pod replica counts"
+            ],
+            [
+              "Service",
+              "Stable abstraction offering persistent IP access to pods"
+            ],
+            [
+              "Etcd",
+              "Distributed key-value store holding cluster state data"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "The DevOps Handbook by Gene Kim, Jez Humble, Patrick Debois, and John Willis",
+            "Kubernetes Up & Running by Kelsey Hightower"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec18",
+      "num": "18",
+      "title": "Section 18: AI & Machine Learning Fundamentals",
+      "subtitle": "Supervised Learning, Neural Networks & LLMs",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec18",
+          "title": "Section 18: AI & Machine Learning Fundamentals",
+          "subtitle": "Supervised Learning, Neural Networks & LLMs"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Exposing AI classifications, linear regressions, backpropagation nodes, activation math, and Large Language Model architectures."
+        },
+        {
+          "type": "h3",
+          "text": "18.1 AI vs Machine Learning Classification"
+        },
+        {
+          "type": "para",
+          "text": "Artificial Intelligence represents the broad science of simulating human intelligence. Machine Learning is a subset of AI where systems parse datasets to train mathematical models, enabling classification without explicit coding. ML is split into Supervised (labeled inputs, e.g. regression, SVM), Unsupervised (unlabeled inputs, e.g. K-means clustering), and Reinforcement Learning (reward/penalty systems)."
+        },
+        {
+          "type": "h3",
+          "text": "18.2 Neural Network Architecture"
+        },
+        {
+          "type": "para",
+          "text": "Deep Learning utilizes Multi-Layer Perceptrons (Artificial Neural Networks). Input nodes pass values through weights and biases to hidden layers. Activation functions (like ReLU or Sigmoid) introduce non-linearities. During training, backpropagation calculates cost function derivatives, adjusting weights using Gradient Descent."
+        },
+        {
+          "type": "h3",
+          "text": "18.3 Large Language Models & Transformers"
+        },
+        {
+          "type": "para",
+          "text": "Modern AI utilizes the Transformer architecture, which relies on self-attention mechanisms to weigh connection strengths between tokens in text blocks. Large Language Models (LLMs) parse massive text corpuses to generate coherent natural language tokens."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "AI & ML Fundamentals introduces neural net calculation paths, weight optimizations, and Transformer self-attention blocks."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Supervised learning trains models using input-label pairs.",
+            "Backpropagation uses the calculus chain rule to calculate error gradients.",
+            "Transformers process words in parallel, using attention matrices to preserve context across long text sequences."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which activation function is widely used to prevent vanishing gradient problems in hidden layers?",
+          "choices": [
+            "Sigmoid",
+            "ReLU (Rectified Linear Unit)",
+            "Tanh",
+            "Binary Step"
+          ],
+          "correctIndex": 1,
+          "explanation": "ReLU outputs input directly if positive, preserving gradients during backpropagation."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain how the self-attention mechanism works in Transformers.",
+          "answer": "Self-attention maps tokens to Query, Key, and Value vectors. It calculates dot-product attention scores between Queries and Keys to create an attention matrix, which determines how much weight is given to other tokens when encoding a specific token."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Overfitting ML models on training datasets (leading to poor generalization on test datasets).",
+            "Using un-scaled input data in neural networks, causing slow training convergence."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Term",
+            "Definition"
+          ],
+          "rows": [
+            [
+              "Gradient Descent",
+              "Iterative optimization minimizing network error"
+            ],
+            [
+              "Overfitting",
+              "Model memorizes training data but fails on new inputs"
+            ],
+            [
+              "ReLU",
+              "f(x) = max(0, x) - non-linear threshold activation"
+            ],
+            [
+              "Tokenization",
+              "Splitting raw text into sub-word integer indices"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Deep Learning by Ian Goodfellow, Yoshua Bengio, and Aaron Courville",
+            "Attention Is All You Need (Transformer Paper) by Vaswani et al."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec19",
+      "num": "19",
+      "title": "Section 19: Interview Preparation",
+      "subtitle": "FAANG Pipelines, DSA & Systems Design Questions",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec19",
+          "title": "Section 19: Interview Preparation",
+          "subtitle": "FAANG Pipelines, DSA & Systems Design Questions"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Strategies for cracking coding interviews, system design round formats, and a bank of detailed questions across OS, DBMS, Networks, and OOP."
+        },
+        {
+          "type": "h3",
+          "text": "19.1 Technical Interview Strategies"
+        },
+        {
+          "type": "para",
+          "text": "Top-tier tech interviews evaluate engineering thinking across three tracks: Data Structures & Algorithms (evaluating time complexity optimization), Low-Level Design / OOP (evaluating class architectures and SOLID clean code), and High-Level System Design (evaluating scalable component distribution under CAP boundaries)."
+        },
+        {
+          "type": "h3",
+          "text": "19.2 High-Frequency Core CS Questions"
+        },
+        {
+          "type": "para",
+          "text": "Review these core computer science questions before entering the interview room:"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Interview Preparation provides candidates with structured answer templates and targeted revision across major computer science engineering disciplines."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Always state the time and space complexity of your algorithms before prompting.",
+            "Structure system design answers using functional requirements, back-of-the-envelope scale math, API endpoints, database schema design, and scaling diagrams.",
+            "Keep code structured with clear modular functions."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the difference between a process context switch and a thread context switch?",
+          "choices": [
+            "Thread switches are faster because threads share the same page table and address space, skipping TLB invalidation.",
+            "Process switches require less memory.",
+            "There is no performance difference.",
+            "Thread switches are slower due to CPU locks."
+          ],
+          "correctIndex": 0,
+          "explanation": "Changing processes requires loading new page directories, invalidating cache lines and TLB mappings."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you explain the difference between a TCP socket connection leak and memory leak?",
+          "answer": "A memory leak occurs when heap memory is allocated but never freed, eventually crashing the app. A socket leak occurs when network connections are opened but never closed, consuming system file descriptors and eventually preventing the OS from accepting new incoming network queries."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Jumping into writing code before clarifying edge cases with the interviewer.",
+            "Memorizing code blocks instead of learning underlying DSA patterns."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Interview Track",
+            "Focus Area",
+            "Common Evaluation Criteria"
+          ],
+          "rows": [
+            [
+              "DSA Coding",
+              "Arrays, Trees, Graphs, DP",
+              "Big-O Analysis, Edge Case Handling, Correctness"
+            ],
+            [
+              "LLD / OOP",
+              "Classes, SOLID, Design Patterns",
+              "Code Extensibility, Modular Separation, Interface design"
+            ],
+            [
+              "HLD System Design",
+              "Scale, DB Sharding, Caching",
+              "Architectural tradeoffs, Bottleneck detection, Fault Tolerance"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Cracking the Coding Interview by Gayle Laakmann McDowell",
+            "Designing Data-Intensive Applications by Martin Kleppmann"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec20",
+      "num": "20",
+      "title": "Section 20: Real World Case Studies",
+      "subtitle": "High-Scale Architecture Analysis",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec20",
+          "title": "Section 20: Real World Case Studies",
+          "subtitle": "High-Scale Architecture Analysis"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Deconstructing the architectures of Google Search indexing, YouTube transcoding, WhatsApp chat servers, Netflix streaming CDNs, and LearnXChain validators."
+        },
+        {
+          "type": "h3",
+          "text": "20.1 Google Search Indexing & Crawling"
+        },
+        {
+          "type": "para",
+          "text": "Google Search parses trillions of web pages. It uses Googlebot (distributed web crawlers) to fetch HTML, storing text indices in Bigtable (distributed wide-column database) and computing page relevance ranks using PageRank MapReduce jobs."
+        },
+        {
+          "type": "h3",
+          "text": "20.2 YouTube Video Transcoding & CDN Delivery"
+        },
+        {
+          "type": "para",
+          "text": "YouTube receives hours of video uploads every minute. Videos are split into chunks, transcoded in parallel into multiple formats/resolutions, and cached across Google Global Cache (GGC) CDN edge nodes globally to minimize buffering latency."
+        },
+        {
+          "type": "h3",
+          "text": "20.3 WhatsApp Chat System Architecture"
+        },
+        {
+          "type": "para",
+          "text": "WhatsApp coordinates billions of messages daily. It uses highly customized FreeBSD servers running Erlang to handle millions of concurrent TCP socket connections. Message exchange utilizes the XMPP protocol, securing content using end-to-end Signal protocol encryption."
+        },
+        {
+          "type": "h3",
+          "text": "20.4 LearnXChain Validation Node"
+        },
+        {
+          "type": "para",
+          "text": "LearnXChain uses a proof-of-stake Byzantine Fault Tolerant (BFT) consensus protocol. Validation nodes run virtual machines, executing smart contract bytecodes and persisting state updates across a distributed ledger index."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Real World Case Studies demonstrate how core computer science concepts (OS, networks, databases, consensus) are applied to build massive production platforms."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Googlebot runs distributed crawlers, indexing the web into Bigtable database clusters.",
+            "WhatsApp scales connection density by tuning Erlang VM actor concurrency mechanisms.",
+            "YouTube splits and transcodes video chunks asynchronously to reduce load."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which protocol is utilized by WhatsApp to coordinate chat message connections?",
+          "choices": [
+            "FTP",
+            "SMTP",
+            "XMPP / WebSocket",
+            "BGP"
+          ],
+          "correctIndex": 2,
+          "explanation": "WhatsApp utilizes customized XMPP protocols to handle instant messaging packet routing."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain why Erlang is used for real-time messaging servers.",
+          "answer": "Erlang runs lightweight processes (actors) on a virtual machine, enabling millions of parallel tasks with isolated heap spaces, preventing system-wide crashes and memory lock bottlenecks."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Assuming massive systems run on a single database type (they actually use polyglot persistence, mixing SQL, key-value, and document DBs).",
+            "Underestimating network hop latency when distributing services across global cloud regions."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Platform",
+            "Primary System Design Component",
+            "Underlying Tech Stack"
+          ],
+          "rows": [
+            [
+              "Google",
+              "Web indexing & Search ranking",
+              "MapReduce, Bigtable, PageRank"
+            ],
+            [
+              "YouTube",
+              "Video segmenting & CDN caching",
+              "FFmpeg transcoding, Google Edge CDNs"
+            ],
+            [
+              "WhatsApp",
+              "Massive websocket routing",
+              "FreeBSD, Erlang Actor model, Signal protocol"
+            ],
+            [
+              "Netflix",
+              "Microservice fault tolerance",
+              "Chaos Monkey, Spring Boot, AWS EC2"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "The Google File System Paper (Ghemawat et al.)",
+            "High Scalability Blog (highscalability.com) case studies"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec21",
+      "num": "21",
+      "title": "Section 21: Projects",
+      "subtitle": "End-to-End System Construction Blueprints",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec21",
+          "title": "Section 21: Projects",
+          "subtitle": "End-to-End System Construction Blueprints"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Detailed design blueprints, schemas, and APIs for 8 core projects: Chat systems, URL shorteners, Banking ledgers, and LearnXChain mini nodes."
+        },
+        {
+          "type": "h3",
+          "text": "21.1 Project: Chat Application Design Blueprint"
+        },
+        {
+          "type": "para",
+          "text": "Requirements: Real-time messaging, active status tracking, message history storage. Database: PostgreSQL for user metadata; Redis for active connection mapping; Cassandra for high-volume chat histories. APIs: POST /chat/send, GET /chat/history?userId=123. Node layout: client establishes WebSocket connection to a load-balanced WebSocket gateway cluster."
+        },
+        {
+          "type": "h3",
+          "text": "21.2 Project: URL Shortener Design (TinyURL)"
+        },
+        {
+          "type": "para",
+          "text": "Requirements: Compress URLs (e.g. from 100 chars to 7 chars), redirect users instantly. Hash algorithm: Base62 encoding on unique IDs generated by a distributed Snowflake coordinator. Redirect strategy: HTTP 301 (Permanent Redirect) to allow client browser caching, minimizing redirect server load."
+        },
+        {
+          "type": "h3",
+          "text": "21.3 Code Snippet: Base62 URL Encoder"
+        },
+        {
+          "type": "codeBlock",
+          "lang": "javascript",
+          "codeText": "\nconst BASE62 = \"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\";\nfunction encodeIdToBase62(num) {\n  let chars = [];\n  while (num > 0) {\n    chars.push(BASE62[num % 62]);\n    num = Math.floor(num / 62);\n  }\n  return chars.reverse().join('');\n}\nconsole.log(encodeIdToBase62(9999999)); // \"b5A9\" - compact short URL path\n"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Projects provide complete application architecture specs, database schemas, and code implementations mapping theory to working software systems."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Chat systems require persistent socket gateways to route push notifications.",
+            "URL shorteners redirect traffic using HTTP 301 codes to reduce server overhead.",
+            "Thread-safe banking ledgers use pessimistic lock queries (SELECT FOR UPDATE) to protect accounts from double-spend operations."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Why is HTTP 301 redirect preferred over HTTP 302 for a URL shortener?",
+          "choices": [
+            "301 is faster to execute.",
+            "301 is a permanent redirect, letting browsers cache the mapping, whereas 302 forces a server trip every time.",
+            "302 is deprecated.",
+            "301 supports encrypted payloads."
+          ],
+          "correctIndex": 1,
+          "explanation": "301 permanent redirect caches the destination on clients, reducing server compute costs."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Describe the database schema design for a basic E-Commerce platform.",
+          "answer": "A relational schema contains: Users (id, name, email), Products (id, name, price, stock), Orders (id, user_id, status, created_at), and Order_Items (id, order_id, product_id, quantity, price) connected with foreign keys."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Failing to handle database transaction rollbacks in user checkout routes, leading to orphan payment records.",
+            "Using simple random strings for short URLs without checking for duplicate collisions."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Project",
+            "Core Bottleneck",
+            "Best architectural fix"
+          ],
+          "rows": [
+            [
+              "Chat App",
+              "WebSocket connection memory exhaustion",
+              "Horizontal gateway scaling + Redis PubSub"
+            ],
+            [
+              "URL Shortener",
+              "High read redirect load",
+              "Local Redis cache + HTTP 301 headers"
+            ],
+            [
+              "E-Commerce",
+              "Double reservation during checkout",
+              "Database transaction locks (Pessimistic/Optimistic)"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "System Design Interview Volume 2 by Alex Xu",
+            "Clean Architecture by Robert C. Martin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec22",
+      "num": "22",
+      "title": "Section 22: GATE CS Preparation",
+      "subtitle": "Core Syllabus Review & Practice Problems",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec22",
+          "title": "Section 22: GATE CS Preparation",
+          "subtitle": "Core Syllabus Review & Practice Problems"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Mastering GATE-focused topics across OS CPU scheduling, database normalization normal forms, computer network subnet calculations, and COA memory maps."
+        },
+        {
+          "type": "h3",
+          "text": "22.1 GATE Computer Science Core Areas"
+        },
+        {
+          "type": "para",
+          "text": "The Graduate Aptitude Test in Engineering (GATE) tests deep mathematical computer science foundations. Key areas evaluate:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Operating Systems: CPU scheduling timeline calculations, virtual memory page faults, and banker's deadlock avoidance calculations.",
+            "DBMS: Finding candidate keys, determining normal forms (1NF, 2NF, 3NF, BCNF), and verifying conflict serializability of transaction schedules.",
+            "Computer Networks: IP subnets math (CIDR masks, network boundaries) and routing table lookup priority (longest prefix match).",
+            "TOC & Compiler Design: Minimizing DFA states, parsing tables (LL/LR conflict resolution), and token counts."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "22.2 Sample Solved GATE Question: Subnetting"
+        },
+        {
+          "type": "para",
+          "text": "Question: A router receives a packet with destination IP address 192.168.1.75. The router's table has entries: (1) 192.168.1.64/26 and (2) 192.168.1.0/24. Which entry is selected?"
+        },
+        {
+          "type": "para",
+          "text": "Solution: IP 192.168.1.75 in binary has the host part in range. /26 mask requires matching the first 26 bits (range 192.168.1.64 to 192.168.1.127). The packet matches BOTH entries. Since entry (1) has a longer prefix (/26 is longer than /24), the router selects entry (1) based on Longest Prefix Match rules."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "GATE CS Preparation compiles high-level academic theory, solved subnet queries, normal form audits, and scheduler timeline calculations."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Conflict serializability is verified by constructing a precedence graph and checking for cycles.",
+            "Subnetting calculations require performing bitwise AND operations between the IP address and the subnet mask.",
+            "BCNF requires that for every functional dependency X -> Y, X must be a super key."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Under what condition is a database relation in 3rd Normal Form (3NF)?",
+          "choices": [
+            "If it is in 2NF and has no transitive functional dependencies of non-prime attributes on candidate keys",
+            "If it contains multi-valued dependencies",
+            "If it contains compound keys",
+            "If it lacks primary keys"
+          ],
+          "correctIndex": 0,
+          "explanation": "3NF eliminates transitive dependencies where a non-prime attribute depends on another non-prime attribute."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain conflict serializability of a transaction schedule.",
+          "answer": "A schedule is conflict serializable if it is conflict equivalent to a serial schedule. This is verified by drawing a precedence graph where nodes are transactions and edges represent conflicting operations (Read-Write, Write-Read, Write-Write on the same data item). The schedule is serializable if the graph is acyclic."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Mistaking /26 subnet masks as allowing 64 hosts (the actual address space has 64 addresses, but only 62 are usable hosts since network and broadcast addresses are reserved).",
+            "Counting duplicate states when minimizing DFAs."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Topic",
+            "Crucial Formula / Rule"
+          ],
+          "rows": [
+            [
+              "IP Host Count",
+              "Usable hosts = 2^(32 - mask) - 2"
+            ],
+            [
+              "Precedence Graph",
+              "Edge Ti -> Tj exists if Tj conflicts with Ti after Ti executes"
+            ],
+            [
+              "BCNF Rule",
+              "For X -> Y, X must be a superkey in the relation"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "GATE CS Syllabus & Solved Papers by GeeksforGeeks",
+            "GATE Overflow (gateoverflow.in) past question bank"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec23",
+      "num": "23",
+      "title": "Section 23: 365 Day Roadmap",
+      "subtitle": "A Structured Study Guide",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec23",
+          "title": "Section 23: 365 Day Roadmap",
+          "subtitle": "A Structured Study Guide"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "A month-by-month study guide mapping programming fundamentals, algorithms, system internals, system designs, and milestones."
+        },
+        {
+          "type": "h3",
+          "text": "23.1 Year-Long Learning Plan"
+        },
+        {
+          "type": "para",
+          "text": "Becoming a world-class systems engineer requires structured study. Follow this month-by-month roadmap:"
+        },
+        {
+          "type": "numbered",
+          "items": [
+            "Month 1-3: Programming Foundations & OOP. Master loops, memory scopes, dynamic dispatch, and design UML structures for local programs.",
+            "Month 4-6: Data Structures & Algorithms. Implement arrays, trees, heaps, graphs, sorting limits, and solve 150+ coding patterns.",
+            "Month 7-9: Operating Systems & Networking. Study processes, thread locks, page replacement policies, and packet paths across OSI layers.",
+            "Month 10-12: System Design & Distributed Systems. Master load balancers, caching, sharding rings, Raft consensus, and deploy full-stack apps."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "23.2 Weekly Tracking Template"
+        },
+        {
+          "type": "para",
+          "text": "Establish weekly milestones: dedicate 15 hours to theory readings, write 3 coding implementations, and draft 1 architecture blueprint."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "365 Day Roadmap charts the engineering milestones from beginner concepts to high-level distributed systems design."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Dedicate months 1-3 to mastering language semantics and object-oriented abstractions.",
+            "Allocate months 7-9 to system debugging, process trace diagnostics, and packet tracking.",
+            "Dedicate the final quarter to building and hosting distributed systems on the cloud."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which phase of the roadmap focuses on resolving race conditions and socket leaks?",
+          "choices": [
+            "Month 1-3 (OOP)",
+            "Month 4-6 (DSA)",
+            "Month 7-9 (OS/Networking)",
+            "Month 10-12 (Distributed Systems)"
+          ],
+          "correctIndex": 2,
+          "explanation": "Months 7-9 cover Operating Systems threads and Network socket routing."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How should projects be structured across the learning roadmap?",
+          "answer": "Projects should increase in complexity: start with console apps in Q1, move to algorithmic simulators in Q2, build networked backend systems in Q3, and design multi-node distributed platforms in Q4."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Skipping computer core concepts (like OS locks or network sockets) to jump directly into cloud dashboards.",
+            "Failing to implement code assignments from scratch."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Quarter",
+            "Focus Subject",
+            "Target Project Milestone"
+          ],
+          "rows": [
+            [
+              "Q1 (M1-3)",
+              "Programming & OOP",
+              "ATM or Library Management Console system"
+            ],
+            [
+              "Q2 (M4-6)",
+              "DSA & Algorithms",
+              "BST index structure and sorting simulator"
+            ],
+            [
+              "Q3 (M7-9)",
+              "OS & Networks",
+              "Multi-threaded Chat Server with TCP Sockets"
+            ],
+            [
+              "Q4 (M10-12)",
+              "System Design & Cloud",
+              "Distributed Key-Value Store with Consistent Hashing"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Developer Roadmap (roadmap.sh/computer-science)",
+            "Teach Yourself Computer Science (teachyourselfcs.com)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec24",
+      "num": "24",
+      "title": "Section 24: Final Master Cheat Sheet",
+      "subtitle": "Consolidated Engineering Cheat Sheets",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec24",
+          "title": "Section 24: Final Master Cheat Sheet",
+          "subtitle": "Consolidated Engineering Cheat Sheets"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Consolidated quick-reference sheets for OS commands, normal forms, network layers, OOP definitions, and DSA complexities."
+        },
+        {
+          "type": "h3",
+          "text": "24.1 Operating Systems Command Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Command",
+            "Purpose"
+          ],
+          "rows": [
+            [
+              "ps aux",
+              "List all active system processes"
+            ],
+            [
+              "top / htop",
+              "Real-time CPU and RAM utilization metrics"
+            ],
+            [
+              "chmod 755 file",
+              "Set user read/write/execute, group/others read/execute permissions"
+            ],
+            [
+              "netstat -tulpn",
+              "List active listening TCP/UDP port sockets"
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "24.2 DBMS Normalization Cheat Sheet"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "1NF: Attributes must contain atomic (indivisible) values only.",
+            "2NF: In 1NF and no partial dependencies (no non-prime attribute depends on a subset of a candidate key).",
+            "3NF: In 2NF and no transitive dependencies (no non-prime attribute functionally determines another non-prime attribute).",
+            "BCNF: For every dependency X -> Y, X must be a superkey."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "24.3 Networking & OOP Definitions"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "TCP 3-Way Handshake: SYN -> SYN-ACK -> ACK.",
+            "HTTP Status Codes: 200 (OK), 301 (Permanent Redirect), 400 (Bad Request), 401 (Unauthorized), 404 (Not Found), 500 (Internal Server Error).",
+            "SOLID: Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, Dependency Inversion."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Final Master Cheat Sheet compiles core commands, normalization definitions, network handshakes, and object-oriented rules for quick revision."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Keep this reference sheet open during development, debugging, and interview prep.",
+            "Use BCNF to audit schema isolation safety.",
+            "Check netstat commands to diagnose port binding issues."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions"
+        },
+        {
+          "type": "questionCard",
+          "question": "What does the HTTP status code 301 represent?",
+          "choices": [
+            "Unauthorized access",
+            "Permanent Redirect",
+            "Server Error",
+            "Page Not Found"
+          ],
+          "correctIndex": 1,
+          "explanation": "301 signals permanent URL redirection, allowing client browsers to cache the new endpoint."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "State the Liskov Substitution Principle (LSP).",
+          "answer": "LSP states that objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Confusing BCNF with 3NF requirements.",
+            "Forgetting to check process port binds when restarting web servers."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Subject",
+            "Quick Reference Check"
+          ],
+          "rows": [
+            [
+              "OS",
+              "Free RAM check: free -h; CPU check: top"
+            ],
+            [
+              "DBMS",
+              "ACID: Atomicity, Consistency, Isolation, Durability"
+            ],
+            [
+              "Networks",
+              "IP mask sizes: /24 = 256 addresses; /30 = 4 addresses"
+            ],
+            [
+              "OOP",
+              "4 Pillars: Encapsulation, Abstraction, Inheritance, Polymorphism"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Cheatography Computer Science Cheat Sheets",
+            "OverAPI developer cheat sheet index"
+          ]
+        }
+      ]
+    }
+  ],
+  "handbookToc": null
+}

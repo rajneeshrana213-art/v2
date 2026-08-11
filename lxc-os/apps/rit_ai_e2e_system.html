@@ -1,0 +1,4402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIT AI — Complete End-to-End System | LXC Technologies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Outfit', sans-serif;
+      
+      --color-background-primary: #04081a;
+      --color-background-secondary: #070d2a;
+      --color-background-tertiary: #0a1240;
+      
+      --color-text-primary: #ffffff;
+      --color-text-secondary: #94a3b8;
+      --color-text-tertiary: #64748b;
+      
+      --color-border-primary: #ff8c00;
+      --color-border-secondary: rgba(255, 140, 0, 0.2);
+      --color-border-tertiary: rgba(255, 255, 255, 0.08);
+
+      /* Layer Colors - Dark Mode */
+      --color-L1: #38bdf8;
+      --color-L1-bg: rgba(56, 189, 248, 0.12);
+      --color-L1-border: rgba(56, 189, 248, 0.3);
+      
+      --color-L2: #34d399;
+      --color-L2-bg: rgba(52, 211, 153, 0.12);
+      --color-L2-border: rgba(52, 211, 153, 0.3);
+      
+      --color-L3: #fbbf24;
+      --color-L3-bg: rgba(251, 191, 36, 0.12);
+      --color-L3-border: rgba(251, 191, 36, 0.3);
+      
+      --color-L4: #ff8c00;
+      --color-L4-bg: rgba(255, 140, 0, 0.12);
+      --color-L4-border: rgba(255, 140, 0, 0.3);
+      
+      --color-L5: #a3e635;
+      --color-L5-bg: rgba(163, 230, 53, 0.12);
+      --color-L5-border: rgba(163, 230, 53, 0.3);
+      
+      --color-L6: #f472b6;
+      --color-L6-bg: rgba(244, 114, 182, 0.12);
+      --color-L6-border: rgba(244, 114, 182, 0.3);
+    }
+
+    body.light-mode {
+      --color-background-primary: #f8fafc;
+      --color-background-secondary: #ffffff;
+      --color-background-tertiary: #f1f5f9;
+      
+      --color-text-primary: #0f172a;
+      --color-text-secondary: #334155;
+      --color-text-tertiary: #64748b;
+      
+      --color-border-secondary: rgba(255, 140, 0, 0.15);
+      --color-border-tertiary: rgba(15, 23, 42, 0.08);
+
+      /* Layer Colors - Light Mode (High Contrast & Saturated) */
+      --color-L1: #0284c7;
+      --color-L1-bg: rgba(2, 132, 199, 0.08);
+      --color-L1-border: rgba(2, 132, 199, 0.25);
+      
+      --color-L2: #059669;
+      --color-L2-bg: rgba(5, 150, 105, 0.08);
+      --color-L2-border: rgba(5, 150, 105, 0.25);
+      
+      --color-L3: #d97706;
+      --color-L3-bg: rgba(217, 119, 6, 0.08);
+      --color-L3-border: rgba(217, 119, 6, 0.25);
+      
+      --color-L4: #ea580c;
+      --color-L4-bg: rgba(234, 88, 12, 0.08);
+      --color-L4-border: rgba(234, 88, 12, 0.25);
+      
+      --color-L5: #65a30d;
+      --color-L5-bg: rgba(101, 163, 13, 0.08);
+      --color-L5-border: rgba(101, 163, 13, 0.25);
+      
+      --color-L6: #db2777;
+      --color-L6-bg: rgba(219, 39, 119, 0.08);
+      --color-L6-border: rgba(219, 39, 119, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-background-primary);
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+      padding: 24px;
+      min-height: 100vh;
+      position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Soft glowing background radial gradients */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 140, 0, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 45%);
+      pointer-events: none;
+      transition: background-image 0.3s ease;
+    }
+
+    body.light-mode::before {
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 140, 0, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 45%);
+    }
+
+    .wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 0;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--color-border-tertiary);
+      padding-bottom: 18px;
+    }
+
+    .top-bar h2 {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      flex: 1;
+      min-width: 280px;
+      letter-spacing: -0.01em;
+    }
+
+    .action-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .view-btns {
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 4px;
+      border-radius: 30px;
+      border: 1px solid var(--color-border-tertiary);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    body.light-mode .view-btns {
+      background: rgba(15, 23, 42, 0.04);
+    }
+
+    .vbtn {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      transition: all 0.2s ease;
+    }
+
+    .vbtn:hover {
+      color: var(--color-text-primary);
+    }
+
+    .vbtn.active {
+      background: var(--color-border-primary);
+      color: #04081a !important;
+      box-shadow: 0 4px 12px rgba(255, 140, 0, 0.35);
+    }
+
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border-tertiary);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-secondary);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 14px;
+    }
+
+    .theme-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--color-text-primary);
+      transform: scale(1.08);
+    }
+
+    body.light-mode .theme-toggle-btn {
+      background: rgba(15, 23, 42, 0.04);
+    }
+
+    body.light-mode .theme-toggle-btn:hover {
+      background: rgba(15, 23, 42, 0.08);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.01);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--color-border-tertiary);
+      align-items: center;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    body.light-mode .legend {
+      background: rgba(15, 23, 42, 0.02);
+    }
+
+    .leg {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .leg-sq {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ── JOURNEY VIEW ── */
+    #view-journey {
+      display: block;
+    }
+
+    .journey-stage {
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      background: var(--color-background-secondary);
+      transition: all 0.3s ease;
+    }
+
+    .journey-stage:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    body.light-mode .journey-stage:hover {
+      border-color: rgba(15, 23, 42, 0.15);
+    }
+
+    .stage-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      cursor: pointer;
+      user-select: none;
+      background: rgba(255, 255, 255, 0.02);
+      transition: background 0.2s ease;
+    }
+
+    .stage-header:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    body.light-mode .stage-header:hover {
+      background: rgba(15, 23, 42, 0.03);
+    }
+
+    .stage-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .stage-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      flex: 1;
+    }
+
+    .stage-sub {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      margin-top: 1px;
+    }
+
+    .stage-arrow {
+      font-size: 14px;
+      color: var(--color-text-tertiary);
+      transition: transform 0.2s ease;
+      font-weight: bold;
+    }
+
+    .stage-arrow.open {
+      transform: rotate(180deg);
+    }
+
+    .stage-body {
+      padding: 16px;
+      border-top: 1px solid var(--color-border-tertiary);
+      background: rgba(4, 8, 26, 0.4);
+      transition: background-color 0.3s;
+    }
+
+    body.light-mode .stage-body {
+      background: rgba(248, 250, 252, 0.5);
+    }
+
+    .mod-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .mod-card {
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      background: rgba(255, 255, 255, 0.02);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.light-mode .mod-card {
+      background: rgba(15, 23, 42, 0.01);
+    }
+
+    .mod-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+
+    .mod-card:hover::after {
+      opacity: 1;
+    }
+
+    .mod-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.4);
+    }
+
+    body.light-mode .mod-card:hover {
+      border-color: rgba(15, 23, 42, 0.15) !important;
+      background: rgba(15, 23, 42, 0.03);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.15);
+    }
+
+    .mod-card.active-mod {
+      border-width: 2px !important;
+      border-color: var(--color-border-primary) !important;
+      box-shadow: 0 0 20px rgba(255, 140, 0, 0.25);
+      background: rgba(255, 140, 0, 0.04);
+    }
+
+    body.light-mode .mod-card.active-mod {
+      background: rgba(255, 140, 0, 0.06);
+    }
+
+    .mod-id {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .mod-name {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      line-height: 1.3;
+    }
+
+    .mod-desc {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      line-height: 1.45;
+      margin-top: 6px;
+    }
+
+    /* Dynamic Card Border and ID color overrides linked to layer variables */
+    #mc-M1, #mc-M2, #mc-M3 { border-color: var(--color-L1-border); }
+    #mc-M1 .mod-id, #mc-M2 .mod-id, #mc-M3 .mod-id { color: var(--color-L1); }
+
+    #mc-M4, #mc-M5, #mc-M6, #mc-M7 { border-color: var(--color-L2-border); }
+    #mc-M4 .mod-id, #mc-M5 .mod-id, #mc-M6 .mod-id, #mc-M7 .mod-id { color: var(--color-L2); }
+
+    #mc-M8, #mc-M9, #mc-M10, #mc-M11 { border-color: var(--color-L3-border); }
+    #mc-M8 .mod-id, #mc-M9 .mod-id, #mc-M10 .mod-id, #mc-M11 .mod-id { color: var(--color-L3); }
+
+    #mc-M12, #mc-M13, #mc-M14, #mc-M15, #mc-M16 { border-color: var(--color-L4-border); }
+    #mc-M12 .mod-id, #mc-M13 .mod-id, #mc-M14 .mod-id, #mc-M15 .mod-id, #mc-M16 .mod-id { color: var(--color-L4); }
+
+    #mc-M17, #mc-M18, #mc-M19 { border-color: var(--color-L5-border); }
+    #mc-M17 .mod-id, #mc-M18 .mod-id, #mc-M19 .mod-id { color: var(--color-L5); }
+
+    #mc-M20, #mc-M21, #mc-M22 { border-color: var(--color-L6-border); }
+    #mc-M20 .mod-id, #mc-M21 .mod-id, #mc-M22 .mod-id { color: var(--color-L6); }
+
+    .flow-arrows {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      padding: 6px 0;
+      line-height: 1.8;
+    }
+
+    .flow-chip {
+      display: inline-block;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-size: 10px;
+      margin: 2px 4px 2px 0;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      transition: all 0.15s;
+    }
+    
+    .flow-chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    }
+
+    .chip-out { background: #E6F1FB; color: #0C447C; border: 0.5px solid rgba(12, 68, 124, 0.2); }
+    .chip-in { background: #E1F5EE; color: #085041; border: 0.5px solid rgba(8, 80, 65, 0.2); }
+    .chip-both { background: #FAEEDA; color: #633806; border: 0.5px solid rgba(99, 56, 6, 0.2); }
+
+    /* ── MATRIX VIEW ── */
+    #view-matrix {
+      display: none;
+    }
+
+    .matrix-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 16px;
+      background: var(--color-background-secondary);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    table.mx {
+      border-collapse: collapse;
+      font-size: 10px;
+      width: 100%;
+    }
+
+    table.mx th, table.mx td {
+      border: 1px solid var(--color-border-tertiary);
+      padding: 0;
+    }
+
+    table.mx th.col-hd {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      padding: 10px 6px;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      height: 100px;
+      vertical-align: bottom;
+      text-align: left;
+      min-width: 26px;
+      letter-spacing: 0.05em;
+    }
+
+    table.mx th.row-hd {
+      text-align: right;
+      padding: 6px 12px;
+      font-family: var(--font-display);
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+      min-width: 130px;
+    }
+
+    table.mx td.cell {
+      width: 26px;
+      height: 26px;
+      text-align: center;
+      vertical-align: middle;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: bold;
+      color: #04081a;
+    }
+
+    table.mx td.cell:hover {
+      background: var(--color-background-tertiary) !important;
+      transform: scale(1.2);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+      z-index: 10;
+      position: relative;
+    }
+
+    body.light-mode table.mx td.cell:hover {
+      box-shadow: 0 0 12px rgba(15, 23, 42, 0.15);
+    }
+
+    table.mx td.cell.self {
+      background: rgba(255, 255, 255, 0.03) !important;
+      cursor: not-allowed;
+    }
+
+    body.light-mode table.mx td.cell.self {
+      background: rgba(15, 23, 42, 0.02) !important;
+    }
+
+    table.mx tr:hover th.row-hd {
+      color: var(--color-text-primary);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    body.light-mode table.mx tr:hover th.row-hd {
+      background: rgba(15, 23, 42, 0.01);
+    }
+
+    /* ── DETAIL PANEL ── */
+    .detail-panel {
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 16px;
+      min-height: 90px;
+      background: linear-gradient(145deg, var(--color-background-secondary), rgba(7, 13, 42, 0.7));
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      transition: all 0.3s ease;
+    }
+
+    body.light-mode .detail-panel {
+      background: linear-gradient(145deg, var(--color-background-secondary), rgba(248, 250, 252, 0.8));
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+
+    .dp-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .dp-layer {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .dp-section {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--color-text-secondary);
+      margin: 18px 0 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding-bottom: 4px;
+    }
+
+    body.light-mode .dp-section {
+      border-bottom-color: rgba(15, 23, 42, 0.05);
+    }
+
+    .dp-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      font-size: 12px;
+    }
+
+    body.light-mode .dp-row {
+      border-bottom-color: rgba(15, 23, 42, 0.03);
+    }
+
+    .dp-row:last-child {
+      border: none;
+    }
+
+    .dp-badge {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 20px;
+      flex-shrink: 0;
+      white-space: nowrap;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-mode .dp-badge {
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05);
+    }
+
+    .dp-text {
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    .dp-name {
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+
+    .dp-hint {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      text-align: center;
+      padding: 24px 0;
+      font-style: italic;
+    }
+
+    /* ── BUILD PATHWAY VIEW ── */
+    #view-build {
+      display: none;
+    }
+    .build-header {
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--color-border-tertiary);
+    }
+    .build-header h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      margin-bottom: 4px;
+    }
+    .build-header p {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+    }
+
+    .build-mode-toggle {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border-tertiary);
+      width: fit-content;
+    }
+    body.light-mode .build-mode-toggle {
+      background: rgba(15, 23, 42, 0.02);
+    }
+    .bm-btn {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--color-text-secondary);
+      transition: all 0.2s ease;
+    }
+    .bm-btn:hover {
+      color: var(--color-text-primary);
+    }
+    .bm-btn.active {
+      background: var(--color-background-tertiary);
+      color: var(--color-border-primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .sim-control-panel {
+      background: linear-gradient(135deg, var(--color-background-secondary), rgba(7, 13, 42, 0.9));
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    body.light-mode .sim-control-panel {
+      background: linear-gradient(135deg, var(--color-background-secondary), rgba(248, 250, 252, 0.9));
+      box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    }
+    .sim-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .sim-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+    }
+    .sim-badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: var(--color-border-tertiary);
+      color: var(--color-text-primary);
+    }
+    .sim-progress-track {
+      height: 6px;
+      background: var(--color-border-tertiary);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .sim-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff8c00, #10b981);
+      width: 0%;
+      border-radius: 3px;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sim-action-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .sim-btn {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--color-border-tertiary);
+      background: var(--color-background-tertiary);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .sim-btn:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-text-primary);
+    }
+    .sim-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .sim-btn.btn-primary {
+      background: var(--color-border-primary);
+      color: #04081a !important;
+      border-color: var(--color-border-primary);
+    }
+    .sim-btn.btn-primary:hover:not(:disabled) {
+      box-shadow: 0 0 10px rgba(255, 140, 0, 0.4);
+      filter: brightness(1.1);
+    }
+    .sim-btn.btn-danger {
+      color: #ef4444;
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+    .sim-btn.btn-danger:hover:not(:disabled) {
+      background: rgba(239, 68, 68, 0.1);
+      color: #f87171;
+    }
+
+    .build-split-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .build-split-layout {
+        grid-template-columns: 1fr;
+      }
+      .build-right-col {
+        position: static !important;
+      }
+    }
+    .build-left-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .build-right-col {
+      position: sticky;
+      top: 24px;
+    }
+
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+    }
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 20px;
+      bottom: 20px;
+      width: 2px;
+      background: var(--color-border-tertiary);
+      z-index: 1;
+    }
+    .timeline-phase {
+      display: flex;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    @media (max-width: 768px) {
+      .timeline-phase {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .timeline-container::before {
+        display: none;
+      }
+      .phase-meta {
+        width: 100% !important;
+        padding-left: 0 !important;
+      }
+      .phase-node {
+        display: none;
+      }
+    }
+    .phase-node {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-background-secondary);
+      border: 3px solid var(--color-border-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--color-text-primary);
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 3;
+    }
+    .phase-meta {
+      width: 240px;
+      flex-shrink: 0;
+    }
+    .phase-badge {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 30px;
+      letter-spacing: 0.05em;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .phase-meta h4 {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: 4px;
+    }
+    .phase-why {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      line-height: 1.5;
+    }
+    .phase-cards {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .pcard {
+      border: 1px solid var(--color-border-tertiary);
+      border-radius: 12px;
+      padding: 14px;
+      cursor: pointer;
+      background: var(--color-background-secondary);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    body.light-mode .pcard {
+      background: rgba(15, 23, 42, 0.01);
+    }
+    .pcard:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-border-primary) !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    body.light-mode .pcard:hover {
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+    }
+    .pcard.active-pcard {
+      border-width: 2px !important;
+      border-color: var(--color-border-primary) !important;
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.2);
+    }
+    .pcard-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .pcard-id {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .pcard-name {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+    .pcard-desc {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    /* ── STEP BY STEP TIMELINE VIEW ── */
+    .timeline-step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      padding-left: 20px;
+    }
+    .timeline-step-list::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 15px;
+      bottom: 15px;
+      width: 2px;
+      background: var(--color-border-tertiary);
+    }
+    .step-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      position: relative;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--color-border-tertiary);
+      background: var(--color-background-secondary);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    body.light-mode .step-row {
+      background: rgba(15, 23, 42, 0.01);
+    }
+    .step-row::before {
+      content: '';
+      position: absolute;
+      left: -17px;
+      top: calc(50% - 4px);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-border-tertiary);
+      border: 2px solid var(--color-background-primary);
+      z-index: 2;
+      transition: all 0.25s ease;
+    }
+    .step-row:hover {
+      transform: translateX(4px);
+      border-color: rgba(255, 140, 0, 0.3) !important;
+    }
+    .step-row.active-step {
+      border-color: var(--color-border-primary) !important;
+      border-width: 2px !important;
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.15);
+      background: rgba(255, 140, 0, 0.02);
+    }
+    body.light-mode .step-row.active-step {
+      background: rgba(255, 140, 0, 0.04);
+    }
+    
+    /* Simulator Card States */
+    .step-row.state-completed {
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .step-row.state-completed::before {
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+    .step-row.state-unlocked {
+      border-color: rgba(255, 140, 0, 0.4);
+    }
+    .step-row.state-unlocked::before {
+      background: #ff8c00;
+      box-shadow: 0 0 8px #ff8c00;
+    }
+    .step-row.state-locked {
+      opacity: 0.45;
+    }
+    .step-row.state-locked::before {
+      background: #475569;
+    }
+    
+    .step-num-badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--color-border-tertiary);
+      color: var(--color-text-tertiary);
+      min-width: 48px;
+      text-align: center;
+    }
+    .step-row.state-completed .step-num-badge {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+    }
+    .step-row.state-unlocked .step-num-badge {
+      background: rgba(255, 140, 0, 0.15);
+      color: #ff8c00;
+    }
+    .step-mod-id {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+    .step-mod-name {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      flex: 1;
+    }
+    .step-status-chip {
+      font-family: var(--font-display);
+      font-size: 8px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+    .chip-completed { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 0.5px solid rgba(16, 185, 129, 0.2); }
+    .chip-unlocked { background: rgba(255, 140, 0, 0.1); color: #ff8c00; border: 0.5px solid rgba(255, 140, 0, 0.2); }
+    .chip-locked { background: rgba(148, 163, 184, 0.05); color: var(--color-text-tertiary); border: 0.5px solid var(--color-border-tertiary); }
+
+    /* SQL DDL Block Styles */
+    .sql-code-container {
+      position: relative;
+      margin-top: 10px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--color-border-tertiary);
+    }
+    .sql-code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--color-border-tertiary);
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--color-text-tertiary);
+    }
+    body.light-mode .sql-code-header {
+      background: rgba(15, 23, 42, 0.02);
+    }
+    .sql-code-pre {
+      background: #010410 !important;
+      padding: 12px;
+      margin: 0;
+      overflow-x: auto;
+      font-family: 'Consolas', 'Courier New', Courier, monospace;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #e2e8f0;
+      white-space: pre;
+    }
+    .sql-copy-btn {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .sql-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--color-text-primary);
+    }
+    
+    /* Interactive Checklist */
+    .checklist-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .chk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+    .chk-box {
+      margin-top: 4px;
+      accent-color: var(--color-border-primary);
+      cursor: pointer;
+    }
+
+
+    /* AI Agent Builder Prompt Box Styles */
+    .prompt-box-container {
+      position: relative;
+      margin-top: 10px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.05);
+    }
+    body.light-mode .prompt-box-container {
+      border: 1px solid rgba(2, 132, 199, 0.2);
+    }
+    .prompt-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 12px;
+      background: rgba(56, 189, 248, 0.05);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+    }
+    body.light-mode .prompt-box-header {
+      background: rgba(2, 132, 199, 0.05);
+      border-bottom-color: rgba(2, 132, 199, 0.15);
+    }
+    .prompt-text-block {
+      background: #020617 !important;
+      padding: 12px;
+      margin: 0;
+      overflow-x: auto;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      line-height: 1.5;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+    body.light-mode .prompt-text-block {
+      background: #fafafa !important;
+      color: #334155;
+    }
+    .prompt-copy-btn {
+      font-family: var(--font-display);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(56, 189, 248, 0.05);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .prompt-copy-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--color-text-primary);
+    }
+
+
+    .mobile-app-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 300px 1.3fr;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .mobile-app-layout {
+        grid-template-columns: 1fr;
+      }
+      .mobile-mockup-col {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+      }
+    }
+    
+    .mobile-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .mobile-screen-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    .mobile-screen-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--color-border-tertiary);
+      background: var(--color-background-secondary);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: left;
+    }
+    body.light-mode .mobile-screen-row {
+      background: rgba(15, 23, 42, 0.01);
+    }
+    .mobile-screen-row:hover {
+      transform: translateX(4px);
+      border-color: rgba(255, 140, 0, 0.3) !important;
+    }
+    .mobile-screen-row.active-mscreen {
+      border-color: var(--color-border-primary) !important;
+      border-width: 2px !important;
+      background: rgba(255, 140, 0, 0.03);
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.15);
+    }
+    body.light-mode .mobile-screen-row.active-mscreen {
+      background: rgba(255, 140, 0, 0.05);
+    }
+    
+    .mscreen-badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--color-border-tertiary);
+      color: var(--color-text-tertiary);
+      min-width: 48px;
+      text-align: center;
+    }
+    .mobile-screen-row.active-mscreen .mscreen-badge {
+      background: rgba(255, 140, 0, 0.15);
+      color: var(--color-border-primary);
+    }
+    
+    .mscreen-name {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      flex: 1;
+    }
+    
+    .mscreen-modules {
+      font-size: 8px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--color-text-secondary);
+      border: 0.5px solid var(--color-border-tertiary);
+    }
+    
+    /* ── High-Fidelity Phone CSS ── */
+    .phone-mockup {
+      width: 290px;
+      height: 580px;
+      border: 10px solid #1e293b;
+      border-radius: 40px;
+      background: #04081a;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 140, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      margin: 0 auto;
+    }
+    body.light-mode .phone-mockup {
+      border-color: #cbd5e1;
+      background: #ffffff;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15), 0 0 20px rgba(15, 23, 42, 0.05);
+    }
+    
+    .phone-notch {
+      width: 100px;
+      height: 18px;
+      background: #1e293b;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      position: absolute;
+      top: 0;
+      left: calc(50% - 50px);
+      z-index: 10;
+      transition: background-color 0.3s ease;
+    }
+    body.light-mode .phone-notch {
+      background: #cbd5e1;
+    }
+    
+    .phone-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      background: #020617;
+      color: #cbd5e1;
+      transition: background-color 0.3s ease;
+    }
+    body.light-mode .phone-screen {
+      background: #f8fafc;
+      color: #334155;
+    }
+    
+    .phone-status-bar {
+      height: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 700;
+      z-index: 9;
+      pointer-events: none;
+      user-select: none;
+      padding-top: 4px;
+    }
+    
+    .phone-signals {
+      display: flex;
+      gap: 4px;
+    }
+    
+    .phone-content-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px;
+      scrollbar-width: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: left;
+    }
+    .phone-content-body::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .phone-navigation-bar {
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      pointer-events: none;
+      user-select: none;
+    }
+    
+    .phone-nav-pill {
+      width: 70px;
+      height: 4px;
+      background: #475569;
+      border-radius: 2px;
+      transition: background-color 0.3s ease;
+    }
+    body.light-mode .phone-nav-pill {
+      background: #94a3b8;
+    }
+    
+    /* ── High-Fidelity Mobile UI Components ── */
+    .ph-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .ph-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    body.light-mode .ph-title {
+      color: #0f172a;
+    }
+    .ph-sub {
+      font-size: 9px;
+      color: #64748b;
+    }
+    .ph-avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff8c00 0%, #10b981 100%);
+      border: 1px solid rgba(255,255,255,0.1);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: bold;
+      color: #000;
+    }
+    
+    .ph-card {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 14px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    body.light-mode .ph-card {
+      border-color: rgba(15, 23, 42, 0.06);
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+    .ph-card:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-2px);
+    }
+    body.light-mode .ph-card:hover {
+      background: rgba(15, 23, 42, 0.01);
+    }
+    
+    .ph-card-title {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .ph-btn {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      width: 100%;
+      text-align: center;
+    }
+    .ph-btn-primary {
+      background: var(--color-border-primary);
+      color: #04081a !important;
+      box-shadow: 0 4px 10px rgba(255, 140, 0, 0.2);
+    }
+    .ph-btn-primary:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+    .ph-btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    body.light-mode .ph-btn-secondary {
+      background: rgba(15, 23, 42, 0.03);
+      color: #0f172a;
+      border-color: rgba(15, 23, 42, 0.08);
+    }
+    .ph-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+    
+    .ph-flex-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    
+    .ph-text-large {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    body.light-mode .ph-text-large {
+      color: #0f172a;
+    }
+    
+    .ph-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.06);
+      margin: 8px 0;
+    }
+    body.light-mode .ph-divider {
+      background: rgba(15, 23, 42, 0.06);
+    }
+    
+    .ph-twin-glow {
+      animation: avatarGlow 3s infinite alternate;
+    }
+    @keyframes avatarGlow {
+      0% { box-shadow: 0 0 8px rgba(255, 140, 0, 0.2); }
+      100% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+    }
+
+    /* Hidden Screen-Reader Only Title */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1 class="sr-only">RIT AI complete end-to-end system — all 22 modules, their descriptions, and every inter-module relationship</h1>
+
+  <div class="top-bar">
+    <h2>RIT AI — complete system · 22 modules · 36 connections</h2>
+    <div class="action-controls">
+      <div class="view-btns">
+        <button class="vbtn active" onclick="setView('journey',this)">Journey view</button>
+        <button class="vbtn" onclick="setView('matrix',this)">Relationship matrix</button>
+        <button class="vbtn" onclick="setView('build',this)">Build Pathway</button>
+        <button class="vbtn" onclick="setView('mobile',this)">Mobile App UX</button>
+      </div>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" aria-label="Toggle Theme" title="Toggle Light/Dark Mode">
+        <span class="theme-icon">🌙</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-sq" style="background:#E6F1FB;border:1px solid #378ADD"></div>Sends to</div>
+    <div class="leg"><div class="leg-sq" style="background:#E1F5EE;border:1px solid #1D9E75"></div>Receives from</div>
+    <div class="leg"><div class="leg-sq" style="background:#FAEEDA;border:1px solid #BA7517"></div>Bidirectional</div>
+    <div class="leg" style="margin-left:auto"><span style="font-size:11px;color:var(--color-text-tertiary)">Click any module to inspect</span></div>
+  </div>
+
+  <!-- ═══ JOURNEY VIEW ═══ -->
+  <div id="view-journey">
+
+    <!-- L1 -->
+    <div class="journey-stage" id="stage-L1">
+      <div class="stage-header" onclick="toggleStage('L1')">
+        <div class="stage-dot" style="background:#E6F1FB;color:#0C447C">L1</div>
+        <div><div class="stage-title">Academic Intelligence</div><div class="stage-sub">M1 · M2 · M3 — entry point, study & knowledge layer</div></div>
+        <span class="stage-arrow open" id="arr-L1">&#8964;</span>
+      </div>
+      <div class="stage-body" id="body-L1">
+        <div class="mod-grid">
+          <div class="mod-card" id="mc-M1" onclick="selectMod('M1')">
+            <div class="mod-id">M1</div>
+            <div class="mod-name">AI Study Planner</div>
+            <div class="mod-desc">Auto-generates daily schedule from syllabus + goals</div>
+          </div>
+          <div class="mod-card" id="mc-M2" onclick="selectMod('M2')">
+            <div class="mod-id">M2</div>
+            <div class="mod-name">Smart Notes</div>
+            <div class="mod-desc">Converts lectures/PDFs to AI summaries & concept maps</div>
+          </div>
+          <div class="mod-card" id="mc-M3" onclick="selectMod('M3')">
+            <div class="mod-id">M3</div>
+            <div class="mod-name">Doubt Solver AI</div>
+            <div class="mod-desc">24/7 voice & text Q&A on NCERT/JEE/NEET topics</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- L2 -->
+    <div class="journey-stage" id="stage-L2">
+      <div class="stage-header" onclick="toggleStage('L2')">
+        <div class="stage-dot" style="background:#E1F5EE;color:#085041">L2</div>
+        <div><div class="stage-title">Personalized Learning</div><div class="stage-sub">M4 · M5 · M6 · M7 — adaptive content & delivery</div></div>
+        <span class="stage-arrow open" id="arr-L2">&#8964;</span>
+      </div>
+      <div class="stage-body" id="body-L2">
+        <div class="mod-grid">
+          <div class="mod-card" id="mc-M4" onclick="selectMod('M4')">
+            <div class="mod-id">M4</div>
+            <div class="mod-name">Adaptive Engine</div>
+            <div class="mod-desc">IRT difficulty scaling; calibrates tests & flashcards</div>
+          </div>
+          <div class="mod-card" id="mc-M5" onclick="selectMod('M5')">
+            <div class="mod-id">M5</div>
+            <div class="mod-name">Practice Tests</div>
+            <div class="mod-desc">Auto-generates JEE/NEET/board mock papers on demand</div>
+          </div>
+          <div class="mod-card" id="mc-M6" onclick="selectMod('M6')">
+            <div class="mod-id">M6</div>
+            <div class="mod-name">Flashcard AI</div>
+            <div class="mod-desc">Spaced repetition & AI-generated mnemonics</div>
+          </div>
+          <div class="mod-card" id="mc-M7" onclick="selectMod('M7')">
+            <div class="mod-id">M7</div>
+            <div class="mod-name">Style Detector</div>
+            <div class="mod-desc">Classifies visual/audio/read-write mode; routes M4</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- L3 -->
+    <div class="journey-stage" id="stage-L3">
+      <div class="stage-header" onclick="toggleStage('L3')">
+        <div class="stage-dot" style="background:#FAEEDA;color:#633806">L3</div>
+        <div><div class="stage-title">Performance & Cognitive AI</div><div class="stage-sub">M8 · M9 · M10 · M11 — Digital Twin intelligence hub</div></div>
+        <span class="stage-arrow open" id="arr-L3">&#8964;</span>
+      </div>
+      <div class="stage-body" id="body-L3">
+        <div class="mod-grid">
+          <div class="mod-card" id="mc-M8" onclick="selectMod('M8')">
+            <div class="mod-id">M8</div>
+            <div class="mod-name">Digital Twin</div>
+            <div class="mod-desc">Central cognitive model — receives from 7, feeds 5 modules</div>
+          </div>
+          <div class="mod-card" id="mc-M9" onclick="selectMod('M9')">
+            <div class="mod-id">M9</div>
+            <div class="mod-name">Perf Dashboard</div>
+            <div class="mod-desc">Live weak-zone radar; exports to Career AI & Mentor</div>
+          </div>
+          <div class="mod-card" id="mc-M10" onclick="selectMod('M10')">
+            <div class="mod-id">M10</div>
+            <div class="mod-name">Failure Alert AI</div>
+            <div class="mod-desc">Predicts at-risk students; triggers mentor + parent alert</div>
+          </div>
+          <div class="mod-card" id="mc-M11" onclick="selectMod('M11')">
+            <div class="mod-id">M11</div>
+            <div class="mod-name">Focus AI</div>
+            <div class="mod-desc">Pomodoro + distraction detect; paused by Wellness AI</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- L4 -->
+    <div class="journey-stage" id="stage-L4">
+      <div class="stage-header" onclick="toggleStage('L4')">
+        <div class="stage-dot" style="background:#FAECE7;color:#712B13">L4</div>
+        <div><div class="stage-title">Career & Self-Enhancement AI</div><div class="stage-sub">M12 · M13 · M14 · M15 · M16 — growth & wellbeing</div></div>
+        <span class="stage-arrow open" id="arr-L4">&#8964;</span>
+      </div>
+      <div class="stage-body" id="body-L4">
+        <div class="mod-grid">
+          <div class="mod-card" id="mc-M12" onclick="selectMod('M12')">
+            <div class="mod-id">M12</div>
+            <div class="mod-name">Career Discovery</div>
+            <div class="mod-desc">Maps M8 strengths → career paths; prescribes M16</div>
+          </div>
+          <div class="mod-card" id="mc-M13" onclick="selectMod('M13')">
+            <div class="mod-id">M13</div>
+            <div class="mod-name">Mentor AI</div>
+            <div class="mod-desc">Activated by M10 risk flags; refines M8 Twin model</div>
+          </div>
+          <div class="mod-card" id="mc-M14" onclick="selectMod('M14')">
+            <div class="mod-id">M14</div>
+            <div class="mod-name">Decision Sim</div>
+            <div class="mod-desc">Simulates college/career choices using M8 profile data</div>
+          </div>
+          <div class="mod-card" id="mc-M15" onclick="selectMod('M15')">
+            <div class="mod-id">M15</div>
+            <div class="mod-name">Wellness AI</div>
+            <div class="mod-desc">Burnout detection; pauses M11, intensifies M13, alerts M22</div>
+          </div>
+          <div class="mod-card" id="mc-M16" onclick="selectMod('M16')">
+            <div class="mod-id">M16</div>
+            <div class="mod-name">Soft Skills Coach</div>
+            <div class="mod-desc">Communication + leadership training; fed by M18 certs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- L5 -->
+    <div class="journey-stage" id="stage-L5">
+      <div class="stage-header" onclick="toggleStage('L5')">
+        <div class="stage-dot" style="background:#EAF3DE;color:#27500A">L5</div>
+        <div><div class="stage-title">Gamification & Skill Economy</div><div class="stage-sub">M17 · M18 · M19 — XP, credentials & peer learning</div></div>
+        <span class="stage-arrow open" id="arr-L5">&#8964;</span>
+      </div>
+      <div class="stage-body" id="body-L5">
+        <div class="mod-grid">
+          <div class="mod-card" id="mc-M17" onclick="selectMod('M17')">
+            <div class="mod-id">M17</div>
+            <div class="mod-name">XP & Leaderboard</div>
+            <div class="mod-desc">Points, streaks, badges; powered by M19 group battles</div>
+          </div>
+          <div class="mod-card" id="mc-M18" onclick="selectMod('M18')">
+            <div class="mod-id">M18</div>
+            <div class="mod-name">Skill Passport</div>
+            <div class="mod-desc">Blockchain-verified certs; feeds M12 career + M16 coach</div>
+          </div>
+          <div class="mod-card" id="mc-M19" onclick="selectMod('M19')">
+            <div class="mod-id">M19</div>
+            <div class="mod-name">Peer Network</div>
+            <div class="mod-desc">Study groups & competitions; awards bonus XP via M17</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- L6 -->
+    <div class="journey-stage" id="stage-L6">
+      <div class="stage-header" onclick="toggleStage('L6')">
+        <div class="stage-dot" style="background:#FBEAF0;color:#72243E">L6</div>
+        <div><div class="stage-title">Accessibility & Bharat Mode</div><div class="stage-sub">M20 · M21 · M22 — infrastructure for rural India</div></div>
+        <span class="stage-arrow open" id="arr-L6">&#8964;</span>
+      </div>
+      <div class="stage-body" id="body-L6">
+        <div class="mod-grid">
+          <div class="mod-card" id="mc-M20" onclick="selectMod('M20')">
+            <div class="mod-id">M20</div>
+            <div class="mod-name">Hinglish Voice AI</div>
+            <div class="mod-desc">Regional accent NLP; powers M3 doubts + M22 alerts</div>
+          </div>
+          <div class="mod-card" id="mc-M21" onclick="selectMod('M21')">
+            <div class="mod-id">M21</div>
+            <div class="mod-name">Offline Mode</div>
+            <div class="mod-desc">2G/no-net sync; enables M4 adaptive + M6 flashcards offline</div>
+          </div>
+          <div class="mod-card" id="mc-M22" onclick="selectMod('M22')">
+            <div class="mod-id">M22</div>
+            <div class="mod-name">Parent Comm AI</div>
+            <div class="mod-desc">Hinglish SMS/WhatsApp; driven by M10 + M15; feeds M8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detail panel -->
+    <div class="detail-panel" id="detail-panel">
+      <div class="dp-hint">Click any module card above to inspect its full relationships</div>
+    </div>
+
+  </div>
+
+  <!-- ═══ MATRIX VIEW ═══ -->
+  <div id="view-matrix">
+    <div class="matrix-wrap">
+      <table class="mx" id="matrix-table"></table>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:12px;text-align:center;font-style:italic">
+      Row sends to column · Filled cell = connection exists · Click a cell to inspect
+    </div>
+    <div class="detail-panel" id="matrix-detail" style="margin-top:16px">
+      <div class="dp-hint">Click any filled cell to see the data flow</div>
+    </div>
+  </div>
+
+  <!-- ═══ BUILD PATHWAY VIEW ═══ -->
+  <div id="view-build">
+    <div class="build-header">
+      <h3>LXC 22-Module Sequential Build Pathway</h3>
+      <p>An interactive, dependency-resolved build dashboard. Simulate the 22-module chronological build sequence and inspect zero-data-loss database schemas.</p>
+    </div>
+    
+    <div class="build-mode-toggle">
+      <button class="bm-btn active" id="btn-bm-step" onclick="setBuildMode('step')">Step-by-Step Sequence (1-22)</button>
+      <button class="bm-btn" id="btn-bm-phase" onclick="setBuildMode('phase')">Macro Phase Groups</button>
+    </div>
+
+    <!-- Simulator Control Panel -->
+    <div class="sim-control-panel">
+      <div class="sim-title-row">
+        <span class="sim-title">⚡ Interactive Build Simulator</span>
+        <span class="sim-badge" id="sim-progress-text">Status: 0 / 22 Modules Completed (0%)</span>
+      </div>
+      <div class="sim-progress-track">
+        <div class="sim-progress-fill" id="sim-progress-fill" style="width: 0%"></div>
+      </div>
+      <div class="sim-action-row">
+        <button class="sim-btn" id="btn-sim-prev" onclick="simStepPrev()" disabled>◀ Prev Step</button>
+        <button class="sim-btn btn-primary" id="btn-sim-play" onclick="toggleSimPlay()">▶ Run Build</button>
+        <button class="sim-btn" id="btn-sim-next" onclick="simStepNext()">Next Step ▶</button>
+        <button class="sim-btn btn-danger" id="btn-sim-reset" onclick="simReset()" style="margin-left: auto">Reset</button>
+      </div>
+    </div>
+
+    <div class="build-split-layout">
+      <!-- Left Column: Timelines -->
+      <div class="build-left-col">
+        
+        <!-- Step-by-Step Sequence view -->
+        <div id="build-step-container" class="timeline-step-list">
+          <!-- Dynamically populated in JavaScript from Step 1 to 22 -->
+        </div>
+
+        <!-- Macro Phase Groups view (Original, styled) -->
+        <div id="build-phase-container" class="timeline-container" style="display: none;">
+          <!-- Phase 1 -->
+          <div class="timeline-phase">
+            <div class="phase-node" style="border-color: var(--color-L1); color: var(--color-L1)">1</div>
+            <div class="phase-meta">
+              <span class="phase-badge" style="background: var(--color-L1-bg); color: var(--color-L1)">PHASE 1</span>
+              <h4>Core Foundation Ingestion</h4>
+              <p class="phase-why"><strong>Logic:</strong> Establishes basic study planning, Hinglish speech interfaces, and localized Q&A doubts, which form the base learning canvas.</p>
+            </div>
+            <div class="phase-cards">
+              <div class="pcard" id="pc-M1" onclick="inspectBuildMod('M1')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L1)">M1</span>
+                  <span class="pcard-name">AI Study Planner</span>
+                </div>
+                <div class="pcard-desc">Dynamic syllabus constraint calendar frameworks.</div>
+              </div>
+              <div class="pcard" id="pc-M2" onclick="inspectBuildMod('M2')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L1)">M2</span>
+                  <span class="pcard-name">Smart Notes</span>
+                </div>
+                <div class="pcard-desc">PDF parser chunking & vector mappings.</div>
+              </div>
+              <div class="pcard" id="pc-M3" onclick="inspectBuildMod('M3')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L1)">M3</span>
+                  <span class="pcard-name">Doubt Solver AI</span>
+                </div>
+                <div class="pcard-desc">Multi-modal LLM retrieval workflows.</div>
+              </div>
+              <div class="pcard" id="pc-M20" onclick="inspectBuildMod('M20')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L6)">M20</span>
+                  <span class="pcard-name">Hinglish Voice AI</span>
+                </div>
+                <div class="pcard-desc">Regional dialect Whisper speech parses.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 2 -->
+          <div class="timeline-phase">
+            <div class="phase-node" style="border-color: var(--color-L3); color: var(--color-L3)">2</div>
+            <div class="phase-meta">
+              <span class="phase-badge" style="background: var(--color-L3-bg); color: var(--color-L3)">PHASE 2</span>
+              <h4>Cognitive Profiling & Adaptive Core</h4>
+              <p class="phase-why"><strong>Logic:</strong> Activates student cognitive modeling. Feeds style and capability metrics directly to the adaptive engine queues.</p>
+            </div>
+            <div class="phase-cards">
+              <div class="pcard" id="pc-M8" onclick="inspectBuildMod('M8')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L3)">M8</span>
+                  <span class="pcard-name">Digital Twin</span>
+                </div>
+                <div class="pcard-desc">Central Student Profile topic-by-topic vectors.</div>
+              </div>
+              <div class="pcard" id="pc-M7" onclick="inspectBuildMod('M7')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L2)">M7</span>
+                  <span class="pcard-name">Style Detector</span>
+                </div>
+                <div class="pcard-desc">Captures visual/read interaction preferences.</div>
+              </div>
+              <div class="pcard" id="pc-M4" onclick="inspectBuildMod('M4')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L2)">M4</span>
+                  <span class="pcard-name">Adaptive Engine</span>
+                </div>
+                <div class="pcard-desc">Calibrates BKT theta capability thresholds.</div>
+              </div>
+              <div class="pcard" id="pc-M6" onclick="inspectBuildMod('M6')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L2)">M6</span>
+                  <span class="pcard-name">Flashcard AI</span>
+                </div>
+                <div class="pcard-desc">SuperMemo-2 retrieval streaking databases.</div>
+              </div>
+              <div class="pcard" id="pc-M21" onclick="inspectBuildMod('M21')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L6)">M21</span>
+                  <span class="pcard-name">Offline Mode</span>
+                </div>
+                <div class="pcard-desc">Watermark offline SQLite syncing buffers.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 3 -->
+          <div class="timeline-phase">
+            <div class="phase-node" style="border-color: var(--color-L2); color: var(--color-L2)">3</div>
+            <div class="phase-meta">
+              <span class="phase-badge" style="background: var(--color-L2-bg); color: var(--color-L2)">PHASE 3</span>
+              <h4>Assessment & Metrics</h4>
+              <p class="phase-why"><strong>Logic:</strong> Standardizes mock tests and logs user behavioral and study focus levels back to Digital Twin vectors.</p>
+            </div>
+            <div class="phase-cards">
+              <div class="pcard" id="pc-M5" onclick="inspectBuildMod('M5')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L2)">M5</span>
+                  <span class="pcard-name">Practice Tests</span>
+                </div>
+                <div class="pcard-desc">Generates test pools matching ability vectors.</div>
+              </div>
+              <div class="pcard" id="pc-M9" onclick="inspectBuildMod('M9')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L3)">M9</span>
+                  <span class="pcard-name">Perf Dashboard</span>
+                </div>
+                <div class="pcard-desc">OLAP query visualizations of dynamic weak zones.</div>
+              </div>
+              <div class="pcard" id="pc-M11" onclick="inspectBuildMod('M11')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L3)">M11</span>
+                  <span class="pcard-name">Focus AI</span>
+                </div>
+                <div class="pcard-desc"> light WASM face and landmark trackers.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 4 -->
+          <div class="timeline-phase">
+            <div class="phase-node" style="border-color: var(--color-L4); color: var(--color-L4)">4</div>
+            <div class="phase-meta">
+              <span class="phase-badge" style="background: var(--color-L4-bg); color: var(--color-L4)">PHASE 4</span>
+              <h4>Risk, Intervention & Career Guides</h4>
+              <p class="phase-why"><strong>Logic:</strong> Triggers safety checks, alerts wellness coaches, dispatches parent progress SMSs, and charts career trajectories.</p>
+            </div>
+            <div class="phase-cards">
+              <div class="pcard" id="pc-M10" onclick="inspectBuildMod('M10')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L3)">M10</span>
+                  <span class="pcard-name">Failure Alert AI</span>
+                </div>
+                <div class="pcard-desc">XGBoost churn risk flags and triggers.</div>
+              </div>
+              <div class="pcard" id="pc-M15" onclick="inspectBuildMod('M15')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L4)">M15</span>
+                  <span class="pcard-name">Wellness AI</span>
+                </div>
+                <div class="pcard-desc">BERT sentiment checks on dynamic text logs.</div>
+              </div>
+              <div class="pcard" id="pc-M13" onclick="inspectBuildMod('M13')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L4)">M13</span>
+                  <span class="pcard-name">Mentor AI</span>
+                </div>
+                <div class="pcard-desc">WebRTC shared workspace coaching schedulers.</div>
+              </div>
+              <div class="pcard" id="pc-M22" onclick="inspectBuildMod('M22')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L6)">M22</span>
+                  <span class="pcard-name">Parent Comm AI</span>
+                </div>
+                <div class="pcard-desc">SMS translated updates mapping risk stages.</div>
+              </div>
+              <div class="pcard" id="pc-M12" onclick="inspectBuildMod('M12')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L4)">M12</span>
+                  <span class="pcard-name">Career Discovery</span>
+                </div>
+                <div class="pcard-desc">Cosine recommendation matches on labor maps.</div>
+              </div>
+              <div class="pcard" id="pc-M14" onclick="inspectBuildMod('M14')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L4)">M14</span>
+                  <span class="pcard-name">Decision Sim</span>
+                </div>
+                <div class="pcard-desc">Monte Carlo admission simulation algorithms.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase 5 -->
+          <div class="timeline-phase">
+            <div class="phase-node" style="border-color: var(--color-L5); color: var(--color-L5)">5</div>
+            <div class="phase-meta">
+              <span class="phase-badge" style="background: var(--color-L5-bg); color: var(--color-L5)">PHASE 5</span>
+              <h4>Gamification & Credentials</h4>
+              <p class="phase-why"><strong>Logic:</strong> Deploys advanced peer matching, leaderboard streaking tables, credential passes, and vocal coaching trackers.</p>
+            </div>
+            <div class="phase-cards">
+              <div class="pcard" id="pc-M17" onclick="inspectBuildMod('M17')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L5)">M17</span>
+                  <span class="pcard-name">XP & Leaderboard</span>
+                </div>
+                <div class="pcard-desc">ZADD Redis arrays mapping active streaks.</div>
+              </div>
+              <div class="pcard" id="pc-M19" onclick="inspectBuildMod('M19')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L5)">M19</span>
+                  <span class="pcard-name">Peer Network</span>
+                </div>
+                <div class="pcard-desc">Multiplayer room matching Websocket rooms.</div>
+              </div>
+              <div class="pcard" id="pc-M18" onclick="inspectBuildMod('M18')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L5)">M18</span>
+                  <span class="pcard-name">Skill Passport</span>
+                </div>
+                <div class="pcard-desc">Gasless ERC-721 Soulbound Polygon NFT contracts.</div>
+              </div>
+              <div class="pcard" id="pc-M16" onclick="inspectBuildMod('M16')">
+                <div class="pcard-header">
+                  <span class="pcard-id" style="color:var(--color-L4)">M16</span>
+                  <span class="pcard-name">Soft Skills Coach</span>
+                </div>
+                <div class="pcard-desc">Voice rate speech pitch analysers.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Inspector -->
+      <div class="build-right-col">
+        <div class="detail-panel" id="build-inspector" style="margin-top: 0;">
+          <div class="dp-hint">Click any module card in the timeline above to inspect its implementation specifications & dependencies</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MOBILE APP UX VIEW ═══ -->
+  <div id="view-mobile" style="display: none;">
+    <div class="build-header">
+      <h3>RIT AI Mobile App UX Sandbox</h3>
+      <p>An interactive high-fidelity UX simulator. Explore mobile screens, user role portals, transition flows, and inter-screen relations.</p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="build-mode-toggle" style="margin-bottom: 20px;">
+      <button class="bm-btn active" id="btn-portal-student" onclick="setMobilePortal('student')">Student Hub Portal</button>
+      <button class="bm-btn" id="btn-portal-parent" onclick="setMobilePortal('parent')">Parent Portal</button>
+      <button class="bm-btn" id="btn-portal-mentor" onclick="setMobilePortal('mentor')">Mentor Dashboard</button>
+    </div>
+
+    <!-- Sequential Screen Simulator Control Panel -->
+    <div class="sim-control-panel" style="border-color: rgba(56, 189, 248, 0.25); margin-bottom: 20px;">
+      <div class="sim-title-row">
+        <span class="sim-title">🔄 End-to-End Screen Sequence Walkthrough</span>
+        <span class="sim-badge" id="ux-sim-progress-text" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">Screen: 1 / 10 (S1: Student Dashboard)</span>
+      </div>
+      <div class="sim-progress-track">
+        <div class="sim-progress-fill" id="ux-sim-progress-fill" style="width: 10%; background: linear-gradient(90deg, #38bdf8, #a3e635);"></div>
+      </div>
+      <div class="sim-action-row">
+        <button class="sim-btn" id="btn-ux-sim-prev" onclick="uxSimStepPrev()">◀ Prev Screen</button>
+        <button class="sim-btn btn-primary" id="btn-ux-sim-play" onclick="toggleUxSimPlay()" style="background: #38bdf8; border-color: #38bdf8; color: #04081a !important;">▶ Play User Journey</button>
+        <button class="sim-btn" id="btn-ux-sim-next" onclick="uxSimStepNext()">Next Screen ▶</button>
+        <button class="sim-btn btn-danger" id="btn-ux-sim-reset" onclick="uxSimReset()" style="margin-left: auto;">Reset</button>
+      </div>
+    </div>
+
+    <div class="mobile-app-layout">
+      <!-- Sidebar Screen List -->
+      <div class="mobile-sidebar">
+        <div id="mobile-screen-list-container" class="mobile-screen-list">
+          <!-- Dynamically populated rows based on selected Portal category -->
+        </div>
+      </div>
+
+      <!-- Live CSS Mobile Frame Mockup -->
+      <div class="mobile-mockup-col">
+        <div class="phone-mockup">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-status-bar">
+              <span class="phone-time">09:41</span>
+              <div class="phone-signals">
+                <span>📶</span>
+                <span>🛜</span>
+                <span>🔋 100%</span>
+              </div>
+            </div>
+            <!-- Dynamic Phone Content -->
+            <div id="phone-screen-content" class="phone-content-body">
+              <!-- Injected by selectMobileScreen() -->
+            </div>
+            
+            <div class="phone-navigation-bar">
+              <div class="phone-nav-pill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Inspector Panel -->
+      <div class="mobile-inspector-col">
+        <div class="detail-panel" id="mobile-inspector" style="margin-top: 0; min-height: 520px;">
+          <div class="dp-hint">Click any mobile screen in the list or trigger mock click transitions inside the phone to inspect UX blueprints</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const MODS = [
+  {id:'M1',name:'AI Study Planner',layer:'L1',lname:'Academic Intelligence',lc:'var(--color-L1)',lbg:'var(--color-L1-bg)'},
+  {id:'M2',name:'Smart Notes',layer:'L1',lname:'Academic Intelligence',lc:'var(--color-L1)',lbg:'var(--color-L1-bg)'},
+  {id:'M3',name:'Doubt Solver AI',layer:'L1',lname:'Academic Intelligence',lc:'var(--color-L1)',lbg:'var(--color-L1-bg)'},
+  {id:'M4',name:'Adaptive Engine',layer:'L2',lname:'Personalized Learning',lc:'var(--color-L2)',lbg:'var(--color-L2-bg)'},
+  {id:'M5',name:'Practice Tests',layer:'L2',lname:'Personalized Learning',lc:'var(--color-L2)',lbg:'var(--color-L2-bg)'},
+  {id:'M6',name:'Flashcard AI',layer:'L2',lname:'Personalized Learning',lc:'var(--color-L2)',lbg:'var(--color-L2-bg)'},
+  {id:'M7',name:'Style Detector',layer:'L2',lname:'Personalized Learning',lc:'var(--color-L2)',lbg:'var(--color-L2-bg)'},
+  {id:'M8',name:'Digital Twin',layer:'L3',lname:'Performance & Cognitive AI',lc:'var(--color-L3)',lbg:'var(--color-L3-bg)'},
+  {id:'M9',name:'Perf Dashboard',layer:'L3',lname:'Performance & Cognitive AI',lc:'var(--color-L3)',lbg:'var(--color-L3-bg)'},
+  {id:'M10',name:'Failure Alert AI',layer:'L3',lname:'Performance & Cognitive AI',lc:'var(--color-L3)',lbg:'var(--color-L3-bg)'},
+  {id:'M11',name:'Focus AI',layer:'L3',lname:'Performance & Cognitive AI',lc:'var(--color-L3)',lbg:'var(--color-L3-bg)'},
+  {id:'M12',name:'Career Discovery',layer:'L4',lname:'Career & Self-Enhancement',lc:'var(--color-L4)',lbg:'var(--color-L4-bg)'},
+  {id:'M13',name:'Mentor AI',layer:'L4',lname:'Career & Self-Enhancement',lc:'var(--color-L4)',lbg:'var(--color-L4-bg)'},
+  {id:'M14',name:'Decision Sim',layer:'L4',lname:'Career & Self-Enhancement',lc:'var(--color-L4)',lbg:'var(--color-L4-bg)'},
+  {id:'M15',name:'Wellness AI',layer:'L4',lname:'Career & Self-Enhancement',lc:'var(--color-L4)',lbg:'var(--color-L4-bg)'},
+  {id:'M16',name:'Soft Skills Coach',layer:'L4',lname:'Career & Self-Enhancement',lc:'var(--color-L4)',lbg:'var(--color-L4-bg)'},
+  {id:'M17',name:'XP & Leaderboard',layer:'L5',lname:'Gamification & Skill Economy',lc:'var(--color-L5)',lbg:'var(--color-L5-bg)'},
+  {id:'M18',name:'Skill Passport',layer:'L5',lname:'Gamification & Skill Economy',lc:'var(--color-L5)',lbg:'var(--color-L5-bg)'},
+  {id:'M19',name:'Peer Network',layer:'L5',lname:'Gamification & Skill Economy',lc:'var(--color-L5)',lbg:'var(--color-L5-bg)'},
+  {id:'M20',name:'Hinglish Voice AI',layer:'L6',lname:'Accessibility & Bharat Mode',lc:'var(--color-L6)',lbg:'var(--color-L6-bg)'},
+  {id:'M21',name:'Offline Mode',layer:'L6',lname:'Accessibility & Bharat Mode',lc:'var(--color-L6)',lbg:'var(--color-L6-bg)'},
+  {id:'M22',name:'Parent Comm AI',layer:'L6',lname:'Accessibility & Bharat Mode',lc:'var(--color-L6)',lbg:'var(--color-L6-bg)'},
+];
+
+const LINKS = [
+  {f:'M1',t:'M4',d:'Study schedule sends difficulty targets to Adaptive Engine'},
+  {f:'M1',t:'M8',d:'Goal progress updates the Digital Twin cognitive model'},
+  {f:'M2',t:'M6',d:'Key concepts auto-generate the Flashcard AI queue'},
+  {f:'M2',t:'M8',d:'Topic engagement enriches the learning profile in Digital Twin'},
+  {f:'M3',t:'M8',d:'Doubt frequency flags knowledge gaps in Digital Twin'},
+  {f:'M3',t:'M20',d:'Voice queries are routed through Hinglish Voice AI'},
+  {f:'M4',t:'M5',d:'Current ability level sets the difficulty for Practice Tests'},
+  {f:'M4',t:'M6',d:'Weak topics prioritize the Flashcard AI review queue'},
+  {f:'M4',t:'M8',d:'Difficulty history enriches the Digital Twin model'},
+  {f:'M7',t:'M4',d:'Preferred learning mode routes content delivery in Adaptive Engine'},
+  {f:'M7',t:'M3',d:'Voice/text preference sets the mode of Doubt Solver AI'},
+  {f:'M8',t:'M4',d:'Cognitive profile calibrates adaptive difficulty in real-time'},
+  {f:'M8',t:'M9',d:'Full student profile powers the Performance Dashboard radar'},
+  {f:'M8',t:'M10',d:'Risk signals trigger Failure Alert AI predictions'},
+  {f:'M8',t:'M12',d:'Strengths map drives Career Discovery recommendations'},
+  {f:'M8',t:'M14',d:'Profile data is used by Decision Simulator for scenario modelling'},
+  {f:'M9',t:'M12',d:'Weak zone data informs Career Discovery fit scoring'},
+  {f:'M9',t:'M13',d:'Performance trends brief Mentor AI session planning'},
+  {f:'M10',t:'M13',d:'At-risk flag activates Mentor AI intervention'},
+  {f:'M10',t:'M22',d:'Failure risk alert triggers Parent Comm AI notification'},
+  {f:'M11',t:'M8',d:'Focus session data updates concentration score in Digital Twin'},
+  {f:'M11',t:'M15',d:'Distraction spike patterns signal burnout risk to Wellness AI'},
+  {f:'M12',t:'M16',d:'Identified career path prescribes Soft Skills Coach training plan'},
+  {f:'M13',t:'M8',d:'Coaching outcomes refine the Digital Twin model over time'},
+  {f:'M15',t:'M11',d:'Burnout detected — Wellness AI pauses Focus AI timer'},
+  {f:'M15',t:'M13',d:'Stress level adjusts Mentor AI coaching intensity'},
+  {f:'M15',t:'M22',d:'Wellness alert triggers Parent Comm AI family notification'},
+  {f:'M17',t:'M19',d:'XP scores power the inter-school leaderboards in Peer Network'},
+  {f:'M18',t:'M12',d:'Earned certificates strengthen the Career Discovery profile'},
+  {f:'M18',t:'M16',d:'Certified skills unlock advanced Soft Skills Coach tracks'},
+  {f:'M19',t:'M17',d:'Group battles award bonus XP back to the leaderboard'},
+  {f:'M20',t:'M3',d:'Regional voice NLP enables voice-based Doubt Solver queries'},
+  {f:'M20',t:'M22',d:'Hinglish engine translates Parent Comm AI alerts to regional language'},
+  {f:'M21',t:'M4',d:'Offline sync delivers adaptive content when 2G or no network'},
+  {f:'M21',t:'M6',d:'Offline queue serves cached flashcard sessions without internet'},
+  {f:'M22',t:'M8',d:'Parent feedback and context updates the Digital Twin model'},
+];
+
+const BUILD_SEQUENCE = [
+  'M1', 'M2', 'M20', 'M3', 'M7', 'M8', 'M4', 'M6', 'M21', 'M5', 'M9', 'M11', 'M10', 'M15', 'M13', 'M22', 'M14', 'M18', 'M12', 'M16', 'M19', 'M17'
+];
+
+const BUILD_METADATA = {
+  M1: {
+    prereq: 'None (Baseline Architecture Anchor)',
+    deliverables: 'Dynamic study calendar constraint builder algorithms, syllabus mapping structures, target hours configurators.',
+    why: 'Feeds basic schedule definitions to M4 (Adaptive Engine) and anchors Digital Twin (M8) study calibrations.'
+  },
+  M2: {
+    prereq: 'None (Baseline Ingestion Anchor)',
+    deliverables: 'PDF node parsers, lecture transcript text analyzers, cognitive vector segment embedding indexers.',
+    why: 'Populates spaced repetition cards for M6 and uploads foundational weakness metrics to M8.'
+  },
+  M20: {
+    prereq: 'None (Bharat Foundation Anchor)',
+    deliverables: 'Whisper Regional dialect acoustic transcription wrappers, Hinglish dictionary translations.',
+    why: 'Enables regional audio speech ingestion for Doubt AI (M3) and Parent Notifications (M22).'
+  },
+  M3: {
+    prereq: 'M20 (Hinglish Voice AI)',
+    deliverables: 'Math equation visual OCR solvers, multi-modal semantic LLM router networks.',
+    why: 'Integrates regional speech transcripts from M20 to process queries, mapping feedback to M8.'
+  },
+  M7: {
+    prereq: 'None (Interaction Telemetry Capturer)',
+    deliverables: 'Client speed and navigation pattern monitors, visual/textual telemetry categorizer.',
+    why: 'Classifies visual vs read-write preferences to dictate M4 Adaptive routing pathways.'
+  },
+  M8: {
+    prereq: 'M1 (Planner), M2 (Notes), M3 (Doubts)',
+    deliverables: 'Student Cognitive Vector Store (0.0 to 1.0 comprehension scalars), transactional schema listeners.',
+    why: 'The brain of the system. Ingests all telemetry data and distributes profiles to M9, M10, and M12.'
+  },
+  M4: {
+    prereq: 'M1 (Planner), M8 (Digital Twin), M7 (Style Detector)',
+    deliverables: 'Bayesian Knowledge Tracing (BKT) engine, Item Response Theory (IRT) dynamic difficulty calibration algorithms.',
+    why: 'Calibrates mock question parameters for M5 and prioritizes weak study cards for M6 Spaced Repetition.'
+  },
+  M6: {
+    prereq: 'M2 (Notes), M4 (Adaptive Engine)',
+    deliverables: 'SuperMemo-2 spaced-repetition retrieval math models, streak scheduler databases.',
+    why: 'Leverages note concept segments from M2 and difficulty priority from M4 for review optimization.'
+  },
+  M21: {
+    prereq: 'None (Bharat Offline Anchor)',
+    deliverables: 'Offline client SQLite schema synchronization buffers, incremental binary payload compression filters.',
+    why: 'Ensures on-device operational state for M4 Adaptive and M6 Flashcards when offline or on 2G.'
+  },
+  M5: {
+    prereq: 'M4 (Adaptive Engine)',
+    deliverables: 'Automated test generation matrices, mock pool selection scripts, sub-second scoring transaction triggers.',
+    why: 'Builds tailored practice papers matching the student\'s IRT ability index calculated in M4.'
+  },
+  M9: {
+    prereq: 'M8 (Digital Twin)',
+    deliverables: 'OLAP Weakness Query aggregate tables, weak zone dynamic radar mapping vectors.',
+    why: 'Visualizes student capability states to feed Career AI matching vectors in M12.'
+  },
+  M11: {
+    prereq: 'None (Attention Telemetry Capturer)',
+    deliverables: 'Light on-device landmark landmark trackers, offline CV concentration logs.',
+    why: 'Feeds distraction metrics to M15 Wellness AI to alert burnout risk.'
+  },
+  M10: {
+    prereq: 'M8 (Digital Twin)',
+    deliverables: 'XGBoost student dropout/churn classification tree, dynamic threshold alert signals.',
+    why: 'Triggers instant alerts to M13 Mentor booking channels and Parent SMS channels (M22) on high failure risk.'
+  },
+  M15: {
+    prereq: 'M11 (Focus AI)',
+    deliverables: 'On-device BERT text sentiment classifier, anxiety dynamic indexing hooks.',
+    why: 'Interrupts M11 Focus timers on high stress and redirects student triggers to wellness mentoring.'
+  },
+  M13: {
+    prereq: 'M10 (Failure Alert), M15 (Wellness AI)',
+    deliverables: 'WebRTC video study room rooms, shared canvas syncer, booking coordinators.',
+    why: 'Enables active human coaching intervention when flagged by failure risk (M10) or burnout indices (M15).'
+  },
+  M22: {
+    prereq: 'M10 (Failure Alert), M15 (Wellness AI), M20 (Voice)',
+    deliverables: 'Twilio WhatsApp chatbot API webhooks, multilingual template regional compilers.',
+    why: 'Translates student risk alerts to parent alerts using translation pipelines from M20.'
+  },
+  M14: {
+    prereq: 'M8 (Digital Twin)',
+    deliverables: 'Monte Carlo college cut-off path simulators, admission probability logic scripts.',
+    why: 'Simulates target outcome probabilities using the central M8 Digital Twin profile.'
+  },
+  M18: {
+    prereq: 'None (Skill Credentialing Anchor)',
+    deliverables: 'ERC-721 Soulbound NFT smart contracts, gasless meta-transaction relays.',
+    why: 'Provides blockchain-verified credentials to unlock carrier fits in M12 and advanced coach tracks in M16.'
+  },
+  M12: {
+    prereq: 'M8 (Digital Twin), M9 (Dashboard), M18 (Passport)',
+    deliverables: 'Cosine career path similarity recommender engines, labor marketplace vector indexes.',
+    why: 'Matches student profile (M8), weakness dashboard (M9), and NFT credentials (M18) to real-world roles.'
+  },
+  M16: {
+    prereq: 'M18 (Passport)',
+    deliverables: 'Vocal tone pitch speed calculators, real-time voice speech feedback models.',
+    why: 'Unlocks coaching content maps based on blockchain skill certificates validated by M18.'
+  },
+  M19: {
+    prereq: 'M17 (XP & Leaderboard)',
+    deliverables: 'Socket.io study room multiplayer servers, matchmaking queue systems.',
+    why: 'Increases group study interaction and updates score triggers to feed the XP Leaderboard (M17).'
+  },
+  M17: {
+    prereq: 'M19 (Peer Network)',
+    deliverables: 'Sub-millisecond Redis Sorted Set (ZADD) streaks rank lists, reward badge indexers.',
+    why: 'Compiles final leaderboard ranks using points earned in Peer Study Network (M19) events.'
+  }
+};
+
+const SQL_MIGRATIONS = {
+  M1: `CREATE TABLE IF NOT EXISTS "AIStudyPlanner" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "syllabus" TEXT NOT NULL,
+  "goals" TEXT NOT NULL,
+  "dailyStudyHours" DOUBLE PRECISION NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" TIMESTAMP(3) NOT NULL
+);
+CREATE INDEX IF NOT EXISTS "AIStudyPlanner_userId_idx" ON "AIStudyPlanner"("userId");`,
+  M2: `CREATE TABLE IF NOT EXISTS "SmartNotes" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "sourceUrl" TEXT,
+  "summary" TEXT NOT NULL,
+  "conceptMap" JSONB,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" TIMESTAMP(3) NOT NULL
+);
+CREATE INDEX IF NOT EXISTS "SmartNotes_userId_idx" ON "SmartNotes"("userId");`,
+  M20: `CREATE TABLE IF NOT EXISTS "HinglishVoiceLogs" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "audioUrl" TEXT NOT NULL,
+  "transcription" TEXT NOT NULL,
+  "confidence" DOUBLE PRECISION NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "HinglishVoiceLogs_userId_idx" ON "HinglishVoiceLogs"("userId");`,
+  M3: `CREATE TABLE IF NOT EXISTS "DoubtQuery" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "voiceLogId" TEXT REFERENCES "HinglishVoiceLogs"("id"),
+  "query" TEXT NOT NULL,
+  "answer" TEXT NOT NULL,
+  "subject" TEXT NOT NULL,
+  "chapter" TEXT NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "DoubtQuery_userId_idx" ON "DoubtQuery"("userId");`,
+  M7: `CREATE TABLE IF NOT EXISTS "LearningStyle" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "styleType" TEXT NOT NULL, -- VISUAL, AUDIO, READ_WRITE
+  "confidence" DOUBLE PRECISION NOT NULL,
+  "lastInteraction" TIMESTAMP(3) NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" TIMESTAMP(3) NOT NULL
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "LearningStyle_userId_key" ON "LearningStyle"("userId");`,
+  M8: `CREATE TABLE IF NOT EXISTS "DigitalTwin" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "comprehensionVectors" JSONB NOT NULL, -- topic scores 0.0 to 1.0
+  "weaknesses" TEXT[],
+  "strengths" TEXT[],
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" TIMESTAMP(3) NOT NULL
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "DigitalTwin_userId_key" ON "DigitalTwin"("userId");`,
+  M4: `CREATE TABLE IF NOT EXISTS "AdaptiveState" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL REFERENCES "DigitalTwin"("id"),
+  "theta" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+  "beta" DOUBLE PRECISION NOT NULL DEFAULT 0.0,
+  "lastCalibrated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "AdaptiveState_userId_key" ON "AdaptiveState"("userId");`,
+  M6: `CREATE TABLE IF NOT EXISTS "FlashcardAI" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "noteId" TEXT REFERENCES "SmartNotes"("id"),
+  "front" TEXT NOT NULL,
+  "back" TEXT NOT NULL,
+  "interval" INTEGER NOT NULL DEFAULT 1,
+  "easeFactor" DOUBLE PRECISION NOT NULL DEFAULT 2.5,
+  "repetitions" INTEGER NOT NULL DEFAULT 0,
+  "nextReview" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "FlashcardAI_userId_idx" ON "FlashcardAI"("userId");`,
+  M21: `CREATE TABLE IF NOT EXISTS "OfflineSyncBuffer" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "tableName" TEXT NOT NULL,
+  "payload" JSONB NOT NULL,
+  "operation" TEXT NOT NULL, -- INSERT, UPDATE, DELETE
+  "synced" BOOLEAN NOT NULL DEFAULT FALSE,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "OfflineSyncBuffer_userId_synced_idx" ON "OfflineSyncBuffer"("userId", "synced");`,
+  M5: `CREATE TABLE IF NOT EXISTS "PracticeTests" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "difficulty" TEXT NOT NULL,
+  "questions" JSONB NOT NULL,
+  "scores" JSONB,
+  "totalScore" DOUBLE PRECISION,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "PracticeTests_userId_idx" ON "PracticeTests"("userId");`,
+  M9: `CREATE TABLE IF NOT EXISTS "PerformanceMetrics" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL REFERENCES "DigitalTwin"("id"),
+  "subjectScores" JSONB NOT NULL,
+  "recentTrend" DOUBLE PRECISION NOT NULL,
+  "lastAggregated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "PerformanceMetrics_userId_key" ON "PerformanceMetrics"("userId");`,
+  M11: `CREATE TABLE IF NOT EXISTS "FocusSession" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "durationSeconds" INTEGER NOT NULL,
+  "distractionSpikes" INTEGER NOT NULL,
+  "focusScore" DOUBLE PRECISION NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "FocusSession_userId_idx" ON "FocusSession"("userId");`,
+  M10: `CREATE TABLE IF NOT EXISTS "FailureRiskAlert" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL REFERENCES "DigitalTwin"("id"),
+  "riskScore" DOUBLE PRECISION NOT NULL,
+  "riskLevel" TEXT NOT NULL,
+  "factors" TEXT[] NOT NULL,
+  "resolved" BOOLEAN NOT NULL DEFAULT FALSE,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "FailureRiskAlert_userId_resolved_idx" ON "FailureRiskAlert"("userId", "resolved");`,
+  M15: `CREATE TABLE IF NOT EXISTS "WellnessLog" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "burnoutIndex" DOUBLE PRECISION NOT NULL,
+  "anxietyIndex" DOUBLE PRECISION NOT NULL,
+  "sentimentLog" TEXT,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "WellnessLog_userId_idx" ON "WellnessLog"("userId");`,
+  M13: `CREATE TABLE IF NOT EXISTS "MentorSession" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "mentorId" TEXT NOT NULL,
+  "riskAlertId" TEXT REFERENCES "FailureRiskAlert"("id"),
+  "scheduledTime" TIMESTAMP(3) NOT NULL,
+  "status" TEXT NOT NULL DEFAULT 'SCHEDULED',
+  "notes" TEXT,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "MentorSession_userId_idx" ON "MentorSession"("userId");`,
+  M22: `CREATE TABLE IF NOT EXISTS "ParentNotifications" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "channel" TEXT NOT NULL,
+  "message" TEXT NOT NULL,
+  "language" TEXT NOT NULL DEFAULT 'Hinglish',
+  "delivered" BOOLEAN NOT NULL DEFAULT FALSE,
+  "sentAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "ParentNotifications_userId_idx" ON "ParentNotifications"("userId");`,
+  M14: `CREATE TABLE IF NOT EXISTS "DecisionSimulations" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL REFERENCES "DigitalTwin"("id"),
+  "targetCareer" TEXT NOT NULL,
+  "simulatedPaths" JSONB NOT NULL,
+  "successProbability" DOUBLE PRECISION NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "DecisionSimulations_userId_idx" ON "DecisionSimulations"("userId");`,
+  M18: `CREATE TABLE IF NOT EXISTS "VerifiableCredential" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "skillName" TEXT NOT NULL,
+  "certId" TEXT NOT NULL,
+  "blockchainHash" TEXT NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "VerifiableCredential_certId_key" ON "VerifiableCredential"("certId");
+CREATE INDEX IF NOT EXISTS "VerifiableCredential_userId_idx" ON "VerifiableCredential"("userId");`,
+  M12: `CREATE TABLE IF NOT EXISTS "CareerRecommendation" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL REFERENCES "DigitalTwin"("id"),
+  "careerPath" TEXT NOT NULL,
+  "fitScore" DOUBLE PRECISION NOT NULL,
+  "unlocked" BOOLEAN NOT NULL DEFAULT FALSE,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "CareerRecommendation_userId_idx" ON "CareerRecommendation"("userId");`,
+  M16: `CREATE TABLE IF NOT EXISTS "SoftSkillsScore" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "communicationRate" DOUBLE PRECISION NOT NULL,
+  "pitchModulation" DOUBLE PRECISION NOT NULL,
+  "leadershipScore" DOUBLE PRECISION NOT NULL,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS "SoftSkillsScore_userId_idx" ON "SoftSkillsScore"("userId");`,
+  M19: `CREATE TABLE IF NOT EXISTS "PeerStudyGroup" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "name" TEXT NOT NULL,
+  "members" TEXT[] NOT NULL,
+  "activeBattles" INTEGER NOT NULL DEFAULT 0,
+  "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);`,
+  M17: `CREATE TABLE IF NOT EXISTS "XPMetrics" (
+  "id" TEXT NOT NULL PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  "currentXP" INTEGER NOT NULL DEFAULT 0,
+  "weeklyXP" INTEGER NOT NULL DEFAULT 0,
+  "streakDays" INTEGER NOT NULL DEFAULT 0,
+  "lastUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE UNIQUE INDEX IF NOT EXISTS "XPMetrics_userId_key" ON "XPMetrics"("userId");`
+};
+
+const AI_PROMPTS = {
+  M1: `You are a Senior Software Engineer instructing an AI Agent to implement Module M1: AI Study Planner end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Verify if table "AIStudyPlanner" already exists in Neon PostgreSQL by querying information schema.
+- If it exists, reuse it and its columns completely. DO NOT execute table drop, reset, or push operations.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Sleek Interface**: Build a responsive study calendar canvas using Plus Jakarta Sans typography.
+- **Controls**: Formulate syllabus files upload indicators, target hours widgets, and study goals input arrays.
+- **Interactions**: Add glowing calendar grid nodes showing scheduled study chunks, including click selectors to manually adjust time blocks.
+- **Micro-Animations**: Hover animations on calendar slots showing popover tooltips of tasks; loading skeleton cards during calendar generation.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: Verify columns: id, userId, syllabus, goals, dailyStudyHours, createdAt, updatedAt.
+- **Planner Algorithm**: Parse raw syllabus data, segment it chronologically, and distribute modules across the calendar, capped by the daily study hours constraint.
+- **Validation**: Reject zero hours inputs and handle multi-subject syllabi gracefully.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Bind Front-End fetch queries to \`POST /api/study-planner\` and render the returned timeline JSON seamlessly in the UI.
+- Establish database saves and handle visual telemetry trackers logging time scheduling updates.`,
+
+  M2: `You are a Senior Software Engineer instructing an AI Agent to implement Module M2: Smart Notes end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Query if table "SmartNotes" already exists in Neon PostgreSQL before running any migrations.
+- If it exists, preserve all notes and reuse the table structure. DO NOT drop or reset.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Layout**: Two-column layout with a left sidebar for document uploads (PDFs, transcripts) and a main note canvas.
+- **Visuals**: A Concept Map visualization section rendering nodes and edge relationships using simple SVG or canvas models.
+- **States**: Loading indicators with conceptual progress text (e.g. "Ingesting PDF...", "Creating vector segments...") and error fallbacks.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, sourceUrl, summary, conceptMap (JSONB), createdAt, updatedAt.
+- **Processing**: Implement notes document chunkers and embed nodes using embedding APIs.
+- **Concept mapping**: Write logic to recursively connect related key ideas into structured nodes with coordinates.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect client file upload triggers directly to \`POST /api/notes/summarize\`.
+- Bind UI interactions (like clicking concept map nodes) to reveal note text highlights and summary tabs dynamically.`,
+
+  M20: `You are a Senior Software Engineer instructing an AI Agent to implement Module M20: Hinglish Voice AI end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Verify if table "HinglishVoiceLogs" already exists.
+- If it exists, reuse it and preserve existing recording logs. DO NOT truncate.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Sleek Interface**: A glowing mic button indicating audio capture state with dynamic soundwave SVGs.
+- **Feedback**: Render real-time Hinglish textual overlays of the captured voice file.
+- **Theme integration**: Fluid dark/light transition states reflecting recording modes.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, audioUrl, transcription, confidence, createdAt.
+- **NLP voice Engine**: Audio capture receiver saving files to file stores.
+- **Dialect Parser**: Feed voice payloads through tuned regional speech-to-text models (Whisper) to resolve Hinglish terms to English transcripts.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Bind HTML Web Audio API recordings to stream binary chunks to \`POST /api/voice/transcribe\`.
+- Pass Hinglish transcripts instantly to the UI and route the cleaned text to Doubt Solver (M3) APIs.`,
+
+  M3: `You are a Senior Software Engineer instructing an AI Agent to implement Module M3: Doubt Solver AI end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Verify if table "DoubtQuery" already exists in the database metadata.
+- If it exists, reuse it and preserve doubt logs. DO NOT execute resets.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Sleek Interface**: An interactive chat sandbox featuring a search bar, image upload picker, and mic trigger.
+- **Math Viewer**: Fully rendered LaTeX mathematical equations styled with clean typography.
+- **Animations**: Slide-in transitions on question submissions, chat bubble loading dots.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, voiceLogId (FK), query, answer, subject, chapter, createdAt.
+- **RAG Engine**: Parse queries and use semantic lookups on curriculum datasets (JEE/NEET).
+- **Voice Doubt Resolution**: Hook with Hinglish Voice AI (M20) to parse spoken queries.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Bind front-end submissions to \`POST /api/doubts/solve\`.
+- Dynamically trigger audio translation queries via M20 and display solutions in LaTeX on the chat interface.`,
+
+  M7: `You are a Senior Software Engineer instructing an AI Agent to implement Module M7: Style Detector end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Check if table "LearningStyle" exists before running database changes.
+- If it exists, reuse it and preserve style records. DO NOT drop.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Visuals**: A sleek card dashboard visualizing student learning styles (VISUAL, AUDIO, READ_WRITE).
+- **Indicators**: Radar metric chart mapping user cognitive style fits.
+- **Micro-Animations**: Clean fade-in transitions when style Type updates.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, styleType, confidence, lastInteraction, createdAt, updatedAt.
+- **Detector logic**: Analyze user telemetry events (video view rates, note scroll speed) to classify cognitive styles.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Set client trackers to push scrolls and clicks telemetry to \`POST /api/telemetry/interaction\`.
+- Dynamically fetch classified learning styles via M7 to route UI themes (visual dashboard vs reading layout).`,
+
+  M8: `You are a Senior Software Engineer instructing an AI Agent to implement Module M8: Digital Twin end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Confirm table "DigitalTwin" already exists in the database schema.
+- If it exists, DO NOT drop or reset. This is the central repository of student profiles.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Twin Dashboard**: A striking dark-themed UI showing a digital avatar or cognitive model representing the student.
+- **Mastery Grids**: Glowing matrices showing 0.0 to 1.0 mastery scores across syllabus topics.
+- **Transitions**: Smooth gradient glow animations shifting colors based on weak/strong subject states.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, comprehensionVectors (JSONB), weaknesses (TEXT[]), strengths (TEXT[]), createdAt, updatedAt.
+- **Sync engines**: Handle event-driven database updates recalculating mastery scalars on study and test completions.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect database master vectors directly to \`GET /api/digital-twin/:userId\`.
+- Real-time client polling updates the UI avatar assets as student mastery vectors adjust.`,
+
+  M4: `You are a Senior Software Engineer instructing an AI Agent to implement Module M4: Adaptive Engine end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Query database metadata to see if table "AdaptiveState" already exists.
+- If it exists, reuse the active mastery theta metrics. DO NOT drop or reset.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Interface**: Visual difficulty slider bars and question card slots.
+- **States**: Dynamic styling changes depending on the IRT question level (Green for easy, Yellow for medium, Red for hard).
+- **Transitions**: Sleek slide-out card deck transition animations on question completions.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, theta (DOUBLE), beta (DOUBLE), lastCalibrated.
+- **Adaptive Algorithms**: Implement Bayesian Knowledge Tracing (BKT) and Item Response Theory (IRT) master calibration logic.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect student answers to \`POST /api/adaptive/calibrate\` to recalculate ability.
+- Use M4 calculated beta thresholds to pull and display questions in the study UI.`,
+
+  M6: `You are a Senior Software Engineer instructing an AI Agent to implement Module M6: Flashcard AI end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Verify if table "FlashcardAI" already exists.
+- If it exists, reuse card interval scheduling records. DO NOT drop or reset.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Card deck interface**: 3D card flipping visual animations showing front/back text elements.
+- **Action rows**: Easy-to-use grading selectors (Forgot, Hard, Good, Easy) styled in a sleek layout.
+- **Progress stats**: Streak badges and remaining review counters.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, noteId (FK), front, back, interval (INT), easeFactor (DOUBLE), repetitions (INT), nextReview, createdAt.
+- **Scheduler**: SM-2 spaced repetition decay algorithms mapping intervals and easeFactors.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect front-end slide clicks to \`POST /api/flashcards/review\` to adjust schedules.
+- Dynamically fetch cards that match nextReview schedules in the client review deck.`,
+
+  M21: `You are a Senior Software Engineer instructing an AI Agent to implement Module M21: Offline Mode end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- QueryINFORMATION_SCHEMA to see if table "OfflineSyncBuffer" already exists.
+- If it exists, preserve all offline buffers. DO NOT drop or truncate.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Offline indicators**: Pinned status indicators (glowing green for Online, dimmed yellow/grey for Offline).
+- **Controls**: A manual "Force Sync" trigger showing micro-loading rings.
+- **States**: Visual warning banners when delta payloads approach the 2G upload limit.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, tableName, payload (JSONB), operation, synced (BOOLEAN), createdAt.
+- **Sync manager**: Incremental sync logic to upload local buffer batches limited strictly under 5KB to optimize for 2G network.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Hook Web localStorages/SQLite queues to push offline mutations batch-wise to \`POST /api/sync/offline-buffer\`.
+- Dynamically update the front-end network status badge on request failure/recovery loops.`,
+
+  M5: `You are a Senior Software Engineer instructing an AI Agent to implement Module M5: Practice Tests end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Verify if table "PracticeTests" exists before running database schemas.
+- If it exists, DO NOT drop. Keep historical board mock examination logs.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Interface**: Full screen testing mode, active countdown timer bar, and side panels for question navigation.
+- **Feedback**: Dynamic alert modals on test exit, showing warning checks.
+- **Transitions**: Smooth slide animations as the user moves between mock questions.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, difficulty, questions (JSONB), scores (JSONB), totalScore (DOUBLE), createdAt.
+- **Mock generator**: Algorithm to fetch questions matching adaptive difficulty thresholds computed in M4.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect mock questions selector directly to \`POST /api/tests/generate\`.
+- Ingest student choices on final test submissions to \`POST /api/tests/submit\` and update performance states.`,
+
+  M9: `You are a Senior Software Engineer instructing an AI Agent to implement Module M9: Perf Dashboard end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Confirm table "PerformanceMetrics" already exists.
+- If it exists, reuse it and preserve historical master aggregates. DO NOT drop or reset.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Dashboard interface**: Dashboard overview showing dynamic weaknesses, strength parameters, and recent progress lines.
+- **Analytics Charts**: Custom SVG/canvas radar charts displaying subject capabilities (Maths, Physics, Chemistry).
+- **Aesthetics**: Sleek off-white layers in light mode, vibrant neon colors in dark mode.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId FK, subjectScores (JSONB), recentTrend (DOUBLE), lastAggregated.
+- **Aggregations**: Dynamic OLAP query aggregate tables compiling scores from M5 Practice Tests.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect database performance statistics to \`GET /api/performance/:userId\`.
+- Real-time client rendering renders charts based on backend perform arrays.`,
+
+  M11: `You are a Senior Software Engineer instructing an AI Agent to implement Module M11: Focus AI end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Check if table "FocusSession" exists in metadata before running DDL schemas.
+- If it exists, reuse it and preserve session lists. DO NOT drop.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Timer layout**: Capsule-like Pomodoro clock container with progress count overlays.
+- **Camera feed**: Tiny side widget showing video feedback, including visual alerts when attention drops.
+- **Controls**: Pause, skip, and reset indicators with glowing transitions.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, durationSeconds (INT), distractionSpikes (INT), focusScore (DOUBLE), createdAt.
+- **CV Engine**: Client landmark tracking calculations compiling focus and deviation indexes.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect completed Pomodoro metrics to \`POST /api/focus/session\`.
+- Pass distraction telemetry signals in real-time to M15 Wellness AI to alert burnout indicators.`,
+
+  M10: `You are a Senior Software Engineer instructing an AI Agent to implement Module M10: Failure Alert AI end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Query database if table "FailureRiskAlert" already exists.
+- If it exists, DO NOT reset risk logs. Reuse the data model.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Risk Board**: Admin/Mentor risk alert dashboard displaying flagged students.
+- **Badges**: High, Medium, Low risk levels marked with bold, vibrant badges (Red, Orange, Gray).
+- **Micro-Animations**: Pulse animation indicators on active unresolved HIGH risk rows.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId FK, riskScore, riskLevel, factors (TEXT[]), resolved (BOOLEAN), createdAt.
+- **ML Flagger**: Predictors mapping low test masters from M9 to identify failure risks.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect risk unresolved flags to \`GET /api/risk/alerts\`.
+- Automate parent communication notifications via Parent Comm AI (M22) and book tutoring slots on M13 when risk is HIGH.`,
+
+  M15: `You are a Senior Software Engineer instructing an AI Agent to implement Module M15: Wellness AI end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Verify if table "WellnessLog" exists in database metadata before migrations.
+- If it exists, reuse it and preserve stress indexes. DO NOT drop or reset.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Wellness Tracker**: Sleek dashboard rendering student stress trends, burnout gauges, and mood logs.
+- **Alert overlays**: Gentle alert notification modals encouraging the student to take breaks when stress is high.
+- **Transitions**: Smooth gradient shifts from soothing blue to warm amber.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, burnoutIndex, anxietyIndex, sentimentLog (TEXT), createdAt.
+- **Sentiments Engine**: BERT sentiment classifiers evaluating conversational doubt logs from M3.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Bind user text evaluations to \`POST /api/wellness/evaluate\` to update indexes.
+- Dynamically trigger callbacks to pause Focus AI (M11) study clock when burnout indices spike.`,
+
+  M13: `You are a Senior Software Engineer instructing an AI Agent to implement Module M13: Mentor AI end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Confirm table "MentorSession" already exists in database.
+- If it exists, reuse it and preserve active booking calendars. DO NOT drop.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Mentor Console**: Live WebRTC whiteboard video console with chat slots.
+- **Booking widget**: Capsule calendar slot picker showing booking lists and active notifications.
+- **Animations**: Slide-in console overlay on session starts.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, mentorId, riskAlertId (FK), scheduledTime, status, notes (TEXT), createdAt.
+- **Coordinators**: Calendar booking endpoints triggered by Failure Alert (M10) alerts.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect calendar booking buttons directly to \`POST /api/mentor/book\`.
+- Real-time coordinates synchronization on the shared whiteboard using active WebRTC channels.`,
+
+  M22: `You are a Senior Software Engineer instructing an AI Agent to implement Module M22: Parent Comm AI end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Query if table "ParentNotifications" exists before migrations.
+- If it exists, DO NOT drop or reset parent logs.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Alert Board**: Parent view interface displaying notifications logs and study stats.
+- **Interface**: Sleek toggle buttons to select alert channels (WhatsApp vs SMS).
+- **Micro-Animations**: Glowing checkmarks indicating delivered alerts.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, channel, message, language, delivered (BOOLEAN), sentAt.
+- **Dispatcher**: API dispatchers linking parent contact channels to WhatsApp/SMS routes.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect alerts dispatcher triggers directly to \`POST /api/parent/notify\`.
+- Ingest student failure risk flags from M10 and automatically dispatch translated updates using M20 pipelines.`,
+
+  M14: `You are a Senior Software Engineer instructing an AI Agent to implement Module M14: Decision Sim end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Verify table "DecisionSimulations" already exists in Neon PostgreSQL.
+- If it exists, reuse college simulation runs. DO NOT drop or reset.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Sim sandbox**: Interactive college simulator panel showing placement probability gauges.
+- **Visuals**: Flow pathways mapping target colleges and success trends.
+- **States**: Loading states rendering progress overlays (e.g. "Calculating Monte Carlo cut-offs...").
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId FK, targetCareer, simulatedPaths (JSONB), successProbability, createdAt.
+- **Sim Algorithms**: Monte Carlo cut-off and admission probability calculation logic.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Bind target college choice triggers directly to \`POST /api/simulation/run\`.
+- Populate simulator paths and success scales dynamically using M8 Digital Twin mastery inputs.`,
+
+  M18: `You are a Senior Software Engineer instructing an AI Agent to implement Module M18: Skill Passport end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Confirm table "VerifiableCredential" already exists in Neon schemas.
+- If it exists, DO NOT drop or reset NFT references.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Skill passport console**: A highly polished digital credentials passport showing certified NFT badges.
+- **Visuals**: Glassmorphic digital passport badges with subtle hover glow effects.
+- **Animations**: Coin flip minting animation checks on new achievements.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, skillName, certId (UNIQUE), blockchainHash, createdAt.
+- **SB-NFT contracts**: ERC-721 Soulbound Polygon smart-contracts mappings and transaction gasless relays.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect credential minting buttons to \`POST /api/passport/mint\`.
+- Query verified NFT passes from M18 blockchain accounts to unlock job fits on the M12 dashboard.`,
+
+  M12: `You are a Senior Software Engineer instructing an AI Agent to implement Module M12: Career Discovery end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Query database metadata if table "CareerRecommendation" exists.
+- If it exists, DO NOT clear career recommends. Reuse the table structure.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Console layout**: Two-column layout displaying top recommended careers and labor stats.
+- **Controls**: Interactive unlock selectors, showing locking layers.
+- **Aesthetics**: harmonized color palettes matching layer levels.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId FK, careerPath, fitScore, unlocked (BOOLEAN), createdAt.
+- **Recommend Core**: Cosine fit similarity recommenders matching M8 student vectors.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect career list fetch buttons directly to \`GET /api/career/recommend/:userId\`.
+- Dynamically parse blockchain NFT skills passport data (M18) to unlock career paths in real-time.`,
+
+  M16: `You are a Senior Software Engineer instructing an AI Agent to implement Module M16: Soft Skills Coach end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Verify table "SoftSkillsScore" exists before migrations.
+- If it exists, reuse it and preserve feedback logs. DO NOT reset.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Coach sandbox**: Interactive presentation slides, vocal recording indicators.
+- **Metrics**: Radar chart displaying scores (pitch rate, speed, modulation).
+- **Micro-Animations**: Speech rate bar overlays that update dynamically as the user speaks.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, communicationRate, pitchModulation, leadershipScore, createdAt.
+- **Voice checker**: Voice rate and pitch modulation calculators evaluating audio files.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect audio presentations uploads to \`POST /api/coach/analyze-speech\`.
+- Fetch leadership trends dynamically based on M18 blockchain verified tasks completions.`,
+
+  M19: `You are a Senior Software Engineer instructing an AI Agent to implement Module M19: Peer Network end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Query if table "PeerStudyGroup" already exists.
+- If it exists, preserve study groups. DO NOT drop.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Multiplayer lobby**: Interactive study group battles console, displaying lobby waitlists.
+- **Visuals**: Avatar selectors showing online status counters.
+- **Transitions**: Smooth animations as matching queues resolve and start battles.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, name, members, activeBattles, createdAt.
+- **Matchmaker**: Socket.io lobby waits queue controllers matching study networks.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Connect client battle invitations triggers to multiplayer socket pipelines.
+- Save peer battle scores and dispatch updates directly to Leaderboard APIs (M17).`,
+
+  M17: `You are a Senior Software Engineer instructing an AI Agent to implement Module M17: XP & Leaderboard end-to-end (Front-End, Back-End, and Top-End integration).
+
+**1. CRITICAL DATABASE PRESERVATION (Zero Data Loss):**
+- Check table "XPMetrics" exists before database resets.
+- If it exists, DO NOT drop or reset historical student XP scores. Reuse the schema.
+
+**2. FRONT-END DEVELOPMENT (UI/UX Blueprint):**
+- **Leaderboard console**: High-ranking global student scoreboard displays.
+- **Streaks indicators**: Interactive calendar showing XP progress streaks and flame badges.
+- **Micro-Animations**: Level-up confetti screen triggers, glowing streaks counters.
+
+**3. BACK-END DEVELOPMENT (API & System Core):**
+- **Schema Mapping**: id, userId, currentXP, weeklyXP, streakDays, lastUpdated. Unique index on "userId".
+- **Leaderboards**: Fast Sorted Set arrays (Redis ZADD) scoring student rankings.
+
+**4. END-TO-END (TOP-END) INTEGRATION:**
+- Hook XP updates trigger direct to \`POST /api/leaderboard/add-xp\`.
+- Dynamically compile and render descending scoreboard stats on the client interface.
+- **Testing & Verification**: Validate that leaderboard lists are returned strictly ordered descending.`
+};
+
+function copyPromptToClipboard(id) {
+  const prompt = AI_PROMPTS[id];
+  if (!prompt) return;
+  
+  navigator.clipboard.writeText(prompt).then(() => {
+    const btn = document.getElementById('copy-prompt-btn-' + id);
+    if (btn) {
+      btn.textContent = 'Copied!';
+      btn.style.color = '#10b981';
+      btn.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+      setTimeout(() => {
+        btn.textContent = 'Copy Prompt';
+        btn.style.color = 'var(--color-text-secondary)';
+        btn.style.borderColor = 'rgba(56, 189, 248, 0.2)';
+      }, 2000);
+    }
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+  });
+}
+
+function getMod(id){return MODS.find(m=>m.id===id)}
+
+function getLinks(id){
+  return {
+    sends: LINKS.filter(l=>l.f===id),
+    gets:  LINKS.filter(l=>l.t===id)
+  };
+}
+
+let selectedMod = null;
+let selectedBuildMod = null;
+const openStages = {L1:true,L2:true,L3:true,L4:true,L5:true,L6:true};
+
+// Tab Switcher and active controller
+function setView(v, btn){
+  document.querySelectorAll('.vbtn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('view-journey').style.display = v==='journey'?'block':'none';
+  document.getElementById('view-matrix').style.display  = v==='matrix'?'block':'none';
+  document.getElementById('view-build').style.display   = v==='build'?'block':'none';
+  document.getElementById('view-mobile').style.display  = v==='mobile'?'block':'none';
+  if(v==='matrix') buildMatrix();
+  if(v==='build') {
+    renderStepTimeline();
+    updateBuildUI();
+  }
+  if(v==='mobile') {
+    renderMobileScreens();
+  }
+}
+
+function toggleStage(l){
+  openStages[l] = !openStages[l];
+  document.getElementById('body-'+l).style.display = openStages[l]?'block':'none';
+  document.getElementById('arr-'+l).classList.toggle('open', openStages[l]);
+}
+
+function selectMod(id){
+  if(selectedMod) document.getElementById('mc-'+selectedMod)?.classList.remove('active-mod');
+  selectedMod = (selectedMod===id)?null:id;
+  if(selectedMod){
+    document.getElementById('mc-'+selectedMod)?.classList.add('active-mod');
+    renderDetail(selectedMod, 'detail-panel');
+  } else {
+    document.getElementById('detail-panel').innerHTML='<div class="dp-hint">Click any module card above to inspect its full relationships</div>';
+  }
+}
+
+function renderDetail(id, panelId){
+  const m = getMod(id);
+  const {sends,gets} = getLinks(id);
+  let html = `<div class="dp-title" style="color:${m.lc}">${m.id} · ${m.name}</div>
+  <div class="dp-layer">${m.lname}</div>`;
+
+  if(sends.length){
+    html += `<div class="dp-section">Sends to (${sends.length})</div>`;
+    html += sends.map(l=>{
+      const t = getMod(l.t);
+      return `<div class="dp-row"><span class="dp-badge" style="background:${t.lbg};color:${t.lc}">→ ${l.t}</span><div class="dp-text"><span class="dp-name">${t.name}</span> — ${l.d}</div></div>`;
+    }).join('');
+  }
+  if(gets.length){
+    html += `<div class="dp-section">Receives from (${gets.length})</div>`;
+    html += gets.map(l=>{
+      const f = getMod(l.f);
+      return `<div class="dp-row"><span class="dp-badge" style="background:${f.lbg};color:${f.lc}">← ${l.f}</span><div class="dp-text"><span class="dp-name">${f.name}</span> — ${l.d}</div></div>`;
+    }).join('');
+  }
+  if(!sends.length && !gets.length) html += '<div class="dp-hint">No connections mapped.</div>';
+  document.getElementById(panelId).innerHTML = html;
+}
+
+function buildMatrix(){
+  const ids = MODS.map(m=>m.id);
+  const linkSet = {};
+  LINKS.forEach(l=>{ linkSet[l.f+'>>'+l.t] = l; });
+
+  let html = '<thead><tr><th style="min-width:130px;padding:6px 12px;font-size:11px;color:var(--color-text-tertiary);text-align:right">From \\ To</th>';
+  ids.forEach(id=>{
+    const m = getMod(id);
+    html += `<th class="col-hd" style="color:${m.lc}">${id}</th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  ids.forEach(fid=>{
+    const fm = getMod(fid);
+    html += `<tr><th class="row-hd" style="color:${fm.lc}">${fid} · ${fm.name}</th>`;
+    ids.forEach(tid=>{
+      if(fid===tid){
+        html += `<td class="cell self"></td>`;
+      } else {
+        const key = fid+'>>'+tid;
+        const link = linkSet[key];
+        if(link){
+          const tm = getMod(tid);
+          html += `<td class="cell" style="background:${tm.lc}" title="${fid} → ${tid}" onclick="showMatrixDetail('${fid}','${tid}')">&#x2713;</td>`;
+        } else {
+          html += `<td class="cell"></td>`;
+        }
+      }
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('matrix-table').innerHTML = html;
+}
+
+function showMatrixDetail(fid, tid){
+  const key = fid+'>>'+tid;
+  const link = LINKS.find(l=>l.f===fid&&l.t===tid);
+  if(!link) return;
+  const fm = getMod(fid), tm = getMod(tid);
+  document.getElementById('matrix-detail').innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+      <span class="dp-badge" style="background:${fm.lbg};color:${fm.lc};font-size:11px;padding:4px 10px">${fid} · ${fm.name}</span>
+      <span style="font-size:16px;color:var(--color-text-tertiary)">&#8594;</span>
+      <span class="dp-badge" style="background:${tm.lbg};color:${tm.lc};font-size:11px;padding:4px 10px">${tid} · ${tm.name}</span>
+    </div>
+    <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.6">${link.d}</div>`;
+}
+
+// ── BUILD PATHWAY & SIMULATOR LOGIC ──
+let activeBuildMode = 'step'; // 'step' | 'phase'
+let buildProgressLevel = 0;   // 0 to 22 completed modules
+let simIntervalId = null;     // play timer reference
+
+function setBuildMode(mode) {
+  activeBuildMode = mode;
+  document.getElementById('btn-bm-step').classList.toggle('active', mode === 'step');
+  document.getElementById('btn-bm-phase').classList.toggle('active', mode === 'phase');
+  document.getElementById('build-step-container').style.display = mode === 'step' ? 'flex' : 'none';
+  document.getElementById('build-phase-container').style.display = mode === 'phase' ? 'flex' : 'none';
+  updateBuildUI();
+}
+
+function renderStepTimeline() {
+  const container = document.getElementById('build-step-container');
+  let html = '';
+  BUILD_SEQUENCE.forEach((id, index) => {
+    const m = getMod(id);
+    const stepNum = index + 1;
+    const stepStr = String(stepNum).padStart(2, '0');
+    html += `
+      <div class="step-row" id="sr-${id}" onclick="inspectBuildMod('${id}')">
+        <span class="step-num-badge">STEP ${stepStr}</span>
+        <span class="step-mod-id" style="color:${m.lc}">${id}</span>
+        <span class="step-mod-name">${m.name}</span>
+        <span class="step-status-chip chip-locked" id="chip-${id}">Locked</span>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function updateBuildUI() {
+  // Update simulator progress level display
+  const pct = Math.round((buildProgressLevel / 22) * 100);
+  document.getElementById('sim-progress-text').textContent = `Status: ${buildProgressLevel} / 22 Modules Completed (${pct}%)`;
+  document.getElementById('sim-progress-fill').style.width = pct + '%';
+  
+  // Enable / disable simulator controls based on states
+  document.getElementById('btn-sim-prev').disabled = (buildProgressLevel === 0);
+  document.getElementById('btn-sim-next').disabled = (buildProgressLevel === 22);
+  
+  const playBtn = document.getElementById('btn-sim-play');
+  if (buildProgressLevel === 22) {
+    if (simIntervalId) toggleSimPlay(); // Pause if it was running
+    playBtn.disabled = true;
+    playBtn.textContent = '✔ Fully Built';
+  } else {
+    playBtn.disabled = false;
+    playBtn.textContent = simIntervalId ? '⏸ Pause Build' : '▶ Run Build';
+  }
+
+  // Loop through build sequence and apply classes to elements
+  BUILD_SEQUENCE.forEach((id, index) => {
+    const isCompleted = index < buildProgressLevel;
+    const isUnlocked = index === buildProgressLevel;
+    const isLocked = index > buildProgressLevel;
+    
+    // 1. Step row adjustments
+    const sr = document.getElementById('sr-' + id);
+    const chip = document.getElementById('chip-' + id);
+    if (sr && chip) {
+      // Remove previous classes
+      sr.classList.remove('state-completed', 'state-unlocked', 'state-locked');
+      chip.classList.remove('chip-completed', 'chip-unlocked', 'chip-locked');
+      
+      if (isCompleted) {
+        sr.classList.add('state-completed');
+        chip.classList.add('chip-completed');
+        chip.textContent = 'Completed';
+      } else if (isUnlocked) {
+        sr.classList.add('state-unlocked');
+        chip.classList.add('chip-unlocked');
+        chip.textContent = 'Available';
+      } else {
+        sr.classList.add('state-locked');
+        chip.classList.add('chip-locked');
+        chip.textContent = 'Locked';
+      }
+    }
+    
+    // 2. Macro phase card adjustments
+    const pc = document.getElementById('pc-' + id);
+    if (pc) {
+      pc.classList.remove('state-completed', 'state-unlocked', 'state-locked');
+      if (isCompleted) {
+        pc.classList.add('state-completed');
+        pc.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+        pc.style.opacity = '1';
+      } else if (isUnlocked) {
+        pc.classList.add('state-unlocked');
+        pc.style.borderColor = 'var(--color-border-primary)';
+        pc.style.opacity = '1';
+      } else {
+        pc.classList.add('state-locked');
+        pc.style.borderColor = 'var(--color-border-tertiary)';
+        pc.style.opacity = '0.4';
+      }
+    }
+  });
+}
+
+function inspectBuildMod(id) {
+  // Clear other active highlights in both views
+  BUILD_SEQUENCE.forEach(modId => {
+    document.getElementById('sr-' + modId)?.classList.remove('active-step');
+    document.getElementById('pc-' + modId)?.classList.remove('active-pcard');
+  });
+  
+  selectedBuildMod = id;
+  
+  // Highlight currently active selections
+  document.getElementById('sr-' + id)?.classList.add('active-step');
+  document.getElementById('pc-' + id)?.classList.add('active-pcard');
+  
+  renderBuildDetail(id, 'build-inspector');
+}
+
+function renderBuildDetail(id, panelId) {
+  const m = getMod(id);
+  const meta = BUILD_METADATA[id];
+  const {sends,gets} = getLinks(id);
+  const sql = SQL_MIGRATIONS[id] || '-- No schema DDL required for this module.';
+  const highlightedSql = highlightSQL(sql);
+  const mPrompt = AI_PROMPTS[id] || 'No builder prompt registered for this module.';
+  
+  const seqIdx = BUILD_SEQUENCE.indexOf(id);
+  const stepNum = seqIdx + 1;
+  const isCompleted = seqIdx < buildProgressLevel;
+  const isUnlocked = seqIdx === buildProgressLevel;
+  
+  let statusBadge = '';
+  if (isCompleted) {
+    statusBadge = `<span class="step-status-chip chip-completed">Completed</span>`;
+  } else if (isUnlocked) {
+    statusBadge = `<span class="step-status-chip chip-unlocked">Ready to Build</span>`;
+  } else {
+    statusBadge = `<span class="step-status-chip chip-locked">Locked (Prereqs Pending)</span>`;
+  }
+
+  let html = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; flex-wrap:wrap; gap:8px">
+      <div>
+        <div style="display:flex; align-items:center; gap:8px">
+          <div class="dp-title" style="color:var(--color-L${m.layer.substring(1)})">${m.id} · ${m.name}</div>
+          ${statusBadge}
+        </div>
+        <div class="dp-layer">${m.lname}</div>
+      </div>
+      <div style="font-family:var(--font-display); font-size:10px; font-weight:800; padding:4px 12px; border-radius:30px; background:var(--color-border-tertiary); color:var(--color-text-primary)">
+        STEP ${stepNum} OF 22
+      </div>
+    </div>
+    
+    <div class="dp-section">🛠️ Dynamic Implementation Blueprint</div>
+    <div class="dp-row"><div class="dp-text"><strong>Prerequisites:</strong> <span style="color:var(--color-text-primary)">${meta.prereq}</span></div></div>
+    <div class="dp-row"><div class="dp-text"><strong>Core Deliverables:</strong> ${meta.deliverables}</div></div>
+    <div class="dp-row"><div class="dp-text"><strong>Architectural Rationale:</strong> ${meta.why}</div></div>
+    
+    <div class="dp-section">🤖 AI Agent Builder Prompt</div>
+    <div style="font-size:11px; color:var(--color-text-tertiary); margin-bottom:6px; font-style:italic">
+      Copy this prompt to instruct an AI coding agent to implement this module end-to-end
+    </div>
+    <div class="prompt-box-container">
+      <div class="prompt-box-header">
+        <span>Prompt (Markdown System Format)</span>
+        <button class="prompt-copy-btn" id="copy-prompt-btn-${id}" onclick="copyPromptToClipboard('${id}')">Copy Prompt</button>
+      </div>
+      <pre class="prompt-text-block" id="prompt-block-${id}">${mPrompt}</pre>
+    </div>
+
+    <div class="dp-section">🛡️ Neon Shared DB Schema Patches</div>
+    <div style="font-size:11px; color:var(--color-text-tertiary); margin-bottom:6px; font-style:italic">
+      LearnXChain Never-Data-Loss Migration System: Safe CREATE TABLE IF NOT EXISTS tables
+    </div>
+    <div class="sql-code-container">
+      <div class="sql-code-header">
+        <span>PostgreSQL DDL (Idempotent execute)</span>
+        <button class="sql-copy-btn" id="copy-btn-${id}" onclick="copySQLToClipboard('${id}')">Copy SQL</button>
+      </div>
+      <pre class="sql-code-pre"><code id="sql-block-${id}">${highlightedSql}</code></pre>
+    </div>
+
+    <div class="dp-section">📋 Step checklist & API contracts</div>
+    <div class="checklist-container">
+      <label class="chk-item">
+        <input type="checkbox" class="chk-box" ${isCompleted?'checked':''}>
+        <span>Idempotent DDL applied directly to ep-tight-thunder (Lxc)</span>
+      </label>
+      <label class="chk-item">
+        <input type="checkbox" class="chk-box" ${isCompleted?'checked':''}>
+        <span>Model constraints and relationships mapped in backend controllers</span>
+      </label>
+      <label class="chk-item">
+        <input type="checkbox" class="chk-box" ${isCompleted?'checked':''}>
+        <span>Dynamic REST APIs registered & event notifications linked</span>
+      </label>
+    </div>
+
+    <div class="dp-section">🚀 Active Dynamic Routing</div>
+  `;
+  
+  if (gets.length) {
+    html += `<div style="font-size:11px; font-weight:700; color:var(--color-text-secondary); margin:6px 0 4px">Requires Inputs From (${gets.length})</div>`;
+    html += gets.map(l => {
+      const f = getMod(l.f);
+      return `<div class="dp-row"><span class="dp-badge" style="background:${f.lbg};color:${f.lc}">← ${l.f}</span><div class="dp-text"><span class="dp-name">${f.name}</span> — ${l.d}</div></div>`;
+    }).join('');
+  }
+  
+  if (sends.length) {
+    html += `<div style="font-size:11px; font-weight:700; color:var(--color-text-secondary); margin:12px 0 4px">Unlocks Pipelines For (${sends.length})</div>`;
+    html += sends.map(l => {
+      const t = getMod(l.t);
+      return `<div class="dp-row"><span class="dp-badge" style="background:${t.lbg};color:${t.lc}">→ ${l.t}</span><div class="dp-text"><span class="dp-name">${t.name}</span> — ${l.d}</div></div>`;
+    }).join('');
+  }
+  
+  if (!sends.length && !gets.length) {
+    html += '<div class="dp-hint">No direct dynamic pipeline routing mapped.</div>';
+  }
+  
+  document.getElementById(panelId).innerHTML = html;
+}
+
+// SQL Syntax highlighting tokenizer
+function highlightSQL(sql) {
+  let highlighted = sql
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  // Highlight key SQL commands (Orange #ff8c00)
+  const keywords = [
+    "CREATE TABLE", "IF NOT EXISTS", "CREATE INDEX", "CREATE UNIQUE INDEX",
+    "ON", "ALTER TABLE", "ADD CONSTRAINT", "UNIQUE"
+  ];
+  keywords.forEach(kw => {
+    const regex = new RegExp("\\b" + kw + "\\b", "g");
+    highlighted = highlighted.replace(regex, `<span style="color:#ff8c00; font-weight:bold">${kw}</span>`);
+  });
+
+  // Highlight Types (Sky blue #38bdf8)
+  const types = [
+    "TEXT", "TIMESTAMP\\(\\d+\\)", "TIMESTAMP", "INTEGER", "DOUBLE PRECISION", "JSONB", "BOOLEAN", "REFERENCES"
+  ];
+  types.forEach(t => {
+    const regex = new RegExp("\\b" + t + "\\b", "g");
+    highlighted = highlighted.replace(regex, `<span style="color:#38bdf8">${t}</span>`);
+  });
+
+  // Highlight Constraints (Emerald #34d399)
+  const constraints = ["PRIMARY KEY", "NOT NULL", "DEFAULT"];
+  constraints.forEach(c => {
+    const regex = new RegExp("\\b" + c + "\\b", "g");
+    highlighted = highlighted.replace(regex, `<span style="color:#34d399; font-weight:bold">${c}</span>`);
+  });
+
+  // Highlight Strings (Gold #fbbf24)
+  highlighted = highlighted.replace(/('[^']+')/g, `<span style="color:#fbbf24">$1</span>`);
+
+  // Highlight SQL Comments (Slate gray)
+  highlighted = highlighted.replace(/(--.*)/g, `<span style="color:#64748b; font-style:italic">$1</span>`);
+
+  return highlighted;
+}
+
+// Copy DDL code to clipboard
+function copySQLToClipboard(id) {
+  const sql = SQL_MIGRATIONS[id];
+  if (!sql) return;
+  
+  navigator.clipboard.writeText(sql).then(() => {
+    const btn = document.getElementById('copy-btn-' + id);
+    if (btn) {
+      btn.textContent = 'Copied!';
+      btn.style.color = '#10b981';
+      btn.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+      setTimeout(() => {
+        btn.textContent = 'Copy SQL';
+        btn.style.color = 'var(--color-text-secondary)';
+        btn.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+      }, 2000);
+    }
+  }).catch(err => {
+    console.error('Failed to copy text: ', err);
+  });
+}
+
+// Simulator State Handlers
+function toggleSimPlay() {
+  if (simIntervalId) {
+    // Pause simulation
+    clearInterval(simIntervalId);
+    simIntervalId = null;
+  } else {
+    // Start simulation loop
+    if (buildProgressLevel === 22) buildProgressLevel = 0; // Wrap around on reset
+    updateBuildUI();
+    simIntervalId = setInterval(() => {
+      if (buildProgressLevel < 22) {
+        simStepNext();
+      } else {
+        toggleSimPlay(); // Pause at completion
+      }
+    }, 1200);
+  }
+  updateBuildUI();
+}
+
+function simStepNext() {
+  if (buildProgressLevel < 22) {
+    buildProgressLevel++;
+    updateBuildUI();
+    
+    // Proactively inspect the newly completed/unlocked module in the timeline
+    const activeModId = BUILD_SEQUENCE[buildProgressLevel - 1];
+    inspectBuildMod(activeModId);
+    
+    // Auto scroll the list slightly to keep active step visible
+    const row = document.getElementById('sr-' + activeModId);
+    if (row && activeBuildMode === 'step') {
+      row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+}
+
+function simStepPrev() {
+  if (buildProgressLevel > 0) {
+    buildProgressLevel--;
+    updateBuildUI();
+    
+    const activeModId = buildProgressLevel > 0 ? BUILD_SEQUENCE[buildProgressLevel - 1] : BUILD_SEQUENCE[0];
+    inspectBuildMod(activeModId);
+    
+    const row = document.getElementById('sr-' + activeModId);
+    if (row && activeBuildMode === 'step') {
+      row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+}
+
+function simReset() {
+  if (simIntervalId) {
+    clearInterval(simIntervalId);
+    simIntervalId = null;
+  }
+  buildProgressLevel = 0;
+  updateBuildUI();
+  
+  // Inspect the first module in sequence on reset
+  inspectBuildMod('M1');
+  const row = document.getElementById('sr-M1');
+  if (row && activeBuildMode === 'step') {
+    row.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// Theme management
+function initTheme() {
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  const iconSpan = document.querySelector('.theme-icon');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    if (iconSpan) iconSpan.textContent = '☀️';
+  } else {
+    document.body.classList.remove('light-mode');
+    if (iconSpan) iconSpan.textContent = '🌙';
+  }
+}
+
+// ── MOBILE APP UX PORTAL LOGIC ──
+let activeMobilePortal = 'student';
+let selectedMobileScreenId = 'student_login';
+
+const MOBILE_SCREENS = {
+  student: [
+    {
+      id: 'student_login',
+      title: 'Portal Secure Login',
+      modules: 'Baseline Credentials, M16',
+      desc: 'High-security onboarding credentials entrance supporting phone OTP verification, multi-language selection, and rural low-bandwidth mode.',
+      specs: {
+        user: 'Anonymous Visitor',
+        goal: 'Authenticate study profiles securely and synchronize dynamic learning sessions in regional languages.',
+        flows: 'Input phone number ➔ Toggle low-bandwidth optimization ➔ Click "Enter Growth OS" to navigate to S2 Student Dashboard.',
+        inputs: 'App launching event loop.',
+        outputs: 'Initializes dynamic telemetry states and loads child mastery calendars.'
+      },
+      mockHtml: `
+        <div style="text-align:center; padding:15px 0 10px">
+          <div style="font-family:var(--font-display); font-size:24px; font-weight:800; background:linear-gradient(135deg, var(--color-border-primary) 0%, #10b981 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; display:inline-block; margin-bottom:4px">LearnXChain</div>
+          <div class="ph-sub">LXC-AI V1.0 Platform • Secure Portal</div>
+        </div>
+        
+        <div class="ph-card" style="margin-top:5px; border-left:3px solid var(--color-border-primary)">
+          <div class="ph-card-title" style="color:var(--color-border-primary)">🔑 SECURE SIGN-IN & INTERACTION</div>
+          
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:8px">
+            <div>
+              <label class="ph-sub" style="margin-bottom:3px; display:block">SELECT INTERACTION LANGUAGE</label>
+              <select style="width:100%; background:rgba(255,255,255,0.05); border:1px solid var(--color-border-tertiary); border-radius:6px; padding:6px; font-size:10px; color:#fff;" onchange="alert('Interaction language successfully updated to: ' + this.value)">
+                <option value="hinglish">🇮🇳 Hinglish (Hing-Lish) • Recommended</option>
+                <option value="english">🇬🇧 English • Standard</option>
+                <option value="hindi">🇮🇳 Hindi (हिन्दी) • Regional</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="ph-sub" style="margin-bottom:3px; display:block">MOBILE / PHONE NUMBER</label>
+              <input type="text" value="+91 98765 43210" style="width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--color-border-tertiary); border-radius:6px; padding:6px 10px; font-size:10px; color:#fff;" disabled>
+            </div>
+            
+            <div>
+              <label class="ph-sub" style="margin-bottom:3px; display:block">ONE-TIME CODE (OTP)</label>
+              <input type="text" value="8 9 2 4" style="width:100%; text-align:center; letter-spacing:8px; background:rgba(255,255,255,0.03); border:1px solid var(--color-border-tertiary); border-radius:6px; padding:6px 10px; font-size:10px; color:#34d399; font-weight:bold" disabled>
+            </div>
+          </div>
+          
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-top:10px">
+            <span class="ph-sub" style="color:#64748b">📶 Low Bandwidth Optimization</span>
+            <input type="checkbox" checked onclick="alert('Bharat Mode low-bandwidth sync toggled!')" style="accent-color:#10b981">
+          </div>
+
+          <div class="ph-divider" style="margin:10px 0"></div>
+          
+          <button class="ph-btn ph-btn-primary" onclick="selectMobileScreen('student_home')" style="font-weight:800; letter-spacing:0.02em">Enter Growth OS 🚀</button>
+        </div>
+        
+        <div class="ph-flex-row" style="justify-content:center; gap:6px; margin-top:6px">
+          <button class="ph-btn ph-btn-secondary" style="font-size:8px; padding:6px; flex:1" onclick="alert('Connecting to Polygon Wallet relayer... Credentials synchronized!');selectMobileScreen('student_passport')">🔐 Polygon Wallet</button>
+          <button class="ph-btn ph-btn-secondary" style="font-size:8px; padding:6px; flex:1" onclick="selectMobileScreen('parent_home')">👩‍👦 Parent Mode</button>
+        </div>
+        
+        <div style="text-align:center; margin-top:10px">
+          <span class="mscreen-modules" style="font-size:7px; background:rgba(52,211,153,0.05); color:#34d399">🛡️ Decentralized & encrypted via LearnXChain Protocol</span>
+        </div>
+      `
+    },
+    {
+      id: 'student_home',
+      title: 'Student Dashboard',
+      modules: 'M1, M2, M8, M15, M17',
+      desc: 'Interactive hub showing AI Study planner calendar summaries, streaks, flashcard status, and Pomodoro CV triggers.',
+      specs: {
+        user: 'Student User Portal',
+        goal: 'High-level dynamic child dashboard mapping calendar slots, focus widgets, and study tasks.',
+        flows: 'Explore active study streaks ➔ Click card to review spaced flashcards or start mock testing ➔ Click ask doubt trigger.',
+        inputs: 'Home button trigger, login landing page.',
+        outputs: 'M1 Study planner constraints routing theta profiles to M4 Adaptive Engine.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div>
+            <div class="ph-sub">🔥 STREAK: 14 DAYS ACTIVE</div>
+            <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+              Aarav Sharma <span style="font-size:10px">✨</span>
+            </div>
+          </div>
+          <div class="ph-avatar ph-twin-glow" style="width:26px; height:26px; font-size:12px;" onclick="selectMobileScreen('student_twin')" title="Inspect Cognitive Digital Twin">🤖</div>
+        </div>
+        
+        <div class="ph-card" style="border-left: 3px solid var(--color-L1); padding:10px; margin-top:5px" onclick="alert('Inspecting AI Study Planner modules M1 and M2')">
+          <div class="ph-card-title" style="font-size:9.5px">📅 M1 & M2: AI ROADMAP PLANNER <span style="color:#10b981; font-size:8px">● LIVE</span></div>
+          <div class="ph-flex-row" style="justify-content:space-between; margin-bottom:4px">
+            <span style="font-size:10px; color:#fff">📌 Physics Calculus Revision</span>
+            <span class="ph-sub" style="color:#a3e635; font-weight:bold">2 Hrs Scheduled</span>
+          </div>
+          <div style="font-size:9px; color:#94a3b8">Subject Priority: High (Math & Physics countdown matches Board Exam targets).</div>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:5px">
+          <div class="ph-card" style="border-left: 2px solid var(--color-L2); padding:8px" onclick="selectMobileScreen('student_flash')">
+            <div class="ph-card-title" style="font-size:9px; margin-bottom:2px">🎴 Spaced Decks</div>
+            <div class="ph-text-large" style="color:var(--color-L2); font-size:16px; font-weight:800">18 Cards</div>
+            <div class="ph-sub">M6 Forgetting Curve</div>
+          </div>
+          <div class="ph-card" style="border-left: 2px solid var(--color-L3); padding:8px" onclick="selectMobileScreen('student_practice')">
+            <div class="ph-card-title" style="font-size:9px; margin-bottom:2px">📝 Practice Mock</div>
+            <div class="ph-text-large" style="color:var(--color-L3); font-size:16px; font-weight:800">JEE Prep</div>
+            <div class="ph-sub">M4 Adaptive Theta</div>
+          </div>
+        </div>
+        
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:5px">
+          <div class="ph-card" style="border-left: 2px solid var(--color-L4); padding:8px" onclick="selectMobileScreen('student_focus')">
+            <div class="ph-card-title" style="font-size:9px; margin-bottom:2px">⏱️ Pomodoro</div>
+            <div style="font-size:11px; color:#fff; font-weight:bold">Active CV Scan</div>
+            <div class="ph-sub">M11 Fatigue Detection</div>
+          </div>
+          <div class="ph-card" style="border-left: 2px solid var(--color-L5); padding:8px" onclick="selectMobileScreen('student_peer')">
+            <div class="ph-card-title" style="font-size:9px; margin-bottom:2px">⚔️ Peer Battle</div>
+            <div style="font-size:11px; color:#fff; font-weight:bold">Alpha Lobby</div>
+            <div class="ph-sub">M17 Quiz & XP Arena</div>
+          </div>
+        </div>
+        
+        <div class="ph-card" style="border-left: 3px solid var(--color-L6); padding:8px; margin-top:5px" onclick="selectMobileScreen('student_passport')">
+          <div class="ph-card-title" style="font-size:9px">💼 M18 Blockchain Wallet & Skill Maps</div>
+          <div class="ph-sub">Polygon Gasless Certs • 3 Verified Badges Unlocked!</div>
+        </div>
+        
+        <button class="ph-btn ph-btn-primary" style="margin-top:6px; font-weight:bold" onclick="selectMobileScreen('student_doubt')">🎤 Ask Doubt in Hinglish (M3 / M20)</button>
+      `
+    },
+    {
+      id: 'student_doubt',
+      title: 'Doubt Solver OCR Chat',
+      modules: 'M3, M20',
+      desc: 'Voice recorder layout supporting speech Hinglish transcriptions, camera OCR scanners, and LaTeX mathematical equations solvers.',
+      specs: {
+        user: 'Student User Portal',
+        goal: 'Instantly resolve learning doubts using multimodal voice queries and visual math scanners.',
+        flows: 'Trigger sound recorder ➔ Whisper Hinglish spoken query ➔ System compiles and outputs LaTeX proof results.',
+        inputs: 'Doubt Mic click from S2 Student Dashboard, query search logs.',
+        outputs: 'Updates query logs database in ep-tight-thunder DB and flags weak concepts to Digital Twin.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Doubt Solver AI</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M3 + M20</span>
+          </div>
+          <button class="ph-btn-secondary" style="width:auto; padding:2px 8px; font-size:8px" onclick="selectMobileScreen('student_home')">◀ Back</button>
+        </div>
+        
+        <div style="flex:1; display:flex; flex-direction:column; gap:6px; margin:4px 0; overflow-y:auto; max-height:170px">
+          <div class="ph-card" style="align-self:flex-start; max-width:90%; background:rgba(56, 189, 248, 0.08); padding:8px; border-radius:10px">
+            <div class="ph-sub" style="color:#38bdf8; font-weight:bold">🗣️ HINGLISH VOICE RECORDING TRANSLATED (M20)</div>
+            <div style="font-size:9.5px; color:#fff">"Sir please check this question: limit x approaches 0, sin x divide by x, kardo step-by-step check."</div>
+          </div>
+          
+          <div class="ph-card" style="align-self:flex-end; max-width:90%; border-left:2px solid var(--color-L1); padding:8px; border-radius:10px">
+            <div class="ph-sub" style="color:var(--color-L1); font-weight:bold">🤖 M3 AI ACADEMIC EVALUATION</div>
+            <div style="font-size:9.5px; font-weight:bold; margin-top:3px; color:#fff">Limits Theorem Solver & Proof:</div>
+            <div style="font-family:'Courier New', monospace; font-size:8.5px; background:#010410; padding:6px; border-radius:6px; color:#38bdf8; overflow-x:auto; margin:4px 0">
+              $$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$$
+            </div>
+            <div style="font-size:8px; color:#94a3b8; line-height:1.2">
+              <strong>Concept Gap Detection:</strong> Perfect. Understood Taylor series expansion: $\\sin x = x - \\frac{x^3}{6} + \\dots$
+            </div>
+            
+            <div class="ph-divider" style="margin:4px 0"></div>
+            
+            <div style="background:rgba(255,255,255,0.02); padding:4px; border-radius:4px">
+              <div style="font-size:8px; font-weight:bold; color:#a3e635">✍️ Subjective Grading Rubric (MCQ & Subjective)</div>
+              <div class="ph-flex-row" style="justify-content:space-between; font-size:7.5px">
+                <span>Concept Score: 5/5</span>
+                <span>Grammar Corrector: Active (Hinglish Clear)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="background:rgba(255,255,255,0.02); border-radius:8px; padding:6px; border:1px solid rgba(255,255,255,0.05); margin-top:3px">
+          <div style="font-size:8px; font-weight:bold; color:#ff8c00; margin-bottom:2px">📸 OCR Image problem scanner active</div>
+          <div class="ph-flex-row" style="gap:4px; align-items:center">
+            <div style="width:20px; height:20px; background:rgba(255,255,255,0.1); border-radius:4px; display:flex; justify-content:center; align-items:center; font-size:9px">📷</div>
+            <span style="font-size:8px; color:#94a3b8">math_limit_problem_jee.jpg (Captured)</span>
+          </div>
+        </div>
+        
+        <div class="ph-flex-row" style="margin-top:5px; gap:4px">
+          <input type="text" placeholder="Type or ask doubt..." style="flex:1; background:rgba(255,255,255,0.03); border:1px solid var(--color-border-tertiary); border-radius:6px; padding:5px; font-size:9px; color:#fff;" disabled>
+          
+          <div style="position:relative; width:26px; height:26px; display:flex; justify-content:center; align-items:center">
+            <div style="position:absolute; width:100%; height:100%; border-radius:50%; background:rgba(239,68,68,0.2); animation:pulse 1.2s infinite"></div>
+            <button class="ph-btn" style="width:22px; height:22px; border-radius:50%; padding:0; background:#ef4444; color:#fff; font-size:9px; border:none; z-index:2" onclick="alert('Hinglish speech evaluation running... Speech-to-Text active!')">🎤</button>
+          </div>
+        </div>
+      `
+    },
+    {
+      id: 'student_flash',
+      title: 'Interactive Spaced Decks',
+      modules: 'M6, M9, M21',
+      desc: '3D card flipping spaced-repetition deck calibrated by SuperMemo-2 algorithms and forgetting curve prediction charts.',
+      specs: {
+        user: 'Student User Portal',
+        goal: 'Optimize historical fact and formula retention through decay review schedules.',
+        flows: 'Examine card front ➔ Tap card body to flip and reveal answer ➔ Rate recall difficulty (Easy, Hard, Forgot).',
+        inputs: 'Cards review card click from S2 Student Dashboard.',
+        outputs: 'Calibrates review intervals and buffers synced payloads to local SQLite offline caches.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Spaced Memory Decks</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M6</span>
+          </div>
+          <button class="ph-btn-secondary" style="width:auto; padding:2px 8px; font-size:8px" onclick="selectMobileScreen('student_home')">◀ Back</button>
+        </div>
+        
+        <div class="ph-card" style="min-height:110px; justify-content:center; align-items:center; border:2px solid var(--color-L2); background:rgba(52, 211, 153, 0.03); text-align:center; padding:12px; margin-top:4px" onclick="this.querySelector('.ans-node').style.display='block'; this.querySelector('.click-tip').style.display='none';">
+          <div class="ph-sub" style="color:var(--color-L2); font-weight:bold">🎴 COGNITIVE FLASHCARD (SuperMemo-2 SM-2)</div>
+          <div style="font-size:11px; font-weight:700; margin-top:8px; color:#fff">State the principle of Bayesian Knowledge Tracing (BKT).</div>
+          <div class="ph-divider" style="margin:8px 0"></div>
+          <div class="ans-node" style="display:none; font-size:9.5px; color:#34d399; font-weight:bold; line-height:1.3">
+            BKT monitors cognitive proficiency as a hidden Markov model, mapping transition probability parameters based on attempt history, response time, and mistakes.
+          </div>
+          <div class="click-tip" style="font-size:8px; color:#64748b; margin-top:10px; font-style:italic">Tap Card to Flip & Reveal Answer 🔄</div>
+        </div>
+        
+        <div class="ph-card" style="padding:6px; margin-top:5px">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:2px">📈 M9 Cognitive Curve prediction</div>
+          <div style="text-align:center">
+            <svg viewBox="0 0 200 60" style="width:100%; height:45px">
+              <line x1="10" y1="5" x2="190" y2="5" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+              <line x1="10" y1="30" x2="190" y2="30" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+              <line x1="10" y1="55" x2="190" y2="55" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+              <path d="M 10 10 Q 70 35, 190 50" fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="200" stroke-dashoffset="0"/>
+              <line x1="10" y1="40" x2="190" y2="40" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="2,2"/>
+              <circle cx="95" cy="39" r="2.5" fill="#ff8c00"/>
+              <text x="12" y="15" fill="#fff" font-size="6">100% Retention</text>
+              <text x="12" y="38" fill="#ef4444" font-size="5">Recall threshold</text>
+              <text x="140" y="55" fill="#a3e635" font-size="6">Forgetting point</text>
+            </svg>
+            <div style="font-size:7.5px; color:#94a3b8; display:flex; justify-content:space-between; margin-top:2px">
+              <span>Today: Decay alert!</span>
+              <span style="color:#ff8c00; font-weight:bold">Optimal Spaced timing reached</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="ph-flex-row" style="justify-content:space-between; gap:3px; margin-top:4px">
+          <button class="ph-btn" style="background:#ef4444; color:#fff; flex:1; padding:5px 0; font-size:8px; border-radius:5px" onclick="alert('Calibrating retention to decay matrix. Screen queued for revision in 1 day.'); selectMobileScreen('student_home')">Forgot</button>
+          <button class="ph-btn" style="background:#f59e0b; color:#fff; flex:1; padding:5px 0; font-size:8px; border-radius:5px" onclick="alert('Calculated SM-2 interval: Next check in 3 days.'); selectMobileScreen('student_home')">Hard</button>
+          <button class="ph-btn" style="background:#3b82f6; color:#fff; flex:1; padding:5px 0; font-size:8px; border-radius:5px" onclick="alert('Calculated SM-2 interval: Next check in 7 days.'); selectMobileScreen('student_home')">Good</button>
+          <button class="ph-btn" style="background:#10b981; color:#fff; flex:1; padding:5px 0; font-size:8px; border-radius:5px" onclick="alert('Calculated SM-2 interval: Next check in 14 days.'); selectMobileScreen('student_home')">Easy</button>
+        </div>
+        
+        <div style="text-align:center; margin-top:3px">
+          <span class="mscreen-modules" style="font-size:7px; background:rgba(255,255,255,0.03); padding:1px 4px">📶 Offline Sync Mode active (SQLite backup ready)</span>
+        </div>
+      `
+    },
+    {
+      id: 'student_practice',
+      title: 'Adaptive Mock Sandbox',
+      modules: 'M4, M5',
+      desc: 'Active mock exam console matching dynamic ability indexes, featuring live countdowns, IRT difficulty curves, and Board Predictions.',
+      specs: {
+        user: 'Student User Portal',
+        goal: 'Examine cognitive capacity under realistic testing pressure and dynamic item scaling.',
+        flows: 'Observe generated question pool ➔ Select choice and submit ➔ IRT theta adjusts mock test difficulty dynamically.',
+        inputs: 'Practice tests card click from S2 Student Dashboard.',
+        outputs: 'Saves aggregate marks and feeds performance indicators back to M8 Digital Twin vectors.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Mock Exam Sandbox</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M4 + M5</span>
+          </div>
+          <span style="font-size:10px; color:#ef4444; font-weight:bold;">⏱️ 02:44:19</span>
+        </div>
+        
+        <div class="ph-card" style="border-left:2px solid var(--color-L3); padding:8px; margin-top:4px">
+          <div class="ph-flex-row" style="justify-content:space-between">
+            <span class="ph-sub" style="color:var(--color-L3); font-weight:bold">QUESTION 4 OF 30 (JEE LEVEL)</span>
+            <span class="mscreen-modules" style="font-size:7.5px; background:rgba(234, 88, 12, 0.15); color:#ea580c; border:1px solid rgba(234,88,12,0.2)">🔥 IRT HARD (Theta +1.42)</span>
+          </div>
+          <div style="font-size:10.5px; font-weight:bold; margin-top:4px; color:#fff; line-height:1.3">
+            Let $f(x)$ be a differentiable function satisfying $f'(x) + f(x) = 0$. If $f(0) = 1$, find the value of $f(1)$.
+          </div>
+        </div>
+        
+        <div class="ph-card" style="padding:6px; margin-top:4px">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:2px">📊 M4 Item Response Theory (IRT) Calibration</div>
+          <div style="text-align:center">
+            <svg viewBox="0 0 200 50" style="width:100%; height:40px">
+              <line x1="10" y1="25" x2="190" y2="25" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+              <line x1="100" y1="5" x2="100" y2="45" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+              <path d="M 20 42 C 70 42, 80 8, 180 8" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+              <line x1="130" y1="5" x2="130" y2="45" stroke="#a3e635" stroke-width="1" stroke-dasharray="2,2"/>
+              <circle cx="130" cy="18" r="3" fill="#ff8c00"/>
+              <text x="15" y="15" fill="#94a3b8" font-size="5">Easy Questions</text>
+              <text x="145" y="45" fill="#94a3b8" font-size="5">Hard Questions</text>
+              <text x="135" y="15" fill="#a3e635" font-size="6">Your Ability (θ = +1.42)</text>
+            </svg>
+            <div style="font-size:7.5px; color:#94a3b8; display:flex; justify-content:space-between; margin-top:2px">
+              <span>Speed-Accuracy Index: Excellent</span>
+              <span style="color:#38bdf8; font-weight:bold">Board Prediction: 94.2% Score probability</span>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display:flex; flex-direction:column; gap:4px; margin-top:4px">
+          <label class="ph-card" style="padding:6px 10px; display:flex; flex-direction:row; align-items:center; gap:6px; background:rgba(255,255,255,0.01); border-radius:8px" onclick="alert('Option A selected (Incorrect, dynamic hint queued)')">
+            <input type="radio" name="opt" style="accent-color:#10b981">
+            <span style="font-size:9.5px; color:#fff">(A) $e$</span>
+          </label>
+          <label class="ph-card" style="padding:6px 10px; display:flex; flex-direction:row; align-items:center; gap:6px; background:rgba(255,255,255,0.01); border-radius:8px" onclick="alert('Option B selected (Correct! Theta capability index increased)')">
+            <input type="radio" name="opt" checked style="accent-color:#10b981">
+            <span style="font-size:9.5px; color:#fff">(B) $1/e$ (Answer: $f(x)=e^{-x}$)</span>
+          </label>
+          <label class="ph-card" style="padding:6px 10px; display:flex; flex-direction:row; align-items:center; gap:6px; background:rgba(255,255,255,0.01); border-radius:8px" onclick="alert('Option C selected (Incorrect, dynamic hint queued)')">
+            <input type="radio" name="opt" style="accent-color:#10b981">
+            <span style="font-size:9.5px; color:#fff">(C) $0$</span>
+          </label>
+        </div>
+        
+        <div class="ph-flex-row" style="margin-top:5px; gap:4px">
+          <button class="ph-btn ph-btn-secondary" style="flex:1; padding:6px 0; font-size:9px" onclick="alert('Question skipped. Difficulty decreased to Theta +1.1'); selectMobileScreen('student_home')">Skip Question</button>
+          <button class="ph-btn ph-btn-primary" style="flex:1; padding:6px 0; font-size:9px" onclick="alert('JEE mock evaluation response compiled successfully!'); selectMobileScreen('student_home')">Submit Answer</button>
+        </div>
+      `
+    },
+    {
+      id: 'student_twin',
+      title: 'Digital Twin Avatar Detail',
+      modules: 'M8, M12, M22',
+      desc: 'Central mastery profile console visualizing topic vectors, Learning DNA profiles, cognitive radar plots, and career discovery matches.',
+      specs: {
+        user: 'Student User Portal',
+        goal: 'Expose a visual representation of student learning capabilities, weak zones, and future career matches.',
+        flows: 'Inspect glowing digital twin ➔ Explore topic-wise mastery radar graphs ➔ Review labor market recommended matches.',
+        inputs: 'Click Digital Twin avatar 🤖 from S2 Student Dashboard, S6 career recommendations click.',
+        outputs: 'Drives adaptive test scaling constraints and maps skill credential requirements.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Cognitive Twin (M8)</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M8 + M12</span>
+          </div>
+          <button class="ph-btn-secondary" style="width:auto; padding:2px 8px; font-size:8px" onclick="selectMobileScreen('student_home')">◀ Back</button>
+        </div>
+        
+        <div style="text-align:center; padding:5px 0">
+          <div class="ph-avatar ph-twin-glow" style="width:40px; height:40px; font-size:18px; margin:0 auto 4px; box-shadow:0 0 20px rgba(52,211,153,0.4)">🤖</div>
+          <div style="font-size:11px; font-weight:bold; color:#fff">Aarav's Learning DNA Profile</div>
+          <div class="ph-sub" style="color:#34d399; font-weight:bold">Cognitive Mastery Vector: 84.8% • Tier 1 Learner</div>
+        </div>
+        
+        <div class="ph-card" style="padding:6px; margin-top:3px">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:2px">🕸️ Skill Graph Radar Mappings</div>
+          <div style="text-align:center">
+            <svg viewBox="0 0 200 80" style="width:100%; height:60px">
+              <polygon points="100,5 160,25 140,75 60,75 40,25" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+              <polygon points="100,20 145,35 130,70 70,70 55,35" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+              <polygon points="100,35 130,45 120,65 80,65 70,45" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="0.8"/>
+              <line x1="100" y1="40" x2="100" y2="5" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <line x1="100" y1="40" x2="160" y2="25" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <line x1="100" y1="40" x2="140" y2="75" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <line x1="100" y1="40" x2="60" y2="75" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <line x1="100" y1="40" x2="40" y2="25" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+              <polygon points="100,12 150,30 135,72 75,71 52,28" fill="rgba(52,211,153,0.15)" stroke="#10b981" stroke-width="1.8"/>
+              <text x="100" y="5" fill="#ff8c00" font-size="5" text-anchor="middle">Calculus (92%)</text>
+              <text x="165" y="27" fill="#38bdf8" font-size="5">Physics (84%)</text>
+              <text x="145" y="77" fill="#a3e635" font-size="5">Organic (72%)</text>
+              <text x="55" y="77" fill="#a3e635" font-size="5" text-anchor="end">Inorganic (78%)</text>
+              <text x="35" y="27" fill="#94a3b8" font-size="5" text-anchor="end">Limits (88%)</text>
+            </svg>
+          </div>
+        </div>
+        
+        <div class="ph-card" style="padding:8px; margin-top:4px" onclick="selectMobileScreen('student_passport')">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:2px">🧭 M12 CAREER DISCOVERY & INTEREST ANALYZER</div>
+          <div class="ph-flex-row" style="justify-content:space-between; align-items:center">
+            <div>
+              <div style="font-size:9.5px; font-weight:bold; color:var(--color-L5)">Aerospace Engineer (96% Match)</div>
+              <div class="ph-sub">Based on advanced Physics mastery signals.</div>
+            </div>
+            <span style="font-size:12px">🚀</span>
+          </div>
+        </div>
+        
+        <div class="ph-flex-row" style="gap:4px; margin-top:4px">
+          <div class="ph-card" style="flex:1; padding:6px; background:rgba(16,185,129,0.03); border-color:rgba(16,185,129,0.1)">
+            <div style="font-size:8px; font-weight:bold; color:#10b981">TALENT MODE</div>
+            <div style="font-size:9px; color:#fff; font-weight:bold">Olympiad Preps</div>
+          </div>
+          <div class="ph-card" style="flex:1; padding:6px; background:rgba(239,68,68,0.03); border-color:rgba(239,68,68,0.1)">
+            <div style="font-size:8px; font-weight:bold; color:#ef4444">DROPOUT RISK</div>
+            <div style="font-size:9px; color:#fff; font-weight:bold">Low (4% Risk)</div>
+          </div>
+        </div>
+      `
+    },
+    {
+      id: 'student_focus',
+      title: 'Pomodoro Focus Tracker',
+      modules: 'M11, M15',
+      desc: 'Circular clock timer integrated with eye-gaze computer vision distraction frames and emotional wellness valves.',
+      specs: {
+        user: 'Student User Portal',
+        goal: 'Foster sustained learning attention and track active screen telemetry.',
+        flows: 'Lock phone frame layout ➔ Active CV eye check counts blink frequency and head angles ➔ Auto-pauses clock if distracted.',
+        inputs: 'Focus clock card click from S2 Student Dashboard.',
+        outputs: 'Feeds distraction spikes to Wellness AI BERT sentiment safety monitors to flag stress index.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Focus Attention Timer</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M11 + M15</span>
+          </div>
+          <button class="ph-btn-secondary" style="width:auto; padding:2px 8px; font-size:8px" onclick="selectMobileScreen('student_home')">◀ Back</button>
+        </div>
+        
+        <div class="ph-card" style="align-items:center; justify-content:center; text-align:center; padding:12px; margin-top:4px; position:relative">
+          <div style="width:75px; height:75px; border-radius:50%; border:3px solid var(--color-L4); display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:6px; box-shadow: 0 0 15px rgba(255,140,0,0.2)">
+            <div style="font-size:16px; font-weight:800; color:#fff">24:18</div>
+            <div class="ph-sub" style="font-size:7px">POMODORO CLOCK</div>
+          </div>
+          <span class="step-status-chip chip-unlocked" style="font-size:8px; padding:2px 6px">● COMPUTER VISION ATTENTION LOCK ACTIVE</span>
+        </div>
+        
+        <div class="ph-card" style="flex-direction:row; align-items:center; gap:8px; padding:8px; margin-top:4px">
+          <div style="width:40px; height:34px; background:#010410; border-radius:6px; display:flex; justify-content:center; align-items:center; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,0.1)">
+            <span style="font-size:14px; z-index:2">👤</span>
+            <svg viewBox="0 0 40 34" style="position:absolute; width:100%; height:100%; top:0; left:0; z-index:1">
+              <line x1="20" y1="0" x2="20" y2="34" stroke="#10b981" stroke-width="0.5" stroke-dasharray="1,1"/>
+              <line x1="0" y1="17" x2="40" y2="17" stroke="#10b981" stroke-width="0.5" stroke-dasharray="1,1"/>
+              <circle cx="21" cy="16" r="3" fill="none" stroke="#ef4444" stroke-width="0.8"/>
+              <circle cx="21" cy="16" r="1" fill="#ef4444"/>
+            </svg>
+          </div>
+          <div style="flex:1">
+            <div style="font-size:9px; font-weight:bold; color:#fff">CV Eye-Gaze Diagnostic Tracker</div>
+            <div class="ph-sub" style="color:#10b981; font-weight:bold">Status: Locked on Screen • Gaze Center</div>
+          </div>
+        </div>
+        
+        <div class="ph-card" style="border-left: 3px solid var(--color-L6); padding:8px; margin-top:4px">
+          <div class="ph-sub" style="color:var(--color-L6); font-weight:bold">🧘 M15 EMOTIONAL WELLNESS VALVE</div>
+          <div style="font-size:9px; color:#fff; line-height:1.2; margin-top:2px">
+            <strong>Gaze fatigue alerts:</strong> Fatigue Index: 0.14 (Low). Study anxiety: Normal.
+          </div>
+          <button class="ph-btn ph-btn-secondary" style="margin-top:6px; padding:4px; font-size:7.5px" onclick="alert('Relaxation micro-exercise launched. Breathe in... Breathe out...');">🧠 Start Smart Break (1 Min)</button>
+        </div>
+      `
+    },
+    {
+      id: 'student_peer',
+      title: 'Peer Study network Lobby',
+      modules: 'M17, M19',
+      desc: 'Multiplayer classroom game matching room lobbies powered by real-time streaking rankings and local community challenges.',
+      specs: {
+        user: 'Student User Portal',
+        goal: 'Encourage healthy student study competitions and study group sharing.',
+        flows: 'Wait inside the multiplayer battle pool ➔ Match with peer networks ➔ Complete math quiz triggers to earn XP.',
+        inputs: 'Study battle card click from S2 Student Dashboard.',
+        outputs: 'Dispenses streak multiplier XP rewards directly back to the global leaderboard.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Peer Battle Lobby</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M17 + M19</span>
+          </div>
+          <button class="ph-btn-secondary" style="width:auto; padding:2px 8px; font-size:8px" onclick="selectMobileScreen('student_home')">◀ Back</button>
+        </div>
+        
+        <div class="ph-card" style="background:rgba(163, 230, 53, 0.04); border-color:rgba(163, 230, 53, 0.15); padding:8px; margin-top:4px">
+          <div class="ph-card-title" style="color:var(--color-L5); font-size:9.5px">⚔️ MULTIPLAYER BATTLE ARENA ACTIVE</div>
+          <div style="font-size:11px; font-weight:bold; color:#fff">Weekly JEE Physics Speed Battle</div>
+          <div class="ph-sub">Lobby Countdown: <strong style="color:var(--color-L5);">Match starting in 3s...</strong></div>
+        </div>
+        
+        <div class="ph-card" style="padding:8px; margin-top:4px">
+          <div class="ph-card-title" style="font-size:8.5px">🏆 ACTIVE LOBBY PLAYERS & STREAKS</div>
+          <div style="display:flex; flex-direction:column; gap:5px; font-size:9px">
+            <div class="ph-flex-row" style="justify-content:space-between; align-items:center">
+              <span>🥇 Aarav S. (You)</span>
+              <span class="step-status-chip chip-unlocked" style="font-size:7.5px; padding:1px 4px">🔥 Streak 14d</span>
+            </div>
+            <div class="ph-flex-row" style="justify-content:space-between; align-items:center">
+              <span>🥈 Kabir Mehta</span>
+              <span class="ph-sub" style="color:#ff8c00">🔥 Streak 8d</span>
+            </div>
+            <div class="ph-flex-row" style="justify-content:space-between; align-items:center">
+              <span>🥉 Diya Patel</span>
+              <span class="ph-sub">🔥 Streak 1d</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="ph-card" style="padding:8px; margin-top:4px; border-left:3px solid var(--color-L1)">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:2px">🔬 M14: REAL-WORLD PROBLEM SOLVING TASK</div>
+          <div style="font-size:9px; color:#fff"><strong>Project:</strong> Calculate battery efficiency models for rural micro-grids.</div>
+          <div class="ph-sub">Collaborate to unlock Skill Economy Badges.</div>
+        </div>
+        
+        <div class="ph-flex-row" style="margin-top:5px; gap:4px">
+          <button class="ph-btn ph-btn-secondary" style="flex:1; padding:6px 0; font-size:9px" onclick="selectMobileScreen('student_home')">Cancel Arena Match</button>
+        </div>
+      `
+    },
+    {
+      id: 'student_passport',
+      title: 'Soulbound Skill Wallet',
+      modules: 'M14, M16, M18',
+      desc: 'Glassmorphic blockchain digital credentials wallet storing gas-free claimed NFT passes and career decision simulations.',
+      specs: {
+        user: 'Student User Portal',
+        goal: 'Expose a non-custodial wallet displaying cryptographically verified skill credentials.',
+        flows: 'View unclaimed accomplishments ➔ Dispatched gasless claims on Polygon blockchain ➔ Unlocks skill maps.',
+        inputs: 'Digital twin career fit card click from S6 twin screen.',
+        outputs: 'Blockchain hashes mapped directly to labor discovery matching filters (M12).'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Soulbound Skill Wallet</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M18</span>
+          </div>
+          <button class="ph-btn-secondary" style="width:auto; padding:2px 8px; font-size:8px" onclick="selectMobileScreen('student_home')">◀ Back</button>
+        </div>
+        
+        <div class="ph-card" style="border-color:rgba(163, 230, 53, 0.3); background:linear-gradient(135deg, rgba(163, 230, 53, 0.08) 0%, rgba(56, 189, 248, 0.08) 100%); padding:12px; margin-top:4px; box-shadow: 0 4px 15px rgba(163, 230, 53, 0.1)">
+          <div class="ph-flex-row" style="justify-content:space-between; align-items:flex-start">
+            <div>
+              <div class="ph-sub" style="color:#a3e635; font-weight:bold">🌐 POLYGON NET SOULBOUND PASS</div>
+              <div style="font-size:12px; font-weight:bold; color:#fff; margin-top:4px">Aarav Sharma • Student DNA Wallet</div>
+            </div>
+            <div style="font-size:14px">💎</div>
+          </div>
+          <div class="ph-divider" style="margin:8px 0; background:rgba(255,255,255,0.08)"></div>
+          <div class="ph-flex-row" style="justify-content:space-between; font-size:7.5px; color:#94a3b8; font-family:monospace">
+            <span>ID: 0x9fA2...e2a1</span>
+            <span>Gasless Relayer: Enabled</span>
+          </div>
+        </div>
+        
+        <div style="display:flex; flex-direction:column; gap:4px; margin-top:4px">
+          <div class="ph-card" style="padding:6px; border-left:3px solid var(--color-L1); border-radius:8px">
+            <div class="ph-flex-row" style="justify-content:space-between; align-items:center">
+              <div>
+                <div style="font-size:9.5px; font-weight:bold; color:#fff">Advanced Physics Integration Medal</div>
+                <div class="ph-sub">ERC-721 Token Standard • On-Chain Verified ✅</div>
+              </div>
+              <span style="font-size:12px">🥇</span>
+            </div>
+          </div>
+          
+          <div class="ph-card" style="padding:6px; border-left:3px solid var(--color-L4); border-radius:8px">
+            <div class="ph-flex-row" style="justify-content:space-between; align-items:center">
+              <div>
+                <div style="font-size:9.5px; font-weight:bold; color:#fff">M16: Eloquent Orator Life Badge</div>
+                <div class="ph-sub">Pending verification from Mentor Whiteboard.</div>
+              </div>
+              <button class="ph-btn ph-btn-primary" style="width:auto; padding:3px 6px; font-size:7.5px" onclick="alert('Soulbound NFT Claim transaction dispatched gas-free on Polygon. Hash: 0x8a92b...!');">Claim Badge</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="ph-card" style="padding:6px; margin-top:4px">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:2px">🎯 M18 Career Decision Simulator</div>
+          <div class="ph-sub" style="margin-bottom:4px">Tradeoff options: Science (A) vs. Commerce (B)</div>
+          <div style="display:flex; flex-direction:column; gap:3px">
+            <div style="font-size:8px">1. Lifetime Earning Multiplier: Science +40%</div>
+            <div style="height:3px; background:rgba(255,255,255,0.05); border-radius:1.5px; overflow:hidden">
+              <div style="height:100%; background:#10b981; width:85%"></div>
+            </div>
+            <div style="font-size:8px">2. Time Investment Risk: Science (High Complexity)</div>
+            <div style="height:3px; background:rgba(255,255,255,0.05); border-radius:1.5px; overflow:hidden">
+              <div style="height:100%; background:#ef4444; width:65%"></div>
+            </div>
+          </div>
+        </div>
+      `
+    }
+  ],
+  parent: [
+    {
+      id: 'parent_home',
+      title: 'Parent Comm AI Portal',
+      modules: 'M10, M20, M22',
+      desc: 'Multilingual messaging interface displaying student risk warning logs, wellness alerts, and regional district analytics heatmaps.',
+      specs: {
+        user: 'Parent Portal Interface',
+        goal: 'Seamlessly keep parents updated on child progress, stress levels, and critical risk notifications.',
+        flows: 'Toggle notification settings ➔ Review translated WhatsApp messages ➔ Inspect child regional school mastery heatmap.',
+        inputs: 'M22 automated WhatsApp triggers, system dashboard parent alert checks.',
+        outputs: 'Parent feedback loop logs back to Digital Twin parameters.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Parent Growth Feed</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M10 + M22</span>
+          </div>
+          <div class="ph-avatar" style="background:#ffc107; color:#000; width:22px; height:22px; font-size:10px">👩‍👦</div>
+        </div>
+        
+        <div class="ph-card" style="border-left:3px solid #ef4444; background:rgba(239, 68, 68, 0.04); padding:8px; margin-top:4px">
+          <div class="ph-card-title" style="color:#ef4444; font-size:9.5px">🚨 SYSTEM GROWTH RISK ALARM M10</div>
+          <div style="font-size:10.5px; font-weight:bold; color:#fff">Aarav Sharma — Churn Risk Triggered</div>
+          <div style="font-size:9px; color:#ef4444; margin-top:3px; line-height:1.2">
+            <strong>Hinglish:</strong> "Aarav JEE Limits practice mocks me average score se thoda peeche chal rahe hain. Mentor support block automatic allocate kiya gaya hai."
+          </div>
+        </div>
+        
+        <div class="ph-card" style="border-left:3px solid #25d366; background:rgba(37,211,102,0.03); padding:8px; margin-top:4px">
+          <div class="ph-card-title" style="color:#25d366; font-size:8.5px">💬 WhatsApp Update Feed Enabled</div>
+          <div style="font-size:9.5px; font-style:italic; color:#fff; line-height:1.2">
+            "Namaste Ji. Aarav ne aaj focus time limits complete kiye. Unka dynamic mock progress 88% reach ho gaya hai. Great progress!"
+          </div>
+          <div class="ph-sub" style="margin-top:4px; color:#25d366; font-weight:bold">✓ Delivered via LearnXChain Whatsapp API Relayer</div>
+        </div>
+        
+        <div class="ph-card" style="padding:8px; margin-top:4px">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:4px">🏛️ M20: Government & CSR District Analytics Heatmap</div>
+          <div style="display:grid; grid-template-columns: repeat(6, 1fr); gap:3px">
+            <div style="height:12px; background:#10b981; border-radius:2px" title="School A: 92% mastery" onclick="alert('School Alpha: Employability Index 92% (High)')"></div>
+            <div style="height:12px; background:#10b981; border-radius:2px" title="School B: 85% mastery" onclick="alert('School Beta: Employability Index 85% (High)')"></div>
+            <div style="height:12px; background:#34d399; border-radius:2px" title="School C: 78% mastery" onclick="alert('School Gamma: Employability Index 78% (Medium)')"></div>
+            <div style="height:12px; background:#f59e0b; border-radius:2px" title="School D: 62% mastery" onclick="alert('School Delta: Employability Index 62% (Warning)')"></div>
+            <div style="height:12px; background:#ef4444; border-radius:2px" title="School E: 45% mastery" onclick="alert('School Epsilon: Employability Index 45% (Critical)')"></div>
+            <div style="height:12px; background:#34d399; border-radius:2px" title="School F: 80% mastery" onclick="alert('School Zeta: Employability Index 80% (Medium)')"></div>
+          </div>
+          <div class="ph-sub" style="margin-top:4px; text-align:center">District School Mastery Index: 76.5% (Intermediate Tier)</div>
+        </div>
+      `
+    }
+  ],
+  mentor: [
+    {
+      id: 'mentor_home',
+      title: 'Mentor Risk Dashboard',
+      modules: 'M10, M13, M19',
+      desc: 'Mentor oversight workspace mapping high-failure risk indicators, WebRTC tutor room setups, and drawing blackboard proofs.',
+      specs: {
+        user: 'Mentor Portal Console',
+        goal: 'Actively monitor high failure risk student profiles and initiate timely WebRTC visual training rooms.',
+        flows: 'Inspect unresolved risk list row cards ➔ Explore risk reasons from student digital profiles ➔ Book whiteboard coaching slots.',
+        inputs: 'M10 XGBoost churn alarm triggers.',
+        outputs: 'Mentor coaching logs refine BKT capability parameters in S6 Digital Twin.'
+      },
+      mockHtml: `
+        <div class="ph-header">
+          <div class="ph-title" style="display:flex; align-items:center; gap:4px">
+            <span>Mentor Risk Board</span> <span class="mscreen-modules" style="font-size:7px; padding:1px 3px">M10 + M13</span>
+          </div>
+          <div class="ph-avatar" style="background:#10b981; color:#000; width:22px; height:22px; font-size:10px">👨‍🏫</div>
+        </div>
+        
+        <div class="ph-card" style="border-left:3px solid #ef4444; background:rgba(239, 68, 68, 0.04); padding:8px; margin-top:4px" onclick="alert('Connecting live WebRTC room... Whiteboard synchronization is active!')">
+          <div class="ph-card-title" style="color:#ef4444; font-size:9.5px">🚨 HIGH DROPOUT CHURN WARNING</div>
+          <div style="font-size:10.5px; font-weight:bold; color:#fff">Aarav Sharma — JEE Math Limits</div>
+          <div class="ph-sub">M10 predictive failure index: 92% probability.</div>
+          <button class="ph-btn ph-btn-primary" style="margin-top:6px; padding:5px 0; font-size:8.5px">📞 Start Live WebRTC Tutor Whiteboard</button>
+        </div>
+        
+        <div class="ph-card" style="padding:6px; margin-top:4px; border:1px solid rgba(255,255,255,0.08); background:#02050f">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:2px">✍️ Live WebRTC Virtual Whiteboard (M13)</div>
+          <div style="width:100%; height:55px; background:#010206; border-radius:6px; position:relative; overflow:hidden; border:1px dashed rgba(255,255,255,0.1)">
+            <svg viewBox="0 0 200 55" style="width:100%; height:100%">
+              <path d="M 0 10 L 200 10 M 0 20 L 200 20 M 0 30 L 200 30 M 0 40 L 200 40" stroke="rgba(56,189,248,0.03)" stroke-width="0.5"/>
+              <path d="M 15 45 C 50 15, 100 40, 180 15" fill="none" stroke="#eab308" stroke-width="1.2" stroke-linecap="round"/>
+              <text x="25" y="15" fill="#38bdf8" font-size="7" font-family="'Courier New', monospace">lim_{x->0} sin(x)/x = 1</text>
+              <circle cx="150" cy="35" r="10" fill="none" stroke="#f43f5e" stroke-width="1" stroke-dasharray="2,2"/>
+              <line x1="150" y1="35" x2="160" y2="35" stroke="#f43f5e" stroke-width="0.8"/>
+              <text x="145" y="32" fill="#f43f5e" font-size="5">r=1</text>
+            </svg>
+          </div>
+          <div class="ph-sub" style="text-align:center; color:#94a3b8">Interactive real-time peer drawing workspace active</div>
+        </div>
+        
+        <div class="ph-card" style="padding:6px; margin-top:4px">
+          <div class="ph-card-title" style="font-size:8.5px; margin-bottom:2px">📅 Olympiad Tutoring Tasks (M19)</div>
+          <div style="font-size:9px; color:#fff">1. Advanced calculus training booked for 15:30.</div>
+          <div class="ph-sub">Risk mitigation tasks assigned to parent feedback loop.</div>
+        </div>
+      `
+    }
+  ]
+};
+
+function setMobilePortal(portal) {
+  activeMobilePortal = portal;
+  
+  document.getElementById('btn-portal-student').classList.toggle('active', portal === 'student');
+  document.getElementById('btn-portal-parent').classList.toggle('active', portal === 'parent');
+  document.getElementById('btn-portal-mentor').classList.toggle('active', portal === 'mentor');
+  
+  renderMobileScreens();
+  
+  const firstScreen = MOBILE_SCREENS[portal][0];
+  if (firstScreen) {
+    selectMobileScreen(firstScreen.id);
+  }
+}
+
+function renderMobileScreens() {
+  const container = document.getElementById('mobile-screen-list-container');
+  if (!container) return;
+  
+  let html = '';
+  MOBILE_SCREENS[activeMobilePortal].forEach(screen => {
+    const isActive = screen.id === selectedMobileScreenId;
+    const badgeText = screen.id.substring(screen.id.indexOf('_') + 1).toUpperCase();
+    html += `
+      <div class="mobile-screen-row ${isActive ? 'active-mscreen' : ''}" onclick="selectMobileScreen('${screen.id}')">
+        <span class="mscreen-badge">${badgeText}</span>
+        <span class="mscreen-name">${screen.title}</span>
+        <span class="mscreen-modules">${screen.modules.split(',')[0]}</span>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+function selectMobileScreen(id) {
+  selectedMobileScreenId = id;
+  
+  let screen = null;
+  for (const portal in MOBILE_SCREENS) {
+    const found = MOBILE_SCREENS[portal].find(s => s.id === id);
+    if (found) {
+      screen = found;
+      if (activeMobilePortal !== portal) {
+        activeMobilePortal = portal;
+        document.getElementById('btn-portal-student').classList.toggle('active', portal === 'student');
+        document.getElementById('btn-portal-parent').classList.toggle('active', portal === 'parent');
+        document.getElementById('btn-portal-mentor').classList.toggle('active', portal === 'mentor');
+        renderMobileScreens();
+      }
+      break;
+    }
+  }
+  
+  if (!screen) return;
+  
+  renderMobileScreens();
+  
+  document.getElementById('phone-screen-content').innerHTML = screen.mockHtml;
+  
+  const ins = document.getElementById('mobile-inspector');
+  if (ins) {
+    ins.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; flex-wrap:wrap; gap:8px">
+        <div>
+          <div style="display:flex; align-items:center; gap:8px">
+            <div class="dp-title" style="color:var(--color-border-primary)">📱 ${screen.title}</div>
+            <span class="step-status-chip chip-unlocked">${screen.id.toUpperCase()}</span>
+          </div>
+          <div class="dp-layer">User Portal: ${screen.specs.user}</div>
+        </div>
+      </div>
+      
+      <div class="dp-section">📱 Core Screen UX Definition</div>
+      <div class="dp-row"><div class="dp-text"><strong>RIT AI Modules Mapped:</strong> <span style="color:var(--color-text-primary)">${screen.modules}</span></div></div>
+      <div class="dp-row"><div class="dp-text"><strong>UX Interaction Purpose:</strong> ${screen.desc}</div></div>
+      <div class="dp-row"><div class="dp-text"><strong>UX Primary Goal:</strong> ${screen.specs.goal}</div></div>
+      
+      <div class="dp-section">🗺️ Screen Transition Flow & Relations</div>
+      <div class="dp-row"><div class="dp-text"><strong>Incoming Navigation triggers:</strong> ${screen.specs.inputs}</div></div>
+      <div class="dp-row"><div class="dp-text"><strong>Outgoing Actions & updates:</strong> ${screen.specs.outputs}</div></div>
+      
+      <div class="dp-section">📋 E2E Interactive User Flows</div>
+      <div style="font-size:12px; color:var(--color-text-secondary); line-height:1.6; padding:8px 0">
+        ${screen.specs.flows}
+      </div>
+    `;
+  }
+  updateUxSimUI();
+}
+
+// ── MOBILE SCREEN WALKTHROUGH PLAYER STATE ENGINE ──
+const UX_SEQUENCE = [
+  'student_login', 'student_home', 'student_doubt', 'student_flash', 'student_practice', 
+  'student_twin', 'student_focus', 'student_peer', 'student_passport', 
+  'parent_home', 'mentor_home'
+];
+let uxSimIntervalId = null;
+
+function updateUxSimUI() {
+  const index = UX_SEQUENCE.indexOf(selectedMobileScreenId);
+  if (index === -1) return;
+  
+  const stepNum = index + 1;
+  const pct = Math.round((stepNum / 11) * 100);
+  const screen = MOBILE_SCREENS[activeMobilePortal].find(s => s.id === selectedMobileScreenId) || 
+                 MOBILE_SCREENS['student'].find(s => s.id === selectedMobileScreenId) ||
+                 MOBILE_SCREENS['parent'].find(s => s.id === selectedMobileScreenId) ||
+                 MOBILE_SCREENS['mentor'].find(s => s.id === selectedMobileScreenId);
+  
+  const displayTitle = screen ? screen.title : 'Mobile Screen';
+  const progressBadge = document.getElementById('ux-sim-progress-text');
+  const progressFill = document.getElementById('ux-sim-progress-fill');
+  
+  if (progressBadge) progressBadge.textContent = `Screen: ${stepNum} / 11 (S${stepNum}: ${displayTitle})`;
+  if (progressFill) progressFill.style.width = pct + '%';
+  
+  const btnPrev = document.getElementById('btn-ux-sim-prev');
+  const btnNext = document.getElementById('btn-ux-sim-next');
+  const btnPlay = document.getElementById('btn-ux-sim-play');
+  
+  if (btnPrev) btnPrev.disabled = (index === 0);
+  if (btnNext) btnNext.disabled = (index === 10);
+  
+  if (btnPlay) {
+    if (index === 10) {
+      if (uxSimIntervalId) toggleUxSimPlay();
+      btnPlay.disabled = true;
+      btnPlay.textContent = '✔ Walkthrough Done';
+    } else {
+      btnPlay.disabled = false;
+      btnPlay.textContent = uxSimIntervalId ? '⏸ Pause User Journey' : '▶ Play User Journey';
+    }
+  }
+}
+
+function toggleUxSimPlay() {
+  if (uxSimIntervalId) {
+    clearInterval(uxSimIntervalId);
+    uxSimIntervalId = null;
+  } else {
+    const currentIndex = UX_SEQUENCE.indexOf(selectedMobileScreenId);
+    if (currentIndex === 10) selectMobileScreen('student_login');
+    uxSimIntervalId = setInterval(() => {
+      const idx = UX_SEQUENCE.indexOf(selectedMobileScreenId);
+      if (idx < 10) {
+        uxSimStepNext();
+      } else {
+        toggleUxSimPlay();
+      }
+    }, 1500);
+  }
+  updateUxSimUI();
+}
+
+function uxSimStepNext() {
+  const index = UX_SEQUENCE.indexOf(selectedMobileScreenId);
+  if (index < 10) {
+    selectMobileScreen(UX_SEQUENCE[index + 1]);
+  }
+}
+
+function uxSimStepPrev() {
+  const index = UX_SEQUENCE.indexOf(selectedMobileScreenId);
+  if (index > 0) {
+    selectMobileScreen(UX_SEQUENCE[index - 1]);
+  }
+}
+
+function uxSimReset() {
+  if (uxSimIntervalId) {
+    clearInterval(uxSimIntervalId);
+    uxSimIntervalId = null;
+  }
+  selectMobileScreen('student_login');
+}
+
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light-mode');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  const iconSpan = document.querySelector('.theme-icon');
+  if (iconSpan) iconSpan.textContent = isLight ? '☀️' : '🌙';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  buildMatrix();
+  
+  // Initial build step populate
+  renderStepTimeline();
+  updateBuildUI();
+  inspectBuildMod('M1');
+  
+  // Initial mobile screen sandbox populate
+  setMobilePortal('student');
+});
+</script>
+
+</body>
+</html>

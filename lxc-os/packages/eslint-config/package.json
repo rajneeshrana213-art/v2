@@ -1,0 +1,10 @@
+{
+  "name": "@learnxchain/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "files": ["index.js"],
+  "dependencies": {
+    "eslint": "^9.0.0"
+  }
+}

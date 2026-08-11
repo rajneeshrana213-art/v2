@@ -1,0 +1,19 @@
+packages:
+  - apps/*
+  - packages/*
+  - services/*
+
+onlyBuiltDependencies:
+  - '@biomejs/biome'
+  - '@firebase/util'
+  - '@prisma/engines'
+  - '@scarf/scarf'
+  - core-js
+  - es5-ext
+  - esbuild
+  - msw
+  - prisma
+  - protobufjs
+  - puppeteer
+  - sharp
+  - unrs-resolver

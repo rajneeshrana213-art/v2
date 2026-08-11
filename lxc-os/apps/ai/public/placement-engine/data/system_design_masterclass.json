@@ -1,0 +1,5621 @@
+{
+  "handbookData": [
+    {
+      "num": "0",
+      "title": "Software Engineering & Architecture Foundations",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Introducing software engineering, architectural styles, LLD vs HLD, and the evolutionary path from absolute beginner projects to high-scale systems."
+        },
+        {
+          "type": "h2",
+          "text": "0.1 What is Software Engineering & Architecture?"
+        },
+        {
+          "type": "para",
+          "text": "Software Engineering is the systematic application of engineering principles to the development, operation, and maintenance of software systems. Architecture defines the structural blueprint of the system: its core components, their relationships, and the trade-offs (e.g. latency vs consistency) made to fulfill functional and non-functional requirements.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "System Design is the holistic process of mapping requirements to specific OOP models, database schemas, API contracts (Low Level Design), and network topologies, microservices, caches, and load balancers (High Level Design).",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "oopPillars"
+        },
+        {
+          "type": "h2",
+          "text": "0.2 System Evolution Pathway"
+        },
+        {
+          "type": "para",
+          "text": "To understand software scaling, look at a beginner project (e.g. an online school portal) and trace its growth: \n1. **Beginner Project**: Single script, console inputs, local file storage.\n2. **OOP Layer**: Classes like Student and Teacher, encapsulation of data, interfaces for database access.\n3. **LLD Layer**: Formal schema design, ORM integration, API routes, dependency injection.\n4. **HLD Layer**: Decoupled front-end, load-balanced web servers, Redis cache, Postgres replica nodes.\n5. **Distributed System**: Event-driven microservices communicating via Kafka queues, distributed databases, Raft-based consensus layers, and auto-scaled container pods.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Software architecture sets the structural blueprints and constraints of a system. Scaling evolves systems from monolithic scripts into distributed microservices.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Software engineering applies structured methodologies to codebase scalability.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Architecture maps trade-offs: every scaling decision resolves one bottleneck but introduces another.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the primary difference between LLD and HLD?",
+          "answer": "LLD focuses on class design, OOP design patterns, design principles (SOLID), database schema tables, and API contracts. HLD focuses on network infrastructure, load balancers, caching strategies, messaging systems, database sharding, and general distributed systems scalability.",
+          "id": "int-0-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Refactor a monolithic script into a three-tier architecture (Presentation, Business Logic, Data Access).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Analyze the scaling bottlenecks of a single database server running on local storage.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a system topology showing the evolutionary path from a single local server to a distributed cluster.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Confusing architecture with design: writing code before establishing non-functional limits.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Optimizing for millions of users on Day 1, leading to over-engineered architectures.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Clean Architecture by Robert C. Martin",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Designing Data-Intensive Applications by Martin Kleppmann",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "1",
+      "title": "Programming Thinking & Problem Solving",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Transitioning from mechanical coding to algorithmic problem solving, emphasizing abstraction, encapsulation, modularity, and code reusability."
+        },
+        {
+          "type": "h2",
+          "text": "1.1 Core Tenets of Algorithmic Thinking"
+        },
+        {
+          "type": "para",
+          "text": "Before writing code, an engineer must decompose complex tasks into discrete logical sub-problems. This relies on: \n• **Abstraction**: Filtering out irrelevant implementation details to focus on core behaviors.\n• **Modularity**: Structuring code into self-contained files or modules with single responsibilities.\n• **Reusability**: Writing generic helper utilities to prevent redundant duplicate code blocks.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "1.2 Implementation Projects"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "bad": "class BadBank {\n  public double balance;\n  public void deposit(double amt) { balance += amt; }\n  public void withdraw(double amt) { balance -= amt; }\n}",
+            "good": "public class BankAccount {\n  private double balance;\n  public synchronized void deposit(double amt) {\n    if (amt <= 0) throw new IllegalArgumentException();\n    balance += amt;\n  }\n  public synchronized double getBalance() { return balance; }\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Programming thinking requires modular decomposition and encapsulation to protect application state.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Abstraction focuses on what an object does, rather than how it does it.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Modularity prevents circular dependencies in large engineering codebases.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why is encapsulation critical in banking applications?",
+          "answer": "Encapsulation prevents direct modification of balance attributes. By exposing balance updates only through validated methods (deposit/withdraw), you enforce business rules, transaction logs, and prevent data corruption.",
+          "id": "int-1-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Build a command-line Calculator supporting operator precedence using stack parsing.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a Student Management registry that enforces unique ID parameters and state validation.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a flowchart mapping user inputs, validate state steps, and output responses in a CLI banking app.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Using public mutable attributes, exposing class states to global side effects.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Hardcoding configs and database connection strings instead of injecting them.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Structure and Interpretation of Computer Programs by Harold Abelson",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "2",
+      "title": "Object Oriented Programming Complete Guide",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "In-depth analysis of classes, objects, constructors, destructuring patterns, and the four foundational pillars of OOP."
+        },
+        {
+          "type": "h2",
+          "text": "2.1 The Four Pillars in Production"
+        },
+        {
+          "type": "para",
+          "text": "OOP models real-world domains as interacting objects: \n• **Encapsulation**: Hiding fields behind accessors. \n• **Abstraction**: Interface definitions decoupling caller from implementation. \n• **Inheritance**: Extending base properties (e.g. class savingAccount extends BankAccount). \n• **Polymorphism**: Dynamic method dispatching via overrides.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "2.2 Domain Project: Library Management System"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "public interface BookSearch {",
+            "    List<Book> searchByTitle(String title);",
+            "}",
+            "public class LibrarySearch implements BookSearch {",
+            "    private List<Book> catalog;",
+            "    @Override",
+            "    public List<Book> searchByTitle(String title) {",
+            "        return catalog.stream()",
+            "            .filter(b -> b.getTitle().toLowerCase().contains(title.toLowerCase()))",
+            "            .collect(Collectors.toList());",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "OOP binds data and behavior into cohesive objects, hiding implementation details behind interfaces.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Access modifiers (private, protected, public) restrict attribute visibility tiers.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Polymorphism allows decoupled client code: clients interact with interfaces without knowing concrete classes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between overloading and overriding?",
+          "answer": "Overloading occurs at compile-time (methods with the same name but different signatures). Overriding occurs at runtime (subclass supplying a specific implementation for a method defined in its parent class).",
+          "id": "int-2-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement an ATM System class structure enforcing card validation, PIN checks, and daily withdrawal limits.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Build a Hospital Management class model mapping Doctors, Patients, Appointments, and billing statements.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Class Diagram mapping relationships (composition, association, inheritance) for the Library Management system.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Using deep inheritance hierarchies instead of composition, resulting in fragile base classes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Exposing internal collections directly, allowing callers to modify lists without class validation.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Head First Object-Oriented Analysis and Design by Brett D. McLaughlin",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "3",
+      "title": "SOLID Design Principles",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Analyzing Single Responsibility, Open-Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion principles with bad vs refactored code patterns."
+        },
+        {
+          "type": "h2",
+          "text": "3.1 The SOLID Framework"
+        },
+        {
+          "type": "para",
+          "text": "SOLID principles guide class design to prevent codebase decay: \n• **S**: Single Responsibility. A class should have only one reason to change.\n• **O**: Open-Closed. Classes open for extension, closed for modification.\n• **L**: Liskov Substitution. Subtypes must be substitutable for base types without altering correctness.\n• **I**: Interface Segregation. Clients should not be forced to depend on methods they do not use.\n• **D**: Dependency Inversion. High-level modules should not depend on low-level modules; both should depend on abstractions.",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "solidPrinciples"
+        },
+        {
+          "type": "h2",
+          "text": "3.2 Liskov Substitution & Dependency Inversion Refactoring"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "bad": "// Wrong: Square inherits Rectangle, but overrides height/width independently, breaking area assertions\nclass Rectangle {\n  protected int w, h;\n  public void setWidth(int w) { this.w = w; }\n  public void setHeight(int h) { this.h = h; }\n}\nclass Square extends Rectangle {\n  @Override\n  public void setWidth(int w) { this.w = w; this.h = w; }\n}",
+            "good": "// Correct: Abstract shape or decouple inheritance. Keep Square and Rectangle independent\ninterface Shape {\n  int getArea();\n}\nclass Rectangle implements Shape {\n  private int w, h;\n  public int getArea() { return w * h; }\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "SOLID principles prevent codebase rigidity, fragility, and immobility by decoupling interfaces and enforcing single responsibilities.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "SRP isolates changes: if business rules for billing change, it should not impact book search.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "DIP decouples components: inject mock dependencies to enable unit testing.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How does the Open-Closed Principle relate to inheritance or interfaces?",
+          "answer": "OCP is typically achieved through abstractions (interfaces). By referencing interfaces in your code, you can introduce new implementations (extensions) without modifying existing caller files.",
+          "id": "int-3-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Refactor a NotificationManager that directly prints SMS, Email, and Push alerts to follow SRP and OCP.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design a payment gateway manager where adding Stripe, PayPal, or UPI integrations does not modify core transaction files.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Class Diagram showing interface decoupling for a printer utility that separates print, scan, and fax APIs (ISP).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Creating giant interfaces containing unrelated functions, forcing simple classes to implement empty methods.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Violating LSP by throwing UnsupportedOperationException in subclass overrides.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Agile Software Development, Principles, Patterns, and Practices by Robert C. Martin",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "4",
+      "title": "Design Patterns: Creational, Structural & Behavioral",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Deep analysis of foundational design patterns, UML structures, trade-offs, and practical implementations."
+        },
+        {
+          "type": "h2",
+          "text": "4.1 Selected Design Patterns"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Pattern Type",
+              "Specific Patterns",
+              "Core Objective / Intent",
+              "Real-World Example"
+            ],
+            [
+              "Creational",
+              "Singleton, Factory, Builder",
+              "Object instantiation decoupling",
+              "Database Connection Manager, String Builders"
+            ],
+            [
+              "Structural",
+              "Adapter, Decorator, Facade",
+              "Composition of classes/objects",
+              "Legacy API adapter, gzip stream wrappers"
+            ],
+            [
+              "Behavioral",
+              "Observer, Strategy, State",
+              "Dynamic object collaboration",
+              "Kafka topic publishers, dynamic payment processors"
+            ]
+          ],
+          "headers": [
+            "Category",
+            "Patterns Covered",
+            "Mathematical / Design Intent",
+            "Production Example"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "4.2 Strategy Pattern Implementation"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "interface PaymentStrategy {",
+            "    void pay(double amount);",
+            "}",
+            "class StripePayment implements PaymentStrategy {",
+            "    public void pay(double amt) { System.out.println('Stripe charge: ' + amt); }",
+            "}",
+            "class ShoppingCart {",
+            "    private PaymentStrategy strategy;",
+            "    public void setPaymentStrategy(PaymentStrategy s) { this.strategy = s; }",
+            "    public void checkout(double total) { strategy.pay(total); }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Design patterns provide proven, reusable templates to solve recurring class design and object composition problems.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Singleton requires a private constructor, private static instance, and double-checked locking sync method.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Observer patterns maintain decoupled relationships between subject and list of subscribers.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between Adapter and Decorator patterns?",
+          "answer": "Adapter changes the interface of an object to match a client's target interface. Decorator enhances or wraps an object to add new responsibilities without changing its interface.",
+          "id": "int-4-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a Thread-Safe Singleton logger featuring timestamp configurations.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Build a dynamic routing manager using the State Pattern to handle Order processing states (Pending, Shipped, Delivered).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a UML Class Diagram representing the Observer pattern with Subject, Observer interface, and ConcreteObservers.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Forcing every project to use Singletons, causing unit testing complications due to global state.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Confusing Factory Method (subclass determines instantiation) with Abstract Factory (creating families of objects).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Design Patterns: Elements of Reusable Object-Oriented Software by Gamma, Helm, Johnson, and Vlissides",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "5",
+      "title": "Clean Code & Enterprise Refactoring",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Enforcing clean naming conventions, single-purpose functions, unified error handling structures, and refactoring legacy codebases."
+        },
+        {
+          "type": "h2",
+          "text": "5.1 Principles of Clean Code"
+        },
+        {
+          "type": "para",
+          "text": "Clean code is readable, self-documenting, and maintainable: \n• **Naming**: Names must reveal intent without comments (e.g. activeUserList instead of list1).\n• **Functions**: Small, single responsibility, minimal arguments (ideally <= 2).\n• **Error Handling**: Use exceptions rather than return codes; handle exceptions at boundary layers.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "5.2 Refactoring Legacy Code Blocks"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "bad": "// Wrong: Deep nesting, magic strings, lack of structure\npublic void proc(int t, String[] a) {\n  if (t == 1) {\n    for (int i=0; i<a.length; i++) {\n      if (a[i].equals(\"active\")) {\n        sendEmail(a[i]);\n      }\n    }\n  }\n}",
+            "good": "// Correct: Clear method signatures, guard clauses, stream parsing\npublic void processActiveUsers(List<User> users) {\n  if (users == null) return;\n  users.stream()\n    .filter(User::isActive)\n    .forEach(this::sendNotificationEmail);\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Clean code prioritizes reader readability, single-purpose functions, and structured exception handling to reduce maintenance debt.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Use expressive names: avoid variables like temp, data, or single characters.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Keep functions small: if a method exceeds 20 lines, it is likely doing too many tasks.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is a 'Guard Clause' and how does it clean up nesting?",
+          "answer": "A guard clause checks for invalid or boundary inputs at the top of a function and exits immediately (returns or throws exceptions). This removes the need for large outer 'if-else' nesting blocks.",
+          "id": "int-5-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Refactor a 100-line user sign-up script featuring nested database queries, mail alerts, and log events into separated services.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Write a unified global Exception Handler interface for an e-commerce checkout API pipeline.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a sequence flowchart showing the refactored workflow of a clean user registration transaction.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Writing comments that restate what the code obviously does (instead of explaining *why* a particular trade-off was made).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Catching generic Exception objects and ignoring them (empty catch blocks), masking system failures.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Clean Code: A Handbook of Agile Software Craftsmanship by Robert C. Martin",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "6",
+      "title": "UML Complete Guide & Architectural Mapping",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Using Class, Sequence, State, and Activity diagrams to model software systems before writing code."
+        },
+        {
+          "type": "h2",
+          "text": "6.1 Standard UML Diagrams"
+        },
+        {
+          "type": "para",
+          "text": "UML provides standardized visualizations: \n• **Class Diagram**: Static structure mapping classes, fields, methods, and cardinality (1-to-many, inheritance).\n• **Sequence Diagram**: Dynamic interaction showing message flows between lifelines chronologically.\n• **State Diagram**: Behavioral states and transitions (e.g. Order: Unpaid -> Paid -> Shipped).",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "6.2 Sequence Mapping: ATM Cash Withdrawal"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "User       ATM Interface       Bank Account",
+            "  |              |                  |",
+            "  |-- Withdraw ->|                  |",
+            "  |              |-- Check Balance->|",
+            "  |              |<-- Available ----|",
+            "  |              |-- Debit Account->|",
+            "  |              |<-- Success ------|",
+            "  |<-- Dispense -|                  |",
+            "  |              |                  |"
+          ],
+          "lang": "text"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "UML diagrams standardize communication between team members and map dynamic state paths of a system.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Solid arrows in Class diagrams represent inheritance; dashed arrows represent implementation.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Sequence diagrams map chronological lifeline communications.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between Aggregation and Composition in UML?",
+          "answer": "Aggregation represents a 'has-a' relationship where child entities can exist independently of the parent (e.g., Department has Doctors). Composition is a strong ownership relationship where child entities cannot exist without the parent (e.g., House has Rooms).",
+          "id": "int-6-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a complete sequence diagram representing the checkout process of an E-Commerce cart.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Model the state diagram of a ridesharing trip (Request -> Match -> Active -> Finished).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Construct a class diagram mapping an e-commerce catalog featuring Categories, Products, and inventories.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Mapping every private helper method in a class diagram, cluttering the architectural model.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Drawing sequence loops backwards, indicating responses originate before requests.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "UML Distilled by Martin Fowler",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "7",
+      "title": "Database Design: ER Modeling & Indexing",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Understanding Entity-Relationship models, normalization levels, index layouts, and database schemas."
+        },
+        {
+          "type": "h2",
+          "text": "7.1 ER Relationships & Normalization"
+        },
+        {
+          "type": "para",
+          "text": "Database design starts with ER mapping: \n• **1NF**: Atomic cell values, unique column names.\n• **2NF**: Meet 1NF, remove partial key dependencies (attributes must depend on the whole primary key).\n• **3NF**: Meet 2NF, remove transitive dependencies (non-key columns must not depend on other non-key columns).",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "7.2 Schema Structure: LearnXChain DB"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "CREATE TABLE users (",
+            "    id BIGSERIAL PRIMARY KEY,",
+            "    email VARCHAR(255) UNIQUE NOT NULL,",
+            "    password_hash VARCHAR(255) NOT NULL,",
+            "    role VARCHAR(50) NOT NULL",
+            ");",
+            "CREATE TABLE enrollments (",
+            "    id BIGSERIAL PRIMARY KEY,",
+            "    student_id BIGINT REFERENCES users(id),",
+            "    course_id BIGINT NOT NULL,",
+            "    enrolled_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+            ");",
+            "CREATE INDEX idx_enroll_student ON enrollments(student_id);"
+          ],
+          "lang": "sql"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "ER modeling defines structural relational boundaries, while normalization limits redundant data anomalies.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Composite indexes prioritize columns left-to-right; query filters must match the leftmost column to hit the index.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Normalization reduces write overhead, but might require multi-join read queries, warranting denormalization at scale.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why would you denormalize a database schema?",
+          "answer": "Denormalization adds redundant data to tables to avoid expensive SQL JOIN operations on high-read query paths, reducing read latencies at the expense of storage and write complexity.",
+          "id": "int-7-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Design a normalized schema for an E-Commerce system tracking Customers, Orders, OrderItems, and Payments.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Optimize a slow database query path by constructing B-Tree composite indexes on filter fields.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw an ER diagram detailing entities, attributes, and cardinally maps for the LearnXChain student tracking database.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Forgetting to write foreign key indexes, leading to full-table scans during relational updates.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Applying too many indices to a high-write table, degrading insert and update velocities.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Database System Concepts by Silberschatz, Korth, and Sudarshan",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "8",
+      "title": "Low Level Design (LLD) Foundation",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Mastering requirement gathering, identifying object boundaries, modeling relationships, and utilizing step-by-step LLD frameworks."
+        },
+        {
+          "type": "h2",
+          "text": "8.1 Step-by-Step LLD Process"
+        },
+        {
+          "type": "para",
+          "text": "A systematic LLD framework follows this pathway: \n1. **Collect Requirements**: Define functional bounds (e.g. 'ATM withdraws cash').\n2. **Identify Entities**: Scan nouns (e.g. Card, User, BankAccount, CashDispenser).\n3. **Map Relationships**: Define associations (e.g. ATM has one CashDispenser, Account has many transactions).\n4. **Design APIs**: Outline method signatures, parameters, and exception flows.\n5. **Apply Patterns**: Inject SOLID concepts (e.g. Strategy for validation, Factory for accounts).",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "8.2 LLD Design Matrix"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Step",
+              "Action Taken",
+              "Deliverable Output",
+              "Design Validation"
+            ],
+            [
+              "1. Noun Analysis",
+              "Identify primary actors & data entities",
+              "Entity list, domain boundaries",
+              "No missing system concepts"
+            ],
+            [
+              "2. Verb Analysis",
+              "Identify actions & status updates",
+              "API contracts, method declarations",
+              "Encapsulated state variables"
+            ],
+            [
+              "3. Pattern Injection",
+              "Decouple classes using design patterns",
+              "Class hierarchy, decorators, interfaces",
+              "SOLID conformance checked"
+            ]
+          ],
+          "headers": [
+            "LLD Pipeline Step",
+            "Execution Target",
+            "Deliverable Artifact",
+            "Validation Target"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "LLD translates high-level specifications into concrete class definitions, interfaces, API paths, and pattern-based components.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "domain objects represent state; service classes contain business logic.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design APIs defensively: always validate bounds, null values, and state preconditions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you start an LLD interview question?",
+          "answer": "Begin by clarifying requirements: define functional bounds (what is in-scope vs out-of-scope), ask about concurrency limits, and state the primary interface definitions before drawing class structures.",
+          "id": "int-8-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Create a class skeleton mapping a chess game, detailing Board, Spot, Piece, Move, and GameState classes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Refactor a monolithic ticket booking class into decoupled Seat, Booking, Theater, and Payment units.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a UML class hierarchy mapping pieces and move rules for a low-level chess engine.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Coding concrete classes immediately without defining the interface layer, causing tight coupling.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Exposing internal data arrays directly through accessors, violating encapsulation bounds.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Applying UML and Patterns by Craig Larman",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "9",
+      "title": "LLD Project 1: Parking Lot System",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "End-to-end design and object-oriented implementation of a parking lot system supporting spot allocations, tickets, and payment processors."
+        },
+        {
+          "type": "h2",
+          "text": "9.1 Requirements & Object Boundaries"
+        },
+        {
+          "type": "para",
+          "text": "The system must manage: \n• Multiple parking levels with spots of varying sizes (Compact, Large, Motorcycle).\n• Auto-assignment of nearest available spot to arriving vehicles.\n• Ticket issuance on entry and payment calculation based on spot duration on exit.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "9.2 Code Implementation"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "enum SpotSize { COMPACT, LARGE, MOTORCYCLE }",
+            "class ParkingSpot {",
+            "    private String id;",
+            "    private SpotSize size;",
+            "    private boolean free = true;",
+            "    public synchronized boolean assignVehicle() {",
+            "        if (!free) return false;",
+            "        free = false; return true;",
+            "    }",
+            "    public synchronized void freeSpot() { free = true; }",
+            "}",
+            "class ParkingLot {",
+            "    private List<ParkingLevel> levels;",
+            "    public ParkingTicket entry(Vehicle v) {",
+            "        ParkingSpot spot = findSpot(v.getSize());",
+            "        if (spot != null && spot.assignVehicle()) {",
+            "            return new ParkingTicket(spot, System.currentTimeMillis());",
+            "        }",
+            "        throw new NoSpaceException();",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Designing a parking lot requires atomic spot state transitions, synchronized entry allocation methods, and decoupled billing calculators.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Mark state modification methods (like assignVehicle) synchronized to prevent double-allocation race conditions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Decouple fee calculation using the Strategy pattern to support hourly, flat, or dynamic surge pricing rates.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle concurrency in spot allocation?",
+          "answer": "Use synchronized methods on ParkingSpot allocations, or wrap operations in thread-safe locks (ReentrantLock) to ensure multiple entrance gates do not double-book the same parking spot.",
+          "id": "int-9-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Extend the parking lot to support EV (electric vehicle) charging spots and include charging fees in the exit ticket.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a custom spot lookup algorithm using priority queues sorted by distance to the entry gate.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Sequence Diagram detailing a vehicle arriving, querying for a spot, assigning the slot, and printing an entry ticket.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to synchronize spot assignments, causing race conditions where two vehicles get the same spot.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Hardcoding fee structures directly inside the ParkingLot class instead of injecting strategy components.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Low Level Design Practice Problems on GitHub",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "10",
+      "title": "LLD Project 2: Library Management System",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing and implementing a production-ready Library Management System featuring book searching, borrowing, and fine calculations."
+        },
+        {
+          "type": "h2",
+          "text": "10.1 System Scope & APIs"
+        },
+        {
+          "type": "para",
+          "text": "The Library system must track: \n• Physical books, multiple copies, authors, and categorizations.\n• Member borrowing limits (e.g. max 5 books for 14 days).\n• Fine calculations ($1/day overdue) and automatic catalog searches.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "10.2 Borrowing Pipeline"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "class BookLending {",
+            "    private BookCopy copy;",
+            "    private Member member;",
+            "    private long dueDate;",
+            "    public void returnBook() {",
+            "        copy.setReturned();",
+            "        long delay = System.currentTimeMillis() - dueDate;",
+            "        if (delay > 0) {",
+            "            FineService.assessFine(member, delay / (24*3600*1000));",
+            "        }",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "A library system decouples catalog query patterns from borrowing transactions and overdue fine trackers.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Separate Book (metadata) from BookCopy (physical copy state) to avoid database redundancy.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Decouple search parameters (author, title, category) using composite filters.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle reserving a book copy that is currently checked out?",
+          "answer": "Maintain a FIFO Reservation Queue for every Book. If all copies are borrowed, add the member ID to the queue; notify the first member in queue when a copy is returned.",
+          "id": "int-10-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement an automated email notifier that runs daily to warn users of upcoming book due dates.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Build a fine settlement payment module supporting credit cards and cash transactions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a State Diagram representing a BookCopy lifecycle: Available -> Reserved -> Borrowed -> Overdue -> Lost.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Compiling book metadata (title, author, ISBN) in every copy record, causing database inflation.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Overlooking member status validations: allowing suspended members to borrow new books.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Object-Oriented Design Interview Patterns",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "11",
+      "title": "LLD Project 3: Hotel Booking System",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "End-to-end design of a hotel reservation engine, covering room inventory management, booking flows, and transaction logs."
+        },
+        {
+          "type": "h2",
+          "text": "11.1 Booking Engine Constraints"
+        },
+        {
+          "type": "para",
+          "text": "The Hotel Booking system must: \n• Manage room inventories across multiple branches and categories (Suite, Deluxe, Standard).\n• Check room availability for target date ranges and lock room inventory temporarily during checkout.\n• Handle payments, check-in schedules, and room cleaning statuses.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "11.2 Room Allocation Code"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "class Room {",
+            "    private String roomNumber;",
+            "    private RoomStyle style;",
+            "    private List<BookingRange> bookings = new ArrayList<>();",
+            "    public synchronized boolean isAvailable(long start, long end) {",
+            "        return bookings.stream().noneMatch(b -> b.overlaps(start, end));",
+            "    }",
+            "    public synchronized void book(long start, long end) {",
+            "        if (!isAvailable(start, end)) throw new RoomUnavailableException();",
+            "        bookings.add(new BookingRange(start, end));",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Hotel booking designs must enforce transactional locks on room booking date ranges to prevent double-booking conflicts.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement temporary inventory locks (e.g. 5-minute Redis locks) during payment checkout to hold rooms.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Expose room cleaning statuses (Clean, Dirty, Servicing) to separate housekeeping services.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you resolve search operations for rooms in a hotel chain?",
+          "answer": "Maintain an index of RoomInventories grouped by branch, category, and date availability. Dynamic queries filter available rooms by checking against active booking dates.",
+          "id": "int-11-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a dynamic pricing engine that increases room rates during weekends or high seasonal demand periods.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Build a check-in guest validation module that captures ID details and issues digital room keys.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Sequence Diagram detailing a customer searching for rooms, checking out, paying, and confirming their reservation.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to lock room inventory during checkout, leading to race conditions where two customers book the same room.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Hardcoding room rates in room instances instead of utilizing a price estimation service.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Enterprise Integration Patterns by Gregor Hohpe",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "12",
+      "title": "LLD Project 4: Food Delivery System",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing Swiggy/Zomato style low-level code, managing customer orders, rider assignments, and restaurant menus."
+        },
+        {
+          "type": "h2",
+          "text": "12.1 Delivery Orchestration"
+        },
+        {
+          "type": "para",
+          "text": "The Food Delivery system must: \n• Sync restaurant menus, options, and item configurations.\n• Manage order lifecycles (Created -> Preparing -> Dispatched -> Delivered).\n• Track real-time driver locations and assign orders to the nearest driver using spatial indexing.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "12.2 Order Assignment Pipeline"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "class DeliveryManager {",
+            "    private List<Driver> activeDrivers;",
+            "    public void assignOrder(Order order) {",
+            "        Driver nearest = activeDrivers.stream()",
+            "            .filter(Driver::isAvailable)",
+            "            .min(Comparator.comparingDouble(d -> d.getDistanceTo(order.getRestaurant())))",
+            "            .orElseThrow(NoDriverException::new);",
+            "        nearest.acceptDelivery(order);",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Food delivery systems synchronize order states and coordinate real-time geospatial driver dispatch pipelines.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Model orders as state machines using the State pattern to track food preparation and delivery stages.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement spatial databases (e.g. PostGIS, Redis GEORADIUS) to resolve driver searches efficiently.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle a driver rejecting an assigned order?",
+          "answer": "If a driver rejects an assignment, mark their state as unavailable for this order, query the active list again to find the next nearest driver, and repeat the assignment process.",
+          "id": "int-12-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Extend the delivery manager to support batching: assigning multiple orders from the same restaurant to a single driver.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a live ETA calculation service based on distance, traffic, and restaurant preparation times.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw an Activity Diagram detailing the steps from a customer placing a food order to food preparation, rider pickup, and delivery.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Querying the entire driver database coordinates linearly on every order, causing performance bottlenecking.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Allowing order modifications once the restaurant has marked the order status as 'Preparing'.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Designing Distributed Systems by Brendan Burns",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "13",
+      "title": "LLD Project 5: LearnXChain School System",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing the student, teacher, parent modules, fee processing, attendance logs, and AI tutor integration in a unified school portal."
+        },
+        {
+          "type": "h2",
+          "text": "13.1 Requirements & Modules"
+        },
+        {
+          "type": "para",
+          "text": "The LearnXChain school system must coordinate: \n• **Student/Teacher/Parent Modules**: Enforcing separate permission access levels (RBAC).\n• **Attendance & Fees**: Tracking daily logging records and processing annual recurring tuition bills.\n• **AI Tutor Gateway**: Integrating tokenized query routes to external LLM engines under sandbox environments.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "13.2 Fee Billing Engine"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "class TuitionBill {",
+            "    private Student student;",
+            "    private double totalAmount;",
+            "    private double paidAmount;",
+            "    private boolean cleared = false;",
+            "    public synchronized void processPayment(double amt) {",
+            "        if (cleared) return;",
+            "        paidAmount += amt;",
+            "        if (paidAmount >= totalAmount) {",
+            "            cleared = true;",
+            "            BlockchainLedger.notifyTuitionCleared(student);",
+            "        }",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "LearnXChain coordinates role-based class permissions, fee ledger transactions, and external AI tutor sandbox gateways.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Use the Proxy pattern to intercept AI tutor queries, checking student tokens and rate limits before routing to LLM endpoints.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Build decoupled modules (Student, Billing, Attendance) that communicate via domain events.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How does the blockchain ledger interface integrate with LLD entities?",
+          "answer": "Implement an Adapter interface (BlockchainLedgerAdapter) that maps tuition transactions into blockchain transactions. This decouples core school database logic from Web3 network code.",
+          "id": "int-13-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement the AI Tutor token tracker that blocks student queries once their daily token limit is exhausted.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Create an attendance dashboard that flags a student's record when their attendance rate falls below 75%.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Class Diagram detailing Student, Teacher, Parent, Bill, AttendanceRecord, and AITutorGateway classes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Exposing raw billing APIs without role-based access checks, allowing student accounts to access tuition balance modifications.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Tight coupling between the AI tutor service and OpenAI APIs, preventing easy migration to local LLM models.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Domain-Driven Design by Eric Evans",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "14",
+      "title": "Advanced LLD: Elevator, Chess & Splitwise",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Analyzing solutions for classic LLD interview questions, including Elevator Systems, Chess engines, and Splitwise algorithms."
+        },
+        {
+          "type": "h2",
+          "text": "14.1 Elevator System Algorithms"
+        },
+        {
+          "type": "para",
+          "text": "An Elevator System must optimize passenger scheduling. The SCAN algorithm (elevator moves in one direction until it hits the terminal floor, then reverses) is typical. We model ElevatorController, Car, Button, and Request objects.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "14.2 Splitwise Expense Allocator"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "class Splitwise {",
+            "    private Map<User, Double> balances = new HashMap<>();",
+            "    public void addExpense(User paidBy, double amount, List<User> sharedBy) {",
+            "        double split = amount / sharedBy.size();",
+            "        balances.put(paidBy, balances.getOrDefault(paidBy, 0.0) + amount - split);",
+            "        for (User u : sharedBy) {",
+            "            if (u.equals(paidBy)) continue;",
+            "            balances.put(u, balances.getOrDefault(u, 0.0) - split);",
+            "        }",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Advanced LLD questions require mapping concurrent state updates (Elevator), complex domain validations (Chess), and transaction simplification loops (Splitwise).",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Optimize Splitwise transactions by constructing a directed graph of balances and resolving cycle loops to simplify payments.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Model Chess pieces using the Factory pattern and validate move pathways using coordinate maps.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you design a Cricbuzz system that pushes live score updates?",
+          "answer": "Use the Observer pattern. When a match score updates (subject), notify all active subscriber channels (e.g., WebSockets, push notification controllers) of the new score data.",
+          "id": "int-14-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Extend the Splitwise module to simplify debt transactions using a greedy min-max matching algorithm.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a dual-car elevator scheduler that coordinates calls using a distance-minimizing dispatch queue.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Sequence Diagram representing a user requesting an elevator, the controller dispatching the car, and the door opening.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Ignoring concurrency issues: allowing multiple players to make simultaneous moves in a chess match state.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Representing split money transactions as floats, resulting in precision rounding errors (always use integer cents).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Introduction to Algorithms by Cormen, Leiserson, Rivest, and Stein",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "15",
+      "title": "High Level Design (HLD) Foundation",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Understanding HLD, scalability models, availability metrics, fault tolerance, and the implications of the CAP Theorem."
+        },
+        {
+          "type": "h2",
+          "text": "15.1 Architectural Scaling Principles"
+        },
+        {
+          "type": "para",
+          "text": "HLD focuses on structural scaling: \n• **Vertical Scaling (Scale Up)**: Adding CPU, RAM, or SSD to a single server. Limited by hardware caps and single-points-of-failure.\n• **Horizontal Scaling (Scale Out)**: Adding more machine nodes to a cluster. Requires load balancers and stateless app designs.\n• **CAP Theorem**: A distributed system can guarantee at most two out of: Consistency (all nodes see same data), Availability (every request gets a non-error response), and Partition Tolerance (system runs despite network drops).",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "scalableArchitecture"
+        },
+        {
+          "type": "h2",
+          "text": "15.2 Scalability Metrics"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Concept",
+              "Availability Target",
+              "Max Allowable Downtime/Year",
+              "Typical Infrastructure Setup"
+            ],
+            [
+              "Two 9s (99%)",
+              "Standard web portal",
+              "3.65 days",
+              "Single server, periodic backup"
+            ],
+            [
+              "Three 9s (99.9%)",
+              "SaaS platform",
+              "8.76 hours",
+              "Active-Passive DB, redundant apps"
+            ],
+            [
+              "Five 9s (99.999%)",
+              "Fintech / Core payment",
+              "5.26 minutes",
+              "Multi-region active-active cluster"
+            ]
+          ],
+          "headers": [
+            "Availability Tier",
+            "Target System Style",
+            "Downtime Margin",
+            "Infrastructure Architecture Pattern"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "HLD coordinates scaling boundaries. CAP limits force systems to choose between strict data consistency and high availability during network partitions.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Horizontally scaled applications must be stateless: session states should reside in caches (Redis) or databases.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Calculate system scale by converting request rates to QPS: 1 million requests/day ≈ 12 QPS.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between latency and throughput?",
+          "answer": "Latency is the time taken to process a single request from client to server and back (measured in milliseconds). Throughput is the number of requests processed by the system per second (measured in QPS).",
+          "id": "int-15-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Calculate capacity requirements (RAM, SSD, bandwidth) for a photo platform receiving 10 million uploads/day.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design a multi-region deployment topology that protects availability in the event of a total AWS zone blackout.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a network topology illustrating a scalable system with DNS routing, load balancers, stateless servers, and database replication.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to account for read/write ratios: designing a write-heavy system with read-optimized caching layouts.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Underestimating network overhead: assuming distributed nodes communicate instantly with zero latency.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Designing Web Databases for Scalability by Udi Dahan",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "16",
+      "title": "Networking: DNS, Load Balancers & Proxies",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Tracing the network path of a web request, covering DNS lookups, TCP handshakes, load balancing, and reverse proxying."
+        },
+        {
+          "type": "h2",
+          "text": "16.1 The Network Route"
+        },
+        {
+          "type": "para",
+          "text": "When a client accesses an API, the network coordinates: \n1. **DNS Lookup**: Maps domain (api.com) to IP address. DNS caches query speeds.\n2. **TCP/IP Handshake**: Initiates connection via SYN, SYN-ACK, ACK exchanges.\n3. **Load Balancer (LB)**: Distributes incoming requests across app servers. LBs use round-robin, least-connections, or IP-hash routing rules.\n4. **Reverse Proxy**: Shields app nodes, intercepts SSL decryption, compresses traffic, and handles static asset caching.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "16.2 Load Balancing Algorithms"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Algorithm",
+              "Mechanism",
+              "Best Use Case",
+              "Trade-off"
+            ],
+            [
+              "Round Robin",
+              "Sequentially routes to next node",
+              "Equal server capacities",
+              "Ignores current server CPU load"
+            ],
+            [
+              "Least Connections",
+              "Routes to node with fewest active requests",
+              "Varying request runtimes",
+              "Requires tracking active states"
+            ],
+            [
+              "IP Hash",
+              "Hashes client IP to determine node",
+              "Sticky session requirements",
+              "Uneven traffic distribution possible"
+            ]
+          ],
+          "headers": [
+            "LB Algorithm",
+            "Routing Logic",
+            "Target Deployment",
+            "Primary Constraint"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Networking layers decouple client clients from server nodes, using load balancers and reverse proxies to optimize request routing.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Use Reverse Proxies (like Nginx, HAProxy) to handle SSL termination, saving CPU cycles on application nodes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Configure Keep-Alive headers to maintain open TCP connections, minimizing handshake latencies on high-traffic paths.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between a forward proxy and a reverse proxy?",
+          "answer": "A forward proxy sits in front of clients and shields their identities (used by clients to access internet pages). A reverse proxy sits in front of servers and shields server nodes from direct client access.",
+          "id": "int-16-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Configure an Nginx routing block that balances traffic across three application server ports.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design a routing path that uses DNS Geo-routing to direct European users to a London region and US users to Virginia.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Sequence Diagram tracing a web request from browser through DNS, Load Balancer, Nginx Reverse Proxy, and App server.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Using sticky sessions on load balancers for highly dynamic clusters, preventing effective horizontal scaling.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to monitor load balancer health checks, allowing traffic to route to dead application nodes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Computer Networking: A Top-Down Approach by Kurose and Ross",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "17",
+      "title": "Caching Strategies: Redis & Memcached",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "In-depth analysis of caching patterns, evictions, latency reductions, and cache scaling topologies in Netflix and Instagram."
+        },
+        {
+          "type": "h2",
+          "text": "17.1 Caching Patterns & Evictions"
+        },
+        {
+          "type": "para",
+          "text": "Caches store high-read data in RAM. We apply distinct patterns: \n• **Cache Aside**: App queries cache; on miss, reads DB and writes to cache. DB is main state source.\n• **Write Through**: App writes directly to cache; cache immediately writes to DB. Writes are synchronous.\n• **Write Back**: App writes to cache; cache writes to DB asynchronously. Fast writes, risk of data loss.\n• **Evictions**: LRU (Least Recently Used), LFU (Least Frequently Used), FIFO.",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "cachePatterns"
+        },
+        {
+          "type": "h2",
+          "text": "17.2 Case Study: Instagram Feed Cache"
+        },
+        {
+          "type": "para",
+          "text": "Instagram caches active user feed IDs in Redis. When a user requests their home feed, the app reads index lists from memory, pulls photo metadata from caches, and returns the compiled feed. This limits database query loads during page transitions.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Caching shifts high-read data to RAM, balancing access latency reductions against state consistency syncing rules.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Set appropriate TTLs (Time-To-Live) on cached items to prevent stale data anomalies.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Avoid Cache Stampede: pre-warm cache entries or use mutex locks on cache misses to prevent database query floods.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is Cache Penetration and how do you prevent it?",
+          "answer": "Cache penetration occurs when requests query keys that exist neither in the cache nor the database, causing database hits every time. Prevent it by caching null results or utilizing Bloom Filters.",
+          "id": "int-17-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a Cache-Aside fetch loop in node/Java that checks Redis before falling back to Postgres database queries.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design a cache invalidation strategy for a shopping cart product details page.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a flowchart mapping a Cache-Aside read path including cache-hit, cache-miss, database fetch, and cache write phases.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to set cache TTLs, leading to memory saturation (OOM) on Redis clusters.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Storing sensitive, unencrypted database records in public caches, violating security compliance.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Redis Internals & Architecture Guides",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "18",
+      "title": "Database Scaling: Replication, Sharding & Partitioning",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Scaling database architectures, sharding schemas, replica configurations, and applying sharding to the LearnXChain database."
+        },
+        {
+          "type": "h2",
+          "text": "18.1 Database Scaling Options"
+        },
+        {
+          "type": "para",
+          "text": "When database storage or throughput limits are reached: \n• **Replication**: Primary node handles writes; replica nodes handle reads. Replication can be synchronous (consistent but slow writes) or asynchronous (eventual consistency).\n• **Partitioning**: Splitting a table into smaller logical chunks on the same disk (e.g. partition by year).\n• **Sharding**: Horizontally splitting data across separate database server instances. Requires a Sharding Key (e.g. sharding by user_id % N) to route queries to target databases.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "18.2 Sharding Project: LearnXChain DB"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Shard router application logic",
+            "class DatabaseShardRouter {",
+            "    private List<DatabaseConnection> shards;",
+            "    public DatabaseConnection getShardForUser(long userId) {",
+            "        int shardIndex = (int) (userId % shards.size());",
+            "        return shards.get(shardIndex);",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Database scaling scales reads using replicas and shards writes across separate servers using sharding keys.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Choose high-cardinality sharding keys (e.g. user_id) to distribute data evenly across shards.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Avoid hot shards by avoiding sharding keys based on sequential dates or status flags.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between database partitioning and sharding?",
+          "answer": "Partitioning splits a table into multiple segments on the same database server node. Sharding distributes table segments across entirely separate database server hardware instances.",
+          "id": "int-18-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Design a sharding layout for an E-Commerce orders database, selecting orders_id or user_id as the shard key.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Configure a PostgreSQL master-slave replication pipeline setting.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw an architecture diagram showing a sharded database setup with an application router routing queries to separate shard nodes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Executing SQL JOIN queries across separate database shards, causing extreme latency (cross-shard joins must be avoided).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to plan for re-sharding: when the sharding hash space cannot scale from N to N+M nodes without complete downtime.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "High Performance MySQL by Baron Schwartz",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "19",
+      "title": "Message Queues: Kafka, RabbitMQ & Decoupling",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Understanding event-driven architectures, pub-sub messaging pipelines, consumer offsets, and designing a notification system."
+        },
+        {
+          "type": "h2",
+          "text": "19.1 Pub-Sub vs Message Queue"
+        },
+        {
+          "type": "para",
+          "text": "Message queues decouple system services: \n• **RabbitMQ (Message Queue)**: Smart broker, dumb consumer. Message is deleted once acknowledged. Best for simple task distribution.\n• **Kafka (Log-based Pub-Sub)**: Dumb broker, smart consumer. Messages are appended to an immutable disk log. Multiple consumer groups can read from offsets independently. Best for high-throughput stream processing.",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "kafkaQueue"
+        },
+        {
+          "type": "h2",
+          "text": "19.2 Project: Decoupled Notification Dispatcher"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Kafka Consumer dispatch loop",
+            "while (true) {",
+            "    ConsumerRecords<String, NotificationEvent> records = consumer.poll(Duration.ofMillis(100));",
+            "    for (ConsumerRecord<String, NotificationEvent> rec : records) {",
+            "        NotificationEvent event = rec.value();",
+            "        EmailService.send(event.getTo(), event.getMessage());",
+            "        consumer.commitAsync();",
+            "    }",
+            "}"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Message queues decouple services asynchronously, translating message spikes into durable buffer logs.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Ensure idempotency: consumers must handle duplicate messages gracefully (e.g. checking a processed_event_id database table).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Use consumer groups in Kafka to automatically scale request processing across topic partitions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is backpressure and how do queues resolve it?",
+          "answer": "Backpressure occurs when a system produces data faster than downstream consumers can process it. Message queues act as shock absorbers, buffering records on disk or memory until consumers catch up.",
+          "id": "int-19-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a Kafka Producer in Node/Java that publishes user registration events to a 'user-signup' topic.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design a retry queue architecture (Dead Letter Queue) to handle notification delivery failures.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a System Architecture mapping a checkout server publishing orders to a queue, and separate Billing and Inventory services consuming them.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to commit consumer offsets correctly, causing infinite message processing loops on service restarts.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Assuming message queues guarantee in-order delivery across different partitions (order is guaranteed only within a single partition).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Kafka: The Definitive Guide by Neha Narkhede",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "20",
+      "title": "Distributed Systems: Consensus & Leader Election",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Understanding distributed systems coordination, leader election, Raft consensus mechanics, and distributed lock patterns."
+        },
+        {
+          "type": "h2",
+          "text": "20.1 Consensus Challenges & Raft"
+        },
+        {
+          "type": "para",
+          "text": "Distributed nodes must agree on system state. Raft simplifies consensus by electing a leader: \n• **Follower State**: Nodes start as followers. If they miss leader heartbeats, they transition to candidates.\n• **Candidate State**: Request votes from peers. \n• **Leader State**: Handles incoming client writes, appends log entries, replicates entries to followers, and commits once a majority acknowledges.",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "raftConsensus"
+        },
+        {
+          "type": "h2",
+          "text": "20.2 Distributed Locks (Redlock)"
+        },
+        {
+          "type": "para",
+          "text": "To prevent concurrent processes from updating shared resources (e.g. inventory) across separate app nodes, implement a distributed lock: Redlock requests lock leases from multiple independent Redis instances simultaneously. The lock is acquired only if a majority of Redis nodes grant it.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Distributed consensus establishes unified state agreements across clusters, using leader-follower networks to coordinate operations.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Never use local in-memory locks (synchronized/mutex) to coordinate resources across multiple server nodes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Ensure consensus partitions handle split-brain scenarios where network drops create two conflicting leaders.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is Split-Brain in distributed databases?",
+          "answer": "Split-Brain occurs when a network partition divides a cluster. If both halves elect their own leader, both write conflicting data. Raft prevents this by requiring a strict majority (quorum) to elect a leader.",
+          "id": "int-20-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a Redis-based Distributed Lock with lease timeouts and unique release tokens.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Write a simulation of Raft leader election timeouts using random delay loops.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Sequence Diagram detailing a client writing to a Raft leader, the leader replicating to followers, and committing the entry.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Releasing a distributed lock without verifying the release token, accidentally freeing a lock held by another thread.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Selecting too few nodes for consensus, failing to meet quorum requirements during node drops.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Distributed Systems: Principles and Paradigms by Tanenbaum and van Steen",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "21",
+      "title": "Microservices: Monolith Migration Strategy",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Comparing Monolith vs Microservices architectures, designing API gateways, and mapping the migration of LearnXChain school portal."
+        },
+        {
+          "type": "h2",
+          "text": "21.1 Architectural Trade-offs"
+        },
+        {
+          "type": "para",
+          "text": "• **Monolith**: Single deployment unit, fast local execution, simple debugging. Rigid scaling boundaries, fragile codebases.\n• **Microservices**: Independent deployments, domain-specific scaling, team autonomy. Network overhead, complex transactions, distributed tracing requirements.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "21.2 LearnXChain Migration Plan (Strangler Fig)"
+        },
+        {
+          "type": "para",
+          "text": "Migrate the LearnXChain monolith to microservices using the Strangler Fig pattern: \n1. Introduce an **API Gateway** (routing proxy) in front of the monolith.\n2. Carve out a single module (e.g. Student Fees) into a separate microservice with its own database.\n3. Route fee API gateway paths to the new service while keeping other routes pointing to the monolith.\n4. Repeat for other modules (Attendance, LMS) until the monolith is retired.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Microservices trade deployment autonomy for distributed system complexity, using strangler proxies to incrementally migrate legacy monoliths.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Always enforce 'Database per Service' in microservices to prevent tight relational coupling.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement Distributed Tracing (e.g. Jaeger, Zipkin) with unique correlation IDs in headers to track request spans.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle database transactions across multiple microservices?",
+          "answer": "Use the Saga Pattern. Instead of distributed two-phase commit locks (which block databases), run local transactions sequentially. If a step fails, trigger compensating transactions backwards.",
+          "id": "int-21-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Design the API gateway routing configuration for the strangler pattern migration of a school portal.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a Saga orchestration logic for a Student enrollment payment transaction.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a System Architecture diagram showing the strangler pattern proxy routing requests to both the monolith and new carved-out services.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Breaking up the codebase but keeping a shared database, creating a distributed monolith with database-level coupling.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Underestimating network latencies: creating micro-services that make multiple synchronous REST calls to each other.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Building Microservices by Sam Newman",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "22",
+      "title": "API Design: REST, GraphQL, WebSockets & gRPC",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing enterprise API interfaces, modeling CRUD routes, comparing REST vs gRPC/GraphQL, and building real WebSocket interfaces."
+        },
+        {
+          "type": "h2",
+          "text": "22.1 API Protocols comparison"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Protocol",
+              "Data Format",
+              "Communication Pattern",
+              "Best Use Case"
+            ],
+            [
+              "REST",
+              "JSON / XML",
+              "Stateless Request-Response",
+              "Public CRUD APIs, web portals"
+            ],
+            [
+              "GraphQL",
+              "JSON structure",
+              "Client-specified Queries",
+              "Dynamic front-end aggregations"
+            ],
+            [
+              "gRPC",
+              "Protocol Buffers",
+              "HTTP/2 Bidirectional Streams",
+              "High-performance microservice-to-microservice"
+            ],
+            [
+              "WebSockets",
+              "Raw Text / Binary",
+              "Stateful Full-Duplex",
+              "Live chat, stock tickers"
+            ]
+          ],
+          "headers": [
+            "API Protocol",
+            "Data Encoding",
+            "Network Pipeline",
+            "Typical Use Case"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "22.2 REST API Specification: Student Register"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "POST /api/v1/students",
+            "Content-Type: application/json",
+            "{",
+            "    \"name\": \"Alice\",",
+            "    \"email\": \"alice@school.edu\"",
+            "}",
+            "Response: 201 Created",
+            "{",
+            "    \"id\": 1029,",
+            "    \"registered_at\": \"2026-06-03T21:11:00Z\"",
+            "}"
+          ],
+          "lang": "http"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "API design defines strict data schemas and communication interfaces between client queries and server capabilities.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Use REST conventions: plural nouns for resources (e.g. /students) and HTTP verbs (GET, POST, PUT, DELETE).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Utilize Protocol Buffers in gRPC to compile payloads into small binaries, reducing network transport overhead.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "When should you prefer GraphQL over REST?",
+          "answer": "Prefer GraphQL when the front-end requires dynamic data fields and nested relations (e.g. user details with posts and followers), preventing over-fetching or multiple REST API calls.",
+          "id": "int-22-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Write a complete OpenAPI/Swagger schema detailing the CRUD paths for a library book resource.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Build a WebSocket server in Node.js that echoes live status updates to connected clients.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a sequence flow mapping the connection handshake and framing exchange of a WebSocket socket session.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Using GET requests for operations that modify database states, bypassing browser security and idempotency guarantees.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Exposing internal database IDs directly in URLs instead of utilizing unique UUIDs.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "REST API Design Rulebook by Mark Masse",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "23",
+      "title": "Security Design: Authentication & Authorization",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Enforcing application security layers, JWT credential signatures, OAuth2 authorization delegation, and Role-Based Access Control."
+        },
+        {
+          "type": "h2",
+          "text": "23.1 Authentication vs Authorization"
+        },
+        {
+          "type": "para",
+          "text": "• **Authentication (AuthN)**: Verifying who a user is (e.g. passwords, MFA, SSO tokens).\n• **Authorization (AuthZ)**: Verifying what a user has permission to do (e.g. Roles, Policies, ACLs).\n• **JWT (JSON Web Token)**: Stateless auth token containing signature, header, and payload. Encrypted using HMAC or RSA to prevent client modification.\n• **OAuth2**: Delegation framework that allows third-party apps to access API resources without exposing passwords.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "23.2 JWT Signature Verification"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Decrypting and validating JWT signature",
+            "Claims claims = Jwts.parserBuilder()",
+            "    .setSigningKey(secretKey)",
+            "    .build()",
+            "    .parseClaimsJws(token)",
+            "    .getBody();",
+            "String role = claims.get(\"role\", String.class);"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Security design establishes authentication loops and enforces strict role-based authorization parameters on API endpoints.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Never store JWT secrets on public client codebases; verify token signatures at API gateway layers.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement Role-Based Access Control (RBAC) to decouple user identities from business permissions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is JWT signature tampering and how does RSA prevent it?",
+          "answer": "JWT signature tampering occurs if a client edits token payloads (like changing role to 'admin'). RSA prevents this because the signature is generated using a private key and validated using a public key; any edit breaks the signature.",
+          "id": "int-23-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement an Express security middleware that decodes and validates authorization headers.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design an OAuth2 Authorization Code Grant flow mapping for client app registration.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Sequence Diagram detailing a client authenticating, receiving a JWT, and accessing protected resources via the API Gateway.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Using weak symmetric encryption keys for JWT generation, allowing brute-force signature decryption.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Storing passwords in plain-text databases instead of utilizing salt-hashing algorithms (like BCrypt).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "OAuth 2 in Action by Justin Richer",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "24",
+      "title": "HLD Case Studies: URL Shortener & Google Drive",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing high-scale distributed systems, covering capacity estimations, API contracts, database partitions, and scaling for TinyURL and Dropbox."
+        },
+        {
+          "type": "h2",
+          "text": "24.1 URL Shortener (TinyURL) Design"
+        },
+        {
+          "type": "para",
+          "text": "• **Functional requirements**: Input long URL -> return short URL. Access short URL -> redirect to destination.\n• **Non-Functional requirements**: High availability, minimal redirection latency, scale to 100M URLs/day.\n• **Capacity Estimation**: 100M writes/day ≈ 1160 writes/sec. Storage: 100M * 500 bytes = 50 GB/day. 5-year storage = 90 TB.\n• **Key Generation Service (KGS)**: Generate unique 62-base short strings (e.g. 7 characters: 62^7 = 3.5 Trillion combinations) in advance to prevent hash collisions at write time.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "24.2 Google Drive Storage Engine"
+        },
+        {
+          "type": "para",
+          "text": "Google Drive must manage file updates and syncing across devices. We scale using chunk upload: split files into 4MB chunks, hash each chunk, and upload unique chunks to Object Storage (S3). A metadata database tracks chunk-file mappings. This optimizes bandwidth by only uploading modified file chunks (delta syncing).",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Case studies translate abstract scalability concepts into concrete calculations, key generation pipelines, and chunk storage layouts.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Pre-generate short URL keys using a dedicated Key Generation Service (KGS) to avoid transactional lock overhead during write operations.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement chunk-level deduplication to optimize storage arrays: if multiple users upload the same file, store the chunk once.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle redirect operations on a URL shortener at scale?",
+          "answer": "Cache hot short URL mappings in Redis (using cache aside). Redirection operations query Redis first, serving the redirect in < 5ms without accessing the primary metadata database.",
+          "id": "int-24-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Estimate the network write bandwidth required for a Pastebin clone handling 10 million uploads/day.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design the database schema for a file sync service tracking User, Device, FileMetadata, and FileChunk mappings.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a High Level Design diagram for TinyURL showing KGS, caching layer, web servers, metadata DB, and redirection flows.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Generating short URL strings on the fly by querying the database for duplicate hash values on every write, creating thread bottlenecks.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Uploading massive files as a single contiguous payload without chunking, leading to connection failures on slow networks.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "System Design Interview – An Insider's Guide by Alex Xu",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "25",
+      "title": "HLD Case Study: Social Media Systems",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing system architectures for WhatsApp messaging and Facebook/Instagram news feed generations at billion-user scale."
+        },
+        {
+          "type": "h2",
+          "text": "25.1 WhatsApp Chat Architecture"
+        },
+        {
+          "type": "para",
+          "text": "WhatsApp requires low-latency delivery. We maintain persistent WebSocket connections from mobile clients to Chat Servers. If Payer is online, the Gateway forwards the message immediately over their socket. If offline, the gateway buffers messages in a metadata database until their socket reconnects.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "25.2 Feed Generation: Fan-out on Write vs Read"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Strategy",
+              "Operation",
+              "Read Latency",
+              "Write Overhead",
+              "Typical Use Case"
+            ],
+            [
+              "Fan-out on Read (Pull)",
+              "Queries followers' posts dynamically when reading feed",
+              "High: requires multi-table JOINS",
+              "Low: single insert to post table",
+              "Used for users with massive follower counts (celebrities)"
+            ],
+            [
+              "Fan-out on Write (Push)",
+              "Pushes post directly into followers' cached feeds on write",
+              "Low: reads single pre-computed cache list",
+              "High: requires updating millions of caches",
+              "Standard user updates with small follower counts"
+            ]
+          ],
+          "headers": [
+            "Fan-out Strategy",
+            "Mechanism",
+            "Read Query Speed",
+            "Write Pipeline Overhead",
+            "Hiring Application Target"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Social media systems rely on persistent bidirectional connections for live messaging and hybrid fan-out strategies for feed generation.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Use a hybrid fan-out model: push posts to standard users' feeds, but pull posts dynamically for celebrity accounts to prevent write queues.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Store active user feeds in in-memory structures (Redis lists) to keep page loads fast.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you track 'Online/Offline' user status in messaging systems?",
+          "answer": "Maintain a Presence Service that tracks active WebSocket connections. When a client closes their socket or misses heartbeats, the status updates to offline in a Redis cluster.",
+          "id": "int-25-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Design a push notification pipeline that distributes alerts to millions of devices asynchronously using SQS and FCM.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Formulate the database schema and indexes for a Twitter clone's Follower relationship table.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a High Level Design diagram for a chat system detailing User clients, WebSockets gateway, Chat servers, Presence servers, and message store databases.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Applying Fan-out on Write to celebrity accounts, creating database write queues when someone with 100M followers posts.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Attempting to build live chat using HTTP polling instead of WebSockets, exhausting server connection pools.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Large Scale System Design Case Studies on GitHub",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "26",
+      "title": "HLD Case Study: Video Systems",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing high-volume streaming architectures for YouTube and Netflix, covering video transcoding pipelines, CDNs, and adaptive streaming."
+        },
+        {
+          "type": "h2",
+          "text": "26.1 Video Transcoding Pipeline"
+        },
+        {
+          "type": "para",
+          "text": "YouTube receives raw video uploads. We must optimize: \n1. **Upload**: User uploads file to S3 bucket. Chunk uploads protect connection breaks.\n2. **Transcode**: Workers split video into chunks, transcode each chunk into different resolutions (1080p, 720p, 480p) and formats (MP4, WebM) using specialized codecs.\n3. **Distribute**: Transcoded video chunks are distributed to CDN (Content Delivery Network) edge locations close to target users.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "26.2 CDN & Adaptive Bitrate Streaming"
+        },
+        {
+          "type": "para",
+          "text": "Adaptive Bitrate Streaming (HLS, DASH) adjusts video resolution dynamically based on client bandwidth. The video player queries a manifest file (.m3u8) that lists movie chunk URLs for different resolutions, requesting lower resolution chunks if the connection speed drops, preventing buffering pauses.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Video architectures rely on asynchronous transcoding pools and distributed CDNs to deliver adaptive stream packages.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Distribute static video assets to Edge CDN nodes to minimize network hop latencies to client devices.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Asynchronously queue transcoding tasks using message queues (Kafka) to coordinate worker pools.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is a Content Delivery Network (CDN) and how does it work?",
+          "answer": "A CDN is a geographically distributed network of proxy servers. It caches static assets (images, video files) close to users, reducing request latencies and saving core server bandwidth.",
+          "id": "int-26-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Design a metadata schema tracking Video details, Transcoding statuses, and Manifest chunk URLs.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Formulate a CDN routing strategy that checks user geographic coordinates to select the closest caching node.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a High Level Design diagram showing video upload, MQ transcode workers, S3 storage, manifest generation, and CDN caching.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Serving raw, untranscoded video files directly from a central application server, exhausting network bandwidth.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Storing transcoded video assets without compression, causing storage arrays to inflate.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Netflix Tech Blog: Video Encoding & CDN Architectures",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "27",
+      "title": "HLD Case Study: Marketplace Systems",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing scalable marketplace platforms like Amazon, detailing search indexing, inventory updates, and checkout pipelines."
+        },
+        {
+          "type": "h2",
+          "text": "27.1 Marketplace Inventory & Search Indexing"
+        },
+        {
+          "type": "para",
+          "text": "Marketplaces coordinate search and inventory under high traffic: \n• **Search**: Catalog data is indexed in Elasticsearch. Elasticsearch uses inverted indexes to resolve full-text search queries in milliseconds.\n• **Inventory Sync**: Inventory values must be accurate during checkout. To avoid database bottlenecks, use Redis to manage inventory counts and decrement stock atomically using Lua scripts, updating primary SQL databases asynchronously.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "27.2 Transactional Checkout Pipeline"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Decrementing inventory atomically in Redis",
+            "String luaScript = \"if redis.call('get', KEYS[1]) >= ARGV[1] then \" +",
+            "                   \"  return redis.call('decrby', KEYS[1], ARGV[1]) \" +",
+            "                   \"else \" +",
+            "                   \"  return -1 \" +",
+            "                   \"end\";",
+            "Object result = jedis.eval(luaScript, Collections.singletonList(\"stock:item1\"), ",
+            "                           Collections.singletonList(\"1\"));"
+          ],
+          "lang": "java"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Marketplace architectures rely on full-text index caches for product discovery and atomic inventory counters for checkout validation.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Use Elasticsearch to handle product searches, syncing modifications from primary databases asynchronously.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement optimistic locking in SQL (using version columns) to update inventory records safely under concurrent writes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle recommendation systems on marketplaces?",
+          "answer": "Process user activity logs (clicks, views, purchases) asynchronously using Kafka, pipeline the data to Hadoop/Spark to train models, and store recommendations in a NoSQL database for fast API lookups.",
+          "id": "int-27-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Design an inventory update transaction that prevents race conditions when multiple users check out the last remaining stock.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Formulate the system topology for a product catalog search engine using relational databases and Elasticsearch sync.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a High Level Design diagram illustrating customer checkout, payment integrations, inventory checks, and warehouse dispatch services.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Querying SQL relational databases with LIKE filters for product searches, causing slow query performance.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to handle failed payment scenarios: holding product inventories locked indefinitely without timeout releases.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Amazon Builders' Library: Architecture Guides",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "28",
+      "title": "HLD Case Study: Fintech & UPI Systems",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing transactional ledger systems, securing payment routing switch pathways, and building UPI transaction pipelines."
+        },
+        {
+          "type": "h2",
+          "text": "28.1 UPI Transaction sequence"
+        },
+        {
+          "type": "para",
+          "text": "UPI coordinates transfers across multiple banking systems. A transaction requires: \n1. **Request**: Payer initiates payment via a PSP app. PSP app signs the request with client keys.\n2. **Debit**: Remitter bank debits Payer account. \n3. **Switch routing**: NPCI Switch receives transaction, resolves Payee VPA address, and directs the request.\n4. **Credit**: Beneficiary bank credits Payee account. The transaction must fail atomically: if debit succeeds but credit fails, the system must trigger an automated rollback (refund).",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "upiSequence"
+        },
+        {
+          "type": "h2",
+          "text": "28.2 Double-Entry Ledger Design"
+        },
+        {
+          "type": "para",
+          "text": "Ledgers track financial values. Never update a single balance cell; instead, record transactions as immutable double-entry logs where sum(debits) = sum(credits). This creates a verifiable audit trail.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "CREATE TABLE ledger_entries (",
+            "    id BIGSERIAL PRIMARY KEY,",
+            "    transaction_id VARCHAR(255) NOT NULL,",
+            "    account_id BIGINT NOT NULL,",
+            "    amount DECIMAL(15, 2) NOT NULL, -- negative for debit, positive for credit",
+            "    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+            ");"
+          ],
+          "lang": "sql"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Fintech systems require strict transactional rollbacks, signed payloads, and immutable double-entry balance sheets.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce double-entry bookkeeping rules: balances are calculated by summing transaction records, never by modifying a single field.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify transaction payloads using cryptographic signatures (HMAC or RSA keys) at API boundaries.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is Idempotency in payment gateways and how do you enforce it?",
+          "answer": "Idempotency guarantees that processing a payment request multiple times yields the same result without double-charging. Enforce it by checking unique request tokens (Idempotency Key) in database indexes before executing transactions.",
+          "id": "int-28-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement an idempotent payment processing endpoint that matches request keys in a cache database.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design a database schema for a double-entry ledger that tracks deposits, withdrawals, and account-to-account transfers.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a Sequence Diagram tracing a UPI transaction through Remitter Bank, NPCI Switch, and Beneficiary Bank.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Updating balance cells directly using SQL UPDATE queries, erasing audit trails and risking data mismatches.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to handle timeout scenarios: marking a payment as failed when it timed out at the credit tier, resulting in double charges.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Stripe Engineering Blog: Designing Ledger Architectures",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "29",
+      "title": "HLD Case Study: AI Systems & RAG Pipeline",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Designing system topologies for LLMs, ChatGPT, Claude, vector database indexing, and agents."
+        },
+        {
+          "type": "h2",
+          "text": "29.1 Retrieval-Augmented Generation (RAG)"
+        },
+        {
+          "type": "para",
+          "text": "Standard LLMs are bounded by training dates. RAG enhances prompts by querying dynamic data: \n1. **Ingest**: Convert PDF or text documents into numerical vectors (embeddings) using an embedding model.\n2. **Store**: Index vectors in a specialized Vector Database (Pinecone, pgvector) using index grids (HNSW).\n3. **Query**: When a user asks a question, embed their query, search the vector database for matching chunks, merge the text chunks into the prompt context, and route the prompt to the LLM generator.",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "ragPipeline"
+        },
+        {
+          "type": "h2",
+          "text": "29.2 AI Tutor Memory & Agent loop"
+        },
+        {
+          "type": "para",
+          "text": "AI agents run in loops: Planning -> Tool Execution -> Observation. To preserve session memory across stateless LLM APIs, maintain a conversation history store in a Redis cache. This history is merged into the LLM context global on every turn.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "AI architectures integrate vector embedding lookups, dynamic retrieval pipelines, and stateful agent memory loops.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement semantic caching: cache common query embeddings in Redis to serve matching answers without hitting LLM APIs.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Set token budgets and rate limits on LLM API calls to prevent budget exhaustion.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is pgvector and how does it compare to specialized vector databases?",
+          "answer": "pgvector is a PostgreSQL extension that adds vector types and distance indexes. It is excellent for systems that want to keep vector indexes and relational metadata in a single database, avoiding cross-database sync issues.",
+          "id": "int-29-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Implement a semantic chunking script that splits document text into overlapping segments of 500 characters.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Design a memory manager class that prune-summarizes conversation logs when they exceed LLM context global bounds.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a High Level Design diagram for a RAG system showing user query embedding, vector search, metadata join, and LLM dispatch.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Sending massive documents directly to LLMs without chunking or indexing, causing context global overflows.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to filter vector database results, injecting irrelevant text blocks into LLM prompts.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "OpenAI Cookbook & LangChain Developer Documentation",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "30",
+      "title": "LearnXChain Complete HLD & Architecture",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "High-Level architecture for the complete LearnXChain system, covering microservice coordination, school management schemas, and deployment topologies."
+        },
+        {
+          "type": "h2",
+          "text": "30.1 High Level System Topology"
+        },
+        {
+          "type": "para",
+          "text": "The LearnXChain enterprise platform must coordinate multiple school modules: \n• **LMS Service**: Delivers course contents and handles student assignments (highly cached reads).\n• **Billing Service**: Processes tuition transactions, handles invoicing, and logs balances to the Ledger DB.\n• **AI Tutor Service**: Decoupled gateway checking rate limits and routing prompts to LLM pools.\n• **SIS Service**: Core Student Information System tracking registrations, parents, and class assignments.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "                       [ API Gateway (Nginx / Kong) ]",
+            "                                     |",
+            "        +----------------------------+----------------------------+",
+            "        |                            |                            |",
+            "  [ SIS Service ]             [ LMS Service ]             [ Billing Service ]",
+            "   (Postgres Shard)             (Redis Cache)               (Ledger DB Sync)",
+            "        |                            |                            |",
+            "        +----------------------------+----------------------------+",
+            "                                     |",
+            "                              [ Kafka Broker ]",
+            "                                     |",
+            "                           [ AI Tutor service ]",
+            "                             (Vector DB index)"
+          ],
+          "lang": "text"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "LearnXChain coordinates sharded SIS records, cached LMS assets, and transactional billing ledgers over an API Gateway and Kafka event broker.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Use Kong or Nginx as an API Gateway to handle rate limiting, RBAC checks, and path routing.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Asynchronously publish student status changes to Kafka to keep SIS, LMS, and Billing databases synced.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you scale the LearnXChain database for a school network with 10 million active students?",
+          "answer": "Shard the student database (SIS) geographically by school_id. Deploy database replicas in regional zones to serve read-heavy gradebooks and schedules locally.",
+          "id": "int-30-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Design the API gateway routing configurations for SIS, LMS, and Billing services.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Formulate the database migration script that splits a monolithic User table into separate SIS and Auth services.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a High Level Design diagram for the complete LearnXChain platform illustrating client users, gateway, microservices, databases, and message brokers.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Deploying all microservices into a single shared database instance, maintaining structural coupling.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Exposing internal microservice ports to the public internet instead of securing them behind the API Gateway.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Microservice Architecture Patterns by Chris Richardson",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "31",
+      "title": "Staff Engineer System Design: Trade-offs & Leadership",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Analyzing architecture trade-offs, writing RFC design docs, managing build vs buy choices, and scaling platforms from 1K to 100M users."
+        },
+        {
+          "type": "h2",
+          "text": "31.1 Staff Engineering Trade-offs"
+        },
+        {
+          "type": "para",
+          "text": "Staff Engineers balance technical excellence with business requirements: \n• **Build vs Buy**: Build custom code only if it is a core business differentiator (e.g. Netflix building their own CDN). Buy or use open-source for standard infrastructure (e.g. using Stripe for checkout billing).\n• **System Evolution**: Do not build a distributed microservice cluster on Day 1. Start with a clean modular monolith to validate product-market fit, then scale out as database write loads demand.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "31.2 Evolution Roadmap: 1K to 100M Users"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Scale Tier",
+              "Primary Bottleneck",
+              "Architectural Fix",
+              "Infrastructure Focus"
+            ],
+            [
+              "1K Users",
+              "Developer velocity",
+              "Deploy modular monolith on a single VPS",
+              "Simple setups, SQL database backups"
+            ],
+            [
+              "100K Users",
+              "Database read capacity",
+              "Add Redis cache layer and database read replicas",
+              "Separate read/write paths, connection pools"
+            ],
+            [
+              "1M Users",
+              "Application CPU limits",
+              "Autoscale stateless app nodes behind Load Balancer",
+              "Stateless sessions, health checks"
+            ],
+            [
+              "10M+ Users",
+              "Database write throughput",
+              "Shard databases, partition tables, and introduce Kafka queues",
+              "Decoupling, async operations"
+            ],
+            [
+              "100M+ Users",
+              "Global latency & failures",
+              "Deploy active-active multi-region clusters with edge CDNs",
+              "Consensus clusters, geo-routing"
+            ]
+          ],
+          "headers": [
+            "Scale Target",
+            "System Bottleneck",
+            "Architectural Remediation",
+            "Infrastructure Focus Area"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Staff engineers design systems based on evolution constraints, evaluating build vs buy choices and prioritizing modular monoliths before scaling.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Always write RFC design docs to document architecture decisions, open questions, and trade-offs before writing code.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Keep non-functional requirements (security, availability, latency) in focus throughout the development lifecycle.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you evaluate a build vs buy decision for a payment gateway?",
+          "answer": "Unless you are a payments processor, buy (integrate Stripe/PayPal). Building a payment gateway requires massive PCI-DSS compliance audits, security layers, and bank relationships, which are non-core overheads.",
+          "id": "int-31-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Write a 1-page RFC design document evaluating the migration of a logging system to Elasticsearch.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Construct a disaster recovery checklist for a database failover scenario.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a system scaling timeline detailing the architectural shifts required as a platform grows from 1K to 100M users.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Choosing complex technologies (like Kubernetes or Cassandra) for simple early-stage products, wasting developer bandwidth.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Refusing to buy SaaS tools, wasting time building custom notification or billing engines.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "The Staff Engineer's Path by Tanya Reilly",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "32",
+      "title": "System Design Interview Guide",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Frameworks for cracking LLD and HLD system design interviews, complete with question structures and sample mock responses."
+        },
+        {
+          "type": "h2",
+          "text": "32.1 The System Design Interview Framework"
+        },
+        {
+          "type": "para",
+          "text": "Cracking a system design interview requires a structured approach. You must manage the 45-minute timeline systematically:",
+          "options": {}
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Timeline",
+              "Phase",
+              "Core Tasks & Goals",
+              "Key Questions to Ask"
+            ],
+            [
+              "0 - 5 min",
+              "Clarify Requirements",
+              "Define functional and non-functional bounds, scale, and constraints",
+              "Who is using it? What is the expected QPS? What are the latency bounds?"
+            ],
+            [
+              "5 - 10 min",
+              "Capacity Estimation",
+              "Calculate storage footprint, memory requirements, and network bandwidth",
+              "How many active users? What is the size of each payload?"
+            ],
+            [
+              "10 - 25 min",
+              "High Level Design",
+              "Draw system components: API routes, databases, load balancers, and caches",
+              "Where do we store the metadata? How does the client query the feed?"
+            ],
+            [
+              "25 - 40 min",
+              "Deep Dive & Scaling",
+              "Identify bottlenecks, database replication, sharding, caching, and consensus",
+              "How do we scale writes? What happens if a database node fails?"
+            ],
+            [
+              "40 - 45 min",
+              "Wrap-up & Summary",
+              "Review the design against requirements, summarize trade-offs and decisions",
+              "Are there any single points of failure left? How do we monitor this?"
+            ]
+          ],
+          "headers": [
+            "Interview Timeline",
+            "Design Phase",
+            "Key Deliverables",
+            "Sample Prompts"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "32.2 Sample HLD Interview: Designing a URL Shortener"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How would you design a URL shortener that handles 100 million writes per day?",
+          "answer": "1. Requirements: Short URL redirect in < 10ms. Scale: 100M writes/day ≈ 1160 writes/sec. Reads: 10x writes = 11,600 reads/sec.\n2. Redirection: Store mappings in SQL DB. Short URL is key. Cache mappings in Redis (99% hit rate). Redirect requests query Redis, bypass DB.\n3. Generation: Use base-62 encoding. Pre-generate keys using Key Generation Service (KGS) to avoid write collisions. Save keys to disk, distribute keys in batches to web servers to prevent single KGS bottlenecks.",
+          "id": "int-32-mock-1"
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "System design interviews evaluate your communication, structured decomposition, capacity estimations, and trade-off selections.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Always write down functional and non-functional requirements on the board before drawing boxes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Do not jump into technologies immediately (e.g. saying 'we will use Kafka') without explaining the problem it solves.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle a system design question about designing Uber?",
+          "answer": "Decompose it: 1. Core requirement: match drivers and riders. 2. Spatial lookup: partition drivers by coordinates using quadtrees or Google S2. 3. Update driver location every 4 seconds via WebSockets. 4. Match requests route to the driver partition.",
+          "id": "int-32-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Perform a mock design session for a live chat app, outlining the capacity estimation and components.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Write the step-by-step capacity calculation for a video platform receiving 1 million uploads/day.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw the high level architecture design for a Pastebin clone showing key generation, paste storage, and CDN endpoints.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to estimate system scale: designing a multi-region active-active database cluster for a low-traffic application.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to discuss trade-offs: presenting a design as 'perfect' without outlining its constraints.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "System Design Interview – An Insider's Guide Volume 2 by Alex Xu",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "33",
+      "title": "365-Day System Design Study Roadmap",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "A comprehensive, month-by-month study curriculum to transition from absolute beginner to principal software architect."
+        },
+        {
+          "type": "h2",
+          "text": "33.1 The 1-Year System Design Curriculum"
+        },
+        {
+          "type": "para",
+          "text": "This roadmap lays out a structured, 365-day plan to build production-grade design and architecture capabilities:",
+          "options": {}
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Timeline",
+              "Syllabus Track Focus",
+              "Weekly Goals & Tasks",
+              "Capstone Project Milestone"
+            ],
+            [
+              "Month 1-3",
+              "Programming, OOP, and SOLID",
+              "Master encapsulation, classes, interfaces, and refactor code to conform with SOLID principles",
+              "Build a library system class structure with full unit tests"
+            ],
+            [
+              "Month 4-6",
+              "Design Patterns and LLD",
+              "Study Creational, Structural, and Behavioral patterns, and design end-to-end low-level projects",
+              "Implement a parking lot system in Java/C++ featuring concurrent spot allocations"
+            ],
+            [
+              "Month 7-9",
+              "HLD, Networking, and Databases",
+              "Understand load balancing, DNS routing, database replication, sharding, and caching",
+              "Build a sharded database cluster for a mock blogging app"
+            ],
+            [
+              "Month 10-12",
+              "Distributed Systems & HLD Cases",
+              "Study consensus (Raft), message queues (Kafka), microservices, security design, and analyze real cases",
+              "Design and deploy the complete LearnXChain school portal in a microservice topology"
+            ]
+          ],
+          "headers": [
+            "Timeline",
+            "Study Curriculum Track",
+            "Weekly Learning Actions",
+            "Capstone Project Milestone"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "The 365-day roadmap guides developers systematically through speed programming, object design, networking, and distributed systems.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Dedicate 30 minutes daily to studying real-world engineering blogs (Netflix, Stripe, Uber) to see how systems scale.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Implement every LLD project in actual code; do not just look at UML diagrams.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the focus of Month 7-9 in the curriculum?",
+          "answer": "The focus is HLD, Networking, and Database scaling, covering replication, sharding, composite indexing, and caching topologies.",
+          "id": "int-33-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Build a personal study log tracking your monthly capstone project releases.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Identify the focus topic for Month 10 of the curriculum.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a timeline representing the 12-month system design roadmap.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Skipping LLD and trying to learn HLD system design cases directly, leading to weak class design capabilities.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Focusing entirely on theory without writing code or drawing architectural diagrams.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "Developer Roadmaps on Roadmap.sh",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "34",
+      "title": "Final Master Cheat Sheet & Formulas",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "High-density reference cards for OOP, SOLID, Design Patterns, LLD, HLD, and Distributed Systems."
+        },
+        {
+          "type": "h2",
+          "text": "34.1 High-Density Architectural Reference"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Topic",
+              "Core Concepts / Formulas",
+              "Optimal Practice / Metric"
+            ],
+            [
+              "OOP Pillars",
+              "Encapsulation, Abstraction, Inheritance, Polymorphism",
+              "Prefer composition over inheritance"
+            ],
+            [
+              "SOLID Principles",
+              "SRP, OCP, LSP, ISP, DIP",
+              "Interface Segregation prevents bloated class implementations"
+            ],
+            [
+              "Design Patterns",
+              "Creational, Structural, Behavioral",
+              "Use Strategy to decouple algorithm configurations"
+            ],
+            [
+              "LLD Framework",
+              "Requirements -> Entities -> Class -> API -> Design",
+              "Write thread-safe, synchronized methods for state updates"
+            ],
+            [
+              "HLD Sizing",
+              "1M requests/day ≈ 12 QPS. 100M/day ≈ 1160 QPS",
+              "Assume 50-70% sphere packing density in volume guesstimates"
+            ],
+            [
+              "Distributed CAP",
+              "Consistency vs Availability during Partitions",
+              "Use Raft consensus for strong metadata consistency"
+            ]
+          ],
+          "headers": [
+            "Architecture Topic Focus",
+            "Primary Principles & Formulas",
+            "Optimal Practice"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "34.2 Capacity Estimation Quick Sheet"
+        },
+        {
+          "type": "para",
+          "text": "• **Power of 2**: 2^10 = 1 Thousand (1 KB), 2^20 = 1 Million (1 MB), 2^30 = 1 Billion (1 GB), 2^40 = 1 Trillion (1 TB).\n• **Database sizing**: 10 million records/day * 500 bytes/record ≈ 5 GB/day. 5-year storage ≈ 9 TB.\n• **Traffic sizing**: 10 million requests/day ≈ 100 requests/sec average. Peak traffic ≈ 2x average = 200 requests/sec.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 40
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "This final master cheat sheet compiles primary OOP principles, SOLID guidelines, design pattern intents, and capacity estimation rules.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "text": "Keep this cheat sheet open during system design mock interviews to verify capacity metrics instantly.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Review the SOLID checklist when refactoring monolithic class blocks.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the equivalent QPS for 86.4 million requests per day?",
+          "answer": "Since 1 day = 86,400 seconds, 86.4M requests/day = 86,400,000 / 86,400 = exactly 1000 QPS.",
+          "id": "int-34-0"
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "bullet",
+          "text": "Write down the capacity estimations for a chat app receiving 50 million messages/day.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify your speed using the capacity estimation quick sheet for different user scales.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "UML Exercise"
+        },
+        {
+          "type": "bullet",
+          "text": "Draw a system design cheat sheet diagram summarizing load balancers, caching, sharding, and consensus.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "text": "Using floating-point numbers in billing applications instead of integers, resulting in precision rounding errors.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Failing to account for replica synchronization delays, causing stale read queries in database nodes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 20
+        },
+        {
+          "type": "h2",
+          "text": "Further Reading"
+        },
+        {
+          "type": "bullet",
+          "text": "System Design Cheat Sheets on GitHub",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    }
+  ],
+  "handbookToc": null
+}

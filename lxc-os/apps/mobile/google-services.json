@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1041415359124",
+    "project_id": "learn-prod-7fd07",
+    "storage_bucket": "learn-prod-7fd07.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041415359124:android:abc68748ed077e3aacc281",
+        "android_client_info": {
+          "package_name": "com.learnxchain.lxc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxcv90Hzdyaj_wDygwM9iC8arCVNAYNaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

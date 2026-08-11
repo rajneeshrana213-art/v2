@@ -1,0 +1,125 @@
+name: AI Code Guardian
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  schedule:
+    # Every 6 hours
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  scan:
+    name: Security & Quality Scan
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Run ESLint
+        id: eslint
+        run: |
+          npx next lint --format json --output-file /tmp/eslint-report.json 2>/tmp/eslint-stderr.txt || true
+          echo "eslint_exit=$?" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+
+      - name: Run TypeScript type check
+        id: tsc
+        run: |
+          npx tsc --noEmit 2>/tmp/tsc-report.txt || true
+          echo "tsc_exit=$?" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+
+      - name: Run AI Guardian scan
+        id: guardian
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          COMMIT_SHA: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          node scripts/ai-guardian/scan.mjs \
+            --eslint-report /tmp/eslint-report.json \
+            --tsc-report /tmp/tsc-report.txt \
+            --output /tmp/guardian-report.json
+        continue-on-error: true
+
+      - name: Update Bug Intelligence Report
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          node scripts/ai-guardian/update-report.mjs \
+            --guardian-report /tmp/guardian-report.json
+        continue-on-error: true
+
+      - name: Run Lighthouse (Performance & SEO)
+        run: |
+          node scripts/ai-guardian/run-lighthouse.mjs \
+            --output /tmp/lighthouse-report.json \
+            --base-url https://www.learnxchain.com \
+            --max-urls 20
+        continue-on-error: true
+
+      - name: Update Performance & SEO Report
+        run: |
+          node scripts/ai-guardian/update-perf-seo-report.mjs \
+            --lighthouse-report /tmp/lighthouse-report.json
+        continue-on-error: true
+
+      - name: Auto-fix ESLint findings (PRs)
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BASE_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          node scripts/ai-guardian/auto-fix.mjs \
+            --guardian-report /tmp/guardian-report.json \
+            --base-branch "${BASE_BRANCH}" \
+            --max-prs 0
+        continue-on-error: true
+
+      - name: Commit updated Bug Intelligence Report
+        if: github.event_name != 'pull_request'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/AI-BUG-REPORT.md docs/AI-PERF-SEO-REPORT.md || true
+          git diff --cached --quiet || git commit -m "chore: update AI reports [skip ci]"
+          git push origin HEAD || true
+        continue-on-error: true
+
+      - name: Upload scan artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-guardian-reports-${{ github.run_id }}
+          path: |
+            /tmp/eslint-report.json
+            /tmp/tsc-report.txt
+            /tmp/guardian-report.json
+            /tmp/lighthouse-report.json
+          retention-days: 30
+          if-no-files-found: ignore

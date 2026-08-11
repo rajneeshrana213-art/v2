@@ -1,0 +1,4123 @@
+{
+  "handbookData": [
+    {
+      "id": "section-0",
+      "num": "0",
+      "title": "DevOps Foundation",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "0",
+          "title": "DevOps Foundation"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 0: DevOps Foundation. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "0.1 What is DevOps, SRE, and Platform Engineering?"
+        },
+        {
+          "type": "para",
+          "text": "DevOps is a cultural philosophy, set of practices, and tools that increases an organization's ability to deliver applications and services at high velocity. It breaks down the traditional silos between Software Development (Dev) and IT Operations (Ops).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "Site Reliability Engineering (SRE) is a discipline pioneered by Google that applies software engineering principles to operations and infrastructure challenges. SRE is 'what happens when you ask a software engineer to design an operations team.'",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "Platform Engineering is the practice of designing and building toolchains and workflows that enable self-service capabilities for software engineering organizations in the cloud era. Platform engineers create an Internal Developer Platform (IDP) to establish a 'Golden Path' for developers, reducing cognitive load.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Comparing Devops, SRE, and Platform Engineering"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "Attribute",
+              "DevOps",
+              "Site Reliability Engineering (SRE)",
+              "Platform Engineering"
+            ],
+            [
+              "Primary Goal",
+              "Bridge Dev and Ops silos",
+              "Ensure system reliability and uptime",
+              "Improve developer experience & velocity"
+            ],
+            [
+              "Key Metrics",
+              "Deployment frequency, Lead time",
+              "SLO compliance, Error budget, MTTR",
+              "Time to market, Developer satisfaction"
+            ],
+            [
+              "Core Focus",
+              "Culture, automation, and tooling",
+              "Production runtime, scalability, and alerts",
+              "Self-service tooling and IDP portals"
+            ]
+          ],
+          "headers": [
+            "Attribute",
+            "DevOps",
+            "SRE",
+            "Platform Engineering"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "0.2 Infrastructure Evolution: Traditional vs Cloud-Native"
+        },
+        {
+          "type": "para",
+          "text": "Infrastructure has shifted from Bare Metal (where server provisioning took weeks) to Virtual Machines (where virtualization enabled hypervisors to divide physical servers in minutes), and finally to Cloud-Native Containerization (where application environments are packaged and run in isolated user-space processes on a shared kernel in seconds).",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "CI/CD Culture & GitOps"
+        },
+        {
+          "type": "para",
+          "text": "GitOps is an operational framework that takes DevOps best practices used for application development, such as version control, collaboration, compliance, and CI/CD, and applies them to infrastructure automation. The Git repository is the single source of truth for the desired state of your infrastructure.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "0.3 Career and Salary Roadmap"
+        },
+        {
+          "type": "para",
+          "text": "DevOps and SRE are among the highest-paying domains in tech. A career progression typically moves from Linux System Admin ($70k-$90k) -> DevOps/Cloud Engineer ($110k-$150k) -> Senior DevOps/SRE ($160k-$220k) -> Principal Infrastructure Architect / Platform Lead ($250k+).",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "DevOps bridges cultural gaps using automation; SRE applies software engineering to reliability; Platform Engineering creates self-service Internal Developer Platforms. GitOps uses Git as the single source of truth for desired state.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between DevOps and SRE.",
+          "answer": "DevOps is a set of cultural principles and practices aimed at breaking down silos between developers and operations. SRE is a concrete implementation of DevOps. SRE focuses heavily on reliability metrics (SLIs, SLOs, Error Budgets), monitoring, incident response, and automation of operational tasks using software engineering practices.",
+          "id": "uid-1"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is GitOps and how does it differ from traditional CI/CD?",
+          "answer": "Traditional CI/CD uses pipelines that push built code or infrastructure changes to targets (e.g. running 'terraform apply' or 'kubectl apply' directly from a runner). GitOps is pull-based: a Git repository stores the declaration of the desired state, and a controller (like ArgoCD) running inside the target cluster continuously compares the desired state with the live state and pulls updates to resolve drift.",
+          "id": "uid-2"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a comparison chart mapping your current organization's software delivery workflow against the DevOps principles. Identify two manual bottle-necks (e.g., manual ticket creation, lack of automated staging tests) and draft a 3-step action plan to automate them.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Case Study: Silicon Valley Fintech Deployments",
+          "text": "A financial platform experienced 30-minute deployment outages due to manual server patching and database configuration drift. By shifting to GitOps with ArgoCD and standardizing environments using Docker containers, they reduced deploy times to under 3 minutes with zero downtime, using rolling deployments and automated rollbacks on target metric anomalies.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Check if Git repo state matches the target environment.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect deployment pipelines for configuration drift.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify that all service dependencies are documented in the deployment manifest.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-1",
+      "num": "1",
+      "title": "Bash & Terminal Mastery",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "1",
+          "title": "Bash & Terminal Mastery"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 1: Bash & Terminal Mastery. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "1.1 Linux Fundamentals & Terminal Navigation"
+        },
+        {
+          "type": "para",
+          "text": "DevOps engineers live in the terminal. The Linux file system is structured as a tree root '/'. Let's master the key command line utilities:",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Core Administration Commands & Examples"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "Command",
+              "Real-World Syntax & Details",
+              "Operation Context"
+            ],
+            [
+              "<code>ls</code>",
+              "<code>ls -lah /var/log</code> - Lists all files (hidden, permissions, size)",
+              "Inspecting logs on disk."
+            ],
+            [
+              "<code>find</code>",
+              "<code>find / -type f -name '*.log' -size +100M</code> - Find files larger than 100MB",
+              "Locating disk-space hogs."
+            ],
+            [
+              "<code>grep</code>",
+              "<code>grep -rnw '/etc/' -e 'server_name'</code> - Recursive search for config names",
+              "Finding NGINX vhost configurations."
+            ],
+            [
+              "<code>sed</code>",
+              "<code>sed -i 's/PORT=3000/PORT=8080/g' .env</code> - Inline stream editor replacement",
+              "Modifying config files inline."
+            ],
+            [
+              "<code>awk</code>",
+              "<code>awk '{print $1, $7}' /var/log/nginx/access.log | sort | uniq -c</code> - Parse columns",
+              "Extracting IP and request path statistics."
+            ],
+            [
+              "<code>xargs</code>",
+              "<code>find . -name '*.tmp' | xargs rm -f</code> - Passes pipe output as command args",
+              "Cleaning up batch temp files."
+            ],
+            [
+              "<code>journalctl</code>",
+              "<code>journalctl -u nginx.service -n 50 -f</code> - Follows service logs in real time",
+              "Debugging systemd service issues."
+            ]
+          ],
+          "headers": [
+            "Command",
+            "Example Syntax",
+            "DevOps Usage"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "1.2 Resource Monitoring Commands"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "Command",
+              "Command Syntax & Operation",
+              "Troubleshooting Goal"
+            ],
+            [
+              "<code>htop</code> / <code>top</code>",
+              "Interactive process viewer showing CPU, Memory, Load average",
+              "Spotting runaway CPU-hogging threads."
+            ],
+            [
+              "<code>lsof</code> / <code>netstat</code>",
+              "<code>lsof -i :3000</code> / <code>ss -tulpn</code>",
+              "Finding which process is blocking port binding."
+            ],
+            [
+              "<code>curl</code> / <code>wget</code>",
+              "<code>curl -Iv https://localhost:3001</code> - Inspect request headers",
+              "Debugging SSL/TLS handshakes and HTTP status."
+            ],
+            [
+              "<code>dig</code> / <code>nslookup</code>",
+              "<code>dig +trace learnxchain.com</code> - Full DNS query path lookup",
+              "Resolving DNS record issues and propagation."
+            ],
+            [
+              "<code>traceroute</code> / <code>ping</code>",
+              "<code>traceroute 8.8.8.8</code> - Inspect packets path hop-by-hop",
+              "Testing network connectivity and latency."
+            ]
+          ],
+          "headers": [
+            "Command",
+            "Syntax Example",
+            "Usage Goal"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h3",
+          "text": "1.3 Lab 1: Automated Log Analyzer Script"
+        },
+        {
+          "type": "para",
+          "text": "Create a Bash script 'log_analyzer.sh' to extract the top 5 requesting IP addresses and the count of 404 errors from an NGINX access log:",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "#!/bin/bash",
+            "LOG_FILE=\"/var/log/nginx/access.log\"",
+            "if [ ! -f \"$LOG_FILE\" ]; then",
+            "  echo \"Error: Log file not found at $LOG_FILE\"",
+            "  exit 1",
+            "fi",
+            "echo \"=== TOP 5 IP ADDRESSES ===\"",
+            "awk '{print $1}' \"$LOG_FILE\" | sort | uniq -c | sort -nr | head -n 5",
+            "echo \"=== TOTAL 404 RESPONSES ===\"",
+            "grep ' 404 ' \"$LOG_FILE\" | wc -l"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "h3",
+          "text": "1.4 Lab 2: Backup Automation Daemon Script"
+        },
+        {
+          "type": "para",
+          "text": "An automated backup script that compresses an application folder and saves it to a backup directory, retaining only the last 7 days of backups:",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "#!/bin/bash",
+            "SOURCE_DIR=\"/var/www/app\"",
+            "BACKUP_DIR=\"/opt/backups\"",
+            "DATE=$(date +%F_%H-%M-%S)",
+            "BACKUP_FILE=\"${BACKUP_DIR}/app_backup_${DATE}.tar.gz\"",
+            "mkdir -p \"$BACKUP_DIR\"",
+            "tar -czf \"$BACKUP_FILE\" -C \"$SOURCE_DIR\" .",
+            "echo \"Backup completed: $BACKUP_FILE\"",
+            "find \"$BACKUP_DIR\" -type f -name 'app_backup_*.tar.gz' -mtime +7 -delete"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Linux administration revolves around managing processes, monitoring resources (htop, ss, lsof), manipulation of strings/files (grep, sed, awk), and writing shell scripts to automate backups and log auditing.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you find which process is listening on port 80?",
+          "answer": "Use 'ss -tulpn | grep :80' or 'lsof -i :80' to find the Process ID (PID) and executable name currently bound to port 80.",
+          "id": "uid-3"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between 'df -h' and 'du -sh'.",
+          "answer": "'df -h' reports file system disk space usage overall at the device partition level. 'du -sh' estimates file space usage recursively for a specific directory or file path.",
+          "id": "uid-4"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Create a cron job that runs every hour, checks if the system memory usage is above 90%, and appends an alert to '/var/log/memory_monitor.log' if it exceeds the limit.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Log Rotation Failure",
+          "text": "An application server crashed due to a 100% full root disk because '/var/log/myapp.log' grew to 80GB. The SRE team wrote a logrotate configuration file and set up an automated bash script that monitors disk usage via 'df -h' and alerts Slack before the capacity hits 85%.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify permission bits using 'ls -la' (e.g. chmod +x).",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Test scripts manually in dry-run mode before putting them in cron jobs.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify process environment variables inside cron shells.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-2",
+      "num": "2",
+      "title": "Virtual Machines & Bare Metal",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "2",
+          "title": "Virtual Machines & Bare Metal"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 2: Virtual Machines & Bare Metal. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "2.1 Virtualization & Hypervisors"
+        },
+        {
+          "type": "para",
+          "text": "Virtualization allows multiple independent operating systems (VMs) to run on a single physical host by abstracting hardware resources.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Type 1 Hypervisors (Bare Metal)**: Run directly on host hardware (e.g. VMware ESXi, Proxmox VE, KVM). High performance, enterprise-grade.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Type 2 Hypervisors (Hosted)**: Run on top of an existing Operating System (e.g. VirtualBox, VMware Workstation). Ideal for local development.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Hypervisors Architecture Visualized"
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n  <div class=\"diagram-wrapper\">\n    <svg viewBox=\"0 0 800 280\" width=\"100%\" height=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">\n      <style>\n        .title { fill: #f8fafc; font-family: sans-serif; font-size: 14px; font-weight: bold; text-anchor: middle; }\n        .sub { fill: #94a3b8; font-family: sans-serif; font-size: 11px; text-anchor: middle; }\n        .box-text { fill: #ffffff; font-family: sans-serif; font-size: 12px; font-weight: bold; text-anchor: middle; }\n        .accent-text { fill: #00ffc8; font-family: sans-serif; font-size: 12px; font-weight: bold; text-anchor: middle; }\n      </style>\n      \n      <!-- VM Side -->\n      <text x=\"200\" y=\"25\" class=\"title\">VIRTUAL MACHINES (Hardware Virtualization)</text>\n      <!-- Guest App 1 -->\n      <rect x=\"50\" y=\"50\" width=\"90\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"95\" y=\"74\" class=\"box-text\">App A</text>\n      <rect x=\"50\" y=\"90\" width=\"90\" height=\"30\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"95\" y=\"109\" class=\"sub\">Bins/Libs</text>\n      <rect x=\"50\" y=\"120\" width=\"90\" height=\"30\" rx=\"4\" fill=\"#475569\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"95\" y=\"139\" class=\"sub\">Guest OS</text>\n\n      <!-- Guest App 2 -->\n      <rect x=\"150\" y=\"50\" width=\"90\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"195\" y=\"74\" class=\"box-text\">App B</text>\n      <rect x=\"150\" y=\"90\" width=\"90\" height=\"30\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"195\" y=\"109\" class=\"sub\">Bins/Libs</text>\n      <rect x=\"150\" y=\"120\" width=\"90\" height=\"30\" rx=\"4\" fill=\"#475569\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"195\" y=\"139\" class=\"sub\">Guest OS</text>\n\n      <!-- Hypervisor -->\n      <rect x=\"50\" y=\"160\" width=\"190\" height=\"40\" rx=\"6\" fill=\"#111827\" stroke=\"#00ffc8\" stroke-width=\"2\"/>\n      <text x=\"145\" y=\"185\" class=\"accent-text\">Hypervisor (KVM/ESXi)</text>\n      \n      <!-- Host OS / Hard -->\n      <rect x=\"50\" y=\"210\" width=\"190\" height=\"40\" rx=\"6\" fill=\"#334155\" stroke=\"#94a3b8\" stroke-width=\"1.5\"/>\n      <text x=\"145\" y=\"234\" class=\"box-text\">Physical Hardware & Host OS</text>\n\n\n      <!-- Container Side -->\n      <text x=\"600\" y=\"25\" class=\"title\">CONTAINERS (OS-level Virtualization)</text>\n      <!-- Container A -->\n      <rect x=\"460\" y=\"50\" width=\"80\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"500\" y=\"74\" class=\"box-text\">App A</text>\n      <rect x=\"460\" y=\"90\" width=\"80\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"500\" y=\"111\" class=\"sub\">Isolated Libs</text>\n\n      <!-- Container B -->\n      <rect x=\"550\" y=\"50\" width=\"80\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"590\" y=\"74\" class=\"box-text\">App B</text>\n      <rect x=\"550\" y=\"90\" width=\"80\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"590\" y=\"111\" class=\"sub\">Isolated Libs</text>\n\n      <!-- Container C -->\n      <rect x=\"640\" y=\"50\" width=\"80\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"680\" y=\"74\" class=\"box-text\">App C</text>\n      <rect x=\"640\" y=\"90\" width=\"80\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"680\" y=\"111\" class=\"sub\">Isolated Libs</text>\n\n      <!-- Container Engine -->\n      <rect x=\"460\" y=\"135\" width=\"260\" height=\"40\" rx=\"6\" fill=\"#111827\" stroke=\"#00ffc8\" stroke-width=\"2\"/>\n      <text x=\"590\" y=\"160\" class=\"accent-text\">Container Engine (containerd/Docker)</text>\n\n      <!-- Host OS / Kernel -->\n      <rect x=\"460\" y=\"185\" width=\"260\" height=\"30\" rx=\"6\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1\"/>\n      <text x=\"590\" y=\"204\" class=\"box-text\">Shared Linux Kernel</text>\n\n      <!-- Hardware -->\n      <rect x=\"460\" y=\"225\" width=\"260\" height=\"25\" rx=\"6\" fill=\"#334155\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"590\" y=\"242\" class=\"sub\">Physical Hardware</text>\n    </svg>\n  </div>"
+        },
+        {
+          "type": "h2",
+          "text": "2.2 KVM (Kernel-based Virtual Machine)"
+        },
+        {
+          "type": "para",
+          "text": "KVM turns the Linux kernel into a Type-1 hypervisor. It utilizes hardware virtualization extensions (Intel VT-x or AMD-V). Operations use 'virsh' CLI to manage VMs:",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# Install KVM dependencies on Ubuntu",
+            "sudo apt update && sudo apt install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager",
+            "",
+            "# Create a KVM Virtual Machine via CLI",
+            "virt-install \\",
+            "  --name=ubuntu-server-vm \\",
+            "  --vcpus=2 \\",
+            "  --memory=2048 \\",
+            "  --disk size=20,format=qcow2 \\",
+            "  --os-variant=ubuntu22.04 \\",
+            "  --graphics none \\",
+            "  --location='http://archive.ubuntu.com/ubuntu/dists/jammy/main/installer-amd64/' \\",
+            "  --extra-args='console=ttyS0,115200n8 serial'"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Type-1 Hypervisors provide high performance by running directly on hardware. KVM integrates virtual machine management directly into the Linux kernel, using QEMU to emulate devices.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between full virtualization and paravirtualization?",
+          "answer": "Full virtualization emulates the entire hardware, allowing unmodified Guest OSs to run. Paravirtualization modifies the Guest OS kernel to communicate directly with the hypervisor via hypercalls, improving network and disk performance significantly.",
+          "id": "uid-5"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Install KVM on a local Linux server or virtual machine, configure a bridged network interface, and install an Alpine Linux instance inside a VM.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "VM Disk Exhaustion",
+          "text": "A database VM hosted on Proxmox ran out of storage space. The SRE team resolved this by increasing the disk allocation on the host via LVM/QEMU, rescanning the SCSI bus inside the VM, resizing the physical volume, and expanding the ext4 file system inline without shutting down the VM.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify CPU hardware virtualization support: egrep -c '(vmx|svm)' /proc/cpuinfo.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check libvirtd service status: systemctl status libvirtd.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify virtual network bridges: ip link show.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-3",
+      "num": "3",
+      "title": "Process Management & Reverse Proxies",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "3",
+          "title": "Process Management & Reverse Proxies"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 3: Process Management & Reverse Proxies. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "3.1 Process Management: Systemd & PM2"
+        },
+        {
+          "type": "para",
+          "text": "Applications run as processes. To make them resilient, we wrap them in process managers.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "1. Systemd Service Unit File"
+        },
+        {
+          "type": "para",
+          "text": "Create a systemd unit file to manage a Node.js web server ('/etc/systemd/system/node-app.service'):",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "[Unit]",
+            "Description=Node.js Fullstack Production Server",
+            "After=network.target postgresql.service",
+            "",
+            "[Service]",
+            "Type=simple",
+            "User=nodeuser",
+            "WorkingDirectory=/var/www/node-app",
+            "ExecStart=/usr/bin/node server.js",
+            "Restart=on-failure",
+            "RestartSec=5s",
+            "Environment=NODE_ENV=production PORT=3000",
+            "",
+            "[Install]",
+            "WantedBy=multi-user.target"
+          ],
+          "lang": "ini"
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# Enable and start the service",
+            "sudo systemctl daemon-reload",
+            "sudo systemctl enable node-app.service",
+            "sudo systemctl start node-app.service"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "h2",
+          "text": "3.2 Reverse Proxies: NGINX"
+        },
+        {
+          "type": "para",
+          "text": "A reverse proxy receives public requests and forwards them to internal server processes, handling SSL/TLS termination, request routing, caching, and rate limiting.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Production NGINX Configuration"
+        },
+        {
+          "type": "para",
+          "text": "This configuration redirects HTTP traffic to HTTPS, sets up secure SSL options, handles rate limiting, and forwards traffic to the backend server running on port 3000:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "nginx": "limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;\nserver {\n    listen 80;\n    server_name learnxchain.com www.learnxchain.com;\n    return 301 https://learnxchain.com$request_uri;\n}\nserver {\n    listen 443 ssl http2;\n    server_name learnxchain.com;\n    ssl_certificate /etc/letsencrypt/live/learnxchain.com/fullchain.pem;\n    ssl_certificate_key /etc/letsencrypt/live/learnxchain.com/privkey.pem;\n    ssl_protocols TLSv1.2 TLSv1.3;\n    ssl_ciphers HIGH:!aNULL:!MD5;\n    gzip on;\n    gzip_types text/plain text/css application/json application/javascript;\n    location / {\n        proxy_pass http://localhost:3000;\n        proxy_http_version 1.1;\n        proxy_set_header Upgrade $http_upgrade;\n        proxy_set_header Connection 'upgrade';\n        proxy_set_header Host $host;\n        proxy_set_header X-Real-IP $remote_addr;\n        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;\n        proxy_set_header X-Forwarded-Proto $scheme;\n        limit_req zone=api_limit burst=20 nodelay;\n    }\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Systemd controls system-level services, handling restarts on crashes. NGINX functions as a reverse proxy, securing applications from public traffic and managing load distribution.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between a forward proxy and a reverse proxy.",
+          "answer": "A forward proxy hides the identity of the client (used by clients to access resources, e.g. a VPN). A reverse proxy hides the identity of the backend server (used by servers to handle client traffic, routing, SSL termination, and load balancing).",
+          "id": "uid-6"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the use of 'proxy_set_header Upgrade $http_upgrade' in NGINX?",
+          "answer": "This is used for WebSockets protocol upgrading. When a client requests a WebSocket connection, NGINX passes the upgrade headers to the backend node server so that the persistent connection can be successfully established.",
+          "id": "uid-7"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Create a systemd unit file for a simple Python HTTP server, test that it starts automatically on reboot, and proxy public port 80 traffic to it using NGINX.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "DoS Attack Mitigation",
+          "text": "A SaaS product experienced a Denial of Service attack where a single IP flooded the application with 500 requests per second. The SRE team quickly updated the NGINX configuration, applying limit_req_zone to throttle requests to 15 per second, returning a 429 Too Many Requests status code for abusers.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify NGINX configuration syntax: nginx -t.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check systemd logs: journalctl -u node-app -f.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify port binding: ss -tulpn | grep nginx.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-4",
+      "num": "4",
+      "title": "SSL/TLS & Certificate Management",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "4",
+          "title": "SSL/TLS & Certificate Management"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 4: SSL/TLS & Certificate Management. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "4.1 SSL/TLS Handshake & PKI"
+        },
+        {
+          "type": "para",
+          "text": "Public Key Infrastructure (PKI) secures communications on the web. During a TLS 1.3 handshake:",
+          "options": {}
+        },
+        {
+          "type": "numbered",
+          "text": "1. Client Hello: Client sends supported cipher suites and key share.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "2. Server Hello: Server selects cipher, provides key share, and sends its SSL Certificate.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "3. Certificate Verification: Client verifies certificate against trusted root Certificate Authorities (CAs).",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "4. Session Keys: Both parties generate symmetric session keys for encrypted communication.",
+          "level": 0
+        },
+        {
+          "type": "h2",
+          "text": "4.2 Let's Encrypt Automation with Certbot"
+        },
+        {
+          "type": "para",
+          "text": "Let's Encrypt uses the ACME protocol to issue certificates. Standard verification is completed via HTTP-01 or DNS-01 challenges.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# Install Certbot on Ubuntu for NGINX",
+            "sudo apt update && sudo apt install -y certbot python3-certbot-nginx",
+            "",
+            "# Obtain SSL certificate automatically configuration NGINX",
+            "sudo certbot --nginx -d learnxchain.com -d www.learnxchain.com",
+            "",
+            "# Test auto-renewal cron jobs",
+            "sudo certbot renew --dry-run"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "h3",
+          "text": "Manual Troubleshooting Commands"
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# Inspect certificate expiration and info",
+            "openssl x509 -in /etc/letsencrypt/live/learnxchain.com/fullchain.pem -text -noout",
+            "",
+            "# Test TLS connection to a public port and print cert chain",
+            "openssl s_client -connect learnxchain.com:443 -tls1_3"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "TLS handshakes secure internet data. Certbot automates certificate requests and renewal from Let's Encrypt, preventing certificate expiration incidents.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between an HTTP-01 and DNS-01 certbot challenge?",
+          "answer": "HTTP-01 requires placing a specific file at a path on the web server (port 80 must be open to the internet). DNS-01 requires creating a specific TXT DNS record, which is ideal for wildcard certificates or internal environments where port 80 is blocked.",
+          "id": "uid-8"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Generate a self-signed certificate using OpenSSL, configure an NGINX server block to use it, and curl the endpoint bypassing validation with 'curl -k'.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Expired Certificates Incident",
+          "text": "An ecommerce store went offline with security warning page blockages because the SSL certificate expired. The SRE team fixed this by resolving a port 80 redirect issue preventing ACME validation, renewing the cert inline, and configuring a script to monitor certificate expiry and alert Slack 14 days in advance.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify that port 80 is open to let ACME HTTP-01 validation reach the host.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check certificate expiration using openssl x509 CLI.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Confirm that the certificate chain is complete (use fullchain.pem, not cert.pem).",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-5",
+      "num": "5",
+      "title": "Cloud Computing Fundamentals",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "5",
+          "title": "Cloud Computing Fundamentals"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 5: Cloud Computing Fundamentals. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "5.1 Cloud Models: IaaS, PaaS, SaaS, and FaaS"
+        },
+        {
+          "type": "para",
+          "text": "Cloud architectures divide operational responsibility between the customer and provider:",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Infrastructure as a Service (IaaS)**: Raw compute (VMs), storage, and networking (e.g. AWS EC2, GCP Compute Engine). You manage OS and stack.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Platform as a Service (PaaS)**: Managed application runtimes (e.g. Heroku, AWS Elastic Beanstalk). You deploy code, provider manages OS.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Serverless / Function as a Service (FaaS)**: Event-driven execution (e.g. AWS Lambda, GCP Cloud Run). Code scales on demand, down to zero.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Cloud Service Comparison"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "Provider",
+              "Compute (VM)",
+              "Kubernetes Service",
+              "Object Storage",
+              "Serverless Functions"
+            ],
+            [
+              "AWS",
+              "EC2",
+              "EKS",
+              "S3",
+              "Lambda"
+            ],
+            [
+              "GCP",
+              "Compute Engine",
+              "GKE",
+              "Cloud Storage",
+              "Cloud Run / Functions"
+            ],
+            [
+              "Azure",
+              "Virtual Machines",
+              "AKS",
+              "Blob Storage",
+              "Azure Functions"
+            ],
+            [
+              "DigitalOcean",
+              "Droplets",
+              "DOKS",
+              "Spaces",
+              "Functions"
+            ]
+          ],
+          "headers": [
+            "Cloud",
+            "VM Service",
+            "K8s Service",
+            "Storage",
+            "Serverless"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Cloud services run from bare infrastructure (IaaS) to fully managed platforms (PaaS/FaaS). Choosing the right service involves balancing cost, setup complexity, and scaling flexibility.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the concept of 'shared responsibility model' in cloud computing.",
+          "answer": "The cloud provider is responsible for securing the physical servers, virtualization hypervisors, and global network. The customer is responsible for patching guest OS, configuring firewalls (Security Groups), protecting data, and managing access IAM credentials.",
+          "id": "uid-9"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Draft a cost-comparison model for hosting a web application requiring 4 cores, 8GB RAM, and 100GB persistent storage across AWS, GCP, and DigitalOcean.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Cloud Cost Overrun",
+          "text": "A startup was billed $25,000 in a month due to runaway dev VMs and unattached disk volumes. SRE instituted cost optimization policies: enforcing AWS budget alarms, automating the deletion of untagged resources, and scheduling dev workloads to shut down on weekends.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify resource quotas in the target cloud zone before provisioning.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Ensure multi-factor authentication (MFA) is active on the root account.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Configure budget alerts at 50%, 75%, and 90% of expected cloud spend.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-6",
+      "num": "6",
+      "title": "Auto Scaling Groups & Managed Infrastructure",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "6",
+          "title": "Auto Scaling Groups & Managed Infrastructure"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 6: Auto Scaling Groups & Managed Infrastructure. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "6.1 High Availability & Disaster Recovery"
+        },
+        {
+          "type": "para",
+          "text": "High availability (HA) ensures systems remain operational even when hardware or network components fail. We achieve HA through redundancy: hosting servers across multiple independent **Availability Zones (AZs)**.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Auto Scaling Groups & Load Balancers"
+        },
+        {
+          "type": "para",
+          "text": "An **Auto Scaling Group (ASG)** automatically launches or terminates virtual machines based on metrics like CPU utilization or network traffic. A **Load Balancer** sits in front of the ASG, distributing requests evenly across healthy virtual machine instances.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "6.2 Disaster Recovery Strategies"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "Strategy",
+              "Recovery Point Objective (RPO)",
+              "Recovery Time Objective (RTO)",
+              "Infrastructure Cost"
+            ],
+            [
+              "Backup & Restore",
+              "Hours to Days (Data backup age)",
+              "Hours to Days (Time to restore)",
+              "Low (Storage only)"
+            ],
+            [
+              "Pilot Light",
+              "Minutes (DB replication live)",
+              "Hours (Scaling up compute)",
+              "Medium (DB is hot, compute is off)"
+            ],
+            [
+              "Warm Standby",
+              "Seconds / Real-time",
+              "Minutes (Route switch)",
+              "Medium-High (Active running standby)"
+            ],
+            [
+              "Active-Active (Multi-region)",
+              "Real-time",
+              "Near Zero (Instant failover)",
+              "High (Double resources active)"
+            ]
+          ],
+          "headers": [
+            "Disaster Recovery Strategy",
+            "RPO",
+            "RTO",
+            "Cost Impact"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Auto Scaling handles request fluctuations. Dynamic load balancers isolate applications from single-point-of-failure instances across multiple Availability Zones.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between RTO and RPO?",
+          "answer": "Recovery Time Objective (RTO) is the maximum acceptable duration of system downtime after an outage. Recovery Point Objective (RPO) is the maximum acceptable age of data loss, measuring the time between the last backup/replication and the outage.",
+          "id": "uid-10"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Design a multi-AZ VPC layout using dry-erase board or design tools, showing public subnets for load balancers and private subnets for app servers and databases.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Black Friday traffic spike",
+          "text": "During a flash sale, traffic surged by 800% in 2 minutes. The SRE team configured the ASG with a step scaling policy based on CPU utilization and request count per target, scaling the fleet from 3 to 45 servers seamlessly without dropping checkout requests.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify that target group health checks are configured correctly.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check cooldown periods on Auto Scaling scaling policies.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Confirm instance limits within the cloud provider region.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-7",
+      "num": "7",
+      "title": "Containers & Container Runtimes",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "7",
+          "title": "Containers & Container Runtimes"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 7: Containers & Container Runtimes. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "7.1 Containerization Under the Hood"
+        },
+        {
+          "type": "para",
+          "text": "Containers are not virtual machines. They are isolated processes running on the host system sharing the host's operating system kernel. Isolation is achieved via Linux kernel primitives:",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Namespaces**: Restrict what the container can see (PID isolation, Network interface isolation, Mount isolation, IPC, UTS, User).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Cgroups (Control Groups)**: Restrict what resources the container can use (CPU limits, Memory limits, Disk I/O throttling).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Pivot Root / chroot**: Changes the root filesystem directory for the container process.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Visual Architecture Comparison: VM vs Container"
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n  <div class=\"diagram-wrapper\">\n    <svg viewBox=\"0 0 800 280\" width=\"100%\" height=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">\n      <style>\n        .title { fill: #f8fafc; font-family: sans-serif; font-size: 14px; font-weight: bold; text-anchor: middle; }\n        .sub { fill: #94a3b8; font-family: sans-serif; font-size: 11px; text-anchor: middle; }\n        .box-text { fill: #ffffff; font-family: sans-serif; font-size: 12px; font-weight: bold; text-anchor: middle; }\n        .accent-text { fill: #00ffc8; font-family: sans-serif; font-size: 12px; font-weight: bold; text-anchor: middle; }\n      </style>\n      \n      <!-- VM Side -->\n      <text x=\"200\" y=\"25\" class=\"title\">VIRTUAL MACHINES (Hardware Virtualization)</text>\n      <!-- Guest App 1 -->\n      <rect x=\"50\" y=\"50\" width=\"90\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"95\" y=\"74\" class=\"box-text\">App A</text>\n      <rect x=\"50\" y=\"90\" width=\"90\" height=\"30\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"95\" y=\"109\" class=\"sub\">Bins/Libs</text>\n      <rect x=\"50\" y=\"120\" width=\"90\" height=\"30\" rx=\"4\" fill=\"#475569\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"95\" y=\"139\" class=\"sub\">Guest OS</text>\n\n      <!-- Guest App 2 -->\n      <rect x=\"150\" y=\"50\" width=\"90\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"195\" y=\"74\" class=\"box-text\">App B</text>\n      <rect x=\"150\" y=\"90\" width=\"90\" height=\"30\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"195\" y=\"109\" class=\"sub\">Bins/Libs</text>\n      <rect x=\"150\" y=\"120\" width=\"90\" height=\"30\" rx=\"4\" fill=\"#475569\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"195\" y=\"139\" class=\"sub\">Guest OS</text>\n\n      <!-- Hypervisor -->\n      <rect x=\"50\" y=\"160\" width=\"190\" height=\"40\" rx=\"6\" fill=\"#111827\" stroke=\"#00ffc8\" stroke-width=\"2\"/>\n      <text x=\"145\" y=\"185\" class=\"accent-text\">Hypervisor (KVM/ESXi)</text>\n      \n      <!-- Host OS / Hard -->\n      <rect x=\"50\" y=\"210\" width=\"190\" height=\"40\" rx=\"6\" fill=\"#334155\" stroke=\"#94a3b8\" stroke-width=\"1.5\"/>\n      <text x=\"145\" y=\"234\" class=\"box-text\">Physical Hardware & Host OS</text>\n\n\n      <!-- Container Side -->\n      <text x=\"600\" y=\"25\" class=\"title\">CONTAINERS (OS-level Virtualization)</text>\n      <!-- Container A -->\n      <rect x=\"460\" y=\"50\" width=\"80\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"500\" y=\"74\" class=\"box-text\">App A</text>\n      <rect x=\"460\" y=\"90\" width=\"80\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"500\" y=\"111\" class=\"sub\">Isolated Libs</text>\n\n      <!-- Container B -->\n      <rect x=\"550\" y=\"50\" width=\"80\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"590\" y=\"74\" class=\"box-text\">App B</text>\n      <rect x=\"550\" y=\"90\" width=\"80\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"590\" y=\"111\" class=\"sub\">Isolated Libs</text>\n\n      <!-- Container C -->\n      <rect x=\"640\" y=\"50\" width=\"80\" height=\"40\" rx=\"4\" fill=\"#0b1329\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"680\" y=\"74\" class=\"box-text\">App C</text>\n      <rect x=\"640\" y=\"90\" width=\"80\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"680\" y=\"111\" class=\"sub\">Isolated Libs</text>\n\n      <!-- Container Engine -->\n      <rect x=\"460\" y=\"135\" width=\"260\" height=\"40\" rx=\"6\" fill=\"#111827\" stroke=\"#00ffc8\" stroke-width=\"2\"/>\n      <text x=\"590\" y=\"160\" class=\"accent-text\">Container Engine (containerd/Docker)</text>\n\n      <!-- Host OS / Kernel -->\n      <rect x=\"460\" y=\"185\" width=\"260\" height=\"30\" rx=\"6\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1\"/>\n      <text x=\"590\" y=\"204\" class=\"box-text\">Shared Linux Kernel</text>\n\n      <!-- Hardware -->\n      <rect x=\"460\" y=\"225\" width=\"260\" height=\"25\" rx=\"6\" fill=\"#334155\" stroke=\"#94a3b8\" stroke-width=\"1\"/>\n      <text x=\"590\" y=\"242\" class=\"sub\">Physical Hardware</text>\n    </svg>\n  </div>"
+        },
+        {
+          "type": "h2",
+          "text": "7.2 OCI Standards & Container Runtimes"
+        },
+        {
+          "type": "para",
+          "text": "The Open Container Initiative (OCI) defines specifications for container runtimes and image formats:",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Low-level runtime (runC)**: Interacts directly with the kernel to set up namespaces, cgroups, and execute container processes.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **High-level runtime (containerd / CRI-O)**: Manages image downloads, image unpacking, container network setup, and calls runC.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Containers isolate processes on a shared kernel using namespaces and cgroups. High-level runtimes like containerd supervise these lifecycles, conforming to OCI standards.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between PID and NET namespaces in Linux.",
+          "answer": "The PID namespace isolates the process ID space, meaning a process inside a container cannot see or kill processes running on the host or other containers. The NET namespace isolates network devices, ports, routing tables, and firewall rules, giving each container its own virtual loopback and IP address.",
+          "id": "uid-11"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What happens if a container process exceeds its memory limit configured in cgroups?",
+          "answer": "The Linux kernel's Out-Of-Memory (OOM) killer will trigger, sending a SIGKILL signal directly to the container process. The container terminates with exit code 137 (OOMKilled).",
+          "id": "uid-12"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Use command line tools to inspect running namespaces on a Linux machine using 'lsns' and check container resource configuration under '/sys/fs/cgroup/'.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Container Escape Vulnerability",
+          "text": "A security audit flagged containers running as privileged users. SRE mitigated container breakout risks by changing all Docker images to run as non-root users, disabling privilege escalation, and utilizing namespaces for user remapping.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect kernel namespaces using the 'lsns' command.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify cgroup configurations under '/sys/fs/cgroup/memory/'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check system logs for OOM events using 'dmesg -T | grep -i oom'.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-8",
+      "num": "8",
+      "title": "Docker Complete Mastery",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "8",
+          "title": "Docker Complete Mastery"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 8: Docker Complete Mastery. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "8.1 Multi-Stage Dockerfile Optimization"
+        },
+        {
+          "type": "para",
+          "text": "Multi-stage builds allow developers to write clean, small production container images. Heavy dependencies, compilers, and development tools are separated into a 'builder' stage, leaving only compiled assets in the final container layer.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Production Multi-Stage Dockerfile"
+        },
+        {
+          "type": "para",
+          "text": "Here is an optimized, non-root, multi-stage Dockerfile for a production Node.js application:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "dockerfile": "FROM node:18-alpine AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\nRUN npm prune --production\n\nFROM node:18-alpine AS runner\nWORKDIR /app\nENV NODE_ENV=production\nRUN addgroup -g 1001 -S nodeapp && adduser -u 1001 -S nodeapp -G nodeapp\nUSER nodeapp\nCOPY --from=builder /app/package*.json ./\nCOPY --from=builder /app/node_modules ./node_modules\nCOPY --from=builder /app/dist ./dist\nEXPOSE 3001\nCMD [\"node\", \"dist/server.js\"]"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "8.2 Orchestrating with Docker Compose"
+        },
+        {
+          "type": "para",
+          "text": "Deploy a multi-container stack containing a web application, a PostgreSQL database, and a Redis cache using Docker Compose:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "docker_compose": "version: '3.8'\nservices:\n  web_app:\n    build:\n      context: .\n      dockerfile: Dockerfile\n    ports:\n      - \"3001:3001\"\n    environment:\n      - DATABASE_URL=postgresql://admin:supersecret@db:5432/production_db\n      - REDIS_URL=redis://cache:6379\n    depends_on:\n      - db\n      - cache\n  db:\n    image: postgres:15-alpine\n    environment:\n      - POSTGRES_USER=admin\n      - POSTGRES_PASSWORD=supersecret\n      - POSTGRES_DB=production_db\n    volumes:\n      - pg_data:/var/lib/postgresql/data\n    ports:\n      - \"5432:5432\"\n  cache:\n    image: redis:7-alpine\n    ports:\n      - \"6379:6379\"\nvolumes:\n  pg_data:"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Optimized Dockerfiles use multi-stage builds and run as non-root users. Docker Compose orchestrates multi-container runtimes on developer machines or single-node VPS environments.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between COPY and ADD in a Dockerfile?",
+          "answer": "COPY simply copies files from the local build context into the container image. ADD has additional features: it can download files from URLs and automatically extract archive contents (tar.gz, zip) into the destination directory. COPY is preferred for its simplicity.",
+          "id": "uid-13"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How does Docker caching work during image build?",
+          "answer": "Docker processes Dockerfile instructions from top to bottom. For each line, Docker checks its cache for an existing layer. If a command or copied file changes (e.g. package.json), the cache for that layer and all subsequent layers is invalidated, requiring full execution.",
+          "id": "uid-14"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a multi-stage Dockerfile for a React application served by NGINX. Optimize the final image size to be under 30MB.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Huge Image Deployments",
+          "text": "A company was deploying 1.5GB Docker images, causing slow startup times and high registry costs. The platform team reorganized the Dockerfiles into multi-stage structures, reducing the final image size to 68MB and cutting deployment times from 8 minutes to 15 seconds.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect Docker build history using 'docker history <image_id>'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check running container logs: 'docker logs -f <container_name>'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect container networks: 'docker network inspect <network_name>'.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-9",
+      "num": "9",
+      "title": "Kubernetes Complete Guide (Part 1)",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "9",
+          "title": "Kubernetes Complete Guide (Part 1)"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 9: Kubernetes Complete Guide (Part 1). This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "9.1 Kubernetes Architecture"
+        },
+        {
+          "type": "para",
+          "text": "Kubernetes is an open-source container orchestration platform for automating application deployment, scaling, and management.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Control Plane**: Manages the cluster state. Contains 'kube-apiserver', 'etcd' (data store), 'kube-scheduler' (assigns nodes), and 'kube-controller-manager' (monitors state).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Worker Nodes**: Execute workloads. Contains 'kubelet' (agent managing container lifecycle), 'kube-proxy' (network rules), and container runtimes.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Kubernetes Cluster Architecture Diagram"
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n  <div class=\"diagram-wrapper\">\n    <svg viewBox=\"0 0 800 320\" width=\"100%\" height=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">\n      <style>\n        .arrow { stroke: #00e5ff; stroke-width: 1.5; fill: none; }\n        .text-head { fill: #f8fafc; font-family: sans-serif; font-size: 13px; font-weight: bold; text-anchor: middle; }\n        .text-sub { fill: #94a3b8; font-family: sans-serif; font-size: 10px; text-anchor: middle; }\n        .node-title { fill: #00ffc8; font-family: sans-serif; font-size: 14px; font-weight: bold; }\n      </style>\n      <defs>\n        <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\">\n          <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#00e5ff\"/>\n        </marker>\n      </defs>\n\n      <!-- Control Plane Node -->\n      <rect x=\"20\" y=\"20\" width=\"340\" height=\"280\" rx=\"8\" fill=\"#0f172a\" stroke=\"#1e293b\" stroke-width=\"2\"/>\n      <text x=\"40\" y=\"45\" class=\"node-title\">Control Plane (Master Node)</text>\n\n      <!-- API Server -->\n      <rect x=\"130\" y=\"65\" width=\"120\" height=\"50\" rx=\"6\" fill=\"#1e1b4b\" stroke=\"#4f46e5\" stroke-width=\"2\"/>\n      <text x=\"190\" y=\"90\" class=\"text-head\">kube-apiserver</text>\n      <text x=\"190\" y=\"105\" class=\"text-sub\">REST Entrypoint</text>\n\n      <!-- Scheduler -->\n      <rect x=\"40\" y=\"140\" width=\"120\" height=\"45\" rx=\"6\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1.5\"/>\n      <text x=\"100\" y=\"162\" class=\"text-head\">kube-scheduler</text>\n      <text x=\"100\" y=\"177\" class=\"text-sub\">Pod Placement</text>\n\n      <!-- Controller Manager -->\n      <rect x=\"220\" y=\"140\" width=\"120\" height=\"45\" rx=\"6\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1.5\"/>\n      <text x=\"280\" y=\"162\" class=\"text-head\">controller-manager</text>\n      <text x=\"280\" y=\"177\" class=\"text-sub\">State reconciler</text>\n\n      <!-- ETCD -->\n      <rect x=\"130\" y=\"220\" width=\"120\" height=\"50\" rx=\"6\" fill=\"#064e3b\" stroke=\"#10b981\" stroke-width=\"2\"/>\n      <text x=\"190\" y=\"245\" class=\"text-head\">etcd</text>\n      <text x=\"190\" y=\"260\" class=\"text-sub\">Consensus KV Store</text>\n\n\n      <!-- Worker Node -->\n      <rect x=\"440\" y=\"20\" width=\"340\" height=\"280\" rx=\"8\" fill=\"#0f172a\" stroke=\"#1e293b\" stroke-width=\"2\"/>\n      <text x=\"460\" y=\"45\" class=\"node-title\">Worker Node</text>\n\n      <!-- Kubelet -->\n      <rect x=\"470\" y=\"65\" width=\"110\" height=\"50\" rx=\"6\" fill=\"#1e293b\" stroke=\"#00ffc8\" stroke-width=\"1.5\"/>\n      <text x=\"525\" y=\"90\" class=\"text-head\">kubelet</text>\n      <text x=\"525\" y=\"105\" class=\"text-sub\">Agent on Node</text>\n\n      <!-- Kube Proxy -->\n      <rect x=\"640\" y=\"65\" width=\"110\" height=\"50\" rx=\"6\" fill=\"#1e293b\" stroke=\"#94a3b8\" stroke-width=\"1.5\"/>\n      <text x=\"695\" y=\"90\" class=\"text-head\">kube-proxy</text>\n      <text x=\"695\" y=\"105\" class=\"text-sub\">Network rules</text>\n\n      <!-- Container Runtime -->\n      <rect x=\"470\" y=\"140\" width=\"280\" height=\"40\" rx=\"6\" fill=\"#020617\" stroke=\"#00e5ff\" stroke-width=\"2\"/>\n      <text x=\"610\" y=\"165\" class=\"text-head\">Container Runtime (containerd)</text>\n\n      <!-- Pods -->\n      <rect x=\"470\" y=\"200\" width=\"130\" height=\"75\" rx=\"6\" fill=\"#111827\" stroke=\"#eab308\" stroke-width=\"1.5\"/>\n      <text x=\"535\" y=\"220\" class=\"text-head\">Pod 1</text>\n      <circle cx=\"510\" cy=\"248\" r=\"10\" fill=\"#0369a1\" stroke=\"#38bdf8\"/>\n      <circle cx=\"535\" cy=\"248\" r=\"10\" fill=\"#0369a1\" stroke=\"#38bdf8\"/>\n      <circle cx=\"560\" cy=\"248\" r=\"10\" fill=\"#0369a1\" stroke=\"#38bdf8\"/>\n      <text x=\"535\" y=\"268\" class=\"text-sub\">Containers</text>\n\n      <rect x=\"620\" y=\"200\" width=\"130\" height=\"75\" rx=\"6\" fill=\"#111827\" stroke=\"#eab308\" stroke-width=\"1.5\"/>\n      <text x=\"685\" y=\"220\" class=\"text-head\">Pod 2</text>\n      <circle cx=\"670\" cy=\"248\" r=\"12\" fill=\"#0369a1\" stroke=\"#38bdf8\"/>\n      <circle cx=\"700\" cy=\"248\" r=\"12\" fill=\"#0369a1\" stroke=\"#38bdf8\"/>\n\n      <!-- Arrows -->\n      <path d=\"M 190 115 L 190 215\" class=\"arrow\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 190 215 L 190 118\" class=\"arrow\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 130 90 L 80 140\" class=\"arrow\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 250 90 L 300 140\" class=\"arrow\" marker-end=\"url(#arrow)\"/>\n\n      <!-- Master API Server to Kubelet -->\n      <path d=\"M 250 80 L 462 80\" class=\"arrow\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 470 95 L 258 95\" class=\"arrow\" marker-end=\"url(#arrow)\"/>\n    </svg>\n  </div>"
+        },
+        {
+          "type": "h2",
+          "text": "9.2 Core Kubernetes Manifests (YAML)"
+        },
+        {
+          "type": "para",
+          "text": "Deploy a scalable application using Deployment and Service resources:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "k8s": "apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: lms-app-deployment\n  labels:\n    app: lms\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: lms\n  template:\n    metadata:\n      labels:\n        app: lms\n    spec:\n      containers:\n      - name: lms-web\n        image: node:18-alpine\n        ports:\n        - containerPort: 3001\n        resources:\n          limits:\n            cpu: \"500m\"\n            memory: \"512Mi\"\n          requests:\n            cpu: \"250m\"\n            memory: \"256Mi\"\n---\napiVersion: v1\nkind: Service\nmetadata:\n  name: lms-service\nspec:\n  type: ClusterIP\n  selector:\n    app: lms\n  ports:\n  - port: 80\n    targetPort: 3001"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "The Control Plane coordinates the cluster; Worker Nodes execute the pods. Yaml manifests declare the desired state, which Kubernetes actively maintains.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between a Pod and a Container.",
+          "answer": "A container is a single executable process isolated at the OS level. A Pod is the smallest deployable unit in Kubernetes, wrapping one or more containers that share the same network namespace, storage volumes, and IP address.",
+          "id": "uid-15"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the role of etcd in Kubernetes?",
+          "answer": "etcd is a highly-available, distributed key-value store used to hold all cluster state data and configuration. It is the single source of truth for Kubernetes, and only the kube-apiserver communicates directly with it.",
+          "id": "uid-16"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Install Minikube locally, deploy the LMS app manifest, scale the replica count to 5 using kubectl CLI, and view container status.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Node Failure Self-Healing",
+          "text": "A physical server in a Kubernetes cluster crashed. Within 40 seconds, the Control Plane noticed the Node status was NotReady, marked the scheduled pods as dead, and redeployed the web replicas onto healthy worker nodes automatically.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect pod statuses: 'kubectl get pods -A'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check event logs: 'kubectl describe pod <pod_name>'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Stream container output: 'kubectl logs <pod_name>'.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-10",
+      "num": "10",
+      "title": "Kubernetes Advanced (Part 2)",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "10",
+          "title": "Kubernetes Advanced (Part 2)"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 10: Kubernetes Advanced (Part 2). This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "10.1 StatefulSets & DaemonSets"
+        },
+        {
+          "type": "para",
+          "text": "• **StatefulSets**: Manage stateful applications requiring persistent storage and stable network identifiers (e.g. databases, Redis clusters). Pods are named sequentially: db-0, db-1.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **DaemonSets**: Ensure that all (or some) nodes run a copy of a Pod (e.g. Prometheus node-exporters, Fluentd logging agents).",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "10.2 Ingress Routing & Horizontal Pod Autoscaler (HPA)"
+        },
+        {
+          "type": "para",
+          "text": "An **Ingress** routes external HTTP/HTTPS traffic to Services inside the cluster using rules. The **HPA** dynamically scales pod count up or down based on CPU/Memory metrics:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "k8s": "apiVersion: networking.k8s.io/v1\nkind: Ingress\nmetadata:\n  name: main-ingress\n  annotations:\n    nginx.ingress.kubernetes.io/ssl-redirect: \"true\"\nspec:\n  ingressClassName: nginx\n  rules:\n  - host: learnxchain.com\n    http:\n      paths:\n      - path: /\n        pathType: Prefix\n        backend:\n          service:\n            name: lms-service\n            port:\n              number: 80\n---\napiVersion: autoscaling/v2\nkind: HorizontalPodAutoscaler\nmetadata:\n  name: lms-hpa\nspec:\n  scaleTargetRef:\n    apiVersion: apps/v1\n    kind: Deployment\n    name: lms-app-deployment\n  minReplicas: 2\n  maxReplicas: 10\n  metrics:\n  - type: Resource\n    resource:\n      name: cpu\n      target:\n        type: Utilization\n        averageUtilization: 75"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "StatefulSets handle stateful apps; Ingress controllers route external traffic into internal services. HPAs automatically manage pod replica scaling based on real-time resource loads.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between a Deployment and a StatefulSet.",
+          "answer": "Deployments manage stateless pods with random suffixes; pods can be deleted or replaced at any time. StatefulSets manage pods with persistent, ordinal indexes (0, 1, 2) that mount specific persistent volumes, maintaining identity during updates.",
+          "id": "uid-17"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How does HPA fetch metrics to perform scaling decisions?",
+          "answer": "HPA queries the Kubernetes metrics-server API to retrieve CPU/Memory usage logs of pods matching target selector labels, making scaling calculations every 15 seconds.",
+          "id": "uid-18"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a Helm chart packaging the LMS application, defining values.yaml parameters for replica count and image tags.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Database Corruption Prevention",
+          "text": "A database running on Kubernetes collapsed under high disk load. Because the SRE team used a StatefulSet with a persistent volume claim (PVC) template, the database pod was rescheduled onto a healthy host node, mounting the same block volume and recovering transaction logs without data loss.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify metrics-server installation: 'kubectl top nodes'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect Ingress rules: 'kubectl describe ingress <name>'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check volume attachments: 'kubectl get pv,pvc'.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-11",
+      "num": "11",
+      "title": "CI/CD Complete Guide",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "11",
+          "title": "CI/CD Complete Guide"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 11: CI/CD Complete Guide. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "11.1 CI/CD Pipelines & GitOps"
+        },
+        {
+          "type": "para",
+          "text": "Continuous Integration (CI) automates code builds, linting, and testing on commit. Continuous Deployment (CD) automates deployments into environments.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Production GitHub Actions Workflow"
+        },
+        {
+          "type": "para",
+          "text": "This workflow triggers on commits to main, installs dependencies, runs tests, builds a Docker image, pushes it to Docker Hub, and triggers an deployment:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "github": "name: Production CI/CD Pipeline\non:\n  push:\n    branches: [ main ]\njobs:\n  test-and-lint:\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout Code\n        uses: actions/checkout@v3\n      - name: Setup Node\n        uses: actions/setup-node@v3\n        with:\n          node-version: 18\n          cache: 'npm'\n      - name: Install dependencies\n        run: npm ci\n      - name: Run ESLint\n        run: npm run lint\n      - name: Run Tests\n        run: npm run test\n  build-and-push:\n    needs: test-and-lint\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout Code\n        uses: actions/checkout@v3\n      - name: Set up QEMU\n        uses: docker/setup-qemu-action@v2\n      - name: Set up Docker Buildx\n        uses: docker/setup-buildx-action@v2\n      - name: Log in to Docker Hub\n        uses: docker/login-action@v2\n        with:\n          username: ${{ secrets.DOCKER_USERNAME }}\n          password: ${{ secrets.DOCKER_PASSWORD }}\n      - name: Build and Push Image\n        uses: docker/build-push-action@v4\n        with:\n          context: .\n          push: true\n          tags: myorg/lms-app:${{ github.sha }},myorg/lms-app:latest"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "11.2 GitOps Git Reconciliation (ArgoCD)"
+        },
+        {
+          "type": "para",
+          "text": "ArgoCD runs inside Kubernetes and syncs clusters to desired state defined in a Git repository:",
+          "options": {}
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n  <div class=\"diagram-wrapper\">\n    <svg viewBox=\"0 0 800 200\" width=\"100%\" height=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">\n      <style>\n        .line { stroke: #00ffc8; stroke-width: 2; fill: none; }\n        .label { fill: #f8fafc; font-family: sans-serif; font-size: 11px; font-weight: bold; text-anchor: middle; }\n        .desc { fill: #94a3b8; font-family: sans-serif; font-size: 9px; text-anchor: middle; }\n      </style>\n      <defs>\n        <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\">\n          <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#00ffc8\"/>\n        </marker>\n      </defs>\n\n      <!-- Git Commit -->\n      <rect x=\"10\" y=\"60\" width=\"100\" height=\"60\" rx=\"8\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n      <text x=\"60\" y=\"85\" class=\"label\">1. Developer</text>\n      <text x=\"60\" y=\"105\" class=\"desc\">git push main</text>\n\n      <!-- GitHub Actions -->\n      <rect x=\"140\" y=\"60\" width=\"110\" height=\"60\" rx=\"8\" fill=\"#1e293b\" stroke=\"#4f46e5\" stroke-width=\"2\"/>\n      <text x=\"195\" y=\"85\" class=\"label\">2. GitHub Actions</text>\n      <text x=\"195\" y=\"105\" class=\"desc\">Build & Test Docker</text>\n\n      <!-- Docker Registry -->\n      <rect x=\"280\" y=\"60\" width=\"110\" height=\"60\" rx=\"8\" fill=\"#1e293b\" stroke=\"#eab308\" stroke-width=\"1.5\"/>\n      <text x=\"335\" y=\"85\" class=\"label\">3. Docker ECR</text>\n      <text x=\"335\" y=\"105\" class=\"desc\">Push Image Tag</text>\n\n      <!-- Config Repository -->\n      <rect x=\"420\" y=\"60\" width=\"110\" height=\"60\" rx=\"8\" fill=\"#1e293b\" stroke=\"#00e5ff\" stroke-width=\"1.5\"/>\n      <text x=\"475\" y=\"85\" class=\"label\">4. Config Git Repo</text>\n      <text x=\"475\" y=\"105\" class=\"desc\">Updated Helm/YAML</text>\n\n      <!-- ArgoCD -->\n      <rect x=\"560\" y=\"60\" width=\"100\" height=\"60\" rx=\"8\" fill=\"#1e293b\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n      <text x=\"610\" y=\"85\" class=\"label\">5. ArgoCD / Flux</text>\n      <text x=\"610\" y=\"105\" class=\"desc\">Reconcile Sync</text>\n\n      <!-- Kubernetes Cluster -->\n      <rect x=\"690\" y=\"60\" width=\"100\" height=\"60\" rx=\"8\" fill=\"#042f2e\" stroke=\"#10b981\" stroke-width=\"2\"/>\n      <text x=\"740\" y=\"85\" class=\"label\">6. K8s Cluster</text>\n      <text x=\"740\" y=\"105\" class=\"desc\">Rolling Update</text>\n\n      <!-- Connectors -->\n      <line x1=\"110\" y1=\"90\" x2=\"132\" y2=\"90\" class=\"line\" marker-end=\"url(#arrow)\"/>\n      <line x1=\"250\" y1=\"90\" x2=\"272\" y2=\"90\" class=\"line\" marker-end=\"url(#arrow)\"/>\n      <line x1=\"360\" y1=\"120\" x2=\"360\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"1.5\" stroke-dasharray=\"3\"/>\n      \n      <!-- Actions updates Config Repo -->\n      <path d=\"M 250 105 C 310 160, 390 160, 440 125\" fill=\"none\" stroke=\"#00e5ff\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n      <text x=\"350\" y=\"165\" class=\"desc\" fill=\"#00e5ff\">Auto Commits Tag</text>\n\n      <line x1=\"390\" y1=\"90\" x2=\"412\" y2=\"90\" class=\"line\" marker-end=\"url(#arrow)\"/>\n      <line x1=\"530\" y1=\"90\" x2=\"552\" y2=\"90\" class=\"line\" marker-end=\"url(#arrow)\"/>\n      <line x1=\"660\" y1=\"90\" x2=\"682\" y2=\"90\" class=\"line\" marker-end=\"url(#arrow)\"/>\n    </svg>\n  </div>"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "CI/CD automation pipelines test and build application packages. GitOps tools like ArgoCD continuously reconcile cluster configurations with Git declarations.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between Continuous Delivery and Continuous Deployment.",
+          "answer": "Continuous Delivery automatically builds, tests, and prepares artifacts for deployment, requiring manual approval to push to production. Continuous Deployment automates the entire process, pushing commits directly to production automatically.",
+          "id": "uid-19"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the 'pull' model in GitOps, and why is it preferred over 'push'?",
+          "answer": "In the pull model, an agent in the cluster pulls updates from Git, meaning the cluster doesn't expose external credentials or API endpoints to CI runners, significantly improving security and preventing config drift.",
+          "id": "uid-20"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a simple pipeline using GitHub Actions that builds a Docker image and runs a security vulnerability scan (using Trivy) before publishing.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Malicious Pipeline Access",
+          "text": "A developer's credentials were stolen, allowing attackers to access CI tools. Because the organization used pull-based ArgoCD GitOps, the attackers could not gain write access to the Kubernetes control plane directly, containing the breach.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify GitHub Action secrets are set correctly.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check ArgoCD sync statuses: 'argocd app get <app_name>'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect CI runner execution output logs.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-12",
+      "num": "12",
+      "title": "Observability & Monitoring",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "12",
+          "title": "Observability & Monitoring"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 12: Observability & Monitoring. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "12.1 The Three Pillars of Observability"
+        },
+        {
+          "type": "para",
+          "text": "• **Metrics**: Numeric aggregations (CPU, RAM, Request Rate) ideal for detecting anomalies and scaling (Prometheus).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Logs**: Structured textual output (JSON) describing specific application events (Loki, ELK Stack).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Traces**: End-to-end request flows across distributed systems, showing latency bottlenecks (Jaeger, OpenTelemetry).",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Prometheus Monitoring Architecture Diagram"
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n  <div class=\"diagram-wrapper\">\n    <svg viewBox=\"0 0 800 240\" width=\"100%\" height=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">\n      <style>\n        .plabel { fill: #f8fafc; font-family: sans-serif; font-size: 12px; font-weight: bold; text-anchor: middle; }\n        .pdesc { fill: #94a3b8; font-family: sans-serif; font-size: 9px; text-anchor: middle; }\n        .parrow { stroke: #00ffc8; stroke-width: 2; fill: none; }\n      </style>\n      <defs>\n        <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"5\" markerHeight=\"5\" orient=\"auto-start-reverse\">\n          <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#00ffc8\"/>\n        </marker>\n      </defs>\n\n      <!-- App Targets -->\n      <rect x=\"20\" y=\"20\" width=\"160\" height=\"200\" rx=\"8\" fill=\"#0f172a\" stroke=\"#1e293b\" stroke-width=\"1.5\"/>\n      <text x=\"100\" y=\"40\" class=\"plabel\">Jobs / Exporters</text>\n\n      <rect x=\"40\" y=\"60\" width=\"120\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#eab308\" stroke-width=\"1\"/>\n      <text x=\"100\" y=\"81\" class=\"plabel\" font-size=\"10\">Node Exporter</text>\n      \n      <rect x=\"40\" y=\"110\" width=\"120\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#eab308\" stroke-width=\"1\"/>\n      <text x=\"100\" y=\"131\" class=\"plabel\" font-size=\"10\">App (/metrics)</text>\n\n      <rect x=\"40\" y=\"160\" width=\"120\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#eab308\" stroke-width=\"1\"/>\n      <text x=\"100\" y=\"181\" class=\"plabel\" font-size=\"10\">MySQL Exporter</text>\n\n      <!-- Prometheus Server -->\n      <rect x=\"280\" y=\"50\" width=\"220\" height=\"140\" rx=\"8\" fill=\"#2d1300\" stroke=\"#f97316\" stroke-width=\"2\"/>\n      <text x=\"390\" y=\"75\" class=\"plabel\" fill=\"#fdba74\" font-size=\"14\">Prometheus Server</text>\n      \n      <rect x=\"300\" y=\"95\" width=\"180\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\"/>\n      <text x=\"390\" y=\"116\" class=\"plabel\" font-size=\"10\">Retrieval (Pull Engine)</text>\n\n      <rect x=\"300\" y=\"140\" width=\"180\" height=\"35\" rx=\"4\" fill=\"#1e293b\" stroke=\"#94a3b8\"/>\n      <text x=\"390\" y=\"161\" class=\"plabel\" font-size=\"10\">TSDB (Local Storage)</text>\n\n      <!-- Grafana -->\n      <rect x=\"600\" y=\"30\" width=\"150\" height=\"70\" rx=\"8\" fill=\"#172554\" stroke=\"#3b82f6\" stroke-width=\"2\"/>\n      <text x=\"675\" y=\"55\" class=\"plabel\">Grafana</text>\n      <text x=\"675\" y=\"75\" class=\"pdesc\">Dashboard Visualization</text>\n      <text x=\"675\" y=\"88\" class=\"pdesc\">PromQL Query API</text>\n\n      <!-- Alertmanager -->\n      <rect x=\"600\" y=\"140\" width=\"150\" height=\"70\" rx=\"8\" fill=\"#450a0a\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n      <text x=\"675\" y=\"165\" class=\"plabel\">Alertmanager</text>\n      <text x=\"675\" y=\"185\" class=\"pdesc\">Slack, PagerDuty, Email</text>\n      <text x=\"675\" y=\"198\" class=\"pdesc\">Deduplicate & Route</text>\n\n      <!-- Connections -->\n      <!-- Pull Metrics -->\n      <path d=\"M 280 110 C 230 110, 230 110, 182 110\" class=\"parrow\" marker-end=\"url(#arrow)\"/>\n      <text x=\"230\" y=\"100\" class=\"pdesc\" fill=\"#00ffc8\">Pulls HTTP /metrics</text>\n\n      <!-- Server to Grafana -->\n      <path d=\"M 450 95 Q 520 65, 592 65\" class=\"parrow\" marker-end=\"url(#arrow)\"/>\n      <!-- Server to Alertmanager -->\n      <path d=\"M 450 145 Q 520 175, 592 175\" class=\"parrow\" marker-end=\"url(#arrow)\"/>\n    </svg>\n  </div>"
+        },
+        {
+          "type": "h2",
+          "text": "12.2 Prometheus Configuration"
+        },
+        {
+          "type": "para",
+          "text": "Prometheus collects metrics by pulling endpoints periodically. Example 'prometheus.yml':",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "yaml": "global:\n  scrape_interval: 15s\nscrape_configs:\n  - job_name: 'prometheus'\n    static_configs:\n      - targets: ['localhost:9090']\n  - job_name: 'lms-app'\n    metrics_path: '/metrics'\n    static_configs:\n      - targets: ['lms-service.default.svc.cluster.local:3001']"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Observability combines metrics, logs, and traces. Prometheus uses a pull model to collect system metrics, visualizing data in Grafana.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between Observability and Monitoring?",
+          "answer": "Monitoring tells you WHEN a system is broken (using alerts for cpu, up status). Observability provides the internal state context to let you understand WHY it is broken (using trace paths and contextual logs).",
+          "id": "uid-21"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Configure a Grafana dashboard with basic Prometheus metrics showing CPU, memory, and network throughput of your node.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Latent Memory Leak",
+          "text": "A server crashed daily due to an out-of-memory error. By analyzing Grafana charts, SRE identified a linear increase in memory usage over 24 hours, locating a node.js memory leak where websocket connections were not cleaned up.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify that targets are reachable from Prometheus using 'curl http://<target-ip>/metrics'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check target states on the Prometheus UI 'http://localhost:9090/targets'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect log outputs to confirm trace contexts are injected.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-13",
+      "num": "13",
+      "title": "Infrastructure as Code (IaC)",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "13",
+          "title": "Infrastructure as Code (IaC)"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 13: Infrastructure as Code (IaC). This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "13.1 Declarative Infrastructure"
+        },
+        {
+          "type": "para",
+          "text": "Infrastructure as Code (IaC) allows engineers to declare infrastructure state in text files, managing infrastructure in Git version control.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Terraform / OpenTofu**: Declarative tool. Uses HCL (HashiCorp Configuration Language) to declare resources, calculating state dependency graphs.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Ansible**: Procedural/declarative configuration tool. Connects via SSH to configure systems.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "13.2 Terraform Configuration: Multi-AZ VPC"
+        },
+        {
+          "type": "para",
+          "text": "This Terraform manifest provisions an AWS VPC, an Internet Gateway, and a subnet:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "tf": "provider \"aws\" {\n  region = \"us-east-1\"\n}\nresource \"aws_vpc\" \"production_vpc\" {\n  cidr_block           = \"10.0.0.0/16\"\n  enable_dns_hostnames = true,\n  tags = {\n    Name = \"production-vpc\"\n  }\n}\nresource \"aws_subnet\" \"public_subnet_a\" {\n  vpc_id            = aws_vpc.production_vpc.id,\n  cidr_block        = \"10.0.1.0/24\"\n  availability_zone = \"us-east-1a\"\n  tags = {\n    Name = \"public-subnet-1a\"\n  }\n}\nresource \"aws_internet_gateway\" \"gw\" {\n  vpc_id = aws_vpc.production_vpc.id\n}\noutput \"vpc_id\" {\n  value = aws_vpc.production_vpc.id\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "IaC manages hardware resources using code configurations. Terraform computes dependencies and deploys cloud architectures, storing configurations in state files.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the purpose of the Terraform state file?",
+          "answer": "The state file acts as a database mapping declared resources in configurations to actual resources running in the cloud provider, allowing Terraform to calculate resource addition, modification, or deletion actions.",
+          "id": "uid-22"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you prevent state lock file issues in team setups?",
+          "answer": "Use remote backend storage (like AWS S3) combined with a database like DynamoDB to hold lock states, preventing multiple developers from running configurations simultaneously.",
+          "id": "uid-23"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a Terraform configuration block to launch a DigitalOcean droplet, outputting its public IP address.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Accidental Deletion of Database",
+          "text": "A developer ran 'terraform destroy' accidentally, destroying a production database. SRE introduced preventative policies: enabling database termination protection and requiring approval reviews before applying configurations.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Run 'terraform plan' to inspect planned actions before applying.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify access keys are configured in shell environments.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Confirm provider locks are resolved: 'terraform force-unlock'.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-14",
+      "num": "14",
+      "title": "CDN & Object Storage",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "14",
+          "title": "CDN & Object Storage"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 14: CDN & Object Storage. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "14.1 Content Delivery Networks (CDN)"
+        },
+        {
+          "type": "para",
+          "text": "CDNs cache static assets (HTML, CSS, JS, Images) on edge servers geographically distributed near users, reducing load latency and server bandwidth usage.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Object Storage: AWS S3 & Cloudflare R2"
+        },
+        {
+          "type": "para",
+          "text": "Object Storage stores unstructured data (images, videos, backups). Cloudflare R2 provides S3-compatible APIs with zero egress fee bandwidth charges.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "14.2 AWS S3 Bucket Policy Configuration"
+        },
+        {
+          "type": "para",
+          "text": "A policy configuration declaring public read access to static assets inside an S3 bucket:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "json": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"PublicReadGetObject\",\n      \"Effect\": \"Allow\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::learnxchain-assets/*\"\n    }\n  ]\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "CDNs cache static assets at network edges. Object storage repositories manage application binary files, secured through access policies.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the egress fee in cloud providers?",
+          "answer": "Egress fees are bandwidth charges billed by cloud providers when transferring data out from their network to clients or other platforms. Cloudflare R2 has zero egress fees.",
+          "id": "uid-24"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Deploy a static website on an AWS S3 bucket, configure it for web hosting, and proxy traffic to it using Cloudflare CDN.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Huge Bandwidth Bills",
+          "text": "A site suffered a $12,000 monthly bill from AWS S3 data egress. SRE resolved this by routing requests through Cloudflare's free cache tier, resulting in a 95% cache hit rate and cutting costs to $400.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify public access block settings on the S3 bucket.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check CDN routing records.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Test resource fetch response headers (e.g. CF-Cache-Status).",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-15",
+      "num": "15",
+      "title": "Sandboxing & Firecracker",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "15",
+          "title": "Sandboxing & Firecracker"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 15: Sandboxing & Firecracker. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "15.1 Secure Multi-Tenant Sandboxing"
+        },
+        {
+          "type": "para",
+          "text": "In multi-tenant environments (e.g., Replit, AWS Lambda, serverless runtimes), executing untrusted code requires strict isolation. Standard containers are insecure because they share the host kernel.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Firecracker**: An open-source virtualization technology built by AWS. It launches lightweight virtual machines (MicroVMs) using KVM in milliseconds, providing VM-level security isolation with container-level startup speeds.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "15.2 Firecracker Architecture"
+        },
+        {
+          "type": "para",
+          "text": "Host OS -> Linux KVM -> Firecracker (VMM) -> MicroVM (isolated Guest kernel & rootfs).",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Interacting with Firecracker API"
+        },
+        {
+          "type": "para",
+          "text": "Firecracker is controlled via a local Unix socket API. Set up a MicroVM network using curl:",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# Start Firecracker process",
+            "./firecracker --api-sock /tmp/firecracker.socket &",
+            "",
+            "# Configure the guest kernel path via Unix socket",
+            "curl --unix-socket /tmp/firecracker.socket -X PUT \\",
+            "  'http://localhost/boot-source' \\",
+            "  -H 'Accept: application/json' \\",
+            "  -H 'Content-Type: application/json' \\",
+            "  -d '{",
+            "    \"kernel_image_path\": \"vmlinux.bin\",",
+            "    \"boot_args\": \"console=ttyS0 reboot=k panic=1 pci=off\"",
+            "  }'"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Firecracker creates secure MicroVMs for serverless runtimes. It operates using local API sockets to launch isolated guest kernels in milliseconds.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why are standard containers considered less secure than microVMs for untrusted code?",
+          "answer": "Standard containers share the same Linux kernel as the host OS. A kernel vulnerability (like a system call bug) could allow an attacker to escape the container. MicroVMs run their own guest kernels, isolating memory and syscall interfaces.",
+          "id": "uid-25"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Download the Firecracker binary, download an uncompressed Linux kernel image, and boot a shell MicroVM locally.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Malicious Code Outbreak",
+          "text": "An education SaaS platform allowed users to run python code. Attackers attempted to access the host server using a kernel privilege exploit. Because the platform ran code inside Firecracker MicroVMs, the attack was contained inside the sandboxed guest, protecting the host system.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify KVM module is loaded on the host: 'lsmod | grep kvm'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check ownership of the Unix socket path '/tmp/firecracker.socket'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify CPU configuration settings in the API payload.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-16",
+      "num": "16",
+      "title": "Redis, Queues & Event Driven Systems",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "16",
+          "title": "Redis, Queues & Event Driven Systems"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 16: Redis, Queues & Event Driven Systems. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "16.1 Message Brokers & Caching"
+        },
+        {
+          "type": "para",
+          "text": "• **Redis**: Key-value data store used as a cache, database, and message queue broker. Supports data eviction policies (LRU).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **RabbitMQ**: Advanced message broker implementing the AMQP protocol, supporting queues and routing exchanges.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Kafka**: Distributed streaming platform storing event records in partitions across topics, supporting heavy event throughput.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "16.2 Node.js Redis Connection Configuration"
+        },
+        {
+          "type": "para",
+          "text": "Establish a connection and set up basic cache lookup operations:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "js": "const redis = require('redis');\nconst client = redis.createClient({ url: 'redis://localhost:6379' });\n\nasync function getCachedUser(userId) {\n  await client.connect();\n  const cachedData = await client.get('user:' + userId);\n  if (cachedData) {\n    console.log(\"Cache hit!\");\n    return JSON.parse(cachedData);\n  }\n  const user = await fetchUserFromDatabase(userId);\n  await client.setEx('user:' + userId, 3600, JSON.stringify(user));\n  return user;\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Redis accelerates data lookups as an in-memory cache. Message brokers like RabbitMQ and Kafka decouple server tasks using asynchronous queue queues.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain Cache Penetration and how to prevent it.",
+          "answer": "Cache penetration occurs when requests repeatedly query data that does not exist, missing the cache and hitting the database. Prevent this by caching null results with short expirations or using Bloom filters.",
+          "id": "uid-26"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Install Redis, run a Redis client inside Docker, write an alert script checking memory usage, and set keys with TTLs.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Database Locks During Notification Spikes",
+          "text": "A system crashed when sending bulk emails to 100,000 users due to database resource exhaustion. SRE separated the task by pushing email events into RabbitMQ, using background workers to process events at a controlled rate of 50 per second.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify Redis connection states and ping status.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Monitor queue length in RabbitMQ admin panels.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check memory consumption of Redis using 'INFO memory'.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-17",
+      "num": "17",
+      "title": "Database Operations",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "17",
+          "title": "Database Operations"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 17: Database Operations. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "17.1 High Availability Databases"
+        },
+        {
+          "type": "para",
+          "text": "Database engines must operate under high availability topologies to ensure uptime.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **PostgreSQL Replication**: Achieved via streaming WAL (Write-Ahead Log) records from a Primary (Read/Write) server to Standby (Read-Only) replicas.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **MongoDB Replica Sets**: Group of mongod processes maintaining the same data set, electing a new Primary automatically if the current one goes offline.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "17.2 PostgreSQL Primary-Standby Configuration"
+        },
+        {
+          "type": "para",
+          "text": "This configuration initiates replication on the primary server ('postgresql.conf'):",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# On Primary Server",
+            "listen_addresses = '*'",
+            "wal_level = replica",
+            "max_wal_senders = 10",
+            "archive_mode = on",
+            "archive_command = 'cp %p /var/lib/postgresql/data/archive/%f'"
+          ],
+          "lang": "ini"
+        },
+        {
+          "type": "para",
+          "text": "Set up the standby server database clone:",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# On Standby Server - backup database from primary",
+            "pg_basebackup -h primary_ip -D /var/lib/postgresql/data -U replicator -P -v -R"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Replication copies database state to backup replicas. PostgreSQL relies on streaming WAL logs; MongoDB uses replica sets to handle server failures.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between synchronous and asynchronous database replication.",
+          "answer": "Synchronous replication waits for transaction verification from standby nodes before reporting success to the client, guaranteeing data safety at the cost of latency. Asynchronous replication writes to the primary and returns immediately, updating standby nodes in the background.",
+          "id": "uid-27"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Launch two PostgreSQL containers using Docker, configure replication from primary to standby, and verify data updates sync.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Primary Node Disk Failure",
+          "text": "The primary DB host failed due to a hardware disk error. The SRE team promoted the read replica to primary using 'pg_ctl promote', updated application connection strings, and restored normal operation within 90 seconds.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect replication lag stats: 'SELECT pg_wal_lsn_diff(pg_current_wal_lsn(), sent_lsn) FROM pg_stat_replication;'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Confirm network connectivity on port 5432 between DB nodes.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check database logs for connection lockouts or timeout events.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-18",
+      "num": "18",
+      "title": "Networking for DevOps",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "18",
+          "title": "Networking for DevOps"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 18: Networking for DevOps. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "18.1 IP Addressing, Routing & Subnetting"
+        },
+        {
+          "type": "para",
+          "text": "Networking forms the backbone of cloud deployments.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **CIDR Notation**: Specifies IP ranges (e.g. '10.0.0.0/16' contains 65,536 IPs).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **VPC (Virtual Private Cloud)**: Isolates network environments inside the cloud.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **NAT Gateway**: Allows private subnet instances to connect out to the internet while blocking incoming connections.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "DNS Lookup Path Visualized"
+        },
+        {
+          "type": "para",
+          "text": "DNS translates domain names to IPs recursively:",
+          "options": {}
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n  <div class=\"diagram-wrapper\">\n    <svg viewBox=\"0 0 800 280\" width=\"100%\" height=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">\n      <defs>\n        <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n          <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#38bdf8\"/>\n        </marker>\n        <linearGradient id=\"dbGrad\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\">\n          <stop offset=\"0%\" stop-color=\"#047857\" />\n          <stop offset=\"100%\" stop-color=\"#065f46\" />\n        </linearGradient>\n      </defs>\n\n      <!-- Users -->\n      <rect x=\"20\" y=\"110\" width=\"90\" height=\"60\" rx=\"8\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"2\"/>\n      <text x=\"65\" y=\"145\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Clients / Users</text>\n\n      <!-- Load Balancer -->\n      <rect x=\"160\" y=\"100\" width=\"110\" height=\"80\" rx=\"8\" fill=\"#334155\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n      <text x=\"215\" y=\"135\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Load Balancer</text>\n      <text x=\"215\" y=\"155\" fill=\"#fb923c\" font-family=\"sans-serif\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">(NGINX / AWS ALB)</text>\n\n      <!-- Microservice Instances -->\n      <rect x=\"330\" y=\"20\" width=\"140\" height=\"50\" rx=\"6\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n      <text x=\"400\" y=\"50\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">Auth API Instance</text>\n\n      <rect x=\"330\" y=\"115\" width=\"140\" height=\"50\" rx=\"6\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n      <text x=\"400\" y=\"145\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">LMS/ERP Instance</text>\n\n      <rect x=\"330\" y=\"210\" width=\"140\" height=\"50\" rx=\"6\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n      <text x=\"400\" y=\"240\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">Notification Worker</text>\n\n      <!-- Cache Layer (Redis) -->\n      <rect x=\"520\" y=\"115\" width=\"100\" height=\"50\" rx=\"6\" fill=\"#311\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n      <text x=\"570\" y=\"145\" fill=\"#fca5a5\" font-family=\"sans-serif\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Redis Cache</text>\n\n      <!-- Databases -->\n      <rect x=\"670\" y=\"50\" width=\"110\" height=\"60\" rx=\"8\" fill=\"url(#dbGrad)\" stroke=\"#10b981\" stroke-width=\"2\"/>\n      <text x=\"725\" y=\"80\" fill=\"#FFFFFF\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">PostgreSQL Master</text>\n      <text x=\"725\" y=\"95\" fill=\"#a7f3d0\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Write Node</text>\n\n      <rect x=\"670\" y=\"170\" width=\"110\" height=\"60\" rx=\"8\" fill=\"url(#dbGrad)\" stroke=\"#10b981\" stroke-width=\"2\"/>\n      <text x=\"725\" y=\"200\" fill=\"#FFFFFF\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">PostgreSQL Slave</text>\n      <text x=\"725\" y=\"215\" fill=\"#a7f3d0\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Read Replica</text>\n\n      <!-- Connectors -->\n      <line x1=\"110\" y1=\"140\" x2=\"152\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"2\" marker-end=\"url(#arrow)\"/>\n      \n      <!-- Load balancer routes -->\n      <path d=\"M 270 130 L 322 55\" fill=\"none\" stroke=\"#fb923c\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 270 140 L 322 140\" fill=\"none\" stroke=\"#fb923c\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 270 150 L 322 225\" fill=\"none\" stroke=\"#fb923c\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n\n      <!-- API to cache / DB -->\n      <line x1=\"470\" y1=\"140\" x2=\"512\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n      \n      <path d=\"M 470 130 Q 560 80, 662 80\" fill=\"none\" stroke=\"#10b981\" stroke-width=\"2\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 470 150 Q 560 200, 662 200\" fill=\"none\" stroke=\"#10b981\" stroke-width=\"2\" marker-end=\"url(#arrow)\"/>\n\n      <!-- Master-Slave Replication -->\n      <path d=\"M 725 110 L 725 162\" fill=\"none\" stroke=\"#10b981\" stroke-width=\"1.5\" stroke-dasharray=\"4\" marker-end=\"url(#arrow)\"/>\n      <text x=\"735\" y=\"135\" fill=\"#10b981\" font-family=\"sans-serif\" font-size=\"8\">Replication</text>\n    </svg>\n  </div>"
+        },
+        {
+          "type": "h2",
+          "text": "18.2 CIDR IP Addressing Guide"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "CIDR Block",
+              "Mask",
+              "Available IPs",
+              "Typical Usage"
+            ],
+            [
+              "/32",
+              "255.255.255.255",
+              "1",
+              "Single server host routing"
+            ],
+            [
+              "/24",
+              "255.255.255.0",
+              "256",
+              "VPC subnets"
+            ],
+            [
+              "/16",
+              "255.255.0.0",
+              "65,536",
+              "Large enterprise VPC networks"
+            ],
+            [
+              "/8",
+              "255.0.0.0",
+              "16,777,216",
+              "Internal cloud networks"
+            ]
+          ],
+          "headers": [
+            "CIDR Block",
+            "Subnet Mask",
+            "IP Count",
+            "Typical Use Case"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "IP addressing organizes network traffic using subnets. NAT gateways secure internal resources, and DNS translates domain paths to target server IPs.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between a Public Subnet and a Private Subnet.",
+          "answer": "A public subnet has a route in its route table pointing to an Internet Gateway, allowing instances to bind public IPs and receive traffic. A private subnet does not route to the Internet Gateway directly; it accesses the web using a NAT gateway.",
+          "id": "uid-28"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Use the CIDR calculator tool to design a VPC network with a 10.0.0.0/16 address space, divided into 2 public and 2 private subnets across 2 AZs.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "IP Address Exhaustion",
+          "text": "A data cluster was unable to scale pods because the subnet CIDR block (/24) ran out of IP addresses. SRE resolved this by allocating a secondary CIDR block to the VPC and expanding the pod network.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify route table entries point to the Internet Gateway / NAT.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect network security group rules.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify DNS propagation status using 'dig'.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-19",
+      "num": "19",
+      "title": "Cloud Security",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "19",
+          "title": "Cloud Security"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 19: Cloud Security. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "19.1 Secrets Management & Vault"
+        },
+        {
+          "type": "para",
+          "text": "Hardcoding API credentials, tokens, and database passwords in Git repositories is a critical security vulnerability.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **HashiCorp Vault**: Secures, stores, and tightly controls access to tokens, passwords, certificates, and encryption keys.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **IAM (Identity and Access Management)**: Controls resource access permissions using policies, roles, and user assignments.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "19.2 AWS IAM Policy: S3 Restricted Access"
+        },
+        {
+          "type": "para",
+          "text": "An IAM policy JSON allowing read and write operations restricted to a single S3 bucket:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "json": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"s3:GetObject\",\n        \"s3:PutObject\",\n        \"s3:ListBucket\"\n      ],\n      \"Resource\": [\n        \"arn:aws:s3:::production-assets-lxc\",\n        \"arn:aws:s3:::production-assets-lxc/*\"\n      ]\n    }\n  ]\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Secrets managers secure application keys. IAM roles define permissions, enforcing the principle of least privilege.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the principle of least privilege?",
+          "answer": "The principle of least privilege states that a user, process, or program should only have access to the specific resources and data necessary to complete its task, minimizing security exposure.",
+          "id": "uid-29"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between an IAM User and an IAM Role.",
+          "answer": "An IAM User represents a specific person or service account with permanent credentials. An IAM Role does not have permanent credentials; it is assumed by users or services to obtain temporary security tokens.",
+          "id": "uid-30"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Set up a local HashiCorp Vault instance inside Docker, write a secret key, and retrieve it using Vault's HTTP API.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Leaked Credentials in Git Repo",
+          "text": "A developer committed AWS API keys to a public GitHub repository. Within minutes, bots detected the keys and launched unauthorized crypto-mining VMs. SRE quickly deleted the keys, terminated the VMs, and implemented Git pre-commit hooks (TruffleHog) to block secret leakage.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify that API keys are not committed to source control.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check IAM policies for wildcard permissions ('*').",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect access logs to audit resource access patterns.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-20",
+      "num": "20",
+      "title": "AWS Complete Masterclass",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "20",
+          "title": "AWS Complete Masterclass"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 20: AWS Complete Masterclass. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "20.1 Core AWS Services"
+        },
+        {
+          "type": "para",
+          "text": "Amazon Web Services (AWS) is the market-leading cloud provider.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **EC2 (Elastic Compute Cloud)**: Scalable virtual machines.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **EKS (Elastic Kubernetes Service)**: Managed Kubernetes control plane.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **RDS (Relational Database Service)**: Managed DB engines (PostgreSQL, MySQL).",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "20.2 AWS CLI Command Guide"
+        },
+        {
+          "type": "para",
+          "text": "Common commands to manage cloud infrastructure:",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# List S3 Buckets",
+            "aws s3 ls",
+            "",
+            "# Describe EC2 Instances in a Region",
+            "aws ec2 describe-instances --region us-east-1 --query 'Reservations[*].Instances[*].[InstanceId,State.Name]'",
+            "",
+            "# Update Kubeconfig to connect to EKS Cluster",
+            "aws eks update-kubeconfig --region us-east-1 --name production-eks-cluster"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "AWS provides comprehensive managed infrastructure. Compute, database, and storage resources are managed via the console, APIs, or CLI.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between EBS and S3.",
+          "answer": "EBS (Elastic Block Store) is high-performance block storage designed for use with a single EC2 instance (like a virtual hard drive). S3 (Simple Storage Service) is object storage accessible from anywhere via HTTP, designed for unstructured files.",
+          "id": "uid-31"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Use the AWS CLI to create an S3 bucket, upload a file, set its access permissions to public, and download it via curl.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "EKS Upgrade Downtime Prevention",
+          "text": "Upgrading an EKS cluster caused service outages. SRE avoided this during subsequent upgrades by creating duplicate node groups, draining pods sequentially, and verifying API compatibility beforehand.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify AWS CLI credential configuration: 'aws configure'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check security group ingress/egress rules.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect CloudWatch logs for service errors.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-21",
+      "num": "21",
+      "title": "GCP Complete Masterclass",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "21",
+          "title": "GCP Complete Masterclass"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 21: GCP Complete Masterclass. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "21.1 Core GCP Services"
+        },
+        {
+          "type": "para",
+          "text": "Google Cloud Platform (GCP) is optimized for containerized workloads and data analysis.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Compute Engine**: Scalable virtual machines.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **GKE (Google Kubernetes Engine)**: The most advanced managed Kubernetes engine on the market.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Cloud Run**: Serverless container hosting, scaling from 0 to thousands of instances.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "21.2 Google Cloud SDK Command Guide"
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# Authenticate GCP SDK",
+            "gcloud auth login",
+            "",
+            "# List Compute Engine VM Instances",
+            "gcloud compute instances list",
+            "",
+            "# Deploy a Container directly to Cloud Run",
+            "gcloud run deploy lms-service --image gcr.io/my-project/lms-app:latest --platform managed --region us-central1 --allow-unauthenticated"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "GCP focuses on serverless container execution and Kubernetes management. Resources are managed via the gcloud CLI tool.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is GKE Autopilot?",
+          "answer": "GKE Autopilot is a fully-managed mode of operation in GKE where Google manages the cluster infrastructure, nodes, scaling, and security, allowing you to focus solely on pod specifications and paying only for running pods.",
+          "id": "uid-32"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Build a Docker image locally, tag it for Google Container Registry (GCR), and deploy it to GCP Cloud Run.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Runaway GKE Node Pool Cost",
+          "text": "A batch processing job launched hundreds of VMs on GKE, resulting in a large bill. SRE resolved this by configuring preemptible VMs (spot instances) and setting autoscaling limits on the node pool.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify project ID configuration: 'gcloud config set project <id>'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check Cloud Logging console for error details.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify IAM service account permissions.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-22",
+      "num": "22",
+      "title": "Azure Complete Masterclass",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "22",
+          "title": "Azure Complete Masterclass"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 22: Azure Complete Masterclass. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "22.1 Azure Cloud Infrastructure"
+        },
+        {
+          "type": "para",
+          "text": "Microsoft Azure is the cloud provider of choice for enterprise organizations.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Virtual Machines**: Enterprise virtualization compute hosts.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **AKS (Azure Kubernetes Service)**: Managed Kubernetes engine.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Azure Blob Storage**: Object storage system.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "22.2 Azure CLI (az) Command Guide"
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# Login to Azure account",
+            "az login",
+            "",
+            "# Create a Resource Group",
+            "az group create --name production-rg --location eastus",
+            "",
+            "# Create an AKS Cluster",
+            "az aks create --resource-group production-rg --name prod-cluster --node-count 3 --enable-addons monitoring --generate-ssh-keys"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Azure provides enterprise-grade infrastructure. Command control uses the 'az' CLI tool, structuring resources inside resource groups.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is an Azure Resource Group?",
+          "answer": "An Azure Resource Group is a logical container that holds related resources for an Azure solution. It allows you to manage, secure, and monitor all resources in the group as a single entity.",
+          "id": "uid-33"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Use the Azure CLI to create a Resource Group, launch a Linux VM, and open port 22 and 80 using Network Security Groups.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Azure VM Outage",
+          "text": "A virtual machine in Azure went offline due to host failure. The SRE team avoided repeat incidents by placing instances in Availability Sets and configuring load balancers to distribute traffic.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify subscription ID: 'az account set --subscription <id>'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check Network Security Group (NSG) rules.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect VM boot diagnostics.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-23",
+      "num": "23",
+      "title": "Platform Engineering",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "23",
+          "title": "Platform Engineering"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 23: Platform Engineering. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "23.1 Internal Developer Platforms (IDP)"
+        },
+        {
+          "type": "para",
+          "text": "Platform Engineering builds the software platforms that developers use to deploy and manage services, removing infrastructure complexity.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Golden Path**: A pre-packaged, fully supported template to launch applications (e.g. database, monitoring, DNS pre-configured).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Spotify Backstage**: An open platform for building developer portals, centralizing services, documentation, and tooling.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "23.2 Platform Engineering Maturity Matrix"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "Maturity Level",
+              "Operational Pattern",
+              "Developer Experience"
+            ],
+            [
+              "Level 1 (Manual)",
+              "Devs file tickets for VMs, DBs, and DNS",
+              "Slow (days to weeks), high cognitive load"
+            ],
+            [
+              "Level 2 (Scripts)",
+              "SRE runs custom scripts to provision resources",
+              "Medium (hours), prone to script drift"
+            ],
+            [
+              "Level 3 (Self-Service)",
+              "Devs use portal (Backstage) to provision stack",
+              "Fast (minutes), standardized templates"
+            ],
+            [
+              "Level 4 (Autonomous)",
+              "Platform auto-provisions and auto-heals dynamic stacks",
+              "Near-instant, zero infrastructure awareness"
+            ]
+          ],
+          "headers": [
+            "Level",
+            "Operational Pattern",
+            "Developer Experience"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Platform Engineering defines the Golden Paths for developers. It reduces cognitive load by abstracting operations into self-service developer portals.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is cognitive load in software development, and how does Platform Engineering reduce it?",
+          "answer": "Cognitive load is the mental effort required to complete tasks. Developers face high cognitive load when they must manage Kubernetes YAML, cloud VPCs, DNS, and database setup. Platform Engineering abstracts this into simple self-service templates, letting developers focus on code.",
+          "id": "uid-34"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Design a self-service Backstage template schema (YAML) representing a standard Node.js microservice deployment.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Microservice Proliferation Chaos",
+          "text": "A company grew to 200 microservices, resulting in unmonitored services and duplicated code. Platform engineers deployed Spotify Backstage, centralizing the software catalog, documentation, and templates, which cut onboarding times from 2 weeks to 10 minutes.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify developer portal template schemas.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Confirm automation runners have appropriate cloud IAM permissions.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Monitor platform api performance and downtime logs.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-24",
+      "num": "24",
+      "title": "Site Reliability Engineering",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "24",
+          "title": "Site Reliability Engineering"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 24: Site Reliability Engineering. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "24.1 Service Level Terminology"
+        },
+        {
+          "type": "para",
+          "text": "• **SLI (Service Level Indicator)**: A quantitative measure of a service's performance (e.g. latency of successful requests < 100ms).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **SLO (Service Level Objective)**: A target reliability metric defined for the SLI (e.g. 99.9% of requests < 100ms over 30 days).",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **SLA (Service Level Agreement)**: The legal agreement with customers, specifying penalties if the SLO is not met.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Error Budgets"
+        },
+        {
+          "type": "para",
+          "text": "The Error Budget is the allowed downtime of a service (100% - SLO). For a 99.9% SLO over 30 days, the allowed downtime is **43.2 minutes**. When the error budget is exhausted, deployments are blocked, and engineers shift focus to reliability improvements.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "24.2 SRE SLO Targets Table"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "SLO Target (Availability)",
+              "Allowed Downtime / Year",
+              "Allowed Downtime / Month",
+              "Allowed Downtime / Week"
+            ],
+            [
+              "99% (Two Nines)",
+              "3.65 days",
+              "14.4 hours",
+              "1.68 hours"
+            ],
+            [
+              "99.9% (Three Nines)",
+              "8.76 hours",
+              "43.8 minutes",
+              "10.1 minutes"
+            ],
+            [
+              "99.99% (Four Nines)",
+              "52.6 minutes",
+              "4.38 minutes",
+              "1.01 minutes"
+            ],
+            [
+              "99.999% (Five Nines)",
+              "5.26 minutes",
+              "25.9 seconds",
+              "6.05 seconds"
+            ]
+          ],
+          "headers": [
+            "SLO Target",
+            "Downtime / Year",
+            "Downtime / Month",
+            "Downtime / Week"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "SRE balances velocity with reliability using error budgets. SLOs define availability targets, and breach events trigger deployment freezes.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you calculate an Error Budget?",
+          "answer": "Error Budget is calculated as '1 - SLO'. For instance, if your availability SLO is 99.9%, your error budget is 0.1%. If your service serves 1,000,000 requests, you can afford to fail 1,000 requests before exhausting the budget.",
+          "id": "uid-35"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is MTTR and MTBF?",
+          "answer": "MTTR (Mean Time to Repair) is the average time taken to restore a service after an outage. MTBF (Mean Time Between Failures) is the average operational time of a system between occurrences of failures.",
+          "id": "uid-36"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write an incident post-mortem report for a simulated 20-minute checkout server outage, identifying the root cause, timeline, and action items.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Error Budget Exhaustion Incident",
+          "text": "A major feature release caused server latency spikes, exhausting the 30-day error budget within 6 hours. SRE blocked all future feature deploys and redirected the engineering team to optimize database indexes.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Review SLI dashboards to locate latency sources.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check error budget burn rate alerts.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Establish an incident commander to run team operations during outages.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-25",
+      "num": "25",
+      "title": "System Design for Infrastructure",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "25",
+          "title": "System Design for Infrastructure"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 25: System Design for Infrastructure. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "25.1 Scaling Production Architectures"
+        },
+        {
+          "type": "para",
+          "text": "Designing global infrastructures requires deep architectural planning. Let's study how major systems scale:",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Netflix**: Multi-region active-active deployment using AWS, replicating data across regions to survive entire cloud outages.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Uber**: Geo-sharded architecture where database nodes partition data based on city/location, preventing global outages.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Replit**: Multi-tenant sandboxing using Firecracker MicroVMs to run millions of untrusted development servers securely.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Global High-Availability Architecture"
+        },
+        {
+          "type": "para",
+          "text": "This system architecture shows a typical global web application with edge CDNs, load balancers, container networks, caching, and database replication:",
+          "options": {}
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n  <div class=\"diagram-wrapper\">\n    <svg viewBox=\"0 0 800 280\" width=\"100%\" height=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">\n      <defs>\n        <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n          <path d=\"M 0 0 L 10 5 L 0 10 z\" fill=\"#38bdf8\"/>\n        </marker>\n        <linearGradient id=\"dbGrad\" x1=\"0%\" y1=\"0%\" x2=\"100%\" y2=\"100%\">\n          <stop offset=\"0%\" stop-color=\"#047857\" />\n          <stop offset=\"100%\" stop-color=\"#065f46\" />\n        </linearGradient>\n      </defs>\n\n      <!-- Users -->\n      <rect x=\"20\" y=\"110\" width=\"90\" height=\"60\" rx=\"8\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"2\"/>\n      <text x=\"65\" y=\"145\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Clients / Users</text>\n\n      <!-- Load Balancer -->\n      <rect x=\"160\" y=\"100\" width=\"110\" height=\"80\" rx=\"8\" fill=\"#334155\" stroke=\"#fb923c\" stroke-width=\"2\"/>\n      <text x=\"215\" y=\"135\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Load Balancer</text>\n      <text x=\"215\" y=\"155\" fill=\"#fb923c\" font-family=\"sans-serif\" font-size=\"10\" font-weight=\"bold\" text-anchor=\"middle\">(NGINX / AWS ALB)</text>\n\n      <!-- Microservice Instances -->\n      <rect x=\"330\" y=\"20\" width=\"140\" height=\"50\" rx=\"6\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n      <text x=\"400\" y=\"50\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">Auth API Instance</text>\n\n      <rect x=\"330\" y=\"115\" width=\"140\" height=\"50\" rx=\"6\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n      <text x=\"400\" y=\"145\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">LMS/ERP Instance</text>\n\n      <rect x=\"330\" y=\"210\" width=\"140\" height=\"50\" rx=\"6\" fill=\"#1e293b\" stroke=\"#38bdf8\" stroke-width=\"1.5\"/>\n      <text x=\"400\" y=\"240\" fill=\"#f8fafc\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">Notification Worker</text>\n\n      <!-- Cache Layer (Redis) -->\n      <rect x=\"520\" y=\"115\" width=\"100\" height=\"50\" rx=\"6\" fill=\"#311\" stroke=\"#ef4444\" stroke-width=\"2\"/>\n      <text x=\"570\" y=\"145\" fill=\"#fca5a5\" font-family=\"sans-serif\" font-size=\"12\" font-weight=\"bold\" text-anchor=\"middle\">Redis Cache</text>\n\n      <!-- Databases -->\n      <rect x=\"670\" y=\"50\" width=\"110\" height=\"60\" rx=\"8\" fill=\"url(#dbGrad)\" stroke=\"#10b981\" stroke-width=\"2\"/>\n      <text x=\"725\" y=\"80\" fill=\"#FFFFFF\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">PostgreSQL Master</text>\n      <text x=\"725\" y=\"95\" fill=\"#a7f3d0\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Write Node</text>\n\n      <rect x=\"670\" y=\"170\" width=\"110\" height=\"60\" rx=\"8\" fill=\"url(#dbGrad)\" stroke=\"#10b981\" stroke-width=\"2\"/>\n      <text x=\"725\" y=\"200\" fill=\"#FFFFFF\" font-family=\"sans-serif\" font-size=\"11\" font-weight=\"bold\" text-anchor=\"middle\">PostgreSQL Slave</text>\n      <text x=\"725\" y=\"215\" fill=\"#a7f3d0\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Read Replica</text>\n\n      <!-- Connectors -->\n      <line x1=\"110\" y1=\"140\" x2=\"152\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"2\" marker-end=\"url(#arrow)\"/>\n      \n      <!-- Load balancer routes -->\n      <path d=\"M 270 130 L 322 55\" fill=\"none\" stroke=\"#fb923c\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 270 140 L 322 140\" fill=\"none\" stroke=\"#fb923c\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 270 150 L 322 225\" fill=\"none\" stroke=\"#fb923c\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n\n      <!-- API to cache / DB -->\n      <line x1=\"470\" y1=\"140\" x2=\"512\" y2=\"140\" stroke=\"#94a3b8\" stroke-width=\"1.5\" marker-end=\"url(#arrow)\"/>\n      \n      <path d=\"M 470 130 Q 560 80, 662 80\" fill=\"none\" stroke=\"#10b981\" stroke-width=\"2\" marker-end=\"url(#arrow)\"/>\n      <path d=\"M 470 150 Q 560 200, 662 200\" fill=\"none\" stroke=\"#10b981\" stroke-width=\"2\" marker-end=\"url(#arrow)\"/>\n\n      <!-- Master-Slave Replication -->\n      <path d=\"M 725 110 L 725 162\" fill=\"none\" stroke=\"#10b981\" stroke-width=\"1.5\" stroke-dasharray=\"4\" marker-end=\"url(#arrow)\"/>\n      <text x=\"735\" y=\"135\" fill=\"#10b981\" font-family=\"sans-serif\" font-size=\"8\">Replication</text>\n    </svg>\n  </div>"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Production systems scale through partition design, geo-sharding, and multi-region replication. High-availability architectures rely on edge CDNs and decoupled caches.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain active-active multi-region deployment.",
+          "answer": "Active-active multi-region deployment routes user requests to the closest geographic region, where all regions are actively running and serving traffic, replicating database states bidirectionally.",
+          "id": "uid-37"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Design the infrastructure architecture for a real-time chat application, specifying load balancing, websocket connections, and database layers.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "AWS US-EAST-1 Region Outage",
+          "text": "A cloud provider region went offline. Netflix survived this outage because their traffic routing layer detected the health failures and redirected all users to us-west-2, utilizing pre-replicated databases.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify cross-region database replication health.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Confirm CDN failover DNS records.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Verify load balancer connection limits.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-26",
+      "num": "26",
+      "title": "Production Projects",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "26",
+          "title": "Production Projects"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 26: Production Projects. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "26.1 Project 1: Personal VPS Hosting Platform"
+        },
+        {
+          "type": "para",
+          "text": "Build a personal VPS hosting platform where users can spin up containers.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Architecture**: NGINX acts as a reverse proxy, routing requests to Docker containers running on a single host.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "26.2 Project 2: Multi-Tenant SaaS Infrastructure"
+        },
+        {
+          "type": "para",
+          "text": "Set up a multi-tenant SaaS application on Kubernetes.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Architecture**: ingress-nginx routes hostnames (e.g. tenant1.saas.com) to isolated tenant pods, using namespace limits.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "LearnXChain Production Infrastructure"
+        },
+        {
+          "type": "para",
+          "text": "Deploy the LearnXChain application, configuring high availability, continuous deployment, and databases:",
+          "options": {}
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "tf": "resource \"aws_vpc\" \"lxc_vpc\" {\n  cidr_block = \"10.10.0.0/16\"\n}\nresource \"aws_eks_cluster\" \"lxc_cluster\" {\n  name     = \"lxc-prod\"\n  role_arn = aws_iam_role.lxc_role.arn\n  vpc_config {\n    subnet_ids = [aws_subnet.subnet_a.id, aws_subnet.subnet_b.id]\n  }\n}"
+          }
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Deploying SaaS apps requires isolation at the infrastructure level. Projects demonstrate the use of Terraform, Docker, and Kubernetes configs to host code.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you isolate tenants in a multi-tenant Kubernetes cluster?",
+          "answer": "Tenants can be isolated using Namespaces, applying NetworkPolicies to block cross-namespace network traffic, configuring RBAC roles to restrict access, and setting ResourceQuotas to limit CPU and Memory utilization.",
+          "id": "uid-38"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a docker-compose manifest orchestrating a web server and DB, testing local connectivity and volume persistence.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Tenant Resource Hog Outage",
+          "text": "A tenant on a SaaS platform ran a heavy script, exhausting server resources and impacting other tenants. SRE resolved this by defining CPU and Memory resource limits on all tenant containers.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify network connectivity between application containers.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check resource limits on container workloads.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Confirm volume mount paths.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-27",
+      "num": "27",
+      "title": "DevOps Interview Preparation",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "27",
+          "title": "DevOps Interview Preparation"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 27: DevOps Interview Preparation. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "27.1 Core Interview Categories"
+        },
+        {
+          "type": "para",
+          "text": "Prepare for your next technical interview. Test your knowledge across core concepts:",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Beginner & Intermediate Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is a container image?",
+          "answer": "A container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries, and settings.",
+          "id": "uid-39"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between a stateful and stateless application.",
+          "answer": "A stateless application does not store data locally; requests can be routed to any instance (e.g. web server). A stateful application relies on local storage or database states, requiring stable network and storage identities.",
+          "id": "uid-40"
+        },
+        {
+          "type": "h3",
+          "text": "Senior & Staff-level Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How would you design a zero-downtime database migration?",
+          "answer": "A zero-downtime database migration involves: 1. Deploying a schema update that is backward-compatible (adding columns, not deleting). 2. Double-writing data to both old and new columns. 3. Backfilling historical data. 4. Updating code to read from the new schema. 5. Deleting old schema columns.",
+          "id": "uid-41"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the Kubernetes scheduling lifecycle.",
+          "answer": "When a Pod is created, it enters the 'Pending' state. The scheduler filters nodes based on resource requests, taints/tolerations, and affinity rules. It then scores the remaining healthy nodes and binds the Pod to the node with the highest score.",
+          "id": "uid-42"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Interview prep tests knowledge from basic container structures to advanced distributed systems design, data migration strategies, and scheduling lifecycles.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Practice answering 5 scenario-based questions out loud, recording your responses to evaluate clarity and depth.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Interview Design Challenge",
+          "text": "During a technical interview, the candidate was asked to design a system capable of handling 100,000 concurrent video streams. They succeeded by proposing edge CDNs, stateless web pools behind auto-scalers, and geo-sharded databases.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Review key definitions for SRE metrics.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Practice writing Kubernetes YAML files from memory.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Refresh core Linux commands and networking fundamentals.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-28",
+      "num": "28",
+      "title": "Complete Troubleshooting Handbook",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "28",
+          "title": "Complete Troubleshooting Handbook"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 28: Complete Troubleshooting Handbook. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "28.1 Root Cause Analysis (RCA) Framework"
+        },
+        {
+          "type": "para",
+          "text": "When a system fails, SRE teams use structured frameworks to diagnose, mitigate, and resolve issues. The '5 Whys' methodology is standard for finding root causes.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Troubleshooting Scenarios & Runbooks"
+        },
+        {
+          "type": "twoColTable",
+          "rows": [
+            [
+              "Failure Mode",
+              "Primary Diagnostic Command",
+              "Resolution Steps"
+            ],
+            [
+              "Server Down",
+              "<code>ping host</code> / <code>ssh -v host</code>",
+              "Verify network routing, check hypervisor state, power cycle VM."
+            ],
+            [
+              "SSL Errors",
+              "<code>openssl s_client -connect host:443</code>",
+              "Check cert expiration date, verify cert chain in NGINX config."
+            ],
+            [
+              "DNS Failures",
+              "<code>dig +trace learnxchain.com</code>",
+              "Check NS records, check local resolv.conf configuration."
+            ],
+            [
+              "Database Failures",
+              "<code>pg_isready</code> / <code>df -h</code>",
+              "Check database process status, free disk space, release table locks."
+            ],
+            [
+              "K8s Failures",
+              "<code>kubectl describe pod <name></code>",
+              "Check logs for CrashLoopBackOff, resource limits, or image pull errors."
+            ],
+            [
+              "Memory Leaks",
+              "<code>valgrind</code> / <code>node --inspect</code>",
+              "Profile heap allocations, restart process using cron or systemd."
+            ]
+          ],
+          "headers": [
+            "Failure Mode",
+            "Diagnostic Tool",
+            "Resolution Action"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "28.2 CrashLoopBackOff Diagnostics"
+        },
+        {
+          "type": "para",
+          "text": "If a Pod displays CrashLoopBackOff, inspect its crash state using CLI tools:",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "# Get exit code details",
+            "kubectl get pod myapp-pod -o jsonpath='{.status.containerStatuses[0].state.waiting.message}'",
+            "",
+            "# Retrieve previous run logs",
+            "kubectl logs myapp-pod --previous"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Troubleshooting uses structured logs and diagnostic commands. Understanding exit codes and service states accelerates system recovery.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What does exit code 137 mean in a Docker container?",
+          "answer": "Exit code 137 indicates that the container was terminated by the operating system kernel sending a SIGKILL signal. This is typically caused by the OOM (Out-Of-Memory) killer when the process exceeds its configured memory limits.",
+          "id": "uid-43"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Configure a test application that throws a runtime error on start. Debug its systemd service status and identify the crash line in logs.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Silent DNS Failure Outage",
+          "text": "An API server could not resolve database hostnames, failing checkout requests. The SRE team diagnosed this by checking resolv.conf, finding a misconfigured internal DNS server, and routing DNS traffic to 1.1.1.1 temporarily.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Verify basic network connection routes.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Check system disk space capacity using 'df -h'.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Inspect application log files for error traces.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-29",
+      "num": "29",
+      "title": "365-Day DevOps Roadmap",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "29",
+          "title": "365-Day DevOps Roadmap"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 29: 365-Day DevOps Roadmap. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "29.1 Month 1-3: Linux, Networking & Bash"
+        },
+        {
+          "type": "para",
+          "text": "• **Goals**: Master the Linux command line, file system, process signals, SSH, and writing Bash script automations.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Milestone**: Write a custom daemon monitoring script that alerts Slack on system anomalies.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "29.2 Month 4-6: Docker, Cloud & Databases"
+        },
+        {
+          "type": "para",
+          "text": "• **Goals**: Understand containerization, network volumes, multi-stage builds, cloud architectures (AWS/GCP), and database replication.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Milestone**: Deploy a multi-service web app using Docker Compose.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "29.3 Month 7-9: Kubernetes & CI/CD"
+        },
+        {
+          "type": "para",
+          "text": "• **Goals**: Learn Kubernetes scheduling, deployments, services, ingress, Helm charts, and building GitHub Actions pipelines.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Milestone**: Package an app in a Helm chart and deploy it using a GitOps pipeline.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "29.4 Month 10-12: Platform Engineering & SRE"
+        },
+        {
+          "type": "para",
+          "text": "• **Goals**: Study reliability metrics (SLIs/SLOs), incident response, distributed tracing, and developer portals.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Milestone**: Deploy a complete observability stack with Prometheus and Grafana.",
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "The 365-day roadmap structures learning from Linux basics to Kubernetes and SRE concepts, establishing clear weekly milestones.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Build a personal Trello board tracking your weekly milestones based on the 365-day roadmap.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Platform Engineer Career Shift",
+          "text": "A systems administrator followed a structured SRE roadmap, mastering Terraform and Kubernetes over 12 months, and transitioned to a Principal Platform Engineer role.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Review weekly study milestones.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Complete practical lab assignments at the end of each module.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Participate in open-source automation projects.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "id": "section-30",
+      "num": "30",
+      "title": "Final Master Cheat Sheet",
+      "items": [
+        {
+          "type": "sectionHeader",
+          "num": "30",
+          "title": "Final Master Cheat Sheet"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 30: Final Master Cheat Sheet. This section covers key infrastructure, automation, SRE best practices, and hands-on operational challenges."
+        },
+        {
+          "type": "h2",
+          "text": "30.1 Linux Command Cheat Sheet"
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "ls -la          # List files details",
+            "df -h           # Check disk space",
+            "free -h         # Check memory usage",
+            "ps aux          # List running processes",
+            "kill -9 <PID>   # Force kill process",
+            "chmod 400 key   # Restrict key permissions"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "h2",
+          "text": "30.2 Docker CLI Cheat Sheet"
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "docker build -t app:latest .   # Build image",
+            "docker run -d -p 80:80 app      # Run container",
+            "docker logs -f <id>            # Follow logs",
+            "docker system prune -a         # Clean disk cache"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "h2",
+          "text": "30.3 Kubernetes (kubectl) Cheat Sheet"
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "kubectl get pods -n kube-system    # List system pods",
+            "kubectl describe pod <name>         # Describe pod state",
+            "kubectl logs -f <name>             # Stream pod logs",
+            "kubectl apply -f manifest.yaml     # Deploy manifest",
+            "kubectl exec -it <pod> -- sh       # Interactive shell"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "h2",
+          "text": "30.4 Terraform CLI Cheat Sheet"
+        },
+        {
+          "type": "codeBlock",
+          "lines": [
+            "terraform init      # Initialize plugins",
+            "terraform plan      # Inspect resource changes",
+            "terraform apply     # Deploy resources",
+            "terraform destroy    # Delete all infrastructure"
+          ],
+          "lang": "bash"
+        },
+        {
+          "type": "spacer",
+          "pt": 60
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "This master cheat sheet serves as a quick operational reference guide for core DevOps tools (Linux, Docker, Kubernetes, Terraform).",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Troubleshooting Checklist"
+        },
+        {
+          "type": "numbered",
+          "text": "Keep cheat sheets printed near your development workstation.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Create aliases for commonly run CLI commands in your zshrc/bashrc.",
+          "level": 0
+        }
+      ]
+    }
+  ],
+  "handbookToc": null
+}

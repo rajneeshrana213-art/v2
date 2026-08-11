@@ -1,0 +1,114 @@
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eef1f6">
+  <tr>
+    <td align="center" style="padding: 50px 15px;">
+
+      <!-- Outer Wrapper -->
+      <table width="720" cellpadding="0" cellspacing="0" border="0"
+        style="background: #ffffff; border-radius: 22px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); overflow: hidden;">
+
+        <!-- HERO HEADER -->
+        <tr>
+          <td align="center" style="padding: 55px 40px;
+                        background: radial-gradient(circle at top, #3a7bd5, #1e3c72);">
+
+            <h1 style="margin: 0;
+                            font-family: 'Segoe UI', Tahoma, sans-serif;
+                            font-size: 34px;
+                            font-weight: 800;
+                            color: #ffffff;
+                            letter-spacing: 0.3px;">
+              Email Verification
+            </h1>
+
+            <p style="margin: 14px 0 0;
+                            font-family: 'Segoe UI', Tahoma, sans-serif;
+                            font-size: 17px;
+                            color: #dfe9ff;
+                            max-width: 520px;">
+              Welcome to LearnXChain!
+            </p>
+
+          </td>
+        </tr>
+
+        <!-- BODY -->
+        <tr>
+          <td style="padding: 50px 55px; text-align: center;">
+
+            <p style="margin: 0 0 20px;
+                            font-family: 'Segoe UI', Tahoma, sans-serif;
+                            font-size: 16px;
+                            color: #222;">
+              Hello <strong>
+                <%= receiver %>
+              </strong>,
+            </p>
+
+            <p style="margin: 0 0 32px;
+                            font-family: 'Segoe UI', Tahoma, sans-serif;
+                            font-size: 16px;
+                            color: #555;
+                            line-height: 1.75;">
+              Ready to get started? Simply click the button below to verify <strong>
+                <%= email %>
+              </strong>, finish setting up your account, and gain access to the platform.
+            </p>
+
+            <!-- CTA -->
+            <table align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="center" style="background: linear-gradient(135deg, #2a5298, #1e3c72);
+                                    border-radius: 60px;
+                                    box-shadow: 0 12px 25px rgba(42,82,152,0.4);">
+
+                  <a href="<%= link %>" target="_blank" style="display: inline-block;
+                                        padding: 16px 48px;
+                                        font-family: 'Segoe UI', Tahoma, sans-serif;
+                                        font-size: 17px;
+                                        font-weight: 700;
+                                        color: #ffffff;
+                                        text-decoration: none;">
+                    Verify Email Address →
+                  </a>
+
+                </td>
+              </tr>
+            </table>
+
+            <p style="margin: 35px 0 0;
+                            font-family: 'Segoe UI', Tahoma, sans-serif;
+                            font-size: 14px;
+                            color: #666;
+                            text-align: center;">
+              If the button doesn't work, copy and paste this link into your browser:<br>
+              <a href="<%= link %>" style="color: #3a7bd5; word-break: break-all; font-size: 12px;">
+                <%= link %>
+              </a>
+            </p>
+
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td align="center" style="padding: 30px 40px;
+                        background: #f6f8fc;
+                        border-top: 1px solid #e6ebf3;">
+
+            <p style="margin: 0;
+                            font-family: 'Segoe UI', Tahoma, sans-serif;
+                            font-size: 14px;
+                            color: #666;
+                            line-height: 1.7;">
+              Your email verification link will expire in 12 hours.<br />
+              📩 <strong>LearnXChain Support</strong> is always with you.
+            </p>
+
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>

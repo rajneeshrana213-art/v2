@@ -1,0 +1,315 @@
+
+<h2 class="sr-only">Rit AI — 60-second Hinglish product demo, 8 scenes auto-advancing every 7.5 seconds</h2>
+<style>
+#stage{position:relative;width:100%;height:500px;overflow:hidden;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);}
+.scene{position:absolute;inset:0;opacity:0;pointer-events:none;padding:24px 36px 42px;display:flex;flex-direction:column;justify-content:center;transition:opacity 0.6s;}
+.scene.active{opacity:1;pointer-events:auto;}
+.scene.active .a1{animation:fu 0.4s 0.05s both;}
+.scene.active .a2{animation:fu 0.4s 0.15s both;}
+.scene.active .a3{animation:fu 0.4s 0.25s both;}
+.scene.active .a4{animation:fu 0.4s 0.35s both;}
+.scene.active .a5{animation:fu 0.4s 0.45s both;}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.stag{display:inline-block;font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:10px;}
+.stag.teal{background:#E1F5EE;color:#085041;}
+.stag.amber{background:#FAEEDA;color:#633806;}
+.stag.purple{background:#EEEDFE;color:#26215C;}
+.stag.muted{background:var(--color-background-secondary);color:var(--color-text-secondary);}
+.stitle{font-size:24px;font-weight:500;line-height:1.25;color:var(--color-text-primary);margin:0 0 8px;}
+.ssub{font-size:13px;color:var(--color-text-secondary);margin:0 0 14px;line-height:1.5;max-width:480px;}
+.ag-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;}
+.ag-card{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px 12px;}
+.ag-nm{font-size:12px;font-weight:500;color:var(--color-text-primary);margin:4px 0 2px;}
+.ag-ds{font-size:11px;color:var(--color-text-secondary);margin:0;line-height:1.35;}
+.bh-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+.bh-card{border-radius:var(--border-radius-md);padding:14px;border:0.5px solid;}
+.bh-big{font-size:24px;font-weight:500;margin:0 0 2px;}
+.bh-lbl{font-size:10px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 6px;}
+.bh-txt{font-size:11px;line-height:1.4;margin:0;}
+.mt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.mt-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;}
+.mt-lbl{font-size:10px;text-transform:uppercase;letter-spacing:0.06em;color:var(--color-text-secondary);margin:0 0 4px;}
+.mt-val{font-size:20px;font-weight:500;margin:0;}
+.mt-hint{font-size:11px;color:var(--color-text-secondary);margin:4px 0 0;}
+.barw{height:5px;background:var(--color-background-tertiary);border-radius:3px;margin-top:8px;overflow:hidden;}
+.barf{height:100%;border-radius:3px;width:0;transition:width 1.2s 0.4s;}
+.md-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;}
+.md-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 6px;text-align:center;}
+.md-nm{font-size:11px;font-weight:500;color:var(--color-text-primary);margin:4px 0 0;line-height:1.3;}
+.xp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+.xp-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:14px;}
+.cert{display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:16px;background:#EEEDFE;color:#3C3489;border:0.5px solid #AFA9EC;font-size:11px;font-weight:500;}
+.pill{display:inline-block;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:500;border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-primary);}
+.prow{display:flex;gap:8px;flex-wrap:wrap;}
+#prog-track{position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--color-background-tertiary);}
+#prog-fill{height:100%;background:#1D9E75;width:0%;transition:width 0.08s linear;}
+#s-nav{position:absolute;bottom:9px;left:50%;transform:translateX(-50%);display:flex;gap:5px;}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--color-border-secondary);cursor:pointer;transition:background 0.3s,transform 0.3s;}
+.dot.on{background:#1D9E75;transform:scale(1.5);}
+#s-ctr{position:absolute;top:14px;right:16px;font-size:11px;color:var(--color-text-secondary);}
+#pbtn{position:absolute;bottom:6px;right:14px;font-size:11px;color:var(--color-text-secondary);cursor:pointer;background:none;border:none;padding:0;}
+.phone-wrap{background:#F1EFE8;border-radius:12px;padding:10px;width:100%;box-sizing:border-box;}
+.ph-hdr{background:#085041;border-radius:8px;padding:7px 10px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.ph-hdr-txt{color:#9FE1CB;font-size:11px;font-weight:500;}
+.bbl{border-radius:8px;padding:7px 10px;margin-bottom:6px;}
+.bbl-u{background:#E6E6F0;border-radius:8px 8px 2px 8px;}
+.bbl-a{background:#E1F5EE;border-radius:8px 8px 8px 2px;}
+.bbl-lbl{font-size:10px;margin:0 0 2px;color:var(--color-text-secondary);}
+.bbl-txt{font-size:11px;margin:0;line-height:1.4;color:var(--color-text-primary);}
+.toast{background:#FAEEDA;border:0.5px solid #EF9F27;border-radius:6px;padding:5px 10px;text-align:center;margin-top:6px;}
+.toast-txt{color:#633806;font-size:11px;font-weight:500;margin:0;}
+.ctx-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);margin-bottom:8px;}
+.ctx-txt{font-size:12px;color:var(--color-text-primary);line-height:1.4;margin:0;}
+.ctx-sub{font-size:11px;color:var(--color-text-secondary);margin:1px 0 0;}
+.miss .t{color:#0F6E56;}
+.miss .a{color:#633806;}
+.miss .p{color:#3C3489;}
+</style>
+
+<div id="stage">
+  <span id="s-ctr">1 / 8</span>
+
+  <div class="scene active" id="s0">
+    <div class="a1" style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span class="stag muted">Real Story</span>
+      <span style="font-size:12px;color:var(--color-text-secondary);">Arjun — Class 10, Rohtak, Haryana</span>
+    </div>
+    <div class="a2" style="display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:16px;align-items:start;">
+      <div class="phone-wrap">
+        <div class="ph-hdr">
+          <i class="ti ti-brain" style="font-size:13px;color:#9FE1CB;" aria-hidden="true"></i>
+          <span class="ph-hdr-txt">Rit AI — Maths</span>
+          <span style="margin-left:auto;font-size:10px;color:#5DCAA5;font-weight:500;">2G</span>
+        </div>
+        <div class="bbl bbl-u">
+          <p class="bbl-lbl">Arjun ne poocha</p>
+          <p class="bbl-txt">"Sir, quadratic equation kaise solve karte hain?"</p>
+        </div>
+        <div class="bbl bbl-a">
+          <p class="bbl-lbl" style="color:#0F6E56;">Teacher Agent</p>
+          <p class="bbl-txt">"Pehle discriminant nikalo: b²−4ac. Agar positive hai toh 2 roots honge..."</p>
+        </div>
+        <div class="bbl bbl-a" style="margin-bottom:4px;">
+          <p class="bbl-lbl" style="color:#185FA5;">Note Taker</p>
+          <p class="bbl-txt" style="color:#185FA5;">"Notes ready! PDF download karein?"</p>
+        </div>
+        <div class="toast"><p class="toast-txt">+50 XP earned — Level 7!</p></div>
+      </div>
+      <div>
+        <div style="font-size:17px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px;">Raat 9 baje. Bijli nahi.</div>
+        <div style="font-size:12px;color:var(--color-text-secondary);margin-bottom:12px;">Kal Maths ka board exam hai. Koi tuition nahi, koi coach nahi.</div>
+        <div class="ctx-item">
+          <i class="ti ti-wifi" style="font-size:14px;color:#BA7517;flex-shrink:0;margin-top:1px;" aria-hidden="true"></i>
+          <div><p class="ctx-txt">2G internet, purana Android phone</p></div>
+        </div>
+        <div class="ctx-item">
+          <i class="ti ti-language" style="font-size:14px;color:#534AB7;flex-shrink:0;margin-top:1px;" aria-hidden="true"></i>
+          <div><p class="ctx-txt">Hindi mein sawaal poocha</p><p class="ctx-sub">AI ne turant Hindi mein jawab diya</p></div>
+        </div>
+        <div class="ctx-item">
+          <i class="ti ti-clock" style="font-size:14px;color:#0F6E56;flex-shrink:0;margin-top:1px;" aria-hidden="true"></i>
+          <div><p class="ctx-txt">20 minute mein concept clear</p><p class="ctx-sub">Notes auto-ready, practice quiz bhi</p></div>
+        </div>
+        <div class="ctx-item" style="border:0.5px solid #5DCAA5;background:#E1F5EE;">
+          <i class="ti ti-check" style="font-size:14px;color:#085041;flex-shrink:0;margin-top:1px;" aria-hidden="true"></i>
+          <div><p class="ctx-txt" style="color:#085041;font-weight:500;">Exam mein 78% marks aaye</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="s1">
+    <div class="a1" style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <div style="width:46px;height:46px;border-radius:12px;background:#E1F5EE;border:0.5px solid #5DCAA5;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <i class="ti ti-brain" style="font-size:20px;color:#0F6E56;" aria-hidden="true"></i>
+      </div>
+      <div>
+        <div style="font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1;">Rit AI</div>
+        <div style="font-size:11px;color:#0F6E56;font-weight:500;margin-top:2px;">by LearnXChain Technologies</div>
+      </div>
+    </div>
+    <div class="stitle a2">India ka pehla<br><span style="color:#1D9E75;">Student Growth Operating System</span></div>
+    <div class="ssub a3">22 AI modules. Ek platform. Class 6 se 12 tak — rural, semi-urban, ya metro, har jagah.</div>
+    <div class="prow a4">
+      <span class="pill" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5;"><i class="ti ti-brain" style="font-size:12px;vertical-align:-1px;margin-right:3px;" aria-hidden="true"></i>Adaptive Learning</span>
+      <span class="pill" style="background:#FAEEDA;color:#633806;border-color:#EF9F27;"><i class="ti ti-map-pin" style="font-size:12px;vertical-align:-1px;margin-right:3px;" aria-hidden="true"></i>Bharat Mode</span>
+      <span class="pill" style="background:#EEEDFE;color:#26215C;border-color:#AFA9EC;"><i class="ti ti-certificate" style="font-size:12px;vertical-align:-1px;margin-right:3px;" aria-hidden="true"></i>Blockchain Certs</span>
+      <span class="pill" style="background:#E6F1FB;color:#0C447C;border-color:#85B7EB;"><i class="ti ti-users" style="font-size:12px;vertical-align:-1px;margin-right:3px;" aria-hidden="true"></i>Multi-Agent AI</span>
+    </div>
+  </div>
+
+  <div class="scene" id="s2">
+    <div class="stag muted a1"><i class="ti ti-school" style="font-size:11px;vertical-align:-1px;margin-right:3px;" aria-hidden="true"></i>Core Feature</div>
+    <div class="stitle a2">Multi-Agent AI Classroom</div>
+    <div class="ssub a3">6 specialized AI agents — ek saath, ek classroom mein. Har agent ka apna role hota hai.</div>
+    <div class="ag-grid a4">
+      <div class="ag-card">
+        <i class="ti ti-presentation" style="font-size:16px;color:#0F6E56;" aria-hidden="true"></i>
+        <div class="ag-nm">Teacher Agent</div>
+        <div class="ag-ds">NCERT-aligned, outcome-based</div>
+      </div>
+      <div class="ag-card">
+        <i class="ti ti-robot" style="font-size:16px;color:#185FA5;" aria-hidden="true"></i>
+        <div class="ag-nm">AI Assistant</div>
+        <div class="ag-ds">Follow-up ka turant jawab</div>
+      </div>
+      <div class="ag-card">
+        <i class="ti ti-mood-smile" style="font-size:16px;color:#BA7517;" aria-hidden="true"></i>
+        <div class="ag-nm">Joker</div>
+        <div class="ag-ds">Humor se engagement badhata hai</div>
+      </div>
+      <div class="ag-card">
+        <i class="ti ti-help" style="font-size:16px;color:#534AB7;" aria-hidden="true"></i>
+        <div class="ag-nm">Curious Learner</div>
+        <div class="ag-ds">Woh sawaal jo student sochta hai</div>
+      </div>
+      <div class="ag-card">
+        <i class="ti ti-notes" style="font-size:16px;color:#993C1D;" aria-hidden="true"></i>
+        <div class="ag-nm">Note Taker</div>
+        <div class="ag-ds">Notes auto-generate karta hai</div>
+      </div>
+      <div class="ag-card">
+        <i class="ti ti-bulb" style="font-size:16px;color:#0F6E56;" aria-hidden="true"></i>
+        <div class="ag-nm">Deep Thinker</div>
+        <div class="ag-ds">Critical thinking se challenge karta</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="s3">
+    <div class="stag amber a1">Bharat Mode</div>
+    <div class="stitle a2">Asli Bharat ke liye bana</div>
+    <div class="ssub a3">Jab doosre metro schools ke liye banate hain, Rit AI wahan jaata hai jahan zaroorat sabse zyada hai.</div>
+    <div class="bh-grid a4">
+      <div class="bh-card" style="background:#E1F5EE;border-color:#5DCAA5;">
+        <div class="bh-big" style="color:#085041;">हिंदी</div>
+        <div class="bh-lbl" style="color:#085041;">Hindi First</div>
+        <div class="bh-txt" style="color:#0F6E56;">Hinglish UI — Swara, Madhur, Ananya, Aarav — Hindi voices</div>
+      </div>
+      <div class="bh-card" style="background:#FAEEDA;border-color:#EF9F27;">
+        <div class="bh-big" style="color:#412402;">2G</div>
+        <div class="bh-lbl" style="color:#633806;">2G First</div>
+        <div class="bh-txt" style="color:#854F0B;">Offline mode bhi, low-bandwidth AI bhi, compressed video bhi</div>
+      </div>
+      <div class="bh-card" style="background:#EEEDFE;border-color:#AFA9EC;">
+        <div class="bh-big" style="color:#26215C;font-size:19px;line-height:1.3;">Student<br>First</div>
+        <div class="bh-lbl" style="color:#3C3489;">Candlelight</div>
+        <div class="bh-txt" style="color:#534AB7;">Haryanvi accent support — underserved India ke liye</div>
+      </div>
+    </div>
+    <div class="a5" style="margin-top:12px;font-size:11px;color:var(--color-text-secondary);">+ Mother Tongue First bridge &nbsp;·&nbsp; Hyperlocal Career Simulator &nbsp;·&nbsp; Rural Entrepreneur Incubator</div>
+  </div>
+
+  <div class="scene" id="s4">
+    <div class="stag purple a1">AI Innovation</div>
+    <div class="stitle a2">Har student ka ek Digital Twin</div>
+    <div class="ssub a3">Ek live AI model — mastery, cognitive load, emotion aur dropout risk — sab real-time mein track hota hai.</div>
+    <div class="mt-grid a4">
+      <div class="mt-card">
+        <div class="mt-lbl">Mastery Score</div>
+        <div class="mt-val" style="color:#0F6E56;">78%</div>
+        <div class="barw"><div class="barf" id="b1" style="background:#1D9E75;"></div></div>
+        <div class="mt-hint">Algebra — Class 10 — improving</div>
+      </div>
+      <div class="mt-card">
+        <div class="mt-lbl">Cognitive Load</div>
+        <div class="mt-val" style="color:#534AB7;">Medium</div>
+        <div class="barw"><div class="barf" id="b2" style="background:#7F77DD;"></div></div>
+        <div class="mt-hint">Optimal hai — naya concept seekh sakta hai</div>
+      </div>
+      <div class="mt-card">
+        <div class="mt-lbl">Dropout Risk</div>
+        <div class="mt-val" style="font-size:16px;color:#639922;margin-top:2px;">LOW — Safe</div>
+        <div class="mt-hint">AI alert: is week koi issue nahi</div>
+      </div>
+      <div class="mt-card">
+        <div class="mt-lbl">Attention Streak</div>
+        <div class="mt-val" style="font-size:17px;color:#D85A30;">7 din — Active</div>
+        <div class="mt-hint">D7 retention target — achieved</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="s5">
+    <div class="stag teal a1">22 AI Modules</div>
+    <div class="stitle a2">Ek platform. Poora safar.</div>
+    <div class="ssub a3">Academics se career tak, emotion se scholarship tak — ek bhi zaroorat chhoot na jaye.</div>
+    <div class="md-grid a4">
+      <div class="md-card"><i class="ti ti-book" style="font-size:16px;color:#0F6E56;" aria-hidden="true"></i><div class="md-nm">Academic AI</div></div>
+      <div class="md-card"><i class="ti ti-target" style="font-size:16px;color:#185FA5;" aria-hidden="true"></i><div class="md-nm">IRT Adaptive Engine</div></div>
+      <div class="md-card"><i class="ti ti-brain" style="font-size:16px;color:#534AB7;" aria-hidden="true"></i><div class="md-nm">Cognitive Balancer</div></div>
+      <div class="md-card"><i class="ti ti-message-circle" style="font-size:16px;color:#993C1D;" aria-hidden="true"></i><div class="md-nm">Communication Coach</div></div>
+      <div class="md-card"><i class="ti ti-map" style="font-size:16px;color:#BA7517;" aria-hidden="true"></i><div class="md-nm">Career Simulator</div></div>
+      <div class="md-card"><i class="ti ti-heart" style="font-size:16px;color:#D4537E;" aria-hidden="true"></i><div class="md-nm">Emotional AI</div></div>
+      <div class="md-card"><i class="ti ti-trophy" style="font-size:16px;color:#639922;" aria-hidden="true"></i><div class="md-nm">Gamification XP</div></div>
+      <div class="md-card"><i class="ti ti-award" style="font-size:16px;color:#0F6E56;" aria-hidden="true"></i><div class="md-nm">Scholarship Auto-Apply</div></div>
+    </div>
+    <div class="a5" style="margin-top:10px;font-size:11px;color:var(--color-text-secondary);">+ PBL Mode · AI Quiz Grading · Whiteboard · PDF Processing · PPTX Export · aur bahut kuch</div>
+  </div>
+
+  <div class="scene" id="s6">
+    <div class="stag amber a1">Skill Economy</div>
+    <div class="stitle a2">Padho. Kamao. Certified ho.</div>
+    <div class="ssub a3">XP earn karo, level up karo — aur blockchain certificates se apna lifelong portfolio banao.</div>
+    <div class="xp-grid a4">
+      <div class="xp-card">
+        <div style="font-size:22px;font-weight:500;color:#0F6E56;margin:0 0 2px;">2,450 XP</div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin:0;">Is mahine kamaye</div>
+        <div class="barw" style="margin-top:10px;"><div class="barf" id="b3" style="background:#EF9F27;"></div></div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">Level 7 → Level 8</div>
+      </div>
+      <div class="xp-card">
+        <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;">Certificates</div>
+        <div class="cert"><i class="ti ti-link" style="font-size:11px;" aria-hidden="true"></i>Algebra Mastery</div>
+        <br>
+        <div class="cert" style="margin-top:6px;"><i class="ti ti-link" style="font-size:11px;" aria-hidden="true"></i>Science Olympiad Prep</div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:8px;">Blockchain-verified — lifetime valid</div>
+      </div>
+      <div class="xp-card">
+        <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px;">Career Match</div>
+        <div style="font-size:18px;font-weight:500;color:#3C3489;">Software Engineer</div>
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px;">Haryana job market data se</div>
+        <div style="font-size:12px;color:#0F6E56;font-weight:500;margin-top:6px;">84% match score</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" id="s7">
+    <div style="font-size:10px;font-weight:500;color:#1D9E75;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;" class="a1">Hamara Mission</div>
+    <div class="a2 miss" style="font-size:23px;font-weight:500;line-height:1.35;margin:0 0 14px;">
+      <span class="t">"Hindi pehle.</span><br>
+      <span class="a">2G pehle.</span><br>
+      <span class="p">Candlelight wala student pehle."</span>
+    </div>
+    <div class="ssub a3">Rit AI akela aisa EdTech hai jisme 22 AI modules, Bharat Mode, Digital Twin aur blockchain certification hai — India ke 1.5 million schools ke liye jo abhi bhi ignore hote hain.</div>
+    <div class="prow a4">
+      <button style="padding:9px 20px;border-radius:20px;font-size:13px;font-weight:500;background:#1D9E75;color:white;border:none;cursor:pointer;" onclick="sendPrompt('Rit AI ke liye free 14-day school trial kaise book karein?')">Free Demo Book Karen →</button>
+      <button style="padding:9px 20px;border-radius:20px;font-size:13px;font-weight:500;background:var(--color-background-secondary);color:var(--color-text-primary);border:0.5px solid var(--color-border-secondary);cursor:pointer;" onclick="sendPrompt('Rit AI ke school pricing plans kya hain?')">Pricing Dekhein</button>
+    </div>
+  </div>
+
+  <div id="prog-track"><div id="prog-fill"></div></div>
+  <div id="s-nav"></div>
+  <button id="pbtn" onclick="togglePlay()" aria-label="Pause"><i class="ti ti-player-pause" style="font-size:12px;color:var(--color-text-secondary);" aria-hidden="true"></i></button>
+</div>
+
+<script>
+const SC=['s0','s1','s2','s3','s4','s5','s6','s7'];
+const DUR=7500,TICK=80;
+let cur=0,el=0,playing=true;
+const nav=document.getElementById('s-nav');
+SC.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.onclick=()=>goTo(i);nav.appendChild(d);});
+function goTo(i){
+  document.getElementById(SC[cur]).classList.remove('active');
+  cur=i;el=0;
+  document.getElementById(SC[cur]).classList.add('active');
+  document.querySelectorAll('.dot').forEach((d,j)=>d.className='dot'+(j===i?' on':''));
+  document.getElementById('s-ctr').textContent=(i+1)+' / '+SC.length;
+  document.getElementById('prog-fill').style.width='0%';
+  if(i===4){setTimeout(()=>{const a=document.getElementById('b1'),b=document.getElementById('b2');if(a)a.style.width='78%';if(b)b.style.width='52%';},200);}
+  if(i===6){setTimeout(()=>{const c=document.getElementById('b3');if(c)c.style.width='65%';},200);}
+}
+function tick(){if(!playing)return;el+=TICK;document.getElementById('prog-fill').style.width=Math.min(el/DUR*100,100)+'%';if(el>=DUR){el=0;goTo((cur+1)%SC.length);}}
+function togglePlay(){playing=!playing;const b=document.getElementById('pbtn');b.innerHTML=playing?'<i class="ti ti-player-pause" style="font-size:12px;color:var(--color-text-secondary);" aria-hidden="true"></i>':'<i class="ti ti-player-play" style="font-size:12px;color:var(--color-text-secondary);" aria-hidden="true"></i>';}
+setInterval(tick,TICK);goTo(0);
+</script>

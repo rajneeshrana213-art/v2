@@ -1,0 +1,15 @@
+{
+    "env": {
+        "TZ": "Asia/Kolkata"
+    },
+    "rewrites": [
+        {
+            "source": "/api/face/(.*)",
+            "destination": "/api/face.py"
+        },
+        {
+            "source": "/api/timetable/(.*)",
+            "destination": "/api/timetable.py"
+        }
+    ]
+}

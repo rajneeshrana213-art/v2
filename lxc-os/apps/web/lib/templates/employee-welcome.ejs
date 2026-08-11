@@ -1,0 +1,164 @@
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eef1f6">
+  <tr>
+    <td align="center" style="padding: 50px 15px;">
+      <!-- Outer Wrapper -->
+      <table width="720" cellpadding="0" cellspacing="0" border="0"
+        style="background: #ffffff; border-radius: 22px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); overflow: hidden;">
+        <!-- HERO HEADER -->
+        <tr>
+          <td align="center"
+            style="padding: 55px 40px;
+            background: radial-gradient(circle at top, #3a7bd5, #1e3c72);">
+            <h1 style="margin: 0;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 34px;
+              font-weight: 800;
+              color: #ffffff;
+              letter-spacing: 0.3px;">
+              Welcome to the Team!
+            </h1>
+            <p style="margin: 14px 0 0;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 17px;
+              color: #dfe9ff;
+              max-width: 520px;">
+              Your employee account has been created successfully
+            </p>
+          </td>
+        </tr>
+        <!-- BODY -->
+        <tr>
+          <td style="padding: 50px 55px;">
+            <p style="margin: 0 0 20px;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 16px;
+              color: #222;">
+              Hi <strong><%= name %></strong>,
+            </p>
+            <p style="margin: 0 0 20px;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 16px;
+              color: #555;
+              line-height: 1.75;">
+              Welcome to LearnXChain! We're excited to have you on board. Your employee account has been created successfully.
+            </p>
+            <p style="margin: 0 0 32px;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 16px;
+              color: #555;">
+              Below are your secure login credentials:
+            </p>
+            <!-- CREDENTIAL GLASS CARD -->
+            <table width="100%" cellpadding="0" cellspacing="0" border="0"
+              style="background: linear-gradient(145deg, #f9fbff, #f1f5ff);
+              border-radius: 18px;
+              border: 1px solid #e3e9f5;
+              box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+              margin-bottom: 38px;">
+              <tr>
+                <td style="padding: 30px 35px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td width="50%">
+                        <p style="margin: 0 0 8px;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 13px;
+                          color: #777;">
+                          Employee Code
+                        </p>
+                        <p style="margin: 0;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 16px;
+                          font-weight: 600;
+                          color: #333;">
+                          <%= employeeCode %>
+                        </p>
+                      </td>
+                      <td width="50%">
+                        <p style="margin: 0 0 8px;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 13px;
+                          color: #777;">
+                          Email
+                        </p>
+                        <p style="margin: 0;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 16px;
+                          font-weight: 600;
+                          color: #333;">
+                          <%= email %>
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2" style="padding-top: 25px;">
+                        <p style="margin: 0 0 8px;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 13px;
+                          color: #777;">
+                          Temporary Password
+                        </p>
+                        <p style="margin: 0;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 20px;
+                          font-weight: 800;
+                          letter-spacing: 1px;
+                          color: #2a5298;">
+                          <%= password %>
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <!-- CTA -->
+            <table align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td align="center"
+                  style="background: linear-gradient(135deg, #2a5298, #1e3c72);
+                  border-radius: 60px;
+                  box-shadow: 0 12px 25px rgba(42,82,152,0.4);">
+                  <a href="<%= loginUrl %>" target="_blank"
+                    style="display: inline-block;
+                    padding: 16px 48px;
+                    font-family: 'Segoe UI', Tahoma, sans-serif;
+                    font-size: 17px;
+                    font-weight: 700;
+                    color: #ffffff;
+                    text-decoration: none;">
+                    Login to Dashboard →
+                  </a>
+                </td>
+              </tr>
+            </table>
+            <p style="margin: 35px 0 0;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 14px;
+              color: #666;
+              text-align: center;">
+              🔐 Please login and change your password upon first login
+            </p>
+          </td>
+        </tr>
+        <!-- FOOTER -->
+        <tr>
+          <td align="center"
+            style="padding: 30px 40px;
+            background: #f6f8fc;
+            border-top: 1px solid #e6ebf3;">
+            <p style="margin: 0;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 14px;
+              color: #666;
+              line-height: 1.7;">
+              Need help?<br />
+              📩 <strong>LearnXChain Support</strong> is always with you.
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+

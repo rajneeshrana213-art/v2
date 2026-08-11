@@ -1,0 +1,3883 @@
+{
+  "handbookData": [
+    {
+      "num": 0,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec0",
+          "title": "Section 0: Introduction to Behavioral Interviews",
+          "subtitle": "Technical vs Behavioral Communication"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "An exploration of why product companies prioritize behavioral screenings, how managers evaluate cultural alignment, and typical candidate pitfalls."
+        },
+        {
+          "type": "h3",
+          "text": "0.1 Understanding Behavioral Assessments"
+        },
+        {
+          "type": "para",
+          "text": "Behavioral interviews are based on the premise that past behavior is the best predictor of future performance. Unlike technical interviews, which verify engineering execution, behavioral interviews evaluate how you collaborate under stress, resolve conflict, manage risk, and take ownership of product successes and system failures."
+        },
+        {
+          "type": "h3",
+          "text": "0.2 Technical Skills vs Behavioral Skills"
+        },
+        {
+          "type": "para",
+          "text": "While solid algorithms and systems architecture get you past coding rounds, behavioral skills dictate whether you get hired and how quickly you grow in your career. High-level engineers must coordinate complex stakeholder landscapes, explain technical trade-offs, and design consensus. Hiring managers look for indicators of humility, execution bias, and conflict management."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Behavioral interviews assess cultural fit, collaboration abilities, and professional maturity, evaluating past behaviors as predictors of future team impact."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the primary factor hiring managers look for in behavioral rounds?",
+          "choices": [
+            "Memory of coding syntax",
+            "Structured evidence of ownership, communication, and learning from failure",
+            "Aggressive project self-assertion",
+            "Flawless technical delivery without teamwork"
+          ],
+          "correctIndex": 1,
+          "explanation": "Hiring managers look for structured stories demonstrating ownership, team cooperation, and growth mindset."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>SITUATION: Describe the scale of the company project.\nTASK: Define your team responsibility.\nACTION: Detail what you personally designed.\nRESULT: Document the business metrics."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why do companies ask behavioral questions?",
+          "answer": "They ask to evaluate non-technical competencies like communication, adaptability, teamwork, conflict resolution, and leadership, ensuring you can operate effectively in ambiguous and high-pressure team environments."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Speaking in generalities rather than referencing a specific project story.",
+            "Using 'We' instead of 'I' when describing key engineering actions, which obscures your personal contribution."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Behavioral rounds are as important as technical coding assessments at top-tier companies.",
+            "Past behavior is key: structure your answers around historical project situations.",
+            "Avoid blame: frame conflicts and failures around process breakdowns and professional growth."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I can explain the difference between technical and behavioral evaluations.",
+            "I understand the core competency metrics (Ownership, collaboration, learning)."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 1,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec1",
+          "title": "Section 1: Self Awareness Foundation",
+          "subtitle": "Personal Core Values & Career Auditing"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Auditing personal strengths, identifying actual weaknesses constructively, outlining core career goals, and completing self-reflection checklists."
+        },
+        {
+          "type": "h3",
+          "text": "1.1 Auditing Strengths & Weaknesses"
+        },
+        {
+          "type": "para",
+          "text": "Effective self-awareness requires identifying your natural strengths (e.g. system simplification, data-driven alignment) and framing weaknesses as areas of active professional growth. A constructive weakness is never a hidden strength (e.g. 'I work too hard') but rather an authentic technical or organizational skill you are actively improving (e.g. 'I historically struggled with public speaking, but recently joined toastmasters to improve')."
+        },
+        {
+          "type": "h3",
+          "text": "1.2 Mapping Core Values to Company Culture"
+        },
+        {
+          "type": "para",
+          "text": "Understanding your personal engineering values (e.g., bias for quality, customer obsession, process automation) helps you select alignment matches at target organizations, making behavioral narratives ring true to recruiters."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Self-awareness represents the baseline of authentic communication, allowing candidates to state strengths confidently and frame weaknesses around measurable self-improvement."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "How should a candidate frame an authentic weakness during an interview?",
+          "choices": [
+            "Deny having any weaknesses to appear flawless",
+            "State a weakness like 'I work too hard' or 'I am a perfectionist'",
+            "Name an authentic, non-critical skill gap and explain the specific steps being taken to improve it",
+            "Blame previous managers for not training them"
+          ],
+          "correctIndex": 2,
+          "explanation": "Naming an actual weakness coupled with active, measurable improvement showcases humility and a growth mindset."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>STRENGTH TEMPLATE: My primary strength is managing ambiguous system scale, as shown when I designed...\nWEAKNESS TEMPLATE: Historically, I struggled with prioritizing between competing tasks, but I resolved this by adopting..."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a personal weakness you are working to improve.",
+          "answer": "I historically had a tendency to dive directly into code before aligning on product requirements with cross-functional stakeholders. I recognized this bottleneck when it caused feature rework, and I have since adopted a practice of drafting design documents for review before writing code."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Using clichéd 'fake' weaknesses (perfectionism, overworking).",
+            "Stating a critical core flaw without showing any plan of action or resolution."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Authentic weaknesses show professional maturity and self-reflection.",
+            "Always match a stated weakness with a concrete, ongoing self-correction path.",
+            "Define clear 5-year career goals before entering behavioral screenings."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have listed three authentic strengths and two weaknesses with mitigation paths.",
+            "I can describe my core career goals for the next five years."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec2",
+          "title": "Section 2: Professional Communication",
+          "subtitle": "Clarity, Active Listening & Professional Vocabulary"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Mastering structured workplace verbal strategies, developing active listening, using professional vocabulary, and managing confidence under pressure."
+        },
+        {
+          "type": "h3",
+          "text": "2.1 Workplace Communication Mechanics"
+        },
+        {
+          "type": "para",
+          "text": "Professional communication in high-pressure engineering roles requires conciseness, structured vocabulary, and active listening. Always restate or clarify ambiguous questions from stakeholders before proposing solutions. Use professional vocabulary (e.g. 'alignment', 'trade-offs', 'business impact') rather than informal speech."
+        },
+        {
+          "type": "h3",
+          "text": "2.2 Verbal Structure: Bottom-Line First"
+        },
+        {
+          "type": "para",
+          "text": "Use the Minto Pyramid or BLUF (Bottom Line Up Front) model: state the core conclusion first, then support it with context and data. This guarantees that busy executives and interviewers capture your key points instantly."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Professional communication combines conciseness with active listening, structuring responses using BLUF to keep messages aligned with business objectives."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What does the BLUF communication framework represent?",
+          "choices": [
+            "Block Logical Unit Flow",
+            "Bottom Line Up Front - state key conclusions first",
+            "Bold Leadership Under Failure",
+            "Brief Listening Until Finished"
+          ],
+          "correctIndex": 1,
+          "explanation": "BLUF improves communication clarity by stating the main point first, followed by supporting arguments."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>BLUF TEMPLATE: The result of my migration was a 30% reduction in database cost. I achieved this by..."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How would you handle explaining a complex outage to non-technical stakeholders?",
+          "answer": "I start with the bottom-line business impact (e.g. user checkout was down for 15 minutes). I then explain the root cause using a simple highway analogy (e.g. database connections hit a traffic jam), followed by the specific actions taken to resolve it and prevent recurrence."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Ramble on context details for several minutes before stating the actual result.",
+            "Interrupting the interviewer or failing to confirm you answered their question."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Always confirm you understand the question before formulating your response.",
+            "Use 'Bottom Line Up Front' (BLUF) to anchor your conclusions.",
+            "Maintain steady, controlled pacing: fast speech signals nervousness."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I practice BLUF when responding to questions.",
+            "I can actively listen and paraphrase questions before answering."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec3",
+          "title": "Section 3: STAR Method Complete Guide",
+          "subtitle": "Structuring Situation, Task, Action & Result"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "A detailed structural walkthrough of the STAR Method, parsing good vs bad answers, templates, and constructing a personal story database."
+        },
+        {
+          "type": "h3",
+          "text": "3.1 The Anatomy of a STAR Response"
+        },
+        {
+          "type": "para",
+          "text": "The STAR framework is the standard structure for behavioral narratives:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Situation (10%): Set the stage. State the project, team size, scale, and the problem.",
+            "Task (10%): What was your specific, personal responsibility in this situation?",
+            "Action (70%): Describe the steps YOU personally took. Explain the engineering options, the design choice, how you handled team consensus, and technical ownership.",
+            "Result (10%): Highlight the quantitative outcome (e.g., latency dropped by 40%, saved $50K/year) and personal learnings."
+          ]
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 800 240\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g fill=\"none\" stroke=\"var(--border)\" stroke-width=\"2\">\n          <!-- Connectors -->\n          <line x1=\"150\" y1=\"120\" x2=\"200\" y2=\"120\" />\n          <line x1=\"330\" y1=\"120\" x2=\"380\" y2=\"120\" />\n          <line x1=\"510\" y1=\"120\" x2=\"560\" y2=\"120\" />\n          <marker id=\"arrow\" viewBox=\"0 0 10 10\" refX=\"6\" refY=\"5\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto-start-reverse\">\n            <path d=\"M 0 2 L 10 5 L 0 8 z\" fill=\"var(--accent)\" />\n          </marker>\n        </g>\n        \n        <!-- S: Situation -->\n        <rect x=\"20\" y=\"60\" width=\"130\" height=\"120\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"85\" y=\"100\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"20\" text-anchor=\"middle\" font-weight=\"bold\">S</text>\n        <text x=\"85\" y=\"125\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">SITUATION</text>\n        <text x=\"85\" y=\"145\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Context, scale,</text>\n        <text x=\"85\" y=\"160\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">& team size</text>\n        \n        <!-- T: Task -->\n        <rect x=\"200\" y=\"60\" width=\"130\" height=\"120\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"265\" y=\"100\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"20\" text-anchor=\"middle\" font-weight=\"bold\">T</text>\n        <text x=\"265\" y=\"125\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">TASK</text>\n        <text x=\"265\" y=\"145\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Your specific</text>\n        <text x=\"265\" y=\"160\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">responsibility</text>\n        \n        <!-- A: Action -->\n        <rect x=\"380\" y=\"60\" width=\"130\" height=\"120\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"445\" y=\"100\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"20\" text-anchor=\"middle\" font-weight=\"bold\">A</text>\n        <text x=\"445\" y=\"125\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">ACTION</text>\n        <text x=\"445\" y=\"145\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">What YOU did &</text>\n        <text x=\"445\" y=\"160\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">how you led</text>\n        \n        <!-- R: Result -->\n        <rect x=\"560\" y=\"60\" width=\"130\" height=\"120\" rx=\"10\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n        <text x=\"625\" y=\"100\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"20\" text-anchor=\"middle\" font-weight=\"bold\">R</text>\n        <text x=\"625\" y=\"125\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">RESULT</text>\n        <text x=\"625\" y=\"145\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Metrics, growth,</text>\n        <text x=\"625\" y=\"160\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">& takeaways</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 1. The STAR Method structured framework for behavioral storytelling.</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "3.2 Comparative STAR Breakdown"
+        },
+        {
+          "type": "para",
+          "text": "A weak STAR answer talks in general terms about the team's actions. A strong STAR answer isolates personal engineering contributions, provides clear metrics, and highlights lessons learned."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "The STAR Method structures responses to behavioral prompts by partitioning context (Situation/Task), personal technical contributions (Action), and business outcomes (Result)."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which portion of the STAR framework should receive the most detailed coverage?",
+          "choices": [
+            "Situation (setting context)",
+            "Task (assigning work)",
+            "Action (your personal steps)",
+            "Result (outcome details)"
+          ],
+          "correctIndex": 2,
+          "explanation": "Action should occupy roughly 70% of your response, showing your specific leadership and engineering steps."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>STAR MATRIX TEMPLATE:\n- Situation: High load on backend service...\n- Task: I had to resolve the database bottleneck...\n- Action: Set up Redis cache, optimized queries...\n- Result: Latency fell from 500ms to 50ms, supporting 2x traffic."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Provide an example of a strong Result statement.",
+          "answer": "By refactoring our API routing layer, we reduced average response times by 35% (saving 150ms of user latency) and reduced cloud hosting costs by $12,000 annually, with zero customer-facing errors during migration."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Spending 90% of the time describing the Situation/context, leaving no room to explain your Actions.",
+            "Failing to provide any quantifiable metrics in the Result phase."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Situation & Task should be brief: establish context in 2-3 sentences.",
+            "Action is key: focus on your personal logic, designs, and decisions.",
+            "Quantify Results: always provide business metrics, system changes, or key learnings."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I can break down a behavioral story into distinct S, T, A, R components.",
+            "My stories emphasize my individual actions (using 'I' instead of 'we')."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec4",
+          "title": "Section 4: Most Common Behavioral Questions",
+          "subtitle": "Standard Screening Prompts & Answer Matrices"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Analyzing standard screening questions: 'Tell me about yourself', 'Why hire you', strengths, weaknesses, successes, and failures."
+        },
+        {
+          "type": "h3",
+          "text": "4.1 Tell Me About Yourself (The Elevator Pitch)"
+        },
+        {
+          "type": "para",
+          "text": "This question is your professional introduction. Use a Present-Past-Future structure: state your current title and specialty, highlight 1-2 key past achievements (with metrics), and explain why you are excited about the target role's challenges."
+        },
+        {
+          "type": "h3",
+          "text": "4.2 Strengths, Successes, and Failures Matrix"
+        },
+        {
+          "type": "para",
+          "text": "For strengths, match the requirements of the job description. For successes, quantify your business impact. For failures, focus on the immediate recovery steps, root cause analysis, and the process safeguards you put in place to prevent similar issues."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Common behavioral questions establish your elevator pitch, technical values, and self-reflection metrics, requiring balanced answers comparing weak, average, and strong examples."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the recommended structure for 'Tell me about yourself'?",
+          "choices": [
+            "Detail your complete childhood and hobbies",
+            "Present-Past-Future: current role focus, past key achievements, and future alignment",
+            "Read your resume word-for-word",
+            "Complain about your current employer"
+          ],
+          "correctIndex": 1,
+          "explanation": "Present-Past-Future is a structured pitch that connects your past success with the target company's challenges."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>ELEVATOR PITCH TEMPLATE: Currently, I am a senior engineer leading... In my past role, I saved $40k by... I am looking to bring this expertise to your team to solve..."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you answer 'Why do you want to join our company?'",
+          "answer": "I link a specific engineering challenge the company is facing (e.g. scaling payment pipelines) or their engineering culture (e.g. open source contribution) with my past expertise, showing how my background aligns with their business goals."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Reciting your resume chronology instead of summarizing key achievements.",
+            "Answering 'Why should we hire you?' with generic traits like 'I am a fast learner' without project evidence."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Pitch yourself in 2 minutes: keep it focused on engineering achievements.",
+            "Strengths must be tied to technical leadership and scaling impact.",
+            "Failures should highlight personal accountability and process improvement."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a structured 90-second professional elevator pitch prepared.",
+            "I have mapped my strengths directly to the target job description requirements."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec5",
+          "title": "Section 5: Teamwork Questions",
+          "subtitle": "Collaboration, Peer Mentoring & Cross-Functional Sync"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Preparing STAR stories on peer cooperation, mentoring junior developers, handling cross-functional requirements, and maintaining project alignment."
+        },
+        {
+          "type": "h3",
+          "text": "5.1 Engineering Collaboration Frameworks"
+        },
+        {
+          "type": "para",
+          "text": "Modern software systems are too complex for single developers. Interviewers evaluate how you unblock teammates, handle code review friction, and align with product managers and QA teams. A strong teamwork story shows you actively listening, compromising on non-critical designs, and prioritizing product launch timelines over personal technical preferences."
+        },
+        {
+          "type": "h3",
+          "text": "5.2 Mentoring & Raising the Bar"
+        },
+        {
+          "type": "para",
+          "text": "Senior and Staff engineers are expected to grow the team's capabilities. Discuss mentoring programs you initiated, documentation improvements, and pair programming to unblock junior developers."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Teamwork questions evaluate your communication footprint within engineering teams, focusing on peer mentorship, code review processes, and cross-functional alignment."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the best way to handle code review disagreements with a peer?",
+          "choices": [
+            "Escalate immediately to the manager to prove you are correct",
+            "Approve the PR but complain to teammates",
+            "Schedule a brief sync, focus on objective styling guidelines or performance metrics, and find a common standard",
+            "Ignore their comments and merge the code"
+          ],
+          "correctIndex": 2,
+          "explanation": "Collaborative developers align on objective metrics and guidelines rather than subjective arguments."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>TEAMWORK TEMPLATE: S: Teammate struggled with a feature timeline...\nT: I had to support them without neglecting my own tasks...\nA: Conducted pair programming and split the complex logic...\nR: Feature launched on time, and teammate learned the design pattern."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you helped a teammate who was struggling.",
+          "answer": "A peer was struggling to implement a database migration before a release. I scheduled a 30-minute whiteboard session to break down the schema changes, pair-programmed the tricky edge cases, and helped them write the tests. The migration completed without errors."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Taking all the credit for a team achievement.",
+            "Describing teammates negatively when explaining a project delay."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Highlight peer mentorship: growing the team is a core senior engineer expectation.",
+            "Prioritize alignment: show how you work with Product and QA to ensure quality.",
+            "Use 'I' for your actions, but share credit for the overall project results."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story illustrating how I unblocked a teammate.",
+            "I can describe my philosophy on code reviews and peer mentorship."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 6,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec6",
+          "title": "Section 6: Conflict Resolution",
+          "subtitle": "Disagreements, Stakeholders & Manager Alignments"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Managing technical disagreements, navigating manager alignments, aligning difficult stakeholders, and review of the Thomas-Kilmann conflict model."
+        },
+        {
+          "type": "h3",
+          "text": "6.1 Handling Technical & Architectural Disagreements"
+        },
+        {
+          "type": "para",
+          "text": "Conflict is natural in engineering. The key to resolving conflict is focusing on objective data rather than opinions. When disagreeing on database choices or system architecture, run benchmarks, compile pros/cons lists, and document trade-offs. Agree to 'disagree and commit' if a decision is made to maintain team velocity."
+        },
+        {
+          "type": "h3",
+          "text": "6.2 Navigating Manager & Stakeholder Friction"
+        },
+        {
+          "type": "para",
+          "text": "Friction with product managers or business stakeholders often stems from mismatched priorities (e.g. feature speed vs technical debt). Solve this by translating engineering complexity into business metrics (e.g. refactoring reduces database costs by 15% and increases page load speeds by 200ms)."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 340\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Axes -->\n        <line x1=\"80\" y1=\"280\" x2=\"520\" y2=\"280\" stroke=\"var(--border)\" stroke-width=\"3\" />\n        <line x1=\"80\" y1=\"40\" x2=\"80\" y2=\"280\" stroke=\"var(--border)\" stroke-width=\"3\" />\n        \n        <!-- Labels -->\n        <text x=\"300\" y=\"315\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">ASSERTIVENESS (Focus on Own Needs)</text>\n        <text x=\"35\" y=\"160\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\" transform=\"rotate(-90 35 160)\">COOPERATIVENESS</text>\n        \n        <!-- Quadrant blocks -->\n        <!-- Competing -->\n        <rect x=\"100\" y=\"60\" width=\"160\" height=\"80\" rx=\"6\" fill=\"var(--bg-card)\" stroke=\"#EF4444\" stroke-width=\"2\" />\n        <text x=\"180\" y=\"95\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">COMPETING</text>\n        <text x=\"180\" y=\"115\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">My way or highway</text>\n        \n        <!-- Collaborating -->\n        <rect x=\"340\" y=\"60\" width=\"160\" height=\"80\" rx=\"6\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n        <text x=\"420\" y=\"95\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">COLLABORATING</text>\n        <text x=\"420\" y=\"115\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Win-Win integration</text>\n        \n        <!-- Compromising (Center) -->\n        <circle cx=\"300\" cy=\"180\" r=\"45\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"2\" />\n        <text x=\"300\" y=\"184\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">COMPROMISE</text>\n        \n        <!-- Avoiding -->\n        <rect x=\"100\" y=\"180\" width=\"140\" height=\"80\" rx=\"6\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"170\" y=\"215\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">AVOIDING</text>\n        <text x=\"170\" y=\"235\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Delay / Ignore</text>\n        \n        <!-- Accommodating -->\n        <rect x=\"360\" y=\"180\" width=\"140\" height=\"80\" rx=\"6\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"430\" y=\"215\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"13\" text-anchor=\"middle\" font-weight=\"bold\">ACCOMMODATING</text>\n        <text x=\"430\" y=\"235\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">Yielding / Smoothing</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 2. Thomas-Kilmann Conflict Mode Instrument mapping Assertiveness vs Cooperativeness.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Conflict resolution requires focusing on objective data, active listening, and prioritizing team alignment over personal technical bias."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What does it mean to 'Disagree and Commit' in an engineering team?",
+          "choices": [
+            "Continue arguing your point after a decision is finalized",
+            "Agree to support the team's decision fully, even if you initially advocated for a different path",
+            "Sabotage the project to prove you were right",
+            "Refuse to work on the feature"
+          ],
+          "correctIndex": 1,
+          "explanation": "'Disagree and commit' ensures team alignment and project velocity after a design path is selected."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>CONFLICT TEMPLATE: S: Disagreed on using NoSQL vs Relational DB...\nT: I had to resolve the debate to keep the project on track...\nA: Built prototypes of both, ran benchmark queries, and compared costs...\nR: Team aligned on relational database due to transaction integrity."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you disagreed with a manager's decision.",
+          "answer": "My manager proposed launching a feature that bypassed key security tests to meet a deadline. I scheduled a private sync, presented a risk matrix showing the potential data exposure vulnerabilities, and proposed a compromise: launch a beta version to a restricted user group while finishing security patches. My manager agreed, preserving data integrity."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Framing conflicts as personal arguments instead of technical trade-offs.",
+            "Portraying yourself as someone who never compromises on designs."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "De-escalate using benchmarks: resolve design debates with code data.",
+            "Understand Thomas-Kilmann: collaboration is the goal for high-impact projects.",
+            "Never criticize former managers or teammates during behavioral rounds."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story showing how I resolved a technical disagreement using data.",
+            "I understand the business trade-off between tech debt and feature timelines."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 7,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec7",
+          "title": "Section 7: Leadership",
+          "subtitle": "Ownership, Leadership Scales & Team Initiatives"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Taking ownership, driving technical initiatives, influencing without authority, and junior vs staff engineer leadership expectations."
+        },
+        {
+          "type": "h3",
+          "text": "7.1 Leadership Without Authority"
+        },
+        {
+          "type": "para",
+          "text": "Leadership is not about titles; it is about influence. Engineers demonstrate leadership by identifying system bottlenecks, drafting design documents, and aligning the team to solve them. To influence without authority, you must build technical trust, present clear business justifications, and support your proposals with data."
+        },
+        {
+          "type": "h3",
+          "text": "7.2 Leadership Expectations by Level"
+        },
+        {
+          "type": "para",
+          "text": "Junior engineers lead their own tasks and ask for help early. Senior engineers lead features, mentor peers, and manage project delivery. Staff/Principal engineers lead cross-team technical strategies, set long-term architecture goals, and align engineering priorities with company executives."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 280\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Steps of the Ladder -->\n        <!-- L3 -->\n        <g transform=\"translate(50, 200)\">\n          <rect x=\"0\" y=\"0\" width=\"80\" height=\"40\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"40\" y=\"25\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">L3</text>\n          <text x=\"40\" y=\"-10\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Junior</text>\n        </g>\n        \n        <!-- L4 -->\n        <g transform=\"translate(150, 160)\">\n          <rect x=\"0\" y=\"0\" width=\"80\" height=\"40\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"40\" y=\"25\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">L4</text>\n          <text x=\"40\" y=\"-10\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Mid-level</text>\n        </g>\n        \n        <!-- L5 -->\n        <g transform=\"translate(250, 120)\">\n          <rect x=\"0\" y=\"0\" width=\"80\" height=\"40\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n          <text x=\"40\" y=\"25\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">L5</text>\n          <text x=\"40\" y=\"-10\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Senior</text>\n        </g>\n        \n        <!-- L6 -->\n        <g transform=\"translate(350, 80)\">\n          <rect x=\"0\" y=\"0\" width=\"80\" height=\"40\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n          <text x=\"40\" y=\"25\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">L6</text>\n          <text x=\"40\" y=\"-10\" fill=\"var(--accent)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">Staff</text>\n        </g>\n        \n        <!-- L7 -->\n        <g transform=\"translate(450, 40)\">\n          <rect x=\"0\" y=\"0\" width=\"80\" height=\"40\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"2\" />\n          <text x=\"40\" y=\"25\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"14\" text-anchor=\"middle\" font-weight=\"bold\">L7</text>\n          <text x=\"40\" y=\"-10\" fill=\"var(--secondary)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\" font-weight=\"bold\">Principal</text>\n        </g>\n        \n        <!-- Line pointing up -->\n        <path d=\"M50 250 H 550\" stroke=\"var(--border)\" stroke-width=\"3\" />\n        <path d=\"M 40 220 L 440 60\" fill=\"none\" stroke=\"var(--accent)\" stroke-dasharray=\"4,4\" stroke-width=\"2\" marker-end=\"url(#arrow)\" />\n        <text x=\"240\" y=\"195\" fill=\"var(--accent)\" font-family=\"sans-serif\" font-size=\"10\" transform=\"rotate(-21 240 195)\">Increasing Autonomy & System-Wide Impact</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 6. The engineering career ladder illustrating scope transition.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Leadership questions evaluate initiative, technical influence, and team ownership, shifting from task delivery at junior levels to org-wide strategy at staff levels."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "How does a Staff Engineer primarily demonstrate leadership?",
+          "choices": [
+            "By writing all the code themselves and working in isolation",
+            "By setting cross-team technical architecture, mentoring senior leads, and aligning tech with business goals",
+            "By forcing developers to use their preferred tools",
+            "By avoiding meetings completely"
+          ],
+          "correctIndex": 1,
+          "explanation": "Staff engineers operate at a strategic level, focusing on architectural standards and cross-team alignment."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>LEADERSHIP TEMPLATE: S: Legacy code created 5% of API failures...\nT: I decided to lead a refactoring initiative without formal directives...\nA: Drafted an RFC, presented performance gains to leads, and ran migrations...\nR: API failure rate dropped to 0.1%, saving $20k in infrastructure costs."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you took the lead on a technical project.",
+          "answer": "We lacked a standardized logging structure, causing long debugging times. I drafted an RFC proposing a centralized JSON logger (Winston), scheduled an architecture review to align the team, and wrote a helper library to simplify implementation. Debugging times fell by 40%."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Defining leadership as dictating solutions rather than building consensus.",
+            "Failing to show stakeholder buy-in or alignment in your leadership stories."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Show initiative: discuss projects you started without being told to.",
+            "Scale matters: senior stories must show influence beyond a single sprint.",
+            "Quantify impact: demonstrate how your leadership improved team velocity or system cost."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story showing how I influenced a technical decision without direct authority.",
+            "I can describe the responsibilities expected at my target engineering level."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 8,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec8",
+          "title": "Section 8: Failure Questions",
+          "subtitle": "Mistakes, Recovery Actions & Process Safeguards"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Stating technical failures, explaining immediate recovery steps, conducting post-mortems, and demonstrating a growth mindset."
+        },
+        {
+          "type": "h3",
+          "text": "8.1 The Anatomy of an Engineering Failure"
+        },
+        {
+          "type": "para",
+          "text": "Everyone makes mistakes; what matters to interviewers is how you handle them. A strong failure story shows immediate accountability, fast mitigation, a blameless post-mortem, and permanent process or tooling changes (e.g. adding CI linting, integration tests, or automated rollbacks) to ensure the bug never occurs again."
+        },
+        {
+          "type": "h3",
+          "text": "8.2 Recovery and Growth Mindset"
+        },
+        {
+          "type": "para",
+          "text": "When describing a production outage or code mistake, focus on what you learned and how you grew. Avoid blaming legacy code or former colleagues; own the mistake and highlight the architectural protections you put in place afterward."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Failure questions evaluate accountability, crisis mitigation, and growth mindsets, requiring stories focused on blameless post-mortems and permanent process guardrails."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the most critical element to highlight when describing a past engineering failure?",
+          "choices": [
+            "Downplaying the impact of the error",
+            "The permanent process safeguards, tests, or monitors you put in place to prevent it from ever happening again",
+            "Explaining which coworker originally wrote the bad code",
+            "Saying you have never made a mistake"
+          ],
+          "correctIndex": 1,
+          "explanation": "Focusing on preventive safeguards and process improvement shows professional maturity and a growth mindset."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>FAILURE TEMPLATE: S: Database crashed due to an un-indexed query I deployed...\nT: Had to restore user access immediately...\nA: Rolled back the deployment, analyzed slow query logs, and added index tests to CI...\nR: System restored in 10 minutes; index tests now prevent un-indexed queries."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a project that failed or did not meet expectations.",
+          "answer": "I led a database migration that ran 2 hours longer than planned, delaying a release. I ran a post-mortem, realized we had not tested the migration with production-scale data, and created a staging restore checklist. Subsequent migrations were tested against full datasets, preventing future delays."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Saying 'I have never failed' (signals lack of experience or lack of self-reflection).",
+            "Blaming external developers, product managers, or users for your mistakes."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Own the error: display direct personal accountability.",
+            "Mitigate fast: show how you diagnosed and resolved the issue in production.",
+            "Systematize: explain the automated guards or tests you added afterward."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story about a technical mistake where I took direct accountability.",
+            "I can explain the blameless post-mortem process and how I apply it."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 9,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec9",
+          "title": "Section 9: Success Questions",
+          "subtitle": "Milestones, Quantifiable Impacts & Project Delivery"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Structuring project achievements, defining quantifiable metrics, aligning team efforts, and explaining target engineering impacts."
+        },
+        {
+          "type": "h3",
+          "text": "9.1 Quantifying Engineering Success"
+        },
+        {
+          "type": "para",
+          "text": "Success stories must go beyond 'we finished the project.' You must quantify the engineering or business impact. Use metrics like latency reductions (e.g. 500ms to 50ms), server cost savings (e.g. 30% reduction), scale capacity (e.g. handled 5x traffic spikes), or team velocity improvements (e.g. cut release cycles from 2 weeks to 2 days)."
+        },
+        {
+          "type": "h3",
+          "text": "9.2 Sharing Credit While Showing Ownership"
+        },
+        {
+          "type": "para",
+          "text": "When presenting a successful project, describe the team's effort to show collaboration, but isolate your specific design contributions (e.g., 'I designed the caching layer and wrote the queue processor') to prove your individual impact."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Success questions evaluate your engineering contribution and business focus, requiring quantifiable metrics to prove the scale and value of your work."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which of the following represents the strongest Result statement for a success story?",
+          "choices": [
+            "The project launched successfully and everyone was happy.",
+            "We migrated the service, reducing API latency by 45% (saving 200ms) and supporting a 3x traffic spike with zero errors.",
+            "I wrote a lot of clean code and refactored multiple files.",
+            "My manager praised my code structure."
+          ],
+          "correctIndex": 1,
+          "explanation": "Strong success results contain specific, quantifiable system and business performance metrics."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>SUCCESS TEMPLATE: S: API load times were slow, impacting checkout conversions...\nT: I was tasked with optimizing the checkout API...\nA: Profiler identified database bottleneck; optimized queries & added Redis...\nR: Latency fell by 60%, reducing checkout drop-offs by 8%."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about your most significant technical achievement.",
+          "answer": "I designed and led the migration of our legacy monolith to a microservices architecture. I drafted the data split plan, built a routing proxy to handle incremental traffic splits, and set up fallback routes. The migration completed with zero user-facing downtime, reducing server costs by 35%."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Failing to provide any numeric metrics or business context for the success.",
+            "Talking only about team actions, leaving the interviewer confused about what you actually coded."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Provide clear numbers: scale, latency, dollar savings, or developer hours.",
+            "Isolate your role: explain what you personally designed, refactored, or coded.",
+            "Connect to business value: show how technical achievements helped the company."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have prepared two success stories with clear before-and-after metrics.",
+            "I can explain the business justification behind my technical achievements."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 10,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec10",
+          "title": "Section 10: Ownership Questions",
+          "subtitle": "Leadership Principles, Accountability & Ambiguity"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Taking complete responsibility, managing project ambiguity, going beyond role definitions, and analyzing Amazon's Ownership leadership principle."
+        },
+        {
+          "type": "h3",
+          "text": "10.1 The Psychology of Ownership"
+        },
+        {
+          "type": "para",
+          "text": "Ownership means thinking long-term and never saying 'that's not my job.' Product companies want engineers who identify production issues outside their assigned tasks, fix broken release steps, write missing test suites, and take responsibility for overall system stability and team success."
+        },
+        {
+          "type": "h3",
+          "text": "10.2 Navigating Technical Ambiguity"
+        },
+        {
+          "type": "para",
+          "text": "As you grow in your career, project assignments become more ambiguous (e.g. 'Improve payment reliability'). Ownership in ambiguous environments requires gathering data, creating design options, building consensus, and driving execution despite unclear requirements."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Ownership questions evaluate long-term thinking, responsibility, and the ability to drive projects through ambiguous requirements without constant supervision."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What does taking ownership look like for an engineer?",
+          "choices": [
+            "Only writing code for tasks assigned in JIRA and ignoring other issues",
+            "Identifying a production bottleneck or build failure, taking responsibility to fix it, and ensuring process improvements",
+            "Telling other developers they are writing bad code",
+            "Refusing to participate in sprint planning"
+          ],
+          "correctIndex": 1,
+          "explanation": "Ownership means taking responsibility for team success and system stability beyond your immediate tasks."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>OWNERSHIP TEMPLATE: S: Found a memory leak in a module owned by another team...\nT: Realized it threatened our release stability...\nA: Profiled the leak, wrote a bug fix, aligned with the owner team, and deployed...\nR: Restored release stability, preventing memory crashes in production."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you had to work on a project with ambiguous requirements.",
+          "answer": "I was asked to 'improve system reliability.' I gathered historical error logs, identified that 80% of failures came from unstable third-party API calls, drafted an RFC to implement circuit breakers (using Hystrix), and led the rollout. Failure rates dropped by 95%."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Saying 'that's not my area' when asked about a system failure.",
+            "Waiting for managers to assign tasks instead of proactively identifying and fixing issues."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Focus on initiative: discuss bottlenecks you resolved without being asked to.",
+            "Emphasize long-term thinking: show how your fixes prevent future maintenance issues.",
+            "Explain how you resolve ambiguity: gather data, draft designs, and align stakeholders."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story demonstrating proactivity on a system-wide issue.",
+            "I can describe how I navigate project ambiguity and gather requirements."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 11,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec11",
+          "title": "Section 11: Decision Making Questions",
+          "subtitle": "Data-Driven Trade-offs, Risk Management & Priorities"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Analyzing data-driven engineering decisions, prioritizing tasks under tight deadlines, managing system risks, and analyzing trade-offs."
+        },
+        {
+          "type": "h3",
+          "text": "11.1 Data-Driven Engineering Decisions"
+        },
+        {
+          "type": "para",
+          "text": "Engineering is the study of trade-offs. Decisions should not be based on personal bias or hype (e.g. 'let's use Rust because it is trendy') but on objective metrics: write latency, read throughput, infrastructure cost, development velocity, and maintenance complexity. Always back up your architecture choices with data."
+        },
+        {
+          "type": "h3",
+          "text": "11.2 Prioritization & Risk Management"
+        },
+        {
+          "type": "para",
+          "text": "When deadlines are tight, prioritize features based on customer impact and engineering risk. Use frameworks like Eisenhower Matrix or MoSCoW (Must have, Should have, Could have, Won't have) and align with product leads to defer non-critical scope."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 340\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Grid lines -->\n        <line x1=\"80\" y1=\"280\" x2=\"520\" y2=\"280\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <line x1=\"80\" y1=\"40\" x2=\"80\" y2=\"280\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <line x1=\"300\" y1=\"40\" x2=\"300\" y2=\"280\" stroke=\"var(--border)\" stroke-width=\"1\" stroke-dasharray=\"4,4\" />\n        <line x1=\"80\" y1=\"160\" x2=\"520\" y2=\"160\" stroke=\"var(--border)\" stroke-width=\"1\" stroke-dasharray=\"4,4\" />\n        \n        <!-- Label Axes -->\n        <text x=\"300\" y=\"310\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">BUSINESS RISK / IMPACT (Low to High)</text>\n        <text x=\"45\" y=\"160\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\" transform=\"rotate(-90 45 160)\">AMBIGUITY LEVEL</text>\n        \n        <!-- Quadrant labels -->\n        <!-- Top Left: High Ambiguity, Low Risk -->\n        <rect x=\"90\" y=\"50\" width=\"190\" height=\"95\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <text x=\"185\" y=\"75\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Experiment & Fail Fast</text>\n        <text x=\"185\" y=\"95\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Delegate testing, build</text>\n        <text x=\"185\" y=\"110\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">rapid prototypes</text>\n        \n        <!-- Top Right: High Ambiguity, High Risk -->\n        <rect x=\"310\" y=\"50\" width=\"190\" height=\"95\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"2\" />\n        <text x=\"405\" y=\"75\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Gather Data & Escalate</text>\n        <text x=\"405\" y=\"95\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Form consensus, establish</text>\n        <text x=\"405\" y=\"110\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">milestones, flag triggers</text>\n        \n        <!-- Bottom Left: Low Ambiguity, Low Risk -->\n        <rect x=\"90\" y=\"175\" width=\"190\" height=\"95\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <text x=\"185\" y=\"200\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Standardized Runbooks</text>\n        <text x=\"185\" y=\"220\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Follow procedures,</text>\n        <text x=\"185\" y=\"235\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">automated scripts</text>\n        \n        <!-- Bottom Right: Low Ambiguity, High Risk -->\n        <rect x=\"310\" y=\"175\" width=\"190\" height=\"95\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"1\" />\n        <text x=\"405\" y=\"200\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Data-Driven Execution</text>\n        <text x=\"405\" y=\"220\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">Measure KPIs, perform detailed</text>\n        <text x=\"405\" y=\"235\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">safety dry runs before launching</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 5. The Decision-Making Quadrant mapping Ambiguity against Business Risk.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Decision-making questions evaluate your trade-off analysis, risk management, and prioritization skills under tight deadlines and ambiguous constraints."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "How should an engineer evaluate a choice between SQL and NoSQL for a new system?",
+          "choices": [
+            "Pick the database they have the most fun coding in",
+            "Analyze data relationships, transaction safety (ACID), scaling requirements, and write/read ratios",
+            "Always choose NoSQL because it is modern",
+            "Flip a coin to save time"
+          ],
+          "correctIndex": 1,
+          "explanation": "Engineering decisions require auditing system trade-offs like data consistency, scale, and query access patterns."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>DECISION TEMPLATE: S: Tight 2-week deadline for a high-traffic feature...\nT: I had to choose between a custom architecture or an off-the-shelf library...\nA: Audited security and latency profiles, chose the library to save time, and planned refactoring...\nR: Launched on time with zero safety failures, refactored in the next sprint."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a tough decision you had to make under time pressure.",
+          "answer": "During a peak shopping event, our checkout latency spiked. I had to decide whether to disable non-critical recommended product fetches or keep them on. I checked the telemetry, saw the DB was overloaded, and toggled the recommendations off. Checkout latency dropped instantly, preserving purchases."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Making architecture decisions based on trends rather than objective system metrics.",
+            "Failing to consult cross-functional partners (Product, QA) on trade-offs."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Be objective: explain the metrics (latency, costs, developer hours) behind choices.",
+            "Mitigate risk: show how you validated decisions using prototypes or A/B tests.",
+            "Consult partners: show alignment with product leads on trade-offs."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story illustrating a technical trade-off decision I led.",
+            "I can explain my framework for analyzing and documenting architecture decisions."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 12,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec12",
+          "title": "Section 12: Communication Questions",
+          "subtitle": "Technical Translation, Alignment & Stakeholders"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Translating complex technical concepts to non-technical partners, handling system misunderstandings, and aligning cross-functional teams."
+        },
+        {
+          "type": "h3",
+          "text": "12.1 Technical Translation Strategies"
+        },
+        {
+          "type": "para",
+          "text": "High-impact engineers must translate complex technical details into business impact for product managers, designers, and marketing leads. Use simple analogies, avoid technical jargon, focus on the user experience (e.g. latency, features, uptime), and use visual diagrams to explain how system changes help business goals."
+        },
+        {
+          "type": "h3",
+          "text": "12.2 Handling Communication Breakdowns"
+        },
+        {
+          "type": "para",
+          "text": "When misunderstandings occur, take responsibility, schedule a brief sync to align on definitions, and document decisions in writing (e.g., API specifications, design documents) to establish a single source of truth."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Communication questions evaluate how you build alignment, translate technical details for non-technical partners, and resolve misunderstandings."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the best way to explain a database deadlock to a non-technical Product Manager?",
+          "choices": [
+            "Explain locking levels and thread stack trace dumps",
+            "Use a simple real-world analogy: two cars blocking each other in a narrow intersection, waiting for the other to move",
+            "Tell them to trust your code and not ask questions",
+            "Send them a link to the database source code"
+          ],
+          "correctIndex": 1,
+          "explanation": "Simple analogies make complex engineering concepts accessible to non-technical stakeholders."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>COMMUNICATION TEMPLATE: S: Stakeholders did not understand why refactoring took 2 weeks...\nT: I had to explain technical debt in business terms...\nA: Drew a pipeline map showing how legacy queries slowed checkouts, affecting sales...\nR: Stakeholders approved the refactor, recognizing it would improve user conversion."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you had to explain a complex technical concept to a non-technical stakeholder.",
+          "answer": "I had to explain why we needed to adopt consistent hashing for our cache cluster. I used a circular filing cabinet analogy to show how it prevents losing files when adding cabinets. The Product Manager understood the stability value and approved the sprint allocation."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Using technical jargon to shut down business stakeholder questions.",
+            "Assuming stakeholders understand engineering concepts without analogies."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Explain in business terms: translate technical improvements into user metrics.",
+            "Use analogies: map systems onto real-world examples (traffic, post offices).",
+            "Document: establish clear written contracts (API endpoints, architecture diagrams)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story showing how I resolved a cross-functional communication gap.",
+            "I use clear analogies to explain complex systems to non-tech partners."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 13,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec13",
+          "title": "Section 13: Adaptability Questions",
+          "subtitle": "Uncertainty, New Technologies & Organizational Change"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Handling sudden product pivots, learning new programming languages under pressure, and managing team uncertainty."
+        },
+        {
+          "type": "h3",
+          "text": "13.1 Navigating Product Pivots & Uncertainty"
+        },
+        {
+          "type": "para",
+          "text": "Software development is dynamic. Target requirements change, priorities shift, and platforms scale. Adaptability means staying calm during changes, audit-checking design adjustments objectively, and helping the team transition without loss of momentum. Frame pivots as opportunities to learn and deliver value."
+        },
+        {
+          "type": "h3",
+          "text": "13.2 Learning New Technologies Under Pressure"
+        },
+        {
+          "type": "para",
+          "text": "Engineers must regularly learn new stacks (e.g. migrating from Python to Go or adopting Kubernetes). When learning new technologies, start with small prototypes, write basic tests, read core documentations, and document best practices to share with the team."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Adaptability questions evaluate how you handle change, learn new tools under pressure, and maintain team velocity during pivots."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the best way to handle a sudden product requirement change mid-sprint?",
+          "choices": [
+            "Complain to the product manager about wasted effort",
+            "Stop writing code until the sprint ends",
+            "Assess the architectural impact, align with product leads on trade-offs, and adjust sprint tasks",
+            "Refuse to work on the updated requirements"
+          ],
+          "correctIndex": 2,
+          "explanation": "Adaptable developers evaluate changes objectively, adjust sprint goals, and align with business needs."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>ADAPTABILITY TEMPLATE: S: Company pivoted from AWS to GCP mid-project...\nT: Had to migrate our deployment pipeline quickly...\nA: Learned GCP IAM and GKE fundamentals, rewrote Terraform configs, and set up test clusters...\nR: Migration completed in 3 weeks with zero downtime; team up-skilled on GCP."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you had to learn a new technology or tool quickly.",
+          "answer": "Our team had to migrate a backend service to Go to improve concurrency. I had no prior Go experience. I spent my first week building small CLI prototypes, reading the core runtime specs, and writing unit tests. I successfully migrated the service, reducing latency by 70%."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Resisting pivots or complaining about updates to coworkers.",
+            "Using a new technology in production without testing or prototyping."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Stay positive: treat pivots as opportunities to learn and deliver value.",
+            "Be structured: explain your method for learning new technologies quickly.",
+            "Lead change: show how you helped your team adopt new tools."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story illustrating how I adapted to a sudden pivot or new technology.",
+            "I can describe my structured learning path when adopting new tools."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 14,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec14",
+          "title": "Section 14: Productivity & Time Management",
+          "subtitle": "Prioritization, Deadlines & Multi-Project Delivery"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Prioritizing tasks using systematic frameworks, managing competing deadlines, handling missed milestones, and optimizing developer velocity."
+        },
+        {
+          "type": "h3",
+          "text": "14.1 Systematic Prioritization Frameworks"
+        },
+        {
+          "type": "para",
+          "text": "Engineers face competing tasks: bug fixes, feature requests, technical debt, and meetings. Productive engineers prioritize tasks using systematic frameworks like the Eisenhower Matrix (categorizing by urgency and importance) or value-effort mapping, ensuring they focus on high-impact projects first."
+        },
+        {
+          "type": "h3",
+          "text": "14.2 Managing Deadlines & Scope Creep"
+        },
+        {
+          "type": "para",
+          "text": "When deadlines are at risk, be transparent. Flag delays early, propose scope adjustments (e.g. launching a MVP with a fast follow-up), and automate manual workflows (like testing or deployment) to reclaim development time."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Productivity and time management questions evaluate how you handle competing deadlines, prioritize tasks, and manage scope creep."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the best way to handle having too many tasks for a sprint deadline?",
+          "choices": [
+            "Work 80 hours a week to finish everything",
+            "Rank tasks by business value, identify non-critical scope, and align with the Product Manager to adjust the timeline",
+            "Ignore the deadline and deliver features late without warning",
+            "Ask other developers to do your work"
+          ],
+          "correctIndex": 1,
+          "explanation": "Productive engineers communicate early, prioritize by value, and manage scope trade-offs."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>PRODUCTIVITY TEMPLATE: S: Assigned 3 critical bugs and 1 feature release in the same week...\nT: Had to deliver the release while stabilizing production...\nA: Ranked tasks by impact, resolved the blocker bugs, negotiated a 2-day deferral on the feature...\nR: Blockers resolved immediately; feature launched on the adjusted date with zero errors."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you missed a deadline. What did you do?",
+          "answer": "I realized a complex integration would delay our launch by 3 days. I flagged this to product leads 1 week early, explained the blocker, and proposed releasing a feature-flagged version to internal testers first. We launched the public version 3 days late but with zero bugs."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Working excessive hours instead of addressing scope management.",
+            "Hiding project delays until the day of the release."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Flag delays early: transparent communication builds trust.",
+            "Systematize priority: use business impact to rank your tasks.",
+            "Manage scope: focus on MVP delivery to meet tight timelines."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story illustrating how I managed competing project deadlines.",
+            "I can describe how I prioritize features and handle scope creep."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 15,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec15",
+          "title": "Section 15: Engineering-Specific Behavioral Questions",
+          "subtitle": "Outages, Technical Debates & Code Review Friction"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Handling high-priority production outages, resolving code review friction, making technical trade-offs, and mentoring junior developers."
+        },
+        {
+          "type": "h3",
+          "text": "15.1 Managing High-Priority Production Outages"
+        },
+        {
+          "type": "para",
+          "text": "Production outages are high-pressure scenarios. Interviewers look for structured troubleshooting: establishing a command structure, stabilizing the system first (e.g. rolling back or shifting traffic), gathering logs and metrics to find the root cause, and documenting findings in a post-mortem to prevent future incidents."
+        },
+        {
+          "type": "h3",
+          "text": "15.2 Code Review & Architecture Friction"
+        },
+        {
+          "type": "para",
+          "text": "Code reviews should focus on code quality, security, and scalability, not personal preferences. Resolve disagreements by referencing style guides, running benchmarks, and keeping discussions respectful and focused on data."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Engineering-specific behavioral questions evaluate how you handle production pressure, technical friction, and team code quality standards."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the first step during a high-severity production outage?",
+          "choices": [
+            "Search the codebase to find who wrote the bug",
+            "Stabilize the system immediately to restore customer access (e.g., rollback, toggle feature flags)",
+            "Write a post-mortem report",
+            "Restart the database without checking why it failed"
+          ],
+          "correctIndex": 1,
+          "explanation": "The immediate priority in an outage is restoring service for users; root-cause analysis and post-mortems follow stabilization."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>OUTAGE TEMPLATE: S: Payment service API error rate spiked to 15%...\nT: I was on-call and had to resolve the issue...\nA: Checked Grafana metrics, identified a memory leak in a recent deploy, and rolled back...\nR: API stabilized in 5 minutes; added memory monitoring to the CI/CD pipeline."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you had a technical disagreement with a senior architect.",
+          "answer": "The architect proposed a microservice split that I believed would introduce circular dependencies. I drew a dependency map, showed the potential network loops, and proposed an asynchronous message queue solution. The architect agreed, and the service launched without coupling issues."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Focusing on blame instead of stabilization during outages.",
+            "Approving bad code just to avoid review discussions."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Stabilize first: show you prioritize user access during outages.",
+            "Use data: resolve code reviews with benchmarks and guidelines.",
+            "Automate: discuss how you add CI/CD tests to prevent bugs."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story about resolving a critical production outage.",
+            "I can describe my code review guidelines for maintaining code quality."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 16,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec16",
+          "title": "Section 16: Amazon Leadership Principles",
+          "subtitle": "Customer Obsession, Ownership & Bias for Action"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "An in-depth review of Amazon's Leadership Principles, mapping STAR stories to core concepts like Customer Obsession and Bias for Action."
+        },
+        {
+          "type": "h3",
+          "text": "16.1 Customer Obsession & Ownership"
+        },
+        {
+          "type": "para",
+          "text": "Customer Obsession means working backward from the customer to design products. Ownership means thinking long-term and never sacrificing long-term value for short-term results. Structure your Amazon stories to show you prioritizing user needs, taking responsibility for issues, and building systems that scale."
+        },
+        {
+          "type": "h3",
+          "text": "16.2 Bias for Action & Deliver Results"
+        },
+        {
+          "type": "para",
+          "text": "Bias for Action means speed matters in business—many decisions are reversible and do not need extensive study. Deliver Results means focusing on the key inputs and delivering quality despite setbacks. Frame stories to highlight your execution speed and metrics."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 320\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Central Node -->\n        <circle cx=\"300\" cy=\"160\" r=\"45\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"3\" />\n        <text x=\"300\" y=\"164\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">AMAZON LPs</text>\n        \n        <!-- Branches -->\n        <g stroke=\"var(--border)\" stroke-width=\"2\">\n          <line x1=\"300\" y1=\"115\" x2=\"300\" y2=\"50\" />\n          <line x1=\"345\" y1=\"160\" x2=\"480\" y2=\"160\" />\n          <line x1=\"300\" y1=\"205\" x2=\"300\" y2=\"270\" />\n          <line x1=\"255\" y1=\"160\" x2=\"120\" y2=\"160\" />\n          <line x1=\"330\" y1=\"130\" x2=\"430\" y2=\"70\" />\n          <line x1=\"270\" y1=\"130\" x2=\"170\" y2=\"70\" />\n        </g>\n        \n        <!-- Principle Nodes -->\n        <!-- Customer Obsession -->\n        <rect x=\"220\" y=\"10\" width=\"160\" height=\"40\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"2\" />\n        <text x=\"300\" y=\"34\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Customer Obsession</text>\n        \n        <!-- Ownership -->\n        <rect x=\"430\" y=\"50\" width=\"130\" height=\"40\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"495\" y=\"74\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\">Ownership</text>\n        \n        <!-- Invent & Simplify -->\n        <rect x=\"480\" y=\"140\" width=\"110\" height=\"40\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"535\" y=\"164\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\">Invent & Simplify</text>\n        \n        <!-- Bias for Action -->\n        <rect x=\"220\" y=\"270\" width=\"160\" height=\"40\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"2\" />\n        <text x=\"300\" y=\"294\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Bias for Action</text>\n        \n        <!-- Earn Trust -->\n        <rect x=\"10\" y=\"140\" width=\"110\" height=\"40\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"65\" y=\"164\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\">Earn Trust</text>\n        \n        <!-- Learn and Be Curious -->\n        <rect x=\"70\" y=\"50\" width=\"140\" height=\"40\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"140\" y=\"74\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\">Learn & Be Curious</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 3. Radial mapping of select Amazon Leadership Principles evaluated in SDMR interviews.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Amazon Leadership Principles evaluate how your behavior aligns with ownership, customer obsession, bias for action, and high standards."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What does Amazon's 'Bias for Action' principle mean for engineers?",
+          "choices": [
+            "Deploying untested code to production quickly",
+            "Making decisions quickly when they are reversible, trading off perfect data for execution speed",
+            "Waiting for executive approval for all decisions",
+            "Writing detailed design documents for minor changes"
+          ],
+          "correctIndex": 1,
+          "explanation": "Bias for Action encourages quick decision-making for reversible (Type 2) choices to maintain momentum."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>CUSTOMER OBSESSION TEMPLATE: S: Users complained about a slow checkout flow...\nT: I was tasked with identifying the cause...\nA: Monitored checkout events, identified a third-party script blocking the UI, and deferred it...\nR: Checkout load times fell by 50%, improving conversion metrics by 4%."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you took a calculated risk to move faster.",
+          "answer": "We had to launch a holiday promo feature. We lacked historical load data. I estimated scale based on traffic spikes, set up aggressive auto-scaling, and deployed a feature-flagged version. The feature launched on time and handled the traffic spike successfully."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Focusing on speed while ignoring code quality or testing.",
+            "Stating stories that fail to highlight customer impact or business value."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Work backward: show how your technical decisions helped the customer.",
+            "Be direct: speak to your personal contribution and metrics.",
+            "Explain reversible decisions: show when speed was prioritized over long analysis."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have mapped my STAR stories to the core Amazon Leadership Principles.",
+            "I can explain the difference between one-way and two-way decisions."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 17,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec17",
+          "title": "Section 17: Google Behavioral Interviews",
+          "subtitle": "Googleyness, Leadership & Intellectual Humility"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Google-specific criteria: Googleyness (navigating ambiguity, doing the right thing, valuing diversity) and General Cognitive Ability (GCA)."
+        },
+        {
+          "type": "h3",
+          "text": "17.1 Deciphering Googleyness"
+        },
+        {
+          "type": "para",
+          "text": "Googleyness measures cultural alignment, evaluated by your ability to navigate ambiguity, do the right thing (integrity), show intellectual humility, support team growth, and value diversity. Focus your Google stories on how you handle uncertain requirements and build collaborative, open environments."
+        },
+        {
+          "type": "h3",
+          "text": "17.2 General Cognitive Ability (GCA) in Behavior"
+        },
+        {
+          "type": "para",
+          "text": "Google also evaluates GCA in behavioral rounds: how you solve complex problems, learn from mistakes, and apply data-driven logic to resolve team and systems challenges."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 320\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Googleyness Circle (Left) -->\n        <circle cx=\"230\" cy=\"140\" r=\"100\" fill=\"none\" stroke=\"var(--accent)\" stroke-width=\"3\" />\n        <text x=\"180\" y=\"100\" fill=\"var(--accent)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">GOOGLEYNESS</text>\n        \n        <!-- Leadership Circle (Right) -->\n        <circle cx=\"370\" cy=\"140\" r=\"100\" fill=\"none\" stroke=\"var(--secondary)\" stroke-width=\"3\" />\n        <text x=\"420\" y=\"100\" fill=\"var(--secondary)\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\">LEADERSHIP</text>\n        \n        <!-- General Cognitive Ability (Bottom) -->\n        <circle cx=\"300\" cy=\"220\" r=\"100\" fill=\"none\" stroke=\"#6366F1\" stroke-width=\"3\" />\n        <text x=\"300\" y=\"300\" fill=\"#6366F1\" font-family=\"monospace\" font-size=\"14\" font-weight=\"bold\" text-anchor=\"middle\">PROBLEM SOLVING (GCA)</text>\n        \n        <!-- Intersections -->\n        <text x=\"300\" y=\"160\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">THE SWEET</text>\n        <text x=\"300\" y=\"176\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">SPOT</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 4. Venn diagram mapping key assessment tracks of Google's hiring criteria.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Googleyness and Leadership rounds evaluate how you handle ambiguity, demonstrate intellectual humility, and act with integrity."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What does 'Intellectual Humility' mean in a Google interview?",
+          "choices": [
+            "Pretending you do not know the answer",
+            "Being open to feedback, admitting when you are wrong, and prioritizing the best solution over your ego",
+            "Refusing to share your designs with others",
+            "Avoiding taking charge of projects"
+          ],
+          "correctIndex": 1,
+          "explanation": "Intellectual humility means prioritizing learning, collaboration, and objective data over personal ego."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>GOOGLEYNESS TEMPLATE: S: High ambiguity regarding a new feature's design...\nT: Had to align the team on a path forward...\nA: Scheduled open brain-storming sessions, welcomed conflicting ideas, and prototyped choices...\nR: Team aligned on a shared architecture, feeling ownership over the solution."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you navigated ambiguity on a project.",
+          "answer": "I was asked to 'improve user engagement.' We had no data on why users dropped off. I set up telemetry logs, identified that 40% of users left due to slow page loads, and led a latency reduction initiative. User engagement metrics improved by 15%."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Appearing defensive or refusing to accept feedback from others.",
+            "Stating you have never faced ambiguity in your engineering work."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Show humility: discuss how you value feedback and learn from mistakes.",
+            "Emphasize collaboration: show you build inclusive, open team environments.",
+            "Explain your logic: structure how you navigate unclear requirements."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have STAR stories showing intellectual humility and feedback adoption.",
+            "I can describe how I support team diversity and build alignment."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 18,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec18",
+          "title": "Section 18: Meta Behavioral Interviews",
+          "subtitle": "Impact, Fast Execution & Team Velocity"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Meta behavioral loops: Move Fast, Focus on Long-Term Impact, and engineering-level execution speed."
+        },
+        {
+          "type": "h3",
+          "text": "18.1 Focus on Impact & Execution"
+        },
+        {
+          "type": "para",
+          "text": "Meta's engineering culture values speed and business impact. In behavioral loops, showcase how you identify high-leverage tasks, ship code quickly, resolve blockers to keep the team moving, and focus on user metrics. Structure your stories to show you prioritizing features that drive business growth."
+        },
+        {
+          "type": "h3",
+          "text": "18.2 Moving Fast Safely"
+        },
+        {
+          "type": "para",
+          "text": "Moving fast does not mean breaking production. Discuss how you use feature flags, automated testing, and incremental rollouts to ship code quickly and safely."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Meta's behavioral rounds evaluate how you prioritize business impact, move fast safely, and maintain high execution velocity."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "How should an engineer demonstrate Meta's core value of 'Focus on Impact'?",
+          "choices": [
+            "By refactoring clean code that has no user-facing effect",
+            "By prioritizing tasks that directly improve key metrics (e.g. latency, user conversion, server cost)",
+            "By writing the longest design documents possible",
+            "By working only on complex algorithms"
+          ],
+          "correctIndex": 1,
+          "explanation": "Focusing on impact means directing engineering efforts toward tasks that drive business value and improve user experience."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>META IMPACT TEMPLATE: S: Competitor launched a feature; we needed to respond in 1 week...\nT: Had to launch a similar tool quickly...\nA: Stripped non-essential scope, built a lightweight version, and released with feature flags...\nR: Shipped in 6 days, retaining 95% of users with zero production errors."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you optimized a workflow to move faster.",
+          "answer": "Our local testing flow was slow, taking developers 40 minutes per run. I set up a parallel test runner and mock database, reducing runtimes to 5 minutes. This saved our team 15 hours of developer wait time weekly, accelerating releases."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Discussing refactoring projects that delivered no business metrics or user value.",
+            "Stating you cannot work effectively under tight deadlines."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Prioritize impact: link technical work directly to user or business value.",
+            "Move fast: show how you simplify solutions to meet tight timelines.",
+            "Mitigate risk: discuss how you use feature flags and automated tests to launch safely."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have two STAR stories showing high-impact technical execution.",
+            "I can describe how I balance shipping speed with code quality."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 19,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec19",
+          "title": "Section 19: Microsoft Behavioral Interviews",
+          "subtitle": "Growth Mindset, Customer Focus & Collaboration"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Microsoft behavioral loops: Growth Mindset, customer-centric design, and cross-team collaboration."
+        },
+        {
+          "type": "h3",
+          "text": "19.1 Growth Mindset & Learning"
+        },
+        {
+          "type": "para",
+          "text": "Microsoft's culture revolves around a Growth Mindset: the belief that abilities can be developed through dedication and hard work. In interviews, show how you learn from failure, seek out feedback, view challenges as opportunities, and help your teammates grow."
+        },
+        {
+          "type": "h3",
+          "text": "19.2 Customer Centricity & Collaboration"
+        },
+        {
+          "type": "para",
+          "text": "Show how you partner with cross-functional teams and external customers to build accessible, reliable products, prioritizing user accessibility and long-term customer success."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Microsoft behavioral evaluations prioritize a growth mindset, customer-centricity, and cross-team collaboration."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What does demonstrating a 'Growth Mindset' look like in an interview?",
+          "choices": [
+            "Stating you have nothing left to learn",
+            "Discussing how you seek out challenging projects, accept feedback, and treat failures as opportunities to learn",
+            "Complaining about legacy code complexity",
+            "Sticking only to technologies you already know"
+          ],
+          "correctIndex": 1,
+          "explanation": "Growth Mindset is characterized by a passion for learning, resilience in setbacks, and adopting constructive feedback."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>GROWTH MINDSET TEMPLATE: S: System migration failed due to a caching edge case I missed...\nT: Needed to fix the system and learn from the gap...\nA: Conducted a post-mortem, read caching protocols, and shared a guide with the team...\nR: Fixed the bug, and the team adopted the updated caching rules, preventing future errors."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you received constructive feedback that changed your approach.",
+          "answer": "A senior lead pointed out that my design documents lacked database sizing estimates. I realized this was a gap, studied database sizing, and added a sizing calculator to our RFC templates. My subsequent designs were more accurate, preventing scaling issues."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Appearing defensive when asked about past feedback or failures.",
+            "Failing to show how you help coworkers grow or adopt new skills."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Own learning: discuss how you proactively learn new skills and technologies.",
+            "Adopt feedback: show you value and act on constructive criticism.",
+            "Focus on users: explain how you prioritize accessibility and customer needs."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story showing how I grew after receiving critical feedback.",
+            "I can describe how I support customer success and product accessibility."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 20,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec20",
+          "title": "Section 20: Managerial & Leadership Interviews",
+          "subtitle": "Delegation, Mentorship & Strategy Case Studies"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Interviews for managers and tech leads: delegating work, coaching developers, defining strategy, and handling low-performing team members."
+        },
+        {
+          "type": "h3",
+          "text": "20.1 Delegation & Empowering Teams"
+        },
+        {
+          "type": "para",
+          "text": "Tech leads and managers must shift from writing code to empowering others. Delegation is not just offloading tasks; it is matching projects with developer growth goals. A strong lead delegates ownership, provides clear outcomes, and supports developers through regular check-ins."
+        },
+        {
+          "type": "h3",
+          "text": "20.2 Coaching & Handling Low Performance"
+        },
+        {
+          "type": "para",
+          "text": "When team members struggle, address it early. Establish a collaborative performance plan with clear, measurable milestones. Focus on identifying root causes (e.g. lack of training, process blockers) and providing targeted support."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Managerial and leadership loops evaluate how you delegate, coach developers, define technical strategy, and handle performance issues."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "How should a Tech Lead handle a team member who is missing milestones?",
+          "choices": [
+            "Write the code for them to meet the deadline",
+            "Schedule a private sync to identify root-cause blockers, set clear daily goals, and provide targeted support",
+            "Publicly criticize them during standup",
+            "Reassign their work without explaining why"
+          ],
+          "correctIndex": 1,
+          "explanation": "Effective leadership involves identifying performance blockers collaboratively and setting clear, measurable targets."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>LEADERSHIP TEMPLATE: S: Junior developer was struggling to ship tasks on time...\nT: Tasked with improving their velocity and confidence...\nA: Scheduled daily 15-minute syncs, pair-programmed complex logic, and broke down tasks...\nR: Developer's velocity doubled in 4 weeks, and they successfully shipped their first feature."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Tell me about a time you delegated a critical project to a teammate.",
+          "answer": "We had to migrate our payment integration. Instead of writing it myself, I delegated it to a mid-level engineer who wanted to learn system design. I provided the architecture guidelines, reviewed their design docs, and acted as a sounding board. They shipped the migration successfully and was promoted."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Micromanaging tasks instead of delegating ownership.",
+            "Blaming low performance on team members' skills instead of looking at process gaps."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Delegate growth: assign projects that align with team member development goals.",
+            "Support early: address performance gaps collaboratively before they escalate.",
+            "Prioritize strategy: show how you align technical plans with business goals."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have a STAR story showing how I coached a team member to success.",
+            "I can describe my framework for delegation and engineering strategy."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 21,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec21",
+          "title": "Section 21: Executive Presence",
+          "subtitle": "Confidence, Body Language & Meeting Leadership"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Developing executive presence: body language, professional speaking, leading high-stakes meetings, and managing stakeholder expectations."
+        },
+        {
+          "type": "h3",
+          "text": "21.1 Mastering Executive Communication"
+        },
+        {
+          "type": "para",
+          "text": "Executive presence is the ability to inspire confidence in your leadership. Speak clearly, maintain direct eye contact (or camera alignment), use open body language, and keep your contributions concise. Frame technical challenges around business risk and opportunity, and stay calm during high-stakes discussions."
+        },
+        {
+          "type": "h3",
+          "text": "21.2 Running High-Stakes Meetings"
+        },
+        {
+          "type": "para",
+          "text": "To lead meetings effectively, establish a clear agenda, define the target outcome, manage time limits, and ensure all voices are heard. Follow up with written action items to maintain momentum."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Executive presence combines clear body language, concise professional speaking, and the ability to align stakeholder expectations during high-stakes meetings."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the most effective way to communicate with company executives?",
+          "choices": [
+            "Provide a detailed, chronological narrative of your coding process",
+            "State the key business conclusion first (BLUF), followed by high-level supporting data and trade-offs",
+            "Ask them to choose the technical libraries for the project",
+            "Avoid making recommendations and let them decide"
+          ],
+          "correctIndex": 1,
+          "explanation": "Executives prioritize high-level business impact and trade-off analysis over low-level code implementation details."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>EXECUTIVE TEMPLATE: S: Critical outage required executive updates...\nT: Tasked with presenting the status to the VP of Engineering...\nA: Summarized the business impact, named the root cause, and outlined the resolution timeline...\nR: Restored service; VP was satisfied with the clear, structured communication."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle a stakeholder who constantly interrupts during meetings?",
+          "answer": "I listen actively to their point, acknowledge their concern (e.g. 'I hear your concern about the timeline'), and propose addressing it in a dedicated section of the meeting or follow-up, keeping the current agenda on track."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Ramble on technical details when presenting to business executives.",
+            "Displaying defensive body language (crossed arms, avoiding eye contact) during criticism."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Use BLUF: state your key conclusions and business impact first.",
+            "Stay calm: handle criticism and high-pressure questions with data.",
+            "Lead meetings: set clear agendas and focus on action items."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I structure my executive presentations around business impact and trade-offs.",
+            "I maintain open body language and clear pacing during presentations."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 22,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec22",
+          "title": "Section 22: Salary Negotiation",
+          "subtitle": "Compensation Strategy & Offer Scripting"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Negotiation strategies: anchoring high, requesting written breakdowns, leveraging competing offers, and handling counter proposals."
+        },
+        {
+          "type": "h3",
+          "text": "22.1 The Rules of Salary Negotiation"
+        },
+        {
+          "type": "para",
+          "text": "Negotiation begins before the offer is written. Rule 1: Never state your target salary or compensation history first. Deflect these questions to get the employer's range. Rule 2: Always negotiate the written offer. Rule 3: Leverage competing offers constructively, focusing on market value and your excitement about the team."
+        },
+        {
+          "type": "h3",
+          "text": "22.2 Negotiation Scripting & Counters"
+        },
+        {
+          "type": "para",
+          "text": "When countered, stay professional. Express excitement, propose a specific number backed by market research, and structure the increase across base salary, sign-on bonus, or stock grants."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 700 220\" xmlns=\"http://www.w3.org/2000/svg\">\n        <g stroke=\"var(--border)\" stroke-width=\"2\">\n          <!-- Timeline line -->\n          <line x1=\"50\" y1=\"120\" x2=\"650\" y2=\"120\" />\n        </g>\n        \n        <!-- Step 1: Initial call -->\n        <circle cx=\"100\" cy=\"120\" r=\"10\" fill=\"var(--accent)\" />\n        <rect x=\"30\" y=\"30\" width=\"140\" height=\"60\" rx=\"4\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <text x=\"100\" y=\"52\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">1. Anchor High</text>\n        <text x=\"100\" y=\"70\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"8\" text-anchor=\"middle\">Deflect salary queries</text>\n        \n        <!-- Step 2: Written Offer -->\n        <circle cx=\"280\" cy=\"120\" r=\"10\" fill=\"var(--secondary)\" />\n        <rect x=\"210\" y=\"150\" width=\"140\" height=\"60\" rx=\"4\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <text x=\"280\" y=\"172\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">2. Request Details</text>\n        <text x=\"280\" y=\"190\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"8\" text-anchor=\"middle\">Analyze base vs stock</text>\n        \n        <!-- Step 3: Counter Offer -->\n        <circle cx=\"460\" cy=\"120\" r=\"10\" fill=\"var(--accent)\" />\n        <rect x=\"390\" y=\"30\" width=\"140\" height=\"60\" rx=\"4\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <text x=\"460\" y=\"52\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">3. Counter Offer</text>\n        <text x=\"460\" y=\"70\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"8\" text-anchor=\"middle\">Provide market benchmarks</text>\n        \n        <!-- Step 4: Signature -->\n        <circle cx=\"620\" cy=\"120\" r=\"10\" fill=\"var(--secondary)\" />\n        <rect x=\"550\" y=\"150\" width=\"140\" height=\"60\" rx=\"4\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"1\" />\n        <text x=\"620\" y=\"172\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\" font-weight=\"bold\">4. Signature</text>\n        <text x=\"620\" y=\"190\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"8\" text-anchor=\"middle\">Confirm target start date</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 7. Step-by-step timeline of salary negotiation communication milestones.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Salary negotiation requires deflecting early salary queries, analyzing compensation structures, and using market data and competing offers to negotiate."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the best response when a recruiter asks for your salary history during a screening?",
+          "choices": [
+            "State your current salary immediately",
+            "Deflect by stating you are focused on the value you bring and ask for the company's approved budget range",
+            "Refuse to answer and hang up",
+            "State an excessively high number without explanation"
+          ],
+          "correctIndex": 1,
+          "explanation": "Deflecting early salary queries preserves your negotiation leverage and encourages the employer to share their range first."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>NEGOTIATION TEMPLATE: 'Thank you for the offer! I am excited about the team's challenges. Based on my research and competing conversations, I was hoping we could target $X in base salary. If we can align on that, I am ready to sign.'"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you handle a recruiter who says 'this is our final offer and it is non-negotiable'?",
+          "answer": "I thank them for the transparency, re-express my excitement about the role, and ask if we can adjust non-monetary benefits (like remote flexibility or additional PTO) or discuss a performance review after 6 months to adjust compensation."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Accepting the first offer immediately without negotiating.",
+            "Being combative or aggressive during compensation discussions (always maintain a collaborative tone)."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Deflect early queries: get the employer's approved budget range first.",
+            "Audit the complete offer: evaluate base salary, sign-on bonuses, and stock vesting schedules.",
+            "Negotiate collaboratively: position the discussion around market value and alignment."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have drafted deflection scripts for early salary queries.",
+            "I understand how to calculate total compensation (base, bonus, stock)."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 23,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec23",
+          "title": "Section 23: Mock Interviews",
+          "subtitle": "Interview Transcripts & Evaluation Rubrics"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Reviewing mock interview transcripts from entry-level to staff engineer, complete with evaluation rubrics and grading."
+        },
+        {
+          "type": "h3",
+          "text": "23.1 Structure of an Evaluation Rubric"
+        },
+        {
+          "type": "para",
+          "text": "Top-tier companies evaluate behavioral interviews using a structured rubric: Ownership (how you take responsibility), Collaboration (how you work in teams), Communication (how you align stakeholders), and Growth Mindset (how you learn from failure). Scores range from Strong No Hire, No Hire, Leaning Hire, to Strong Hire."
+        },
+        {
+          "type": "h3",
+          "text": "23.2 Mock Interview Transcript: Handling a Technical Conflict"
+        },
+        {
+          "type": "para",
+          "text": "Review the mock interview transcript below to see how a candidate presents conflict resolution using data-driven logic:"
+        },
+        {
+          "type": "codeBlock",
+          "lang": "text",
+          "code": "\nInterviewer: 'Tell me about a time you had a technical conflict with a teammate.'\nCandidate: 'In my last role, we were designing a data processing service. My peer wanted to use MongoDB, while I advocated for PostgreSQL.\nSituation: The project required complex relational joins and ACID transaction guarantees.\nAction: Instead of arguing, I proposed we build a test schema in both databases, load 1 million mock records, and run benchmark queries. The relational database performed joins 3x faster, and preserved transaction safety. I presented this data to the team.\nResult: The peer agreed with the data, and we deployed PostgreSQL. The service launched on time with zero errors.\nInterviewer Evaluation: Strong Hire. Candidate avoided personal conflict, used objective benchmarks, and built team consensus.'\n"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Mock interviews illustrate the difference between weak and strong answers across seniority levels, using structured evaluation rubrics to grade responses."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which grade is assigned to a candidate who blames their team for a project failure?",
+          "choices": [
+            "Strong Hire",
+            "Hire",
+            "Leaning Hire",
+            "No Hire / Strong No Hire"
+          ],
+          "correctIndex": 3,
+          "explanation": "Blaming others shows a lack of ownership, self-awareness, and collaboration, leading to a No Hire recommendation."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>MOCK RUBRIC TEMPLATE:\n- Ownership: Direct accountability for results (Score: 4/5)\n- Collaboration: Built team consensus (Score: 5/5)\n- Communication: Clear, structured delivery (Score: 4/5)"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain what an interviewer evaluates during a 'failure' question.",
+          "answer": "They evaluate whether you take personal accountability for the mistake, how quickly you acted to resolve it, your ability to run a blameless post-mortem, and the permanent safeguards you built to prevent it from recurring."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Presenting mock answers that lack a clear STAR structure.",
+            "Providing answers that sound rehearsed or insincere."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Structure matters: always use the STAR framework for behavioral responses.",
+            "Be authentic: discuss real engineering challenges, conflicts, and failures.",
+            "Keep it concise: target 3 minutes per behavioral answer."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have reviewed mock interview transcripts for my target seniority level.",
+            "I understand the core competencies evaluated in behavioral rubrics."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 24,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec24",
+          "title": "Section 24: Story Bank Creation",
+          "subtitle": "Building a Personal Story Database"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Creating a personal interview story library, mapping past projects to core behavioral competencies."
+        },
+        {
+          "type": "h3",
+          "text": "24.1 Building a Story Grid"
+        },
+        {
+          "type": "para",
+          "text": "A story bank is a collection of 6-8 versatile project stories from your career that can be adapted to answer different behavioral questions. Build a grid mapping your projects against key competencies: Success, Failure, Conflict, Ownership, Leadership, and Ambiguity. This ensures you always have a relevant story ready."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 600 240\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Column lines -->\n        <line x1=\"180\" y1=\"20\" x2=\"180\" y2=\"220\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <line x1=\"320\" y1=\"20\" x2=\"320\" y2=\"220\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <line x1=\"460\" y1=\"20\" x2=\"460\" y2=\"220\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        \n        <!-- Row lines -->\n        <line x1=\"40\" y1=\"70\" x2=\"560\" y2=\"70\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <line x1=\"40\" y1=\"140\" x2=\"560\" y2=\"140\" stroke=\"var(--border)\" stroke-width=\"1\" />\n        <line x1=\"40\" y1=\"210\" x2=\"560\" y2=\"210\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        \n        <!-- Headers -->\n        <text x=\"110\" y=\"45\" fill=\"var(--accent)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">Competency</text>\n        <text x=\"250\" y=\"45\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Project Alpha (Scale)</text>\n        <text x=\"390\" y=\"45\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Project Beta (Migration)</text>\n        <text x=\"510\" y=\"45\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\" font-weight=\"bold\">Project Gamma</text>\n        \n        <!-- Row 1: Success -->\n        <text x=\"110\" y=\"105\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">SUCCESS STORIES</text>\n        <rect x=\"195\" y=\"85\" width=\"110\" height=\"40\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--accent)\" stroke-width=\"1\" />\n        <text x=\"250\" y=\"108\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"10\" text-anchor=\"middle\">STAR Story 1 (DB Scale)</text>\n        \n        <!-- Row 2: Conflict -->\n        <text x=\"110\" y=\"175\" fill=\"var(--text)\" font-family=\"monospace\" font-size=\"12\" text-anchor=\"middle\">CONFLICTS</text>\n        <rect x=\"335\" y=\"155\" width=\"110\" height=\"40\" rx=\"3\" fill=\"var(--bg-card)\" stroke=\"var(--secondary)\" stroke-width=\"1\" />\n        <text x=\"390\" y=\"178\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">STAR Story 2 (Arch Diff)</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 8. Matrix for plotting and auditing behavioral stories across projects.</div>\n    </div>\n  "
+        },
+        {
+          "type": "h3",
+          "text": "24.2 Auditing Story Versatility"
+        },
+        {
+          "type": "para",
+          "text": "For every story in your grid, write a detailed STAR breakdown. Ensure your stories are versatile (e.g. a database migration story can show technical success, conflict resolution, or handling ambiguity) and contain quantitative metrics."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Story Bank Creation helps you build a library of versatile project stories mapped to key competencies like success, failure, and conflict."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "How many versatile project stories should you prepare in your story bank?",
+          "choices": [
+            "1 generic story",
+            "6 to 8 detailed project stories",
+            "30 short answers",
+            "None - wing the interview"
+          ],
+          "correctIndex": 1,
+          "explanation": "Preparing 6-8 detailed, versatile stories allows you to adapt them to cover different behavioral questions."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>STORY BANK TEMPLATE:\n- Project Name: Payment Gateway Upgrade\n- Success Angle: Reduced transaction latency by 20%.\n- Conflict Angle: Disagreed with lead on retry logic.\n- Failure Angle: Outage caused by misconfigured timeout."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you adapt a single success story to answer a question about conflict?",
+          "answer": "I focus on the action phase: I explain that during the successful project design, there was a debate about architecture, and I resolve it by running benchmarks and building consensus, leading to the project's success."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Using the same story to answer every behavioral question in an interview loop.",
+            "Failing to document and review your stories before the interview."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Select versatile stories: pick projects that show success, conflict, and scaling.",
+            "Detail the actions: focus on your personal technical contribution.",
+            "Quantify: ensure every story has measurable results."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have drafted 6 versatile project stories in my story bank.",
+            "Every story in my bank has a detailed STAR breakdown and metrics."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 25,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec25",
+          "title": "Section 25: Psychology of Interviews",
+          "subtitle": "First Impressions, Anxiety & Rapport Building"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Managing interview anxiety, making strong first impressions, and building rapport with your interviewer."
+        },
+        {
+          "type": "h3",
+          "text": "25.1 First Impressions & Rapport"
+        },
+        {
+          "type": "para",
+          "text": "First impressions are formed in the first 2 minutes. Start the call with a warm greeting, clear eye contact, and professional pacing. Build rapport by active listening, showing genuine curiosity about the team's challenges, and keeping the conversation collaborative."
+        },
+        {
+          "type": "h3",
+          "text": "25.2 Managing Interview Anxiety"
+        },
+        {
+          "type": "para",
+          "text": "Anxiety is a natural response to high-pressure interviews. Manage it by thorough preparation, systematic breathing, and treating the interview as a collaborative project sync between two engineers rather than a test."
+        },
+        {
+          "type": "rawHtml",
+          "html": "\n    <div class=\"diagram-wrapper\">\n      <svg class=\"cs-diagram\" viewBox=\"0 0 500 280\" xmlns=\"http://www.w3.org/2000/svg\">\n        <!-- Triangle lines -->\n        <g stroke=\"var(--border)\" stroke-width=\"3\" fill=\"none\">\n          <polygon points=\"250,50 100,220 400,220\" />\n        </g>\n        \n        <!-- Top Node: Active Listening -->\n        <g transform=\"translate(250, 50)\">\n          <circle cx=\"0\" cy=\"0\" r=\"15\" fill=\"var(--accent)\" />\n          <text x=\"0\" y=\"-25\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">ACTIVE LISTENING</text>\n        </g>\n        \n        <!-- Bottom Left Node: Empathy -->\n        <g transform=\"translate(100, 220)\">\n          <circle cx=\"0\" cy=\"0\" r=\"15\" fill=\"var(--secondary)\" />\n          <text x=\"-10\" y=\"30\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"end\" font-weight=\"bold\">EMPATHY</text>\n        </g>\n        \n        <!-- Bottom Right Node: Confidence -->\n        <g transform=\"translate(400, 220)\">\n          <circle cx=\"0\" cy=\"0\" r=\"15\" fill=\"var(--accent)\" />\n          <text x=\"10\" y=\"30\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"start\" font-weight=\"bold\">CONFIDENCE</text>\n        </g>\n        \n        <!-- Central Goal: Trust & Rapport -->\n        <rect x=\"200\" y=\"125\" width=\"100\" height=\"50\" rx=\"5\" fill=\"var(--bg-card)\" stroke=\"var(--border)\" stroke-width=\"2\" />\n        <text x=\"250\" y=\"150\" fill=\"var(--text)\" font-family=\"sans-serif\" font-size=\"12\" text-anchor=\"middle\" font-weight=\"bold\">RAPPORT</text>\n        <text x=\"250\" y=\"165\" fill=\"var(--text-muted)\" font-family=\"sans-serif\" font-size=\"9\" text-anchor=\"middle\">(Hiring Trust)</text>\n      </svg>\n      <div class=\"diagram-caption\">Figure 9. The Psychological Rapport Triangle outlining elements of successful interviewer connection.</div>\n    </div>\n  "
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "The psychology of interviews focuses on making positive first impressions, managing anxiety, and building rapport through active listening."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the most effective mindset for reducing interview anxiety?",
+          "choices": [
+            "Treat the interview as a high-stakes exam where mistakes are fatal",
+            "Treat the interview as a collaborative project sync with a peer to solve technical challenges",
+            "Assume the interviewer wants you to fail",
+            "Avoid preparing to stay relaxed"
+          ],
+          "correctIndex": 1,
+          "explanation": "Reframing the interview as a collaborative discussion with a peer reduces performance pressure and builds rapport."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "callout",
+          "calloutType": "TIP",
+          "text": "<strong>STAR Template:</strong><br/>RAPPORT TEMPLATE: 'Thank you for the time today! I have been following your team's work on payment scale, and I am excited to discuss how my background in API design can support your initiatives.'"
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you rebuild rapport after realizing you made a technical mistake in your answer?",
+          "answer": "I take immediate accountability, explain the correct logic (e.g. 'I realize I miscalculated the database lock overhead; here is the corrected scaling limit'), and thank the interviewer for their guidance, showing coachability."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Arriving late or having poor audio/video quality for remote calls.",
+            "Appearing defensive or arguing when the interviewer corrects a mistake."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Start strong: greet the interviewer warmly and outline your excitement.",
+            "Listen actively: show interest in the team's engineering challenges.",
+            "Reframe: treat the interview as a collaborative project sync."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "I have tested my audio, video, and internet setup for remote calls.",
+            "I can reframe technical questions as collaborative discussions."
+          ]
+        }
+      ]
+    },
+    {
+      "num": 26,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec26",
+          "title": "Section 26: 365-Day Roadmap",
+          "subtitle": "A Structured Study Guide"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "A month-by-month study guide mapping self-awareness, STAR storytelling, mock interviews, and career progression."
+        },
+        {
+          "type": "h3",
+          "text": "26.1 Year-Long Learning Plan"
+        },
+        {
+          "type": "para",
+          "text": "Developing professional communication and leadership takes time. Follow this month-by-month roadmap:"
+        },
+        {
+          "type": "numbered",
+          "items": [
+            "Month 1-3: Self-Awareness & Foundation. Audit your career, define your strengths/weaknesses, and start practicing active listening.",
+            "Month 4-6: STAR Method & Story Bank. Write detailed STAR breakdowns for 6-8 versatile project stories and practice elevator pitches.",
+            "Month 7-9: Competency Focus & Mock Interviews. Practice conflict resolution, leadership, and failure scenarios with peers.",
+            "Month 10-12: Advanced Mock Loops & Salary Negotiation. Run full mock interview loops, practice compensation scripting, and refine executive presence."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "26.2 Weekly Progress Tracking"
+        },
+        {
+          "type": "para",
+          "text": "Set weekly goals: dedicate 2 hours to writing story drafts, record yourself answering 3 behavioral questions, and practice active listening in daily team standups."
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Quarter",
+            "Focus Area",
+            "Milestone Target"
+          ],
+          "rows": [
+            [
+              "Q1 (M1-3)",
+              "Self-Awareness & Basics",
+              "Complete career audit and list strengths/weaknesses"
+            ],
+            [
+              "Q2 (M4-6)",
+              "STAR & Story Bank",
+              "Write and refine 6-8 versatile project stories"
+            ],
+            [
+              "Q3 (M7-9)",
+              "Mock Interviews",
+              "Run 5 mock interview loops with peers"
+            ],
+            [
+              "Q4 (M10-12)",
+              "Advanced Loops & Negotiation",
+              "Master executive presence and deflection scripts"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "365 Day Roadmap charts your progress from basic self-reflection to advanced leadership communication and negotiation."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "Which phase of the roadmap focuses on building your personal story bank?",
+          "choices": [
+            "Month 1-3",
+            "Month 4-6",
+            "Month 7-9",
+            "Month 10-12"
+          ],
+          "correctIndex": 1,
+          "explanation": "Months 4-6 are dedicated to writing STAR breakdowns for your story bank."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "para",
+          "text": "No templates configured."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How should you practice behavioral questions weekly?",
+          "answer": "I recommend recording yourself answering 3 questions weekly, reviewing the recordings to improve pacing and structure, and seeking feedback from peers."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Skipping early self-reflection steps to jump directly into advanced negotiation scripting.",
+            "Failing to practice mock interviews with other engineers."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Spend the first quarter auditing your career milestones and defining your values.",
+            "Dedicate the second quarter to writing and refining your versatile story bank.",
+            "Practice mock interviews regularly in the final quarter to build confidence."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "HBR Guide to Persuasive Presentations by Nancy Duarte",
+            "Never Split the Difference by Chris Voss"
+          ]
+        }
+      ]
+    },
+    {
+      "num": 27,
+      "items": [
+        {
+          "type": "sectionHeader",
+          "id": "sec27",
+          "title": "Section 27: Final Master Cheat Sheet",
+          "subtitle": "Consolidated Communication Cheat Sheets"
+        },
+        {
+          "type": "chapterIntro",
+          "text": "Consolidated quick-reference sheets for STAR method, negotiation scripting, leadership cards, and conflict resolution templates."
+        },
+        {
+          "type": "h3",
+          "text": "27.1 STAR Method Cheat Sheet"
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Phase",
+            "Time Allocation",
+            "Core Focus"
+          ],
+          "rows": [
+            [
+              "Situation",
+              "10% (2-3 sentences)",
+              "Context, scale, team size, and high-level problem"
+            ],
+            [
+              "Task",
+              "10% (1-2 sentences)",
+              "Your specific, personal responsibility in the situation"
+            ],
+            [
+              "Action",
+              "70% (detailed steps)",
+              "Your design choices, data-driven decisions, and leadership steps"
+            ],
+            [
+              "Result",
+              "10% (outcomes)",
+              "Quantifiable metrics, business impact, and personal learnings"
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "27.2 Salary Negotiation Deflection Script"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Recruiter: 'What are your salary expectations for this role?'",
+            "Your Script: 'I am highly interested in the team's challenges and want to ensure a good fit first. I would expect compensation to align with market benchmarks for this seniority level. Could you share the approved range for this role?'"
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "27.3 Leadership & Conflict Cheat Sheet"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Leadership: Focus on initiative, cross-team influence, mentoring, and data-driven alignment.",
+            "Conflict: Focus on objective data, active listening, and the Thomas-Kilmann collaboration model.",
+            "SBI Feedback: Situation -> Behavior -> Impact feedback framework."
+          ]
+        },
+        {
+          "type": "twoColTable",
+          "headers": [
+            "Subject",
+            "Quick Reference Check"
+          ],
+          "rows": [
+            [
+              "STAR",
+              "I vs We check: focus on personal contributions"
+            ],
+            [
+              "Negotiation",
+              "Deflect early queries, negotiate the written offer"
+            ],
+            [
+              "Conflict",
+              "Focus on data and consensus, avoid blame"
+            ],
+            [
+              "Leadership",
+              "Show initiative and influence without authority"
+            ]
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Final Master Cheat Sheet compiles core templates, negotiation scripts, and leadership frameworks for quick reference."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Practice Questions & Scenarios"
+        },
+        {
+          "type": "questionCard",
+          "question": "What is the recommended time allocation for the 'Action' phase of a STAR response?",
+          "choices": [
+            "10%",
+            "30%",
+            "70%",
+            "90%"
+          ],
+          "correctIndex": 2,
+          "explanation": "Action is the core of your story, representing 70% of the response to show your personal contribution."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "STAR Method Templates"
+        },
+        {
+          "type": "para",
+          "text": "No templates configured."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Mock Interview Scenario"
+        },
+        {
+          "type": "interviewCard",
+          "question": "State the Situation-Behavior-Impact (SBI) framework.",
+          "answer": "SBI is a feedback model: describe the Situation, detail the observed Behavior, and explain the concrete Impact of that behavior."
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Stating your target salary first during initial recruiter screens.",
+            "Spending too much time on context (Situation) in interview answers."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Keep this cheat sheet open during interview prep and team communication.",
+            "Use deflection scripts to manage salary discussions with recruiters.",
+            "Audit your stories against the STAR time allocation guidelines."
+          ]
+        },
+        {
+          "type": "spacer"
+        },
+        {
+          "type": "h2",
+          "text": "Self-Evaluation Checklist"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "Crucial Conversations by Patterson, Grenny, McMillan, and Switzler",
+            "Manager Tools Podcast (manager-tools.com)"
+          ]
+        }
+      ]
+    }
+  ],
+  "handbookToc": [
+    {
+      "secIdx": 0,
+      "text": "Section 0: Introduction to Behavioral Interviews",
+      "id": "sec0"
+    },
+    {
+      "secIdx": 1,
+      "text": "Section 1: Self Awareness Foundation",
+      "id": "sec1"
+    },
+    {
+      "secIdx": 2,
+      "text": "Section 2: Professional Communication",
+      "id": "sec2"
+    },
+    {
+      "secIdx": 3,
+      "text": "Section 3: STAR Method Complete Guide",
+      "id": "sec3"
+    },
+    {
+      "secIdx": 4,
+      "text": "Section 4: Most Common Behavioral Questions",
+      "id": "sec4"
+    },
+    {
+      "secIdx": 5,
+      "text": "Section 5: Teamwork Questions",
+      "id": "sec5"
+    },
+    {
+      "secIdx": 6,
+      "text": "Section 6: Conflict Resolution",
+      "id": "sec6"
+    },
+    {
+      "secIdx": 7,
+      "text": "Section 7: Leadership",
+      "id": "sec7"
+    },
+    {
+      "secIdx": 8,
+      "text": "Section 8: Failure Questions",
+      "id": "sec8"
+    },
+    {
+      "secIdx": 9,
+      "text": "Section 9: Success Questions",
+      "id": "sec9"
+    },
+    {
+      "secIdx": 10,
+      "text": "Section 10: Ownership Questions",
+      "id": "sec10"
+    },
+    {
+      "secIdx": 11,
+      "text": "Section 11: Decision Making Questions",
+      "id": "sec11"
+    },
+    {
+      "secIdx": 12,
+      "text": "Section 12: Communication Questions",
+      "id": "sec12"
+    },
+    {
+      "secIdx": 13,
+      "text": "Section 13: Adaptability Questions",
+      "id": "sec13"
+    },
+    {
+      "secIdx": 14,
+      "text": "Section 14: Productivity & Time Management",
+      "id": "sec14"
+    },
+    {
+      "secIdx": 15,
+      "text": "Section 15: Engineering-Specific Behavioral Questions",
+      "id": "sec15"
+    },
+    {
+      "secIdx": 16,
+      "text": "Section 16: Amazon Leadership Principles",
+      "id": "sec16"
+    },
+    {
+      "secIdx": 17,
+      "text": "Section 17: Google Behavioral Interviews",
+      "id": "sec17"
+    },
+    {
+      "secIdx": 18,
+      "text": "Section 18: Meta Behavioral Interviews",
+      "id": "sec18"
+    },
+    {
+      "secIdx": 19,
+      "text": "Section 19: Microsoft Behavioral Interviews",
+      "id": "sec19"
+    },
+    {
+      "secIdx": 20,
+      "text": "Section 20: Managerial & Leadership Interviews",
+      "id": "sec20"
+    },
+    {
+      "secIdx": 21,
+      "text": "Section 21: Executive Presence",
+      "id": "sec21"
+    },
+    {
+      "secIdx": 22,
+      "text": "Section 22: Salary Negotiation",
+      "id": "sec22"
+    },
+    {
+      "secIdx": 23,
+      "text": "Section 23: Mock Interviews",
+      "id": "sec23"
+    },
+    {
+      "secIdx": 24,
+      "text": "Section 24: Story Bank Creation",
+      "id": "sec24"
+    },
+    {
+      "secIdx": 25,
+      "text": "Section 25: Psychology of Interviews",
+      "id": "sec25"
+    },
+    {
+      "secIdx": 26,
+      "text": "Section 26: 365-Day Roadmap",
+      "id": "sec26"
+    },
+    {
+      "secIdx": 27,
+      "text": "Section 27: Final Master Cheat Sheet",
+      "id": "sec27"
+    }
+  ]
+}

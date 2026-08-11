@@ -1,0 +1,56 @@
+name: LXC CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Lint
+        run: npm run lint
+
+      - name: Type Check
+        run: npx tsc --noEmit
+
+      - name: Dependency Vulnerability Scan
+        run: npm audit --audit-level=critical
+
+      - name: Build Docker Image
+        run: docker build -t lxc:${{ github.sha }} .
+
+      - name: Push to Registry
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker tag lxc:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/lxc:${{ github.sha }}
+          docker tag lxc:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/lxc:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/lxc:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/lxc:latest
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    permissions: {}
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Deploy to Staging
+        run: echo "Deploy script here — connect via SSH and run blue/green swap"

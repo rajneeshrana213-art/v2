@@ -1,0 +1,150 @@
+<table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#eef1f6">
+    <tr>
+        <td align="center" style="padding: 50px 15px;">
+            <!-- Outer Wrapper -->
+            <table width="720" cellpadding="0" cellspacing="0" border="0"
+                style="background: #ffffff; border-radius: 22px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); overflow: hidden;">
+                <!-- HERO HEADER -->
+                <tr>
+                    <td align="center" style="padding: 55px 40px;
+            background: radial-gradient(circle at top, #667eea, #764ba2);">
+                        <h1 style="margin: 0;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 34px;
+              font-weight: 800;
+              color: #ffffff;
+              letter-spacing: 0.3px;">
+                            New Ticket Assignment
+                        </h1>
+                        <p style="margin: 14px 0 0;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 17px;
+              color: #e0e6ed;
+              max-width: 520px;">
+                            You have been assigned a new support ticket
+                        </p>
+                    </td>
+                </tr>
+                <!-- BODY -->
+                <tr>
+                    <td style="padding: 50px 55px;">
+                        <p style="margin: 0 0 20px;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 16px;
+              color: #222;">
+                            Hi <strong>
+                                <%= employeeName %>
+                            </strong>,
+                        </p>
+                        <p style="margin: 0 0 20px;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 16px;
+              color: #555;
+              line-height: 1.75;">
+                            A new support ticket has been assigned to you. Please review the details below and take
+                            necessary action.
+                        </p>
+
+                        <!-- TICKET DETAILS CARD -->
+                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: linear-gradient(145deg, #f9fbff, #f1f5ff);
+              border-radius: 18px;
+              border: 1px solid #e3e9f5;
+              box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+              margin-bottom: 38px;">
+                            <tr>
+                                <td style="padding: 30px 35px;">
+                                    <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td style="padding-bottom: 15px;">
+                                                <p style="margin: 0 0 5px;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 13px;
+                          color: #777;">
+                                                    Ticket Number
+                                                </p>
+                                                <p style="margin: 0;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 16px;
+                          font-weight: 600;
+                          color: #333;">
+                                                    #<%= ticketNumber %>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding-bottom: 15px;">
+                                                <p style="margin: 0 0 5px;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 13px;
+                          color: #777;">
+                                                    Title
+                                                </p>
+                                                <p style="margin: 0;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 16px;
+                          font-weight: 600;
+                          color: #333;">
+                                                    <%= ticketTitle %>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p style="margin: 0 0 5px;
+                          font-family: 'Segoe UI', Tahoma, sans-serif;
+                          font-size: 13px;
+                          color: #777;">
+                                                    Priority
+                                                </p>
+                                                <% const pStyle=`margin: 0; font-family: 'Segoe UI' , Tahoma,
+                                                    sans-serif; font-size: 14px; font-weight: 600; color:
+                                                    ${priorityColor};`; %>
+                                                    <p style="<%= pStyle %>">
+                                                        <%= ticketPriority %>
+                                                    </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- CTA -->
+                        <table align="center" cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td align="center" style="background: linear-gradient(135deg, #667eea, #764ba2);
+                  border-radius: 60px;
+                  box-shadow: 0 12px 25px rgba(102, 126, 234, 0.4);">
+                                    <a href="<%= dashboardLink %>" target="_blank" style="display: inline-block;
+                    padding: 16px 48px;
+                    font-family: 'Segoe UI', Tahoma, sans-serif;
+                    font-size: 17px;
+                    font-weight: 700;
+                    color: #ffffff;
+                    text-decoration: none;">
+                                        View Ticket →
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <!-- FOOTER -->
+                <tr>
+                    <td align="center" style="padding: 30px 40px;
+            background: #f6f8fc;
+            border-top: 1px solid #e6ebf3;">
+                        <p style="margin: 0;
+              font-family: 'Segoe UI', Tahoma, sans-serif;
+              font-size: 14px;
+              color: #666;
+              line-height: 1.7;">
+                            Need help?<br />
+                            📩 <strong>LearnXChain Support</strong> is always available.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>

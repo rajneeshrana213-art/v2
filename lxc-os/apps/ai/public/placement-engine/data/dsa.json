@@ -1,0 +1,4417 @@
+{
+  "handbookData": [
+    {
+      "num": "0",
+      "title": "Programming Foundations",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Master the bedrock of computer science — from how a computer executes a single instruction to writing clean, object-oriented programs with recursion, memory management, and beyond."
+        },
+        {
+          "type": "h2",
+          "text": "0.1  How Computers Execute Code"
+        },
+        {
+          "type": "para",
+          "text": "When you write code and run it, a chain of transformation takes place before the CPU executes a single instruction. Understanding this pipeline removes the mystery of programming.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "The Compilation / Interpretation Pipeline"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Source Code (.cpp / .java / .py)",
+              "Human-readable instructions you write"
+            ],
+            [
+              "Compiler / Interpreter",
+              "Translates to machine-understandable form"
+            ],
+            [
+              "Assembly / Bytecode",
+              "Intermediate low-level representation"
+            ],
+            [
+              "Machine Code (Binary)",
+              "0s and 1s the CPU understands"
+            ],
+            [
+              "CPU Execution",
+              "Fetch → Decode → Execute cycle"
+            ]
+          ],
+          "headers": [
+            "Stage",
+            "What Happens"
+          ],
+          "colWidths": [
+            3600,
+            5760
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Compiled vs Interpreted Languages"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "C, C++, Rust",
+              "Compiled",
+              "Fast, native machine code"
+            ],
+            [
+              "Java, Kotlin",
+              "Compiled to Bytecode → JIT",
+              "Portable, JVM-based"
+            ],
+            [
+              "Python, Ruby",
+              "Interpreted (CPython)",
+              "Flexible, slower"
+            ],
+            [
+              "JavaScript",
+              "JIT Compiled in browser/Node",
+              "V8 engine optimises at runtime"
+            ]
+          ],
+          "headers": [
+            "Language",
+            "Type",
+            "Note"
+          ],
+          "colWidths": [
+            2400,
+            2880,
+            4080
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "CPU Fetch-Decode-Execute Cycle (Visual)"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "  Memory",
+            "  ┌─────────────────────────────────────┐",
+            "  │  Address │ Instruction              │",
+            "  │  0x0001  │ LOAD  R1, 5             │",
+            "  │  0x0002  │ LOAD  R2, 3             │",
+            "  │  0x0003  │ ADD   R3, R1, R2        │",
+            "  │  0x0004  │ STORE R3, result        │",
+            "  └─────────────────────────────────────┘",
+            "         ↓ Fetch  ↓ Decode  ↓ Execute",
+            "  CPU Registers: R1=5, R2=3, R3=8"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "callout",
+          "title": "Memory Trick",
+          "text": "Think of the CPU as a chef: Fetch = read recipe, Decode = understand steps, Execute = cook the dish. The kitchen (memory) stores all ingredients (data).",
+          "calloutType": "info"
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.2  Variables & Data Types"
+        },
+        {
+          "type": "para",
+          "text": "A variable is a named container in memory. A data type tells the compiler how many bytes to allocate and how to interpret those bytes.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Primitive Data Types (C++ / Java / Python comparison)"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "int",
+              "4 bytes",
+              "32-bit signed integer",
+              "-2B to +2B"
+            ],
+            [
+              "long long",
+              "8 bytes",
+              "64-bit signed integer",
+              "-9.2×10¹⁸ to +9.2×10¹⁸"
+            ],
+            [
+              "float",
+              "4 bytes",
+              "Single precision float",
+              "~7 decimal digits"
+            ],
+            [
+              "double",
+              "8 bytes",
+              "Double precision float",
+              "~15 decimal digits"
+            ],
+            [
+              "char",
+              "1 byte",
+              "Single character",
+              "ASCII 0–127"
+            ],
+            [
+              "bool",
+              "1 byte",
+              "true / false",
+              "1 or 0"
+            ],
+            [
+              "string",
+              "varies",
+              "Sequence of chars",
+              "Heap allocated"
+            ]
+          ],
+          "headers": [
+            "Type",
+            "Size",
+            "Description",
+            "Range/Note"
+          ],
+          "colWidths": [
+            1440,
+            1440,
+            3480,
+            2400
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Variable Declaration Examples"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++",
+            "int age = 25;",
+            "double pi = 3.14159;",
+            "char grade = 'A';",
+            "bool isStudent = true;",
+            "string name = \"Arjun\";",
+            "",
+            "// Python",
+            "age = 25            # dynamically typed",
+            "pi = 3.14159",
+            "name = \"Arjun\"",
+            "",
+            "// Java",
+            "int age = 25;",
+            "double pi = 3.14159;",
+            "String name = \"Arjun\";",
+            "",
+            "// JavaScript",
+            "let age = 25;",
+            "const pi = 3.14159;",
+            "var name = \"Arjun\";"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "callout",
+          "title": "Common Mistake",
+          "text": "Using int when you need long long. If N can be up to 10^18, always use long long in C++ to avoid silent integer overflow!",
+          "calloutType": "warning"
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.3  Operators"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Arithmetic",
+              "+ - * / % **",
+              "5 % 3 = 2  (modulo)"
+            ],
+            [
+              "Comparison",
+              "== != < > <= >=",
+              "Returns bool"
+            ],
+            [
+              "Logical",
+              "&& || !",
+              "&& = AND, || = OR, ! = NOT"
+            ],
+            [
+              "Bitwise",
+              "& | ^ ~ << >>",
+              "5 & 3 = 1 (AND on bits)"
+            ],
+            [
+              "Assignment",
+              "= += -= *= /= %=",
+              "x += 5 is x = x + 5"
+            ],
+            [
+              "Ternary",
+              "condition ? a : b",
+              "Shorthand if-else"
+            ]
+          ],
+          "headers": [
+            "Category",
+            "Operators",
+            "Example / Note"
+          ],
+          "colWidths": [
+            2160,
+            2880,
+            4320
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Operator Precedence (High → Low)"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Highest:  ()  []  .  ->                     (grouping/access)",
+            "          !   ~   ++  --  (unary)            (unary ops)",
+            "          *   /   %                          (multiply/divide)",
+            "          +   -                              (add/subtract)",
+            "          <<  >>                             (bit shift)",
+            "          <   >   <=  >=                     (comparison)",
+            "          ==  !=                             (equality)",
+            "          &                                  (bitwise AND)",
+            "          ^                                  (bitwise XOR)",
+            "          |                                  (bitwise OR)",
+            "          &&                                 (logical AND)",
+            "          ||                                 (logical OR)",
+            "Lowest:   =   +=  -=  etc.                   (assignment)"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.4  Input / Output"
+        },
+        {
+          "type": "h3",
+          "text": "Standard I/O in 4 languages"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++ (fastest for competitive programming)",
+            "#include <bits/stdc++.h>",
+            "using namespace std;",
+            "int main() {",
+            "    ios_base::sync_with_stdio(false);  // MUST for CP",
+            "    cin.tie(NULL);",
+            "    int n; cin >> n;",
+            "    cout << \"n = \" << n << \"\\n\";  // Use \\n not endl",
+            "}",
+            "",
+            "# Python",
+            "n = int(input())",
+            "a, b = map(int, input().split())",
+            "print(f\"n = {n}\")",
+            "",
+            "// Java",
+            "import java.util.*;",
+            "Scanner sc = new Scanner(System.in);",
+            "int n = sc.nextInt();",
+            "System.out.println(\"n = \" + n);",
+            "",
+            "// JavaScript (Node.js)",
+            "const readline = require('readline');",
+            "const rl = readline.createInterface({ input: process.stdin });",
+            "rl.on('line', line => { console.log(line.trim()); });"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "callout",
+          "title": "Speed Tip for C++",
+          "text": "Always add ios_base::sync_with_stdio(false) and cin.tie(NULL) at the start of main() in competitive programming. This makes cin/cout as fast as scanf/printf.",
+          "calloutType": "success"
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.5  Conditions & Control Flow"
+        },
+        {
+          "type": "para",
+          "text": "Control flow determines which parts of code execute based on conditions.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// if-else ladder",
+            "if (score >= 90) grade = 'A';",
+            "else if (score >= 80) grade = 'B';",
+            "else if (score >= 70) grade = 'C';",
+            "else grade = 'F';",
+            "",
+            "// switch-case",
+            "switch(day) {",
+            "    case 1: cout << \"Monday\"; break;",
+            "    case 2: cout << \"Tuesday\"; break;",
+            "    default: cout << \"Other\";",
+            "}",
+            "",
+            "// Ternary operator",
+            "int max = (a > b) ? a : b;"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.6  Loops — The Engine of Repetition"
+        },
+        {
+          "type": "para",
+          "text": "Loops execute a block of code repeatedly. Mastering loop control is the foundation for pattern printing, arrays, and algorithms.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Types of Loops"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "for loop",
+              "Known number of iterations. Use when you know start, end, step."
+            ],
+            [
+              "while loop",
+              "Unknown iterations. Check condition before entering."
+            ],
+            [
+              "do-while loop",
+              "Executes at least once. Check condition after body."
+            ],
+            [
+              "range-based for",
+              "Iterate over collections (C++11, Python for-in)."
+            ]
+          ],
+          "headers": [
+            "Loop Type",
+            "When to Use"
+          ],
+          "colWidths": [
+            2400,
+            6960
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++ for loop",
+            "for (int i = 1; i <= 5; i++) {",
+            "    cout << i << \" \";   // Output: 1 2 3 4 5",
+            "}",
+            "",
+            "// Nested loops (key for patterns)",
+            "for (int i = 1; i <= 3; i++) {",
+            "    for (int j = 1; j <= 3; j++) {",
+            "        cout << i * j << \" \";",
+            "    }",
+            "    cout << \"\\n\";",
+            "}",
+            "",
+            "// while loop",
+            "int i = 1;",
+            "while (i <= 10) {",
+            "    cout << i << \" \";",
+            "    i += 2;   // Prints odd numbers",
+            "}",
+            "",
+            "// Python equivalent",
+            "for i in range(1, 6):",
+            "    print(i, end=' ')",
+            "",
+            "for i in range(1, 11, 2):  # step=2",
+            "    print(i, end=' ')"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "callout",
+          "title": "Loop Control: break vs continue",
+          "text": "break: exits the loop entirely\ncontinue: skips current iteration, goes to next\nReturn value: a function exit; use to end recursion",
+          "calloutType": "note"
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.7  Functions"
+        },
+        {
+          "type": "para",
+          "text": "Functions encapsulate reusable logic. They are the building blocks of all programs and algorithms.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++",
+            "// Declaration: return_type name(param_type param) { body }",
+            "int add(int a, int b) {",
+            "    return a + b;",
+            "}",
+            "",
+            "// Multiple return values (use pair/tuple or pass by reference)",
+            "pair<int,int> divmod(int a, int b) {",
+            "    return {a/b, a%b};",
+            "}",
+            "",
+            "// Default parameters",
+            "int power(int base, int exp = 2) {",
+            "    int result = 1;",
+            "    for (int i = 0; i < exp; i++) result *= base;",
+            "    return result;",
+            "}",
+            "",
+            "// Python",
+            "def add(a, b):",
+            "    return a + b",
+            "",
+            "def divmod_custom(a, b):",
+            "    return a // b, a % b  # returns tuple",
+            "",
+            "# Lambda (anonymous) function",
+            "square = lambda x: x * x"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Call Stack Visualization"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "  main() calls add(3, 4)",
+            "  ┌─────────────────────────────────────────┐  ← Stack grows down",
+            "  │  Stack Frame: main()                    │",
+            "  │    local vars: result                   │",
+            "  ├─────────────────────────────────────────┤",
+            "  │  Stack Frame: add(a=3, b=4)             │",
+            "  │    local vars: a=3, b=4                 │",
+            "  │    return value: 7                      │",
+            "  └─────────────────────────────────────────┘",
+            "  ↑ When add() returns, its frame is popped off"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.8  Arrays"
+        },
+        {
+          "type": "para",
+          "text": "An array stores multiple elements of the same type in contiguous memory. This contiguity is the secret to O(1) random access.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++  — static array",
+            "int arr[5] = {10, 20, 30, 40, 50};",
+            "cout << arr[0];  // 10  (0-indexed)",
+            "",
+            "// vector (dynamic array) — use this in CP",
+            "vector<int> v = {1, 2, 3, 4, 5};",
+            "v.push_back(6);",
+            "v.pop_back();",
+            "int sz = v.size();",
+            "",
+            "// 2D array",
+            "int matrix[3][3] = {{1,2,3},{4,5,6},{7,8,9}};",
+            "vector<vector<int>> grid(3, vector<int>(3, 0)); // 3x3 zeros",
+            "",
+            "// Python",
+            "arr = [10, 20, 30, 40, 50]",
+            "arr.append(60)",
+            "arr.pop()",
+            "print(arr[0])  # 10",
+            "",
+            "# 2D list",
+            "matrix = [[0]*3 for _ in range(3)]"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Array Memory Layout"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "  Index:    0     1     2     3     4",
+            "           ┌─────┬─────┬─────┬─────┬─────┐",
+            "  Value:   │ 10  │ 20  │ 30  │ 40  │ 50  │",
+            "           └─────┴─────┴─────┴─────┴─────┘",
+            "  Address: 1000  1004  1008  1012  1016    (each int = 4 bytes)",
+            "",
+            "  arr[i] address = base_address + i × sizeof(type)",
+            "  arr[2] = 1000 + 2×4 = 1008  ✓  O(1) access!"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Key Array Operations & Time Complexity"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Access arr[i]",
+              "O(1)",
+              "Direct address calculation"
+            ],
+            [
+              "Search (unsorted)",
+              "O(n)",
+              "Linear scan"
+            ],
+            [
+              "Search (sorted)",
+              "O(log n)",
+              "Binary search"
+            ],
+            [
+              "Insert at end",
+              "O(1) amortised",
+              "Vector push_back"
+            ],
+            [
+              "Insert at middle",
+              "O(n)",
+              "Shift elements"
+            ],
+            [
+              "Delete at middle",
+              "O(n)",
+              "Shift elements"
+            ],
+            [
+              "Sort",
+              "O(n log n)",
+              "std::sort / Arrays.sort"
+            ]
+          ],
+          "headers": [
+            "Operation",
+            "Time",
+            "Note"
+          ],
+          "colWidths": [
+            3120,
+            1440,
+            4800
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.9  Strings"
+        },
+        {
+          "type": "para",
+          "text": "A string is a sequence of characters. In C, strings are char arrays ending with '\\0'. In C++/Java/Python, strings are first-class objects.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++",
+            "string s = \"Hello World\";",
+            "int len = s.length();        // 11",
+            "char c = s[0];               // 'H'",
+            "string sub = s.substr(6, 5); // \"World\"",
+            "int pos = s.find(\"World\");   // 6",
+            "s += \" Arjun\";               // concatenation",
+            "reverse(s.begin(), s.end()); // reverse in-place",
+            "sort(s.begin(), s.end());    // sort characters",
+            "",
+            "// Python",
+            "s = \"Hello World\"",
+            "print(len(s))                # 11",
+            "print(s[6:11])               # World",
+            "print(s.find('World'))       # 6",
+            "print(s[::-1])               # reverse",
+            "print(sorted(s))             # sorted characters",
+            "",
+            "// Java",
+            "String s = \"Hello World\";",
+            "int len = s.length();",
+            "char c = s.charAt(0);",
+            "String sub = s.substring(6, 11);",
+            "StringBuilder sb = new StringBuilder(s);",
+            "sb.reverse(); sb.append(\" Arjun\");"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "callout",
+          "title": "String Immutability",
+          "text": "In Java and Python, strings are immutable. Every concatenation creates a new string — O(n) per concat. Use StringBuilder (Java) or ''.join() (Python) for repeated concatenation inside loops.",
+          "calloutType": "note"
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.10  Pointers & References"
+        },
+        {
+          "type": "para",
+          "text": "A pointer stores the memory address of another variable. Understanding pointers is crucial for linked lists, trees, dynamic memory, and understanding pass-by-reference vs value.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++",
+            "int x = 42;",
+            "int* ptr = &x;     // ptr stores address of x",
+            "cout << ptr;       // prints address e.g. 0x7ffd12",
+            "cout << *ptr;      // dereference: prints 42",
+            "*ptr = 100;        // changes x to 100",
+            "",
+            "// Pointer arithmetic",
+            "int arr[] = {10, 20, 30};",
+            "int* p = arr;      // p points to arr[0]",
+            "p++;               // now points to arr[1]",
+            "cout << *p;        // 20",
+            "",
+            "// References (safer alias, no re-assignment)",
+            "int& ref = x;      // ref is an alias for x",
+            "ref = 999;         // also changes x",
+            "",
+            "// Pass by reference (critical for efficiency)",
+            "void doubleIt(int& n) { n *= 2; }  // modifies original",
+            "void doubleIt(int* n) { *n *= 2; } // pointer version"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Pointer Visual Diagram"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "  Variable x at address 0x100:",
+            "  ┌──────────────┐",
+            "  │  Value: 42   │  ← Memory address 0x100",
+            "  └──────────────┘",
+            "         ↑",
+            "  ┌──────────────┐",
+            "  │ Value: 0x100 │  ← ptr (pointer variable at address 0x108)",
+            "  └──────────────┘",
+            "",
+            "  *ptr = 42   (dereference follows the arrow)",
+            "  &x   = 0x100 (address-of gives the box's address)"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.11  Classes, Objects & OOP"
+        },
+        {
+          "type": "para",
+          "text": "Object-Oriented Programming organises code around objects that bundle data (attributes) and behaviour (methods). OOP pillars: Encapsulation, Inheritance, Polymorphism, Abstraction.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++",
+            "class Student {",
+            "private:",
+            "    string name;",
+            "    int age;",
+            "public:",
+            "    Student(string n, int a) : name(n), age(a) {}",
+            "    void display() { cout << name << \" \" << age << endl; }",
+            "    string getName() { return name; }  // getter",
+            "};",
+            "",
+            "// Inheritance",
+            "class GradStudent : public Student {",
+            "    string thesis;",
+            "public:",
+            "    GradStudent(string n, int a, string t)",
+            "        : Student(n, a), thesis(t) {}",
+            "};",
+            "",
+            "# Python",
+            "class Student:",
+            "    def __init__(self, name, age):",
+            "        self.name = name",
+            "        self.__age = age  # private",
+            "    def display(self):",
+            "        print(f'{self.name} {self.__age}')",
+            "",
+            "class GradStudent(Student):  # inheritance",
+            "    def __init__(self, name, age, thesis):",
+            "        super().__init__(name, age)",
+            "        self.thesis = thesis"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.12  Recursion — The Algorithm of Miracles"
+        },
+        {
+          "type": "para",
+          "text": "Recursion is when a function calls itself. Every recursive solution has: (1) a Base Case that stops recursion, and (2) a Recursive Case that moves toward the base case.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Golden Formula"
+        },
+        {
+          "type": "callout",
+          "title": "Recursion Template",
+          "text": "solve(problem) {\n  if (base case) return base_answer;\n  smaller = make_problem_smaller(problem);\n  result = solve(smaller);\n  return combine(result);\n}",
+          "calloutType": "info"
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Factorial: n! = n × (n-1)!",
+            "int factorial(int n) {",
+            "    if (n == 0) return 1;         // base case",
+            "    return n * factorial(n - 1);  // recursive case",
+            "}",
+            "",
+            "// Dry run: factorial(4)",
+            "// factorial(4) = 4 × factorial(3)",
+            "// factorial(3) = 3 × factorial(2)",
+            "// factorial(2) = 2 × factorial(1)",
+            "// factorial(1) = 1 × factorial(0)",
+            "// factorial(0) = 1  ← base case",
+            "// Unwind: 1 → 1 → 2 → 6 → 24",
+            "",
+            "// Fibonacci",
+            "int fib(int n) {",
+            "    if (n <= 1) return n;",
+            "    return fib(n-1) + fib(n-2);",
+            "}",
+            "",
+            "// Recursion Tree for fib(4):",
+            "//         fib(4)",
+            "//        /      \\",
+            "//    fib(3)    fib(2)",
+            "//    /    \\    /    \\",
+            "// fib(2) fib(1) fib(1) fib(0)",
+            "// /  \\",
+            "// fib(1) fib(0)"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "callout",
+          "title": "Common Recursion Mistake",
+          "text": "Forgetting the base case causes infinite recursion → Stack Overflow. Always identify and implement the base case FIRST before writing the recursive step.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "spacer",
+          "size": 160
+        },
+        {
+          "type": "h2",
+          "text": "0.13  Memory Concepts: Stack vs Heap"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Stack",
+              "Static size at compile time",
+              "Function frames, local variables",
+              "Automatic",
+              "Fast, LIFO order",
+              "Limited (~1-8 MB)"
+            ],
+            [
+              "Heap",
+              "Dynamic (runtime allocation)",
+              "new/malloc, objects, vectors",
+              "Manual (delete/free)",
+              "Slower, fragmentation",
+              "Large (GBs)"
+            ]
+          ],
+          "headers": [
+            "",
+            "Allocation",
+            "Used For",
+            "Management",
+            "Speed",
+            "Size"
+          ],
+          "colWidths": [
+            1440,
+            1800,
+            2160,
+            1440,
+            1440,
+            1080
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "  Stack (grows downward)          Heap (grows upward)",
+            "  ┌──────────────────┐            ┌──────────────────┐",
+            "  │  main() frame    │            │  new int[100]    │ ← ptr points here",
+            "  │    int x = 5     │            │  vector<int> v   │",
+            "  │    int* ptr       │────────→  │  string s        │",
+            "  ├──────────────────┤            │                  │",
+            "  │  foo() frame     │            │ (freed with      │",
+            "  │    int a = 3     │            │  delete/free)    │",
+            "  └──────────────────┘            └──────────────────┘",
+            "",
+            "  int x = 5;           // Stack — automatic",
+            "  int* p = new int(5); // Heap  — manual: delete p;",
+            "  vector<int> v;       // Heap  — RAII (auto-managed)"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "callout",
+          "title": "Memory Leak Warning",
+          "text": "Every 'new' needs a 'delete'. Every 'malloc' needs a 'free'. In modern C++, prefer RAII: use vectors, unique_ptr, shared_ptr instead of raw pointers to prevent leaks.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 0 — Revision Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Variables: types, sizes, signed/unsigned differences",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Operators: precedence — multiplication before addition before comparison",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Loops: for (count-known), while (condition-based), do-while (at least once)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Functions: pass by value vs by reference; default params",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Arrays: O(1) access via address math; 0-indexed",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Strings: immutable in Python/Java; use StringBuilder for heavy ops",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Recursion: always base case first; draw recursion tree",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Memory: Stack = fast+auto, Heap = large+manual; prefer RAII",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "1",
+      "title": "Pattern Printing Mastery",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Pattern printing is the #1 way to master loops, nested loops, and logical thinking. Every FAANG candidate has solved hundreds of patterns. This section teaches you to DERIVE any pattern rather than memorize it."
+        },
+        {
+          "type": "h2",
+          "text": "1.1  Universal Pattern-Solving Framework"
+        },
+        {
+          "type": "para",
+          "text": "Apply this 6-step method to ANY pattern you encounter:",
+          "options": {}
+        },
+        {
+          "type": "numbered",
+          "text": "Count rows → determines outer loop limit",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Count columns per row → determines inner loop logic",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Count spaces (leading, middle, trailing)",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Count symbols (stars, numbers, letters)",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Derive formula relating row i to symbols/spaces",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Implement using loops",
+          "level": 0
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "callout",
+          "title": "The Pattern Table Technique",
+          "text": "For any pattern, write a table:\nRow | Spaces | Stars | Formula\n  1 |   4    |   1   | spaces=n-i, stars=2i-1\n  2 |   3    |   3   |\n  3 |   2    |   5   |\nLook for arithmetic or geometric progressions.",
+          "calloutType": "info"
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "1.2  Basic Star Patterns"
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 1: Right-Angle Star Triangle"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):          Analysis Table:",
+            "*                      Row | Stars | Formula",
+            "* *                     1  |   1   | stars = row",
+            "* * *                   2  |   2   |",
+            "* * * *                 3  |   3   |",
+            "* * * * *               4  |   4   |",
+            "                         5  |   5   |"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// C++",
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= i; j++) {",
+            "        cout << \"* \";",
+            "    }",
+            "    cout << \"\\n\";",
+            "}",
+            "",
+            "# Python",
+            "for i in range(1, n+1):",
+            "    print('* ' * i)",
+            "",
+            "Time: O(n²)   Space: O(1)"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 2: Inverted Right-Angle Triangle"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):          Formula: stars = n - row + 1",
+            "* * * * *",
+            "* * * *",
+            "* * *",
+            "* *",
+            "*"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = n; i >= 1; i--) {",
+            "    for (int j = 1; j <= i; j++) cout << \"* \";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 3: Centred Star Pyramid"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):           Analysis:",
+            "    *                  Row | Spaces | Stars | Space=n-i | Stars=2i-1",
+            "   * * *                1  |   4   |   1   |",
+            "  * * * * *             2  |   3   |   3   |",
+            " * * * * * * *          3  |   2   |   5   |",
+            "* * * * * * * * *       4  |   1   |   7   |",
+            "                         5  |   0   |   9   |"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    // Print spaces",
+            "    for (int j = 1; j <= n-i; j++) cout << \" \";",
+            "    // Print stars",
+            "    for (int j = 1; j <= 2*i-1; j++) cout << \"*\";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 4: Inverted Star Pyramid"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):           Formula: spaces=i-1, stars=2(n-i)+1",
+            "* * * * * * * * *",
+            " * * * * * * *",
+            "  * * * * *",
+            "   * * *",
+            "    *"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= i-1; j++) cout << \" \";",
+            "    for (int j = 1; j <= 2*(n-i)+1; j++) cout << \"*\";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 5: Full Diamond"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=4):           Tip: Diamond = Pyramid + Inverted Pyramid",
+            "   *",
+            "  * * *",
+            " * * * * *",
+            "* * * * * * *",
+            " * * * * *",
+            "  * * *",
+            "   *"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Upper half (pyramid)",
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= n-i; j++) cout << \" \";",
+            "    for (int j = 1; j <= 2*i-1; j++) cout << \"*\";",
+            "    cout << \"\\n\";",
+            "}",
+            "// Lower half (inverted pyramid, starting from n-1)",
+            "for (int i = n-1; i >= 1; i--) {",
+            "    for (int j = 1; j <= n-i; j++) cout << \" \";",
+            "    for (int j = 1; j <= 2*i-1; j++) cout << \"*\";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 6: Hollow Diamond"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):        Rule: Print * only at first/last position of each row",
+            "    *",
+            "   * *",
+            "  *   *",
+            " *     *",
+            "*       *",
+            " *     *",
+            "  *   *",
+            "   * *",
+            "    *"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= n-i; j++) cout << \" \";",
+            "    if (i == 1) { cout << \"*\"; }",
+            "    else {",
+            "        cout << \"*\";",
+            "        for (int k = 1; k <= 2*(i-1)-1; k++) cout << \" \";",
+            "        cout << \"*\";",
+            "    }",
+            "    cout << \"\\n\";",
+            "}",
+            "// Mirror for lower half"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 7: Butterfly Pattern"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=4):",
+            "*      *",
+            "**    **",
+            "***  ***",
+            "********",
+            "********",
+            "***  ***",
+            "**    **",
+            "*      *"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Upper half",
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= i; j++) cout << \"*\";",
+            "    for (int j = 1; j <= 2*(n-i); j++) cout << \" \";",
+            "    for (int j = 1; j <= i; j++) cout << \"*\";",
+            "    cout << \"\\n\";",
+            "}",
+            "// Lower half (reverse)",
+            "for (int i = n; i >= 1; i--) {",
+            "    for (int j = 1; j <= i; j++) cout << \"*\";",
+            "    for (int j = 1; j <= 2*(n-i); j++) cout << \" \";",
+            "    for (int j = 1; j <= i; j++) cout << \"*\";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "1.3  Number Patterns"
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 8: Natural Number Triangle"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):",
+            "1",
+            "1 2",
+            "1 2 3",
+            "1 2 3 4",
+            "1 2 3 4 5"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= i; j++) cout << j << \" \";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 9: Same Number Each Row"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):    Rule: each position prints row number",
+            "1",
+            "2 2",
+            "3 3 3",
+            "4 4 4 4",
+            "5 5 5 5 5"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= i; j++) cout << i << \" \";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 10: Descending Triangle"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):",
+            "1 2 3 4 5",
+            "1 2 3 4",
+            "1 2 3",
+            "1 2",
+            "1"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = n; i >= 1; i--) {",
+            "    for (int j = 1; j <= i; j++) cout << j << \" \";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 11: Number Pyramid"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):",
+            "    1",
+            "   2 2",
+            "  3 3 3",
+            " 4 4 4 4",
+            "5 5 5 5 5"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= n-i; j++) cout << \" \";",
+            "    for (int j = 1; j <= i; j++) cout << i << \" \";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 12: Floyd's Triangle"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):    Numbers fill rows sequentially",
+            "1",
+            "2 3",
+            "4 5 6",
+            "7 8 9 10",
+            "11 12 13 14 15"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "int num = 1;",
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= i; j++) {",
+            "        cout << num++ << \" \";",
+            "    }",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 13: Pascal's Triangle"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):",
+            "    1",
+            "   1 1",
+            "  1 2 1",
+            " 1 3 3 1",
+            "1 4 6 4 1",
+            "",
+            "Rule: Each element = sum of two above. Edge elements = 1.",
+            "Element[i][j] = C(i-1, j-1) = (i-1)! / (j-1)!(i-j)!"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "vector<vector<int>> pascal(n, vector<int>());",
+            "for (int i = 0; i < n; i++) {",
+            "    pascal[i].resize(i+1);",
+            "    pascal[i][0] = pascal[i][i] = 1;",
+            "    for (int j = 1; j < i; j++)",
+            "        pascal[i][j] = pascal[i-1][j-1] + pascal[i-1][j];",
+            "}",
+            "// Print with spaces..."
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "1.4  Alphabet Patterns"
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 14: Alphabet Triangle"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):    Rule: char = 'A' + col - 1",
+            "A",
+            "A B",
+            "A B C",
+            "A B C D",
+            "A B C D E"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= i; j++) {",
+            "        cout << (char)('A' + j - 1) << \" \";",
+            "    }",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 15: Same Letter Each Row"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):    Rule: char = 'A' + row - 1",
+            "A",
+            "B B",
+            "C C C",
+            "D D D D",
+            "E E E E E"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= i; j++) {",
+            "        cout << (char)('A' + i - 1) << \" \";",
+            "    }",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 16: Descending Alphabet"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):",
+            "E D C B A",
+            "E D C B",
+            "E D C",
+            "E D",
+            "E"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = n; i >= 1; i--) {",
+            "    for (int j = n; j >= n-i+1; j--) {",
+            "        cout << (char)('A' + j - 1) << \" \";",
+            "    }",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 17: Alphabet Pyramid"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):",
+            "    A",
+            "   A B A",
+            "  A B C B A",
+            " A B C D C B A",
+            "A B C D E D C B A",
+            "",
+            "Rule: Print A to col letter, then mirror back to A"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= n-i; j++) cout << \" \";",
+            "    for (int j = 1; j <= i; j++) cout << (char)('A'+j-1) << \" \";",
+            "    for (int j = i-1; j >= 1; j--) cout << (char)('A'+j-1) << \" \";",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "1.5  Mixed Patterns"
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 18: Hollow Rectangle"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=4, m=8):",
+            "* * * * * * * *",
+            "*             *",
+            "*             *",
+            "* * * * * * * *",
+            "",
+            "Rule: Print * on border (first/last row or first/last col)"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= m; j++) {",
+            "        if (i==1 || i==n || j==1 || j==m)",
+            "            cout << \"* \";",
+            "        else",
+            "            cout << \"  \";",
+            "    }",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern 19: Number Diamond Pyramid"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Output (n=5):",
+            "    1",
+            "   212",
+            "  32123",
+            " 4321234",
+            "543212345"
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "for (int i = 1; i <= n; i++) {",
+            "    for (int j = 1; j <= n-i; j++) cout << \" \";",
+            "    for (int j = i; j >= 1; j--) cout << j;",
+            "    for (int j = 2; j <= i; j++) cout << j;",
+            "    cout << \"\\n\";",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "1.6  Pattern Decision Tree"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Given a pattern...",
+            "",
+            "Step 1: Is it left-aligned?",
+            "   YES → outer loop i=1..n; inner loop j=1..i (or j=1..n-i+1)",
+            "   NO  → Are there leading spaces?",
+            "           YES → need a spaces loop before symbols loop",
+            "",
+            "Step 2: Are stars increasing or decreasing?",
+            "   Increasing → stars = i   (or i*2-1 for pyramid)",
+            "   Decreasing → stars = n-i+1",
+            "   Both       → Diamond pattern",
+            "",
+            "Step 3: What symbol?",
+            "   Stars (*) → print '*'",
+            "   Numbers   → print row i OR column j OR counter",
+            "   Letters   → print (char)('A' + j - 1) or ('A' + i - 1)",
+            "",
+            "Step 4: Hollow?",
+            "   YES → only print on border: first/last row OR first/last col",
+            "         if (i==1 || i==n || j==1 || j==cols)"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 1 — Key Takeaways"
+        },
+        {
+          "type": "bullet",
+          "text": "ALWAYS make an analysis table (row → spaces, stars, formula)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Diamond = Upper Pyramid + Lower Inverted Pyramid",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Hollow patterns: print symbol only on border positions",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Number pattern using row: print i; using col: print j; sequential: use counter",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Alphabet trick: char c = 'A' + (i or j - 1)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Time complexity of all basic patterns: O(n²)",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "2",
+      "title": "Logic Building Masterclass",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Logic building is the art of converting human language into precise algorithmic steps. It's a trainable skill — practice it daily and you'll solve unseen problems with confidence."
+        },
+        {
+          "type": "h2",
+          "text": "2.1  Thinking Like a Programmer"
+        },
+        {
+          "type": "para",
+          "text": "A programmer breaks every problem into: Input → Process → Output. Before writing a single line of code, you should be able to describe the solution in plain English.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "The 5-Step Problem Decomposition"
+        },
+        {
+          "type": "numbered",
+          "text": "Understand: Read the problem 3 times. What is given? What do you need to find?",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Example: Create 2-3 examples manually. Confirm your understanding.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Pattern: Identify if you've solved something similar before.",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Algorithm: Write steps in plain English (pseudocode).",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "Code: Translate pseudocode to code. Test. Debug.",
+          "level": 0
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Example: Count vowels in a string"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "English: 'Count how many vowels (a,e,i,o,u) are in a string'",
+            "",
+            "Pseudocode:",
+            "  count = 0",
+            "  for each character c in string:",
+            "    if c is in {a, e, i, o, u}:",
+            "      count += 1",
+            "  return count",
+            "",
+            "// C++",
+            "int countVowels(string s) {",
+            "    int count = 0;",
+            "    string vowels = \"aeiouAEIOU\";",
+            "    for (char c : s)",
+            "        if (vowels.find(c) != string::npos) count++;",
+            "    return count;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "2.2  Dry Running Code"
+        },
+        {
+          "type": "para",
+          "text": "Dry running means manually tracing through code step by step to understand what happens. This skill is CRITICAL for debugging and interviews.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Example: Dry run bubble sort on [5, 1, 4, 2]"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "Pass 1:  [5,1,4,2]",
+            "  Compare 5,1 → swap → [1,5,4,2]",
+            "  Compare 5,4 → swap → [1,4,5,2]",
+            "  Compare 5,2 → swap → [1,4,2,5]",
+            "",
+            "Pass 2:  [1,4,2,5]",
+            "  Compare 1,4 → no swap",
+            "  Compare 4,2 → swap → [1,2,4,5]",
+            "  Compare 4,5 → no swap",
+            "",
+            "Pass 3:  [1,2,4,5]  → already sorted",
+            "  Final: [1,2,4,5] ✓"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "2.3  Algorithm Design Exercises"
+        },
+        {
+          "type": "h3",
+          "text": "Beginner Level"
+        },
+        {
+          "type": "bullet",
+          "text": "Check if a number is even or odd",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Print all prime numbers from 1 to N",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Reverse a string without built-in functions",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Find the GCD of two numbers using Euclidean algorithm",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Check if a string is a palindrome",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 80
+        },
+        {
+          "type": "h3",
+          "text": "Intermediate Level"
+        },
+        {
+          "type": "bullet",
+          "text": "Find two numbers in an array that sum to target",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Rotate an array to the right by k positions",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Find the longest common prefix of an array of strings",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Count the number of islands in a 2D grid (use DFS concept)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Find all anagrams of a pattern in a string",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 80
+        },
+        {
+          "type": "h3",
+          "text": "Advanced Level"
+        },
+        {
+          "type": "bullet",
+          "text": "Design an LRU cache with O(1) get and put",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Find the median of two sorted arrays in O(log n)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Serialize and deserialize a binary tree",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Find the minimum global substring containing all characters of T",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Solve the N-Queens problem using backtracking",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 2 — Key Takeaways"
+        },
+        {
+          "type": "bullet",
+          "text": "Always understand before coding: examples are your best friend",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Write pseudocode first — the translation to code becomes mechanical",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Dry running catches bugs before you even run the program",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Build a mental library of small algorithms (GCD, prime check, reversal)",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "3",
+      "title": "Mathematics for DSA",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Mathematics is the backbone of competitive programming. Know these topics cold — they appear in 40% of problems."
+        },
+        {
+          "type": "h2",
+          "text": "3.1  Prime Numbers"
+        },
+        {
+          "type": "para",
+          "text": "A prime number has exactly two distinct divisors: 1 and itself. Primality testing and prime generation are fundamental operations.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Trial Division: O(√n)",
+            "bool isPrime(int n) {",
+            "    if (n < 2) return false;",
+            "    if (n == 2) return true;",
+            "    if (n % 2 == 0) return false;",
+            "    for (int i = 3; i * i <= n; i += 2)",
+            "        if (n % i == 0) return false;",
+            "    return true;",
+            "}",
+            "",
+            "// Why √n? If n = a*b and a ≤ b, then a ≤ √n.",
+            "// So we only need to check divisors up to √n."
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "3.2  Sieve of Eratosthenes"
+        },
+        {
+          "type": "para",
+          "text": "Find all primes up to N in O(N log log N) — far faster than checking each number individually.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Sieve of Eratosthenes — O(N log log N)",
+            "vector<bool> sieve(int N) {",
+            "    vector<bool> is_prime(N+1, true);",
+            "    is_prime[0] = is_prime[1] = false;",
+            "    for (int i = 2; i * i <= N; i++) {",
+            "        if (is_prime[i]) {",
+            "            for (int j = i*i; j <= N; j += i)",
+            "                is_prime[j] = false;",
+            "        }",
+            "    }",
+            "    return is_prime;",
+            "}",
+            "",
+            "// Visualisation for N=20:",
+            "// Mark: 4,6,8,10,12,14,16,18,20 (multiples of 2)",
+            "// Mark: 9,15 (multiples of 3, 6+ already marked)",
+            "// 5*5=25>20, stop.",
+            "// Primes: 2,3,5,7,11,13,17,19"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "3.3  GCD & LCM"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Euclidean Algorithm: O(log(min(a,b)))",
+            "int gcd(int a, int b) {",
+            "    return b == 0 ? a : gcd(b, a % b);",
+            "}",
+            "",
+            "// LCM using GCD",
+            "long long lcm(long long a, long long b) {",
+            "    return a / gcd(a, b) * b;  // divide first to avoid overflow",
+            "}",
+            "",
+            "// Dry run: gcd(48, 18)",
+            "// gcd(48, 18) = gcd(18, 12) = gcd(12, 6) = gcd(6, 0) = 6"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "3.4  Modular Arithmetic"
+        },
+        {
+          "type": "para",
+          "text": "When dealing with large numbers, always work modulo a prime (usually 10^9+7). Key properties:",
+          "options": {}
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "(a + b) % m",
+              "(a%m + b%m) % m"
+            ],
+            [
+              "(a - b) % m",
+              "((a%m - b%m) + m) % m   ← note: add m"
+            ],
+            [
+              "(a * b) % m",
+              "(a%m * b%m) % m"
+            ],
+            [
+              "(a / b) % m",
+              "(a * modInverse(b, m)) % m"
+            ]
+          ],
+          "headers": [
+            "Operation",
+            "Modular Form"
+          ],
+          "colWidths": [
+            3120,
+            6240
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "const int MOD = 1e9 + 7;",
+            "",
+            "// Fast Exponentiation: a^b mod m in O(log b)",
+            "long long power(long long a, long long b, long long m) {",
+            "    long long result = 1;",
+            "    a %= m;",
+            "    while (b > 0) {",
+            "        if (b & 1) result = result * a % m;  // if b is odd",
+            "        a = a * a % m;",
+            "        b >>= 1;  // b = b / 2",
+            "    }",
+            "    return result;",
+            "}",
+            "",
+            "// Modular Inverse (Fermat's Little Theorem): a^(m-2) mod m",
+            "// Only works when m is prime",
+            "long long modInverse(long long a, long long m) {",
+            "    return power(a, m-2, m);",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "3.5  Combinatorics"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Permutations P(n,r)",
+              "n!/(n-r)!",
+              "Ordered arrangements of r from n"
+            ],
+            [
+              "Combinations C(n,r)",
+              "n!/(r!(n-r)!)",
+              "Unordered selections of r from n"
+            ],
+            [
+              "Pascal's Identity",
+              "C(n,r) = C(n-1,r-1)+C(n-1,r)",
+              "Used in DP problems"
+            ],
+            [
+              "Stars and Bars",
+              "C(n+k-1, k-1)",
+              "Distribute n among k bins"
+            ]
+          ],
+          "headers": [
+            "Formula",
+            "Expression",
+            "Note"
+          ],
+          "colWidths": [
+            2640,
+            2880,
+            3840
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Precompute factorials and inverse factorials",
+            "const int MAXN = 1e6+5;",
+            "long long fact[MAXN], inv_fact[MAXN];",
+            "",
+            "void precompute(int n, long long mod) {",
+            "    fact[0] = 1;",
+            "    for (int i = 1; i <= n; i++) fact[i] = fact[i-1]*i%mod;",
+            "    inv_fact[n] = power(fact[n], mod-2, mod);",
+            "    for (int i = n-1; i >= 0; i--) inv_fact[i] = inv_fact[i+1]*(i+1)%mod;",
+            "}",
+            "",
+            "long long nCr(int n, int r, long long mod) {",
+            "    if (r < 0 || r > n) return 0;",
+            "    return fact[n] * inv_fact[r] % mod * inv_fact[n-r] % mod;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 3 — Mathematics Cheat Sheet"
+        },
+        {
+          "type": "bullet",
+          "text": "Prime check: O(√n) — loop i from 2 to √n",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Sieve of Eratosthenes: O(N log log N) — best for all primes ≤ N",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "GCD: use recursive Euclidean gcd(a,b) = gcd(b, a%b)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "LCM = a/gcd(a,b) × b — divide FIRST to avoid overflow",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Fast power: O(log b) — binary exponentiation trick",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Modular inverse: a^(p-2) mod p (Fermat's Little Theorem, p prime)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Always use long long for intermediate products when MOD operations involved",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "4",
+      "title": "Time Complexity Master Guide",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Big-O notation tells you how your algorithm scales. In interviews, you MUST state time and space complexity. In CP, it determines if your solution passes."
+        },
+        {
+          "type": "h2",
+          "text": "4.1  Complexity Classes — Visual Comparison"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "n = 10^6:",
+            "                                           Operations",
+            "O(1)         ─────────────────────────────    1",
+            "O(log n)     ─────────────────────────────    ~20",
+            "O(n)         ─────────────────────────────    10^6",
+            "O(n log n)   ─────────────────────────────    ~2×10^7",
+            "O(n²)        ─────────────────────────────    10^12  ← TOO SLOW",
+            "O(2^n)       ─────────────────────────────    unimaginably large",
+            "",
+            "Rule of thumb: 10^8 operations per second on modern hardware."
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "O(1)",
+              "Constant",
+              "Array access, hash lookup",
+              "N ≤ any",
+              "arr[i], map.get(k)"
+            ],
+            [
+              "O(log n)",
+              "Logarithmic",
+              "Binary search, balanced BST",
+              "N ≤ 10^18",
+              "while(n>0) n/=2"
+            ],
+            [
+              "O(√n)",
+              "Square root",
+              "Prime factorization, sqrt decomp",
+              "N ≤ 10^12",
+              "for i to √n"
+            ],
+            [
+              "O(n)",
+              "Linear",
+              "Single loop, linear search",
+              "N ≤ 10^8",
+              "for i in arr"
+            ],
+            [
+              "O(n log n)",
+              "Linearithmic",
+              "Merge sort, heap sort",
+              "N ≤ 10^6",
+              "sort(arr)"
+            ],
+            [
+              "O(n²)",
+              "Quadratic",
+              "Nested loops, bubble sort",
+              "N ≤ 10^4",
+              "for i for j"
+            ],
+            [
+              "O(n³)",
+              "Cubic",
+              "Triple nested, Floyd-Warshall",
+              "N ≤ 500",
+              "for i for j for k"
+            ],
+            [
+              "O(2^n)",
+              "Exponential",
+              "Subsets, backtracking",
+              "N ≤ 20",
+              "power set"
+            ],
+            [
+              "O(n!)",
+              "Factorial",
+              "Permutations, TSP brute force",
+              "N ≤ 12",
+              "all permutations"
+            ]
+          ],
+          "headers": [
+            "Complexity",
+            "Name",
+            "Common Use",
+            "Max N",
+            "Example"
+          ],
+          "colWidths": [
+            1440,
+            1440,
+            3120,
+            1440,
+            1920
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "4.2  Constraint-Based Algorithm Selection"
+        },
+        {
+          "type": "callout",
+          "title": "The Constraint Cheat Sheet — MEMORISE THIS",
+          "text": "N ≤ 12        → O(n!) or O(2^n × n)  — Backtracking/Bitmask DP\nN ≤ 20        → O(2^n)               — Bitmask / meet-in-middle\nN ≤ 500       → O(n³)                — Floyd-Warshall, 3-loop DP\nN ≤ 5000      → O(n²)                — Quadratic DP, Dijkstra naive\nN ≤ 10^5      → O(n log n)           — Sort, Binary search, Segment tree\nN ≤ 10^6      → O(n) or O(n log n)   — Linear scan, Sieve\nN ≤ 10^9      → O(√n) or O(log n)    — Math tricks\nN ≤ 10^18     → O(log n)             — Binary search, matrix exponentiation",
+          "calloutType": "tip"
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "4.3  How to Calculate Complexity"
+        },
+        {
+          "type": "h3",
+          "text": "Rules"
+        },
+        {
+          "type": "bullet",
+          "text": "Drop constants: O(2n) = O(n)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Drop lower terms: O(n² + n) = O(n²)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Nested loops multiply: outer O(n) × inner O(n) = O(n²)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Sequential operations add then simplify: O(n) + O(n²) = O(n²)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Recursion: T(n) = work + T(subproblem); solve by recursion tree or Master Theorem",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h3",
+          "text": "Master Theorem (for Divide & Conquer)"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "T(n) = aT(n/b) + f(n)  where a≥1, b>1",
+            "",
+            "Case 1: f(n) = O(n^c) where c < log_b(a)  →  T(n) = O(n^log_b(a))",
+            "Case 2: f(n) = O(n^c) where c = log_b(a)  →  T(n) = O(n^c log n)",
+            "Case 3: f(n) = O(n^c) where c > log_b(a)  →  T(n) = O(f(n))",
+            "",
+            "Merge Sort: T(n) = 2T(n/2) + O(n)",
+            "  a=2, b=2, log_2(2)=1, f(n)=O(n^1) → Case 2 → O(n log n) ✓",
+            "",
+            "Binary Search: T(n) = T(n/2) + O(1)",
+            "  a=1, b=2, log_2(1)=0, f(n)=O(n^0)=O(1) → Case 2 → O(log n) ✓"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 4 — Complexity Memory Tricks"
+        },
+        {
+          "type": "bullet",
+          "text": "Binary search: halving = log. Phone book. O(log n)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "One loop = O(n). Two nested loops = O(n²). Three = O(n³)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Recursion with 2 branches = O(2^n) unless memoized → O(n)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Sort is always O(n log n) — remember this as your default",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Constraint → Complexity is a reverse mapping you must know cold",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "5",
+      "title": "DSA Mindset & Problem-Solving Framework",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "The DSA Mindset is a systematic process for approaching ANY problem — from a beginner LeetCode Easy to a hard competitive programming challenge."
+        },
+        {
+          "type": "h2",
+          "text": "5.1  The 6-Step Problem Framework"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "1. Understand",
+              "Read 3 times. Identify: input, output, edge cases, constraints."
+            ],
+            [
+              "2. Analyse Constraints",
+              "N ≤ ? → determines acceptable complexity."
+            ],
+            [
+              "3. Brute Force First",
+              "Find a working solution even if slow. Correctness before speed."
+            ],
+            [
+              "4. Identify Bottleneck",
+              "Where is the slow part? Repeated work? Redundant states?"
+            ],
+            [
+              "5. Optimise",
+              "Apply patterns: caching, sorting, two pointers, binary search, DP..."
+            ],
+            [
+              "6. Code & Test",
+              "Clean implementation. Test edge cases: empty, single, large input."
+            ]
+          ],
+          "headers": [
+            "Step",
+            "Action"
+          ],
+          "colWidths": [
+            1440,
+            7920
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "5.2  The Constraints Cheat Sheet (Expanded)"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "N ≤ 12",
+              "Permutations possible",
+              "Backtracking / Bitmask DP",
+              "O(n!)"
+            ],
+            [
+              "N ≤ 20",
+              "Small exponential",
+              "Meet in middle, Bitmask DP",
+              "O(2^n)"
+            ],
+            [
+              "N ≤ 100",
+              "Small quadratic/cubic",
+              "O(n³) DP, O(n²) brute",
+              "O(n²) or O(n³)"
+            ],
+            [
+              "N ≤ 1000",
+              "Medium quadratic",
+              "O(n²) DP (LCS, matrix chain)",
+              "O(n²)"
+            ],
+            [
+              "N ≤ 10^5",
+              "Log-linear required",
+              "Segment tree, merge sort, BFS",
+              "O(n log n)"
+            ],
+            [
+              "N ≤ 10^6",
+              "Near-linear required",
+              "Sieve, linear DP, hash",
+              "O(n) or O(n log n)"
+            ],
+            [
+              "N ≤ 10^9",
+              "Sub-linear required",
+              "Math, sqrt decomp, binary srch",
+              "O(√n) or O(log n)"
+            ],
+            [
+              "N ≤ 10^18",
+              "Log only",
+              "Matrix exp, binary search",
+              "O(log n)"
+            ]
+          ],
+          "headers": [
+            "N (Constraint)",
+            "What it Means",
+            "Typical Algorithms",
+            "Target Complexity"
+          ],
+          "colWidths": [
+            1800,
+            2160,
+            3240,
+            2160
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "5.3  Identifying the Pattern — Quick Triggers"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Sorted array / sorted answer",
+              "Binary Search"
+            ],
+            [
+              "Contiguous subarray (sum, max, min)",
+              "Sliding Window or Prefix Sum"
+            ],
+            [
+              "Count frequency / first occurrence",
+              "HashMap / HashSet"
+            ],
+            [
+              "All pairs, two elements with property",
+              "Two Pointers"
+            ],
+            [
+              "Parent-child relationship, hierarchy",
+              "Tree (DFS/BFS)"
+            ],
+            [
+              "Minimum path, connectivity",
+              "Graph (BFS/Dijkstra)"
+            ],
+            [
+              "Optimal choice, maximise/minimise",
+              "DP or Greedy"
+            ],
+            [
+              "All subsets, all permutations",
+              "Backtracking / Bitmask"
+            ],
+            [
+              "k-th largest/smallest",
+              "Heap (Priority Queue)"
+            ],
+            [
+              "Range query on array",
+              "Segment Tree / BIT"
+            ],
+            [
+              "String matching / substring",
+              "KMP / Z-Algorithm / Rabin-Karp"
+            ],
+            [
+              "Prefix/suffix strings",
+              "Trie"
+            ],
+            [
+              "Overlapping intervals",
+              "Sorting + Sweep"
+            ],
+            [
+              "Connected components",
+              "Union-Find / DFS"
+            ]
+          ],
+          "headers": [
+            "Problem Clue",
+            "Pattern to Apply"
+          ],
+          "colWidths": [
+            4680,
+            4680
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "5.4  Edge Cases to Always Test"
+        },
+        {
+          "type": "bullet",
+          "text": "Empty input (n=0, empty string, empty array)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Single element (n=1)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "All same elements",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Already sorted / reverse sorted",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Negative numbers (if applicable)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Maximum constraints (N = 10^5 or 10^6 — check TLE)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Integer overflow — use long long when products can exceed 2×10^9",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 5 — Mindset Mantras"
+        },
+        {
+          "type": "bullet",
+          "text": "Brute force FIRST, then optimise. A slow correct solution beats a fast wrong one.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Constraints are hints — N ≤ 20 is screaming 'use bitmask or backtracking'",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Always test edge cases before submitting — they cost the most points",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Pattern recognition comes from solving 200+ problems — there is no shortcut, only practice",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "6",
+      "title": "Master DSA Decision Tree",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This decision tree maps problem characteristics to algorithms. When you see a new problem, run it through these questions to arrive at the right data structure and algorithm."
+        },
+        {
+          "type": "h2",
+          "text": "6.1  The Complete Decision Tree"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "START: What is the core structure?",
+            "│",
+            "├── LINEAR (array/string/sequence)",
+            "│   ├── Sorted? → Binary Search",
+            "│   ├── Contiguous subarray sum/max/min? → Sliding Window or Kadane",
+            "│   ├── Two elements with property (sum/diff)? → Two Pointers",
+            "│   ├── Prefix sums needed? → Prefix Sum Array",
+            "│   ├── Range queries (sum, min, max)? → Segment Tree / BIT",
+            "│   ├── Frequency count? → HashMap / HashSet",
+            "│   ├── Longest increasing subsequence? → DP (patience sort)",
+            "│   └── Pattern match in string? → KMP / Z-Algo / Rabin-Karp",
+            "│",
+            "├── TREE",
+            "│   ├── Find path/sum/depth? → DFS",
+            "│   ├── Level-by-level? → BFS",
+            "│   ├── Search/insert/delete ordered? → BST",
+            "│   ├── Diameter / height / balanced? → DFS with return values",
+            "│   ├── Lowest common ancestor? → LCA (binary lifting)",
+            "│   ├── Heavy path queries? → Heavy-Light Decomposition",
+            "│   └── Prefix strings? → Trie",
+            "│",
+            "├── GRAPH",
+            "│   ├── BFS → Shortest path (unweighted), level-order",
+            "│   ├── DFS → Connected components, cycle detection, topological sort",
+            "│   ├── Dijkstra → Shortest path (non-negative weights)",
+            "│   ├── Bellman-Ford → Shortest path (negative weights, cycle detection)",
+            "│   ├── Floyd-Warshall → All-pairs shortest paths",
+            "│   ├── Union-Find → Connectivity, cycle detection, Kruskal's MST",
+            "│   ├── Prim's / Kruskal's → Minimum Spanning Tree",
+            "│   ├── Topological Sort → DAG ordering, course prerequisites",
+            "│   ├── Tarjan / Kosaraju → Strongly Connected Components",
+            "│   └── Bridges / Articulation points → Tarjan's algorithm",
+            "│",
+            "├── OPTIMISATION (find max/min/optimal)",
+            "│   ├── Greedy choice works? → Greedy",
+            "│   │   └── Examples: interval scheduling, Huffman, coin change (special)",
+            "│   └── Overlapping subproblems? → Dynamic Programming",
+            "│       ├── On arrays → 1D/2D DP (LIS, LCS, knapsack)",
+            "│       ├── On trees → Tree DP",
+            "│       ├── On digits → Digit DP",
+            "│       └── On bitmask → Bitmask DP (TSP, set cover)",
+            "│",
+            "├── ALL POSSIBILITIES (enumerate)",
+            "│   ├── All subsets → Backtracking or 2^n bitmask",
+            "│   ├── All permutations → Backtracking",
+            "│   └── All valid placements → Backtracking with pruning",
+            "│",
+            "└── SPECIALISED",
+            "    ├── Range updates + queries → Segment Tree with Lazy Propagation",
+            "    ├── Offline range queries → Mo's Algorithm",
+            "    ├── Stack-based patterns → Monotonic Stack (NGE, histogram)",
+            "    ├── Queue-based patterns → Monotonic Queue (sliding max/min)",
+            "    ├── K closest / K largest → Heap (Priority Queue)",
+            "    └── Number theory → GCD, Sieve, modular arithmetic"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "6.2  Pattern → Algorithm Quick Reference Table"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Sorted array, find element",
+              "Binary Search",
+              "O(log n)"
+            ],
+            [
+              "Max subarray sum",
+              "Kadane's Algorithm",
+              "O(n)"
+            ],
+            [
+              "Subarray with sum = k",
+              "Prefix Sum + HashMap",
+              "O(n)"
+            ],
+            [
+              "Longest substring no repeat",
+              "Sliding Window",
+              "O(n)"
+            ],
+            [
+              "Merge k sorted lists",
+              "Min-Heap",
+              "O(n log k)"
+            ],
+            [
+              "Find kth largest",
+              "Quick Select / Max-Heap",
+              "O(n) avg"
+            ],
+            [
+              "Detect cycle in linked list",
+              "Fast-Slow Pointers",
+              "O(n)"
+            ],
+            [
+              "Reverse linked list",
+              "Iterative or Recursive",
+              "O(n)"
+            ],
+            [
+              "Level order traversal",
+              "BFS (Queue)",
+              "O(n)"
+            ],
+            [
+              "Check balanced BST",
+              "DFS with min/max bounds",
+              "O(n)"
+            ],
+            [
+              "Shortest path, unweighted",
+              "BFS",
+              "O(V+E)"
+            ],
+            [
+              "Shortest path, weighted",
+              "Dijkstra (Priority Queue)",
+              "O((V+E)log V)"
+            ],
+            [
+              "MST",
+              "Kruskal / Prim",
+              "O(E log E)"
+            ],
+            [
+              "Count connected components",
+              "DFS / Union-Find",
+              "O(V+E)"
+            ],
+            [
+              "Topological ordering",
+              "DFS / Kahn's BFS",
+              "O(V+E)"
+            ],
+            [
+              "0/1 Knapsack",
+              "2D DP",
+              "O(nW)"
+            ],
+            [
+              "LCS",
+              "2D DP",
+              "O(nm)"
+            ],
+            [
+              "LIS",
+              "DP + Binary Search",
+              "O(n log n)"
+            ],
+            [
+              "Edit Distance",
+              "2D DP",
+              "O(nm)"
+            ],
+            [
+              "All subsets",
+              "Backtracking / Bitmask",
+              "O(2^n)"
+            ],
+            [
+              "Valid parentheses",
+              "Stack",
+              "O(n)"
+            ],
+            [
+              "Next Greater Element",
+              "Monotonic Stack",
+              "O(n)"
+            ],
+            [
+              "Sliding Window Maximum",
+              "Monotonic Deque",
+              "O(n)"
+            ],
+            [
+              "Range sum query",
+              "BIT / Prefix Sum",
+              "O(log n) / O(1)"
+            ],
+            [
+              "Range min query",
+              "Sparse Table",
+              "O(1) query"
+            ],
+            [
+              "String matching",
+              "KMP",
+              "O(n+m)"
+            ],
+            [
+              "Prefix autocomplete",
+              "Trie",
+              "O(L) per query"
+            ]
+          ],
+          "headers": [
+            "Problem Type",
+            "Algorithm",
+            "Complexity"
+          ],
+          "colWidths": [
+            3600,
+            3360,
+            2400
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 6 — Key Takeaways"
+        },
+        {
+          "type": "bullet",
+          "text": "The decision tree is your first-response system for any new problem",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Pattern recognition + correct algorithm selection = 80% of the interview",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Memorise the 'Problem Clue → Algorithm' table — it's your interview cheat sheet",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "When stuck, fall back to brute force and look for the bottleneck to optimise",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "7",
+      "title": "Complete DSA Pattern Cheat Sheet",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "For each major DSA pattern: recognition signals, template code, complexity, and common mistakes. This is your quick-reference guide before any coding interview."
+        },
+        {
+          "type": "h2",
+          "text": "7.1  Array Patterns"
+        },
+        {
+          "type": "h3",
+          "text": "Pattern: Prefix Sum"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Recognition",
+              "Range sum queries, sum equals k, subarray problems"
+            ],
+            [
+              "Time",
+              "O(n) precompute, O(1) query"
+            ],
+            [
+              "Space",
+              "O(n)"
+            ],
+            [
+              "Common Mistake",
+              "Off-by-one: prefix[i] = sum of first i elements (prefix[0]=0)"
+            ]
+          ],
+          "headers": [
+            "Attribute",
+            "Value"
+          ],
+          "colWidths": [
+            2400,
+            6960
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Build prefix sum",
+            "vector<int> prefix(n+1, 0);",
+            "for (int i = 0; i < n; i++) prefix[i+1] = prefix[i] + arr[i];",
+            "",
+            "// Query: sum of arr[l..r] (0-indexed)",
+            "int rangeSum(int l, int r) { return prefix[r+1] - prefix[l]; }",
+            "",
+            "// Subarray sum equals k (using hashmap)",
+            "int subarraySum(vector<int>& nums, int k) {",
+            "    unordered_map<int,int> freq;",
+            "    freq[0] = 1;",
+            "    int sum = 0, count = 0;",
+            "    for (int x : nums) {",
+            "        sum += x;",
+            "        count += freq[sum - k];",
+            "        freq[sum]++;",
+            "    }",
+            "    return count;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern: Kadane's Algorithm (Maximum Subarray)"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Recognition",
+              "Max/min sum contiguous subarray, best time to buy/sell"
+            ],
+            [
+              "Idea",
+              "At each position, decide: start new subarray or extend current"
+            ],
+            [
+              "Time",
+              "O(n)"
+            ],
+            [
+              "Space",
+              "O(1)"
+            ]
+          ],
+          "headers": [
+            "Attribute",
+            "Value"
+          ],
+          "colWidths": [
+            2400,
+            6960
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "int maxSubarray(vector<int>& nums) {",
+            "    int maxSum = nums[0], curr = nums[0];",
+            "    for (int i = 1; i < nums.size(); i++) {",
+            "        curr = max(nums[i], curr + nums[i]);  // extend or restart",
+            "        maxSum = max(maxSum, curr);",
+            "    }",
+            "    return maxSum;",
+            "}",
+            "// [-2,1,-3,4,-1,2,1,-5,4] → answer is 6 (subarray [4,-1,2,1])"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern: Two Pointers"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Recognition",
+              "Sorted array, pair with sum/diff, palindrome check, remove duplicates"
+            ],
+            [
+              "Idea",
+              "One pointer at start, one at end (or slow/fast). Move based on condition."
+            ],
+            [
+              "Time",
+              "O(n)"
+            ],
+            [
+              "Common Mistake",
+              "Using two pointers on unsorted data (must sort first or use hashmap)"
+            ]
+          ],
+          "headers": [
+            "Attribute",
+            "Value"
+          ],
+          "colWidths": [
+            2400,
+            6960
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Two Sum (sorted array)",
+            "vector<int> twoSum(vector<int>& nums, int target) {",
+            "    int l = 0, r = nums.size() - 1;",
+            "    while (l < r) {",
+            "        int sum = nums[l] + nums[r];",
+            "        if (sum == target) return {l, r};",
+            "        else if (sum < target) l++;",
+            "        else r--;",
+            "    }",
+            "    return {};",
+            "}",
+            "",
+            "// Remove duplicates from sorted array",
+            "int removeDuplicates(vector<int>& nums) {",
+            "    int slow = 0;",
+            "    for (int fast = 1; fast < nums.size(); fast++) {",
+            "        if (nums[fast] != nums[slow]) nums[++slow] = nums[fast];",
+            "    }",
+            "    return slow + 1;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern: Sliding Window"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Recognition",
+              "Subarray/substring of fixed or variable size, max/min in global"
+            ],
+            [
+              "Fixed size",
+              "Slide global of size k across array"
+            ],
+            [
+              "Variable size",
+              "Expand right, shrink left when condition violated"
+            ],
+            [
+              "Time",
+              "O(n) — each element enters and exits global once"
+            ]
+          ],
+          "headers": [
+            "Attribute",
+            "Value"
+          ],
+          "colWidths": [
+            2400,
+            6960
+          ]
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Fixed global: max sum of k consecutive elements",
+            "int maxSum(vector<int>& arr, int k) {",
+            "    int windowSum = 0;",
+            "    for (int i = 0; i < k; i++) windowSum += arr[i];",
+            "    int maxS = windowSum;",
+            "    for (int i = k; i < arr.size(); i++) {",
+            "        windowSum += arr[i] - arr[i-k];",
+            "        maxS = max(maxS, windowSum);",
+            "    }",
+            "    return maxS;",
+            "}",
+            "",
+            "// Variable global: longest substring without repeating chars",
+            "int lengthOfLongestSubstring(string s) {",
+            "    unordered_set<char> global;",
+            "    int left = 0, ans = 0;",
+            "    for (int right = 0; right < s.size(); right++) {",
+            "        while (global.count(s[right]))",
+            "            global.erase(s[left++]);",
+            "        global.insert(s[right]);",
+            "        ans = max(ans, right - left + 1);",
+            "    }",
+            "    return ans;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "7.2  Binary Search Patterns"
+        },
+        {
+          "type": "h3",
+          "text": "Pattern: Classic Binary Search"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Search in sorted array: O(log n)",
+            "int binarySearch(vector<int>& arr, int target) {",
+            "    int lo = 0, hi = arr.size() - 1;",
+            "    while (lo <= hi) {",
+            "        int mid = lo + (hi - lo) / 2;  // avoid overflow!",
+            "        if (arr[mid] == target) return mid;",
+            "        else if (arr[mid] < target) lo = mid + 1;",
+            "        else hi = mid - 1;",
+            "    }",
+            "    return -1;",
+            "}",
+            "",
+            "// Find first position >= target (lower_bound equivalent)",
+            "int lowerBound(vector<int>& arr, int target) {",
+            "    int lo = 0, hi = arr.size();",
+            "    while (lo < hi) {",
+            "        int mid = lo + (hi - lo) / 2;",
+            "        if (arr[mid] < target) lo = mid + 1;",
+            "        else hi = mid;",
+            "    }",
+            "    return lo;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h3",
+          "text": "Pattern: Binary Search on Answer"
+        },
+        {
+          "type": "para",
+          "text": "When the answer has a monotonic property — if X is feasible, all Y > X are also feasible — binary search on the answer.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Template: Binary search on answer",
+            "// Check if 'mid' is a valid answer. Narrow search space.",
+            "int lo = min_possible, hi = max_possible;",
+            "while (lo < hi) {",
+            "    int mid = lo + (hi - lo) / 2;",
+            "    if (isPossible(mid)) {",
+            "        hi = mid;       // try smaller (for minimisation)",
+            "        // lo = mid+1   // try larger (for maximisation)",
+            "    } else {",
+            "        lo = mid + 1;   // mid is too small",
+            "    }",
+            "}",
+            "// answer = lo",
+            "",
+            "// Example: Koko Eating Bananas — min speed to eat all in H hours",
+            "bool canEat(vector<int>& piles, int speed, int h) {",
+            "    int hours = 0;",
+            "    for (int p : piles) hours += (p + speed - 1) / speed; // ceil(p/speed)",
+            "    return hours <= h;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "7.3  Stack Patterns"
+        },
+        {
+          "type": "h3",
+          "text": "Pattern: Monotonic Stack (Next Greater Element)"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Next Greater Element: O(n)",
+            "vector<int> nextGreater(vector<int>& nums) {",
+            "    int n = nums.size();",
+            "    vector<int> ans(n, -1);",
+            "    stack<int> st;  // stores indices",
+            "    for (int i = 0; i < n; i++) {",
+            "        while (!st.empty() && nums[st.top()] < nums[i]) {",
+            "            ans[st.top()] = nums[i];",
+            "            st.pop();",
+            "        }",
+            "        st.push(i);",
+            "    }",
+            "    return ans;",
+            "}",
+            "",
+            "// Largest Rectangle in Histogram: O(n)",
+            "int largestRectangle(vector<int>& heights) {",
+            "    stack<int> st;",
+            "    int maxArea = 0;",
+            "    heights.push_back(0);  // sentinel",
+            "    for (int i = 0; i < heights.size(); i++) {",
+            "        while (!st.empty() && heights[st.top()] > heights[i]) {",
+            "            int h = heights[st.top()]; st.pop();",
+            "            int w = st.empty() ? i : i - st.top() - 1;",
+            "            maxArea = max(maxArea, h * w);",
+            "        }",
+            "        st.push(i);",
+            "    }",
+            "    return maxArea;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "7.4  Linked List Patterns"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Fast-Slow Pointer: detect cycle, find middle",
+            "bool hasCycle(ListNode* head) {",
+            "    ListNode *slow = head, *fast = head;",
+            "    while (fast && fast->next) {",
+            "        slow = slow->next;",
+            "        fast = fast->next->next;",
+            "        if (slow == fast) return true;",
+            "    }",
+            "    return false;",
+            "}",
+            "",
+            "ListNode* findMiddle(ListNode* head) {",
+            "    ListNode *slow = head, *fast = head;",
+            "    while (fast->next && fast->next->next) {",
+            "        slow = slow->next;",
+            "        fast = fast->next->next;",
+            "    }",
+            "    return slow; // middle node",
+            "}",
+            "",
+            "// Reverse Linked List: O(n)",
+            "ListNode* reverse(ListNode* head) {",
+            "    ListNode *prev = nullptr, *curr = head;",
+            "    while (curr) {",
+            "        ListNode* next = curr->next;",
+            "        curr->next = prev;",
+            "        prev = curr;",
+            "        curr = next;",
+            "    }",
+            "    return prev;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "7.5  Tree Patterns"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "struct TreeNode { int val; TreeNode *left, *right; };",
+            "",
+            "// DFS patterns",
+            "int height(TreeNode* root) {",
+            "    if (!root) return 0;",
+            "    return 1 + max(height(root->left), height(root->right));",
+            "}",
+            "",
+            "// Diameter of Binary Tree",
+            "int diameter = 0;",
+            "int dfs(TreeNode* node) {",
+            "    if (!node) return 0;",
+            "    int left = dfs(node->left), right = dfs(node->right);",
+            "    diameter = max(diameter, left + right);",
+            "    return 1 + max(left, right);",
+            "}",
+            "",
+            "// BFS level-order traversal",
+            "vector<vector<int>> levelOrder(TreeNode* root) {",
+            "    vector<vector<int>> ans;",
+            "    if (!root) return ans;",
+            "    queue<TreeNode*> q;",
+            "    q.push(root);",
+            "    while (!q.empty()) {",
+            "        int sz = q.size();",
+            "        vector<int> level;",
+            "        for (int i = 0; i < sz; i++) {",
+            "            TreeNode* node = q.front(); q.pop();",
+            "            level.push_back(node->val);",
+            "            if (node->left) q.push(node->left);",
+            "            if (node->right) q.push(node->right);",
+            "        }",
+            "        ans.push_back(level);",
+            "    }",
+            "    return ans;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "7.6  Graph Patterns"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// BFS: shortest path, level order",
+            "vector<int> bfs(int start, vector<vector<int>>& adj, int n) {",
+            "    vector<int> dist(n, -1);",
+            "    queue<int> q;",
+            "    dist[start] = 0; q.push(start);",
+            "    while (!q.empty()) {",
+            "        int u = q.front(); q.pop();",
+            "        for (int v : adj[u]) {",
+            "            if (dist[v] == -1) { dist[v] = dist[u]+1; q.push(v); }",
+            "        }",
+            "    }",
+            "    return dist;",
+            "}",
+            "",
+            "// Dijkstra: weighted shortest path",
+            "vector<long long> dijkstra(int src, vector<vector<pair<int,int>>>& adj, int n) {",
+            "    vector<long long> dist(n, LLONG_MAX);",
+            "    priority_queue<pair<long long,int>, vector<pair<long long,int>>,",
+            "                   greater<>> pq;",
+            "    dist[src] = 0; pq.push({0, src});",
+            "    while (!pq.empty()) {",
+            "        auto [d, u] = pq.top(); pq.pop();",
+            "        if (d > dist[u]) continue;",
+            "        for (auto [v, w] : adj[u]) {",
+            "            if (dist[u]+w < dist[v]) {",
+            "                dist[v] = dist[u]+w;",
+            "                pq.push({dist[v], v});",
+            "            }",
+            "        }",
+            "    }",
+            "    return dist;",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "7.7  Union-Find (Disjoint Set Union)"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// DSU with path compression + union by rank",
+            "struct DSU {",
+            "    vector<int> parent, rank;",
+            "    DSU(int n) : parent(n), rank(n, 0) {",
+            "        iota(parent.begin(), parent.end(), 0);",
+            "    }",
+            "    int find(int x) {",
+            "        if (parent[x] != x) parent[x] = find(parent[x]); // path compression",
+            "        return parent[x];",
+            "    }",
+            "    bool unite(int x, int y) {",
+            "        int px = find(x), py = find(y);",
+            "        if (px == py) return false; // already connected",
+            "        if (rank[px] < rank[py]) swap(px, py);",
+            "        parent[py] = px;",
+            "        if (rank[px] == rank[py]) rank[px]++;",
+            "        return true;",
+            "    }",
+            "    bool connected(int x, int y) { return find(x) == find(y); }",
+            "};",
+            "// Time: O(α(n)) ≈ O(1) amortised per operation"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "7.8  Heap / Priority Queue Patterns"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Top K elements — O(n log k)",
+            "vector<int> topK(vector<int>& nums, int k) {",
+            "    priority_queue<int, vector<int>, greater<int>> minHeap; // min-heap",
+            "    for (int x : nums) {",
+            "        minHeap.push(x);",
+            "        if (minHeap.size() > k) minHeap.pop(); // keep only k largest",
+            "    }",
+            "    vector<int> res;",
+            "    while (!minHeap.empty()) { res.push_back(minHeap.top()); minHeap.pop(); }",
+            "    return res;",
+            "}",
+            "",
+            "// Merge k sorted lists — O(n log k)",
+            "// Use min-heap storing (value, list_index, element_index)"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "7.9  Backtracking Template"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Universal Backtracking Template",
+            "void backtrack(state, choices, result) {",
+            "    if (is_complete(state)) {",
+            "        result.push_back(state);",
+            "        return;",
+            "    }",
+            "    for each choice in choices {",
+            "        if (is_valid(choice, state)) {",
+            "            make_choice(state, choice);",
+            "            backtrack(state, remaining_choices, result);",
+            "            undo_choice(state, choice);  // CRITICAL: always backtrack!",
+            "        }",
+            "    }",
+            "}",
+            "",
+            "// Subsets: O(2^n)",
+            "void subsets(vector<int>& nums, int start, vector<int>& curr,",
+            "             vector<vector<int>>& result) {",
+            "    result.push_back(curr);",
+            "    for (int i = start; i < nums.size(); i++) {",
+            "        curr.push_back(nums[i]);",
+            "        subsets(nums, i+1, curr, result);",
+            "        curr.pop_back();  // backtrack",
+            "    }",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 120
+        },
+        {
+          "type": "h2",
+          "text": "7.10  Dynamic Programming Quick Templates"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// 0/1 Knapsack: O(nW)",
+            "int knapsack(vector<int>& w, vector<int>& v, int W, int n) {",
+            "    vector<vector<int>> dp(n+1, vector<int>(W+1, 0));",
+            "    for (int i = 1; i <= n; i++)",
+            "        for (int j = 0; j <= W; j++) {",
+            "            dp[i][j] = dp[i-1][j];",
+            "            if (j >= w[i-1])",
+            "                dp[i][j] = max(dp[i][j], dp[i-1][j-w[i-1]] + v[i-1]);",
+            "        }",
+            "    return dp[n][W];",
+            "}",
+            "",
+            "// LCS (Longest Common Subsequence): O(nm)",
+            "int lcs(string s, string t) {",
+            "    int m = s.size(), n = t.size();",
+            "    vector<vector<int>> dp(m+1, vector<int>(n+1, 0));",
+            "    for (int i = 1; i <= m; i++)",
+            "        for (int j = 1; j <= n; j++) {",
+            "            if (s[i-1] == t[j-1]) dp[i][j] = dp[i-1][j-1] + 1;",
+            "            else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);",
+            "        }",
+            "    return dp[m][n];",
+            "}",
+            "",
+            "// LIS (Longest Increasing Subsequence): O(n log n)",
+            "int lis(vector<int>& nums) {",
+            "    vector<int> tails;",
+            "    for (int x : nums) {",
+            "        auto it = lower_bound(tails.begin(), tails.end(), x);",
+            "        if (it == tails.end()) tails.push_back(x);",
+            "        else *it = x;",
+            "    }",
+            "    return tails.size();",
+            "}"
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 7 — Master Cheat Sheet Summary"
+        },
+        {
+          "type": "bullet",
+          "text": "Prefix Sum: O(1) range queries after O(n) build — always go-to for range sums",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Kadane: max subarray in O(n) — the most asked array problem",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Two Pointers: O(n) for sorted arrays — reduce O(n²) to O(n)",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Sliding Window: O(n) for subarray/substring constraints",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Binary Search on Answer: whenever answer is monotonic",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Monotonic Stack: O(n) for NGE, NSE, histogram — deceptively powerful",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "DSU: O(α(n)) connectivity — Kruskal's MST, cycle detection",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Dijkstra: O((V+E)log V) — most asked graph problem",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Backtracking: always undo your choice after recursive call",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "DP: identify state, transition, base case — then code top-down or bottom-up",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "8",
+      "title": "Pattern Recognition Master Table",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "500+ problem clues mapped to algorithms. Study this table until pattern matching becomes instinctive. In an interview, you should identify the algorithm within 30 seconds of reading a problem."
+        },
+        {
+          "type": "h2",
+          "text": "8.1  Array & String Clues"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Sorted array, find target",
+              "Binary Search"
+            ],
+            [
+              "Sorted array, two sum",
+              "Two Pointers"
+            ],
+            [
+              "Max/min of contiguous subarray",
+              "Kadane / Sliding Window"
+            ],
+            [
+              "Subarray with sum equals k",
+              "Prefix Sum + HashMap"
+            ],
+            [
+              "Substring with all chars of T",
+              "Sliding Window + HashMap"
+            ],
+            [
+              "Longest substring no repeat",
+              "Sliding Window + HashSet"
+            ],
+            [
+              "Count pairs with property",
+              "Two Pointers or HashMap"
+            ],
+            [
+              "Find duplicate in array",
+              "Floyd's Cycle / XOR / Set"
+            ],
+            [
+              "Rotate array k times",
+              "Reverse trick"
+            ],
+            [
+              "Merge sorted arrays",
+              "Two Pointers"
+            ],
+            [
+              "Remove duplicates (sorted)",
+              "Two Pointers (slow-fast)"
+            ],
+            [
+              "Next permutation",
+              "Reverse + find suffix"
+            ],
+            [
+              "Majority element (>n/2)",
+              "Boyer-Moore Voting"
+            ],
+            [
+              "Stock buy-sell max profit",
+              "Greedy / Kadane variant"
+            ],
+            [
+              "Trapping rain water",
+              "Two Pointers or Monotonic Stack"
+            ],
+            [
+              "Container with most water",
+              "Two Pointers (greedy shrink)"
+            ],
+            [
+              "Minimum in rotated sorted array",
+              "Modified Binary Search"
+            ],
+            [
+              "Search in rotated sorted array",
+              "Modified Binary Search"
+            ],
+            [
+              "Missing number in [1..n]",
+              "XOR or sum formula"
+            ],
+            [
+              "Find k-th largest element",
+              "QuickSelect or Min-Heap"
+            ],
+            [
+              "Top k frequent elements",
+              "Bucket Sort or Max-Heap"
+            ],
+            [
+              "Product of array except self",
+              "Prefix-Suffix Products"
+            ],
+            [
+              "Set matrix zeroes",
+              "First row/col as flag"
+            ],
+            [
+              "Spiral matrix traversal",
+              "Direction arrays (dr,dc)"
+            ],
+            [
+              "Word search in grid",
+              "DFS Backtracking"
+            ]
+          ],
+          "headers": [
+            "Problem Clue",
+            "Pattern / Algorithm"
+          ],
+          "colWidths": [
+            4680,
+            4680
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "8.2  Linked List Clues"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Detect cycle in linked list",
+              "Fast-Slow Pointers (Floyd's)"
+            ],
+            [
+              "Find cycle start",
+              "Fast-Slow Pointers meet, then reset one"
+            ],
+            [
+              "Find middle of linked list",
+              "Fast-Slow Pointers"
+            ],
+            [
+              "Reverse linked list",
+              "Iterative 3-pointer"
+            ],
+            [
+              "Reverse k-group linked list",
+              "Iterative + recursion"
+            ],
+            [
+              "Palindrome linked list",
+              "Find mid, reverse second half"
+            ],
+            [
+              "Merge two sorted lists",
+              "Two Pointers"
+            ],
+            [
+              "Merge k sorted lists",
+              "Min-Heap"
+            ],
+            [
+              "Remove nth from end",
+              "Fast-Slow with n-gap"
+            ],
+            [
+              "Intersection of two lists",
+              "Length difference trick"
+            ],
+            [
+              "Add two numbers as lists",
+              "Carry simulation"
+            ],
+            [
+              "LRU Cache",
+              "HashMap + Doubly Linked List"
+            ]
+          ],
+          "headers": [
+            "Problem Clue",
+            "Pattern / Algorithm"
+          ],
+          "colWidths": [
+            4680,
+            4680
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "8.3  Tree Clues"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Level-order traversal",
+              "BFS with queue"
+            ],
+            [
+              "Path sum / root-to-leaf path",
+              "DFS with running sum"
+            ],
+            [
+              "Diameter of binary tree",
+              "DFS returning height + global max"
+            ],
+            [
+              "Maximum path sum in tree",
+              "DFS returning max single path"
+            ],
+            [
+              "Lowest Common Ancestor",
+              "DFS: recurse left+right, return node"
+            ],
+            [
+              "Validate BST",
+              "DFS with min/max bounds"
+            ],
+            [
+              "Serialize/Deserialize tree",
+              "BFS with null markers"
+            ],
+            [
+              "Invert binary tree",
+              "Recursive swap"
+            ],
+            [
+              "Symmetric tree",
+              "Recursive mirror check"
+            ],
+            [
+              "Count nodes in complete tree",
+              "Binary search + bit counting"
+            ],
+            [
+              "Right side view",
+              "BFS, last node of each level"
+            ],
+            [
+              "Flatten tree to linked list",
+              "Morris traversal or DFS"
+            ],
+            [
+              "Construct tree from traversals",
+              "Preorder+Inorder DFS"
+            ],
+            [
+              "Kth smallest in BST",
+              "Inorder traversal (sorted)"
+            ],
+            [
+              "Distance between two nodes",
+              "LCA + depth"
+            ]
+          ],
+          "headers": [
+            "Problem Clue",
+            "Pattern / Algorithm"
+          ],
+          "colWidths": [
+            4680,
+            4680
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "8.4  Graph Clues"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Shortest path, unweighted",
+              "BFS"
+            ],
+            [
+              "Shortest path, weighted (non-neg)",
+              "Dijkstra"
+            ],
+            [
+              "Shortest path, negative edges",
+              "Bellman-Ford"
+            ],
+            [
+              "All-pairs shortest paths",
+              "Floyd-Warshall"
+            ],
+            [
+              "Minimum spanning tree",
+              "Kruskal (sort+DSU) or Prim"
+            ],
+            [
+              "Detect cycle, undirected",
+              "DSU or DFS with parent tracking"
+            ],
+            [
+              "Detect cycle, directed",
+              "DFS with white-gray-black coloring"
+            ],
+            [
+              "Topological order",
+              "Kahn's BFS or DFS post-order"
+            ],
+            [
+              "Connected components",
+              "DFS / BFS / DSU"
+            ],
+            [
+              "Bipartite check",
+              "BFS 2-coloring"
+            ],
+            [
+              "Strongly connected components",
+              "Kosaraju / Tarjan"
+            ],
+            [
+              "Articulation points / bridges",
+              "Tarjan low-link DFS"
+            ],
+            [
+              "Grid shortest path",
+              "BFS (unit weights) or Dijkstra"
+            ],
+            [
+              "Word ladder transformation",
+              "BFS on word graph"
+            ],
+            [
+              "Course schedule / prerequisites",
+              "Topological sort"
+            ],
+            [
+              "Clone graph",
+              "DFS/BFS with hashmap"
+            ],
+            [
+              "Number of islands",
+              "DFS/BFS flood fill"
+            ],
+            [
+              "Walls and gates",
+              "Multi-source BFS"
+            ]
+          ],
+          "headers": [
+            "Problem Clue",
+            "Pattern / Algorithm"
+          ],
+          "colWidths": [
+            4680,
+            4680
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 100
+        },
+        {
+          "type": "h2",
+          "text": "8.5  DP Clues"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Count ways to reach target",
+              "DP (coin change, climbing stairs)"
+            ],
+            [
+              "Max/min cost path in grid",
+              "2D DP"
+            ],
+            [
+              "Knapsack: select items under weight",
+              "0/1 Knapsack DP"
+            ],
+            [
+              "Unbounded item selection",
+              "Unbounded Knapsack"
+            ],
+            [
+              "Longest common subsequence",
+              "LCS 2D DP"
+            ],
+            [
+              "Longest common substring",
+              "2D DP (reset on mismatch)"
+            ],
+            [
+              "Longest increasing subsequence",
+              "DP O(n²) or patience sort O(n log n)"
+            ],
+            [
+              "Edit distance between strings",
+              "2D DP (insert/delete/replace)"
+            ],
+            [
+              "Palindrome partitioning",
+              "DP on palindrome check"
+            ],
+            [
+              "Minimum palindrome cuts",
+              "DP + palindrome precompute"
+            ],
+            [
+              "Wildcard/regex matching",
+              "2D DP"
+            ],
+            [
+              "Burst balloons",
+              "Interval DP"
+            ],
+            [
+              "Matrix chain multiplication",
+              "Interval DP"
+            ],
+            [
+              "Decode ways",
+              "1D DP"
+            ],
+            [
+              "Unique paths in grid",
+              "2D DP or combinatorics"
+            ],
+            [
+              "Jump game (can reach end?)",
+              "Greedy or DP"
+            ],
+            [
+              "Partition equal subset sum",
+              "Knapsack / Bitset DP"
+            ],
+            [
+              "Counting BSTs with n nodes",
+              "Catalan numbers / DP"
+            ],
+            [
+              "Digit DP (count numbers with prop)",
+              "Digit DP with tight constraint"
+            ],
+            [
+              "Subset sum equals k",
+              "Knapsack DP"
+            ],
+            [
+              "Minimum cost to merge stones",
+              "Interval DP"
+            ],
+            [
+              "Stock problems (with cooldown/fee)",
+              "State machine DP"
+            ]
+          ],
+          "headers": [
+            "Problem Clue",
+            "Pattern / Algorithm"
+          ],
+          "colWidths": [
+            4680,
+            4680
+          ]
+        },
+        {
+          "type": "spacer",
+          "size": 200
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "h3",
+          "text": "Section 8 — How to Use This Table"
+        },
+        {
+          "type": "bullet",
+          "text": "Read the problem → identify 2-3 key clues → look up in table",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "If multiple clues match, check constraint N → pick complexity-appropriate algorithm",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Practice with LeetCode: for each problem, identify the clue BEFORE looking at hints",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "After 200 problems, this table should be in your head automatically",
+          "level": 0,
+          "options": {}
+        }
+      ]
+    }
+  ],
+  "handbookToc": null
+}

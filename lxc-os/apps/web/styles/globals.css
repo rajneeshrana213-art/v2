@@ -1,0 +1,367 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* LearnXChain Brand Colors */
+  --brand-primary-dark: #071b2c;
+  --brand-primary-blue: #2c81b4;
+  --brand-secondary-blue: #224662;
+  --brand-accent-green: #75b96d;
+  --brand-bg-light: #ffffff;
+  --brand-bg-dark: #071b2c;
+  --brand-text-dark: #071b2c;
+  --brand-text-light: #ffffff;
+  --brand-text-muted: #9fb3c8;
+  --brand-border: #1e3a52;
+  --brand-gradient-start: #071b2c;
+  --brand-gradient-mid: #2c81b4;
+  --brand-gradient-end: #75b96d;
+}
+
+/* Custom Toast Styles - Glassmorphism & Interactive */
+.Toastify__toast-container {
+  width: auto !important;
+  min-width: 320px;
+  max-width: 480px;
+  padding: 1rem;
+}
+
+.glass-toast {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset !important;
+  border-radius: 1rem !important;
+  padding: 0 !important;
+  margin-bottom: 1rem !important;
+  overflow: hidden !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Dark mode support if needed, or adjust based on theme */
+.dark .glass-toast {
+  background: rgba(7, 27, 44, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: var(--brand-text-light) !important;
+}
+
+.glass-toast:hover {
+  transform: translateY(-2px) !important;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset !important;
+}
+
+.glass-toast-body {
+  padding: 0.75rem 1rem !important;
+  font-family: inherit !important;
+  font-size: 0.9em !important;
+  font-weight: 500 !important;
+  color: var(--brand-text-dark) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+}
+
+.dark .glass-toast-body {
+  color: var(--brand-text-light) !important;
+}
+
+/* Success Toast */
+.Toastify__toast--success .glass-toast-progress {
+  background: linear-gradient(
+    to right,
+    var(--brand-accent-green),
+    #86efac
+  ) !important;
+}
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: var(--brand-accent-green) !important;
+}
+
+/* Error Toast */
+.Toastify__toast--error .glass-toast-progress {
+  background: linear-gradient(to right, #ef4444, #f87171) !important;
+}
+.Toastify__toast--error .Toastify__toast-icon svg {
+  fill: #ef4444 !important;
+}
+
+/* Info/Default Toast */
+.Toastify__toast--info .glass-toast-progress {
+  background: linear-gradient(
+    to right,
+    var(--brand-primary-blue),
+    #60a5fa
+  ) !important;
+}
+.Toastify__toast--info .Toastify__toast-icon svg {
+  fill: var(--brand-primary-blue) !important;
+}
+
+/* Progress Bar */
+.glass-toast-progress {
+  height: 3px !important;
+  bottom: 0 !important;
+  opacity: 0.8 !important;
+}
+
+/* Close Button */
+.Toastify__close-button {
+  color: var(--brand-text-muted) !important;
+  opacity: 0.6 !important;
+  align-self: flex-start !important;
+  margin-top: 0.25rem !important;
+}
+.Toastify__close-button:hover {
+  color: var(--brand-text-dark) !important;
+  opacity: 1 !important;
+}
+.dark .Toastify__close-button:hover {
+  color: var(--brand-text-light) !important;
+}
+
+/* Lightweight animations replacing framer-motion */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Custom Scrollbar Styles */
+@layer base {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-gray-200/80 transition-colors;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-gray-800/80;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-300;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-700;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(229, 231, 235, 0.8) transparent;
+  }
+
+  .dark * {
+    scrollbar-color: rgba(31, 41, 55, 0.8) transparent;
+  }
+}
+
+/* ─── Stream Video SDK theme fixes ──────────────────────────────────────────
+   The SDK uses mask-image icons (background-color IS the icon color) and
+   resets button styles with `all: unset` which drops color inheritance.
+   Dark-mode overrides are scoped to `.dark` so light mode works correctly.
+----------------------------------------------------------------------------- */
+
+/* ── DARK MODE ─────────────────────────────────────────────────────────────── */
+
+/* Menu container popup */
+.dark .str-video .str-video__menu-container {
+  background-color: #1e2b38 !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Menu item buttons — restore white text after `all: unset` */
+.dark
+  .str-video
+  .str-video__generic-menu
+  .str-video__generic-menu--item
+  button {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+.dark
+  .str-video
+  .str-video__generic-menu
+  .str-video__generic-menu--item
+  button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+/* Mask-image icons — background-color IS the displayed icon colour */
+.dark .str-video .str-video__icon {
+  background-color: #ffffff !important;
+}
+
+/* Participant name / label text */
+.dark .str-video .str-video__participant-details,
+.dark .str-video .str-video__participant-details span,
+.dark .str-video .str-video__call-stats,
+.dark .str-video [class*="__label"],
+.dark .str-video [class*="__name"],
+.dark .str-video [class*="__title"] {
+  color: #ffffff !important;
+}
+
+/* Dropdown lists (device picker, quality selector) */
+.dark .str-video .str-video__dropdown-list {
+  background-color: #1e2b38 !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .str-video .str-video__dropdown-option,
+.dark .str-video .str-video__dropdown__option {
+  color: #ffffff !important;
+}
+
+.dark .str-video .str-video__dropdown-option:hover,
+.dark .str-video .str-video__dropdown__option:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark .str-video .str-video__dropdown-selected {
+  color: #ffffff !important;
+  background-color: #19232d !important;
+}
+
+/* Tooltip */
+.dark .str-video .str-video__tooltip {
+  background-color: #0f1923 !important;
+  color: #ffffff !important;
+}
+
+/* Settings / stats panels */
+.dark .str-video .str-video__device-settings,
+.dark .str-video .str-video__call-stats-report {
+  background-color: #19232d !important;
+  color: #ffffff !important;
+}
+
+.dark .str-video .str-video__device-settings label,
+.dark .str-video .str-video__device-settings span,
+.dark .str-video .str-video__call-stats-report * {
+  color: #ffffff !important;
+}
+
+/* Participant overlay info bar (bottom of video tile) — always dark (video bg) */
+.str-video .str-video__participant-details {
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7)) !important;
+}
+
+/* Call controls label text */
+.dark
+  .str-video
+  .str-video__composite-button
+  .str-video__composite-button__title {
+  color: #ffffff !important;
+}
+
+/* ── LIGHT MODE ────────────────────────────────────────────────────────────── */
+
+/* Menu container popup */
+:not(.dark) .str-video .str-video__menu-container {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Menu item buttons */
+:not(.dark)
+  .str-video
+  .str-video__generic-menu
+  .str-video__generic-menu--item
+  button {
+  color: #111827 !important;
+  background-color: transparent !important;
+}
+
+:not(.dark)
+  .str-video
+  .str-video__generic-menu
+  .str-video__generic-menu--item
+  button:hover {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+}
+
+/* Mask-image icons — dark icon colour in light mode */
+:not(.dark) .str-video .str-video__icon {
+  background-color: #374151 !important;
+}
+
+/* Label / name text */
+:not(.dark) .str-video [class*="__label"],
+:not(.dark) .str-video [class*="__name"],
+:not(.dark) .str-video [class*="__title"] {
+  color: #111827 !important;
+}
+
+/* Dropdown lists */
+:not(.dark) .str-video .str-video__dropdown-list {
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+:not(.dark) .str-video .str-video__dropdown-option,
+:not(.dark) .str-video .str-video__dropdown__option {
+  color: #111827 !important;
+}
+
+:not(.dark) .str-video .str-video__dropdown-option:hover,
+:not(.dark) .str-video .str-video__dropdown__option:hover {
+  background-color: #f3f4f6 !important;
+}
+
+:not(.dark) .str-video .str-video__dropdown-selected {
+  color: #111827 !important;
+  background-color: #f9fafb !important;
+}
+
+/* Tooltip */
+:not(.dark) .str-video .str-video__tooltip {
+  background-color: #1f2937 !important;
+  color: #ffffff !important;
+}
+
+/* Settings / stats panels */
+:not(.dark) .str-video .str-video__device-settings,
+:not(.dark) .str-video .str-video__call-stats-report {
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+
+:not(.dark) .str-video .str-video__device-settings label,
+:not(.dark) .str-video .str-video__device-settings span,
+:not(.dark) .str-video .str-video__call-stats-report * {
+  color: #111827 !important;
+}
+
+/* Call controls label text */
+:not(.dark)
+  .str-video
+  .str-video__composite-button
+  .str-video__composite-button__title {
+  color: #374151 !important;
+}

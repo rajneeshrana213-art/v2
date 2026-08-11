@@ -1,0 +1,11 @@
+<h2>Payment Invoice</h2>
+<p>Invoice Number: <%= invoiceNumber %></p>
+<% if (typeof baseAmount !== 'undefined') { %>
+<p>Base Amount: ₹<%= baseAmount %></p>
+<p>GST (18%): ₹<%= gstAmount %></p>
+<p>Total Amount: ₹<%= totalAmount %></p>
+<% } else { %>
+<p>Amount: ₹<%= amount %></p>
+<% } %>
+<p>Date: <%= date %></p>
+<p>Thank you for your payment.</p>

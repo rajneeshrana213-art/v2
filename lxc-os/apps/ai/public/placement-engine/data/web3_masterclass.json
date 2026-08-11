@@ -1,0 +1,4069 @@
+{
+  "handbookData": [
+    {
+      "num": "0",
+      "title": "Blockchain Foundations",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Welcome to Section 0: Blockchain Foundations. Here we cover the birth of decentralized ledgers, the double spending problem, and consensus mechanisms."
+        },
+        {
+          "type": "h2",
+          "text": "0.1 What is Blockchain & Why it Exists"
+        },
+        {
+          "type": "para",
+          "text": "A blockchain is a shared, immutable ledger that facilitates the process of recording transactions and tracking assets in a network. It exists to remove intermediaries and provide a trustless environment for coordination.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "The Evolution of Money"
+        },
+        {
+          "type": "para",
+          "text": "Money has transitioned from tangible commodity cash to centralized ledgers, digital accounts, and finally decentralized consensus networks:",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "moneyEvolution"
+        },
+        {
+          "type": "h2",
+          "text": "0.2 Double Spending & Byzantine Generals Problem"
+        },
+        {
+          "type": "para",
+          "text": "Double spending is the risk that a digital currency can be spent twice. Byzantine Generals Problem models coordination in a distributed network where nodes can be malicious.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Blockchains solve the double spending problem without central authorities. By leveraging Byzantine fault tolerance and consensus mechanisms, distributed nodes agree on a single history.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How does Proof of Work solve the Byzantine Generals Problem?",
+          "answer": "Proof of Work solves the Byzantine Generals Problem by requiring mathematical computation (CPU energy) to vote on transaction history. This makes it prohibitively expensive for malicious generals to alter historical blocks."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Simulate a distributed ledger locally using a text file. Coordinate 3 terminal processes appending transactions and resolving conflicts based on longest-chain rules.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "A 51% Attack Scenario",
+          "text": "A proof-of-work blockchain suffered a reorg because a mining group controlled over 51% of hashpower. They spent tokens on an exchange and then published a private chain that bypassed the exchange deposit transaction, causing double spending.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Validate blockchain fork rules.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Monitor consensus node distribution and network partition risks.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Confusing Distributed Databases with Blockchains: Databases are faster but centralized; blockchains trade latency for decentralization.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Double Spend**: Prevented by UTXO verification or state balance constraints.\n• **BFT**: Byzantine Fault Tolerance handles network partitions and malicious nodes.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "1",
+      "title": "Cryptography Complete Guide",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section teaches core cryptographic hash functions, symmetric/asymmetric encryption, digital signatures, and Merkle Trees."
+        },
+        {
+          "type": "h2",
+          "text": "1.1 Cryptographic Hash Functions"
+        },
+        {
+          "type": "para",
+          "text": "A cryptographic hash function maps input data of arbitrary size to a fixed-size bit string. Examples include SHA-256, Keccak-256, and Blake3.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Merkle Tree Verification Path"
+        },
+        {
+          "type": "para",
+          "text": "Merkle Trees compile transaction arrays into a single root hash, allowing O(log N) verification proofs:",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "merkleTree"
+        },
+        {
+          "type": "h2",
+          "text": "1.2 Digital Signatures (ECDSA vs Ed25519)"
+        },
+        {
+          "type": "para",
+          "text": "Asymmetric cryptography relies on private/public keypairs. Ethereum uses ECDSA (secp256k1) whereas Solana leverages Ed25519 for signature verification.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Rust Cryptography Signature Verification Lab"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "use ed25519_dalek::{Signature, VerifyingKey, Signer, SigningKey};",
+            "use rand::rngs::OsRng;",
+            "",
+            "fn main() {",
+            "    let mut csprng = OsRng;",
+            "    let signing_key: SigningKey = SigningKey::generate(&mut csprng);",
+            "    let message: &[u8] = b\"Verify this message for LearnXChain\";",
+            "    let signature: Signature = signing_key.sign(message);",
+            "    let public_key: VerifyingKey = signing_key.verifying_key();",
+            "    assert!(public_key.verify(message, &signature).is_ok());",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Hash functions guarantee data integrity, Merkle trees optimize batch verification, and digital signatures verify message authenticity.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why does Solana use Ed25519 instead of ECDSA?",
+          "answer": "Solana uses Ed25519 because signature verification is significantly faster and easier to batch compute in parallel across GPU threads compared to ECDSA (secp256k1), enabling Solana's high throughput."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a JS script to construct a Merkle Tree from 4 transaction hashes and output the Merkle root and proof for the first transaction.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Weak Entropy Key Generation",
+          "text": "An early wallet generator used a predictable seed for key generation. Hackers reconstructed the private keys and drained $1.4M from users.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Ensure key generation uses cryptographically secure random number generators (CSPRNG).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify that signature recovery codes protect against signature malleability attacks.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Reusing Nonces: Reusing a nonce in ECDSA signatures reveals the private key. Always use deterministic RFC 6979 signatures.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **SHA256**: Mainstay hash of Bitcoin.\n• **Keccak256**: Keccak variant used in Ethereum.\n• **Ed25519**: EdDSA signature scheme used in Solana.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "2",
+      "title": "Bitcoin Deep Dive",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores the Bitcoin protocol, the UTXO ledger model, blocks, the mempool, consensus, and transaction scripts."
+        },
+        {
+          "type": "h2",
+          "text": "2.1 The UTXO Ledger Model"
+        },
+        {
+          "type": "para",
+          "text": "Unlike account balances, Bitcoin records ownership as unspent transaction outputs (UTXOs). Every transaction consumes existing UTXOs and creates new ones.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Bitcoin Transaction Structure"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Field",
+              "Size",
+              "Description"
+            ],
+            [
+              "Version",
+              "4 Bytes",
+              "Transaction protocol version"
+            ],
+            [
+              "Inputs count",
+              "1-9 Bytes",
+              "Number of input UTXOs being spent"
+            ],
+            [
+              "Inputs",
+              "Variable",
+              "Array of inputs specifying tx hash, index, and unlock script"
+            ],
+            [
+              "Outputs count",
+              "1-9 Bytes",
+              "Number of outputs being created"
+            ],
+            [
+              "Outputs",
+              "Variable",
+              "Array of outputs specifying amount in Satoshis and locking script"
+            ],
+            [
+              "Locktime",
+              "4 Bytes",
+              "Block height or timestamp before which tx is locked"
+            ]
+          ],
+          "headers": [
+            "Transaction Field",
+            "Data Size",
+            "Purpose"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "2.2 Bitcoin Script (ScriptPubKey & ScriptSig)"
+        },
+        {
+          "type": "para",
+          "text": "Bitcoin uses a stack-based, non-Turing complete scripting language to secure transactions. ScriptPubKey locking scripts are unlocked by ScriptSig inputs.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Custom Bitcoin UTXO State in Rust"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "#[derive(Debug, Clone)]",
+            "pub struct UTXO {",
+            "    pub tx_id: [u8; 32],",
+            "    pub index: u32,",
+            "    pub amount: u64,",
+            "    pub script_pubkey: String,",
+            "}",
+            "",
+            "pub struct UTXOSet {",
+            "    pub utxos: Vec<UTXO>,",
+            "}",
+            "",
+            "impl UTXOSet {",
+            "    pub fn spend_utxo(&mut self, tx_id: &[u8; 32], index: u32) -> Option<UTXO> {",
+            "        let pos = self.utxos.iter().position(|u| &u.tx_id == tx_id && u.index == index);",
+            "        if let Some(i) = pos {",
+            "            Some(self.utxos.remove(i))",
+            "        } else {",
+            "            None",
+            "        }",
+            "    }",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Bitcoin secures transaction validation using UTXO inputs/outputs and execution stacks, maintaining absolute immutability.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why doesn't Bitcoin use loops in its script language?",
+          "answer": "Bitcoin Script does not allow loops to prevent denial of service (DoS) attacks. Without loops, it is impossible for a transaction to lock up a validator node in an infinite execution loop."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a mock transaction builder that takes UTXO inputs, spends 80% to a target address, and sends 20% to a change address.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Mempool Congestion & Fee Spikes",
+          "text": "During high network demand, transaction fees spiked to $50 per transaction. Transactions with low fee rates remained stuck in the Mempool for days, requiring users to use RBF (Replace-by-Fee) or CPFP (Child-Pays-for-Parent).",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Validate locktime values before publishing.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify input transaction IDs match existing unspent outputs.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Forgetting Change: If input UTXO exceeds output requirements and no change output is defined, the difference goes entirely to the miner.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **UTXO**: Unspent Transaction Output.\n• **OP_DUP OP_HASH160**: Standard locking script for Pay-to-Public-Key-Hash (P2PKH).",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "3",
+      "title": "Ethereum Deep Dive",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores Ethereum, the Account-based model, Gas fee dynamics, the EVM, and Smart Contracts (ERC20, ERC721, DAO)."
+        },
+        {
+          "type": "h2",
+          "text": "3.1 The Account-Based Model & Gas"
+        },
+        {
+          "type": "para",
+          "text": "Ethereum tracks state as account balances instead of UTXOs. Users trigger EVM state changes by paying Gas (gasUsed * baseFee + priorityFee).",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "3.2 Smart Contracts & EVM Execution"
+        },
+        {
+          "type": "para",
+          "text": "Smart contracts are self-executing agreements written in Solidity/Vyper and compiled to EVM bytecode. State variables are stored in 256-bit slots.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Solidity ERC20 Interface & Implementation"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// SPDX-License-Identifier: MIT",
+            "pragma solidity ^0.8.20;",
+            "",
+            "contract ERC20 {",
+            "    string public name = \"LearnXChain\";",
+            "    string public symbol = \"LXC\";",
+            "    uint8 public decimals = 18;",
+            "    uint256 public totalSupply;",
+            "    mapping(address => uint256) public balanceOf;",
+            "    mapping(address => mapping(address => uint256)) public allowance;",
+            "",
+            "    event Transfer(address indexed from, address indexed to, uint256 value);",
+            "",
+            "    function transfer(address to, uint256 value) public returns (bool) {",
+            "        require(balanceOf[msg.sender] >= value, \"Insufficient balance\");",
+            "        balanceOf[msg.sender] -= value;",
+            "        balanceOf[to] += value;",
+            "        emit Transfer(msg.sender, to, value);",
+            "        return true;",
+            "    }",
+            "}"
+          ],
+          "lang": "solidity"
+        },
+        {
+          "type": "h2",
+          "text": "3.3 UTXO vs Ethereum Account Model"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Feature",
+              "UTXO Model (Bitcoin)",
+              "Account Model (Ethereum)"
+            ],
+            [
+              "State Storage",
+              "Set of unspent coins",
+              "Account balances mapping"
+            ],
+            [
+              "Concurrency",
+              "High (txs independent)",
+              "Low (sequential tx ordering)"
+            ],
+            [
+              "Smart Contracts",
+              "Basic locking script",
+              "Turing-complete logic"
+            ],
+            [
+              "Size on Disk",
+              "Larger (stores outputs history)",
+              "Smaller (stores current balances)"
+            ]
+          ],
+          "headers": [
+            "Comparison Metric",
+            "Bitcoin UTXO",
+            "Ethereum Account Model"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Ethereum EVM supports stateful logic. Gas limits prevent infinite loops, and smart contracts manage token economies.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between call, delegatecall, and staticcall in Solidity.",
+          "answer": "• call: Executes code in target contract, using target storage.\n• delegatecall: Executes code in target contract, using caller's storage context.\n• staticcall: Like call, but reverts if any state modification is attempted."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Design a simple multi-signature contract in Solidity that requires approval from 2 out of 3 owners to execute.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Reentrancy Exploit",
+          "text": "The DAO was hacked because it updated contract balances after sending ether. The attacker deployed a contract whose fallback function recursively re-called the withdraw function, draining $50M.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Always use the Checks-Effects-Interactions pattern.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Prevent integer overflows by using Solidity >= 0.8.0.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Storage Overlap: Forgetting storage layouts in delegatecall upgrades causes variables to get overwritten.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Gas**: Computational unit.\n• **EVM**: Stack-based virtual machine executing bytecode.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "4",
+      "title": "Solana Architecture",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section covers Solana architecture: Proof of History, Sealevel runtime, Gulf Stream, Turbine, and the transaction lifecycle."
+        },
+        {
+          "type": "h2",
+          "text": "4.1 Proof of History (PoH)"
+        },
+        {
+          "type": "para",
+          "text": "PoH is a sequence of computation (SHA-256 loop) that provides a cryptographic clock, establishing ordering and elapsed time between events.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Solana Transaction Lifecycle"
+        },
+        {
+          "type": "para",
+          "text": "Transactions are forwarded directly to the scheduled leader validator, processed concurrently by Sealevel, and distributed via Turbine:",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "solanaTxLifecycle"
+        },
+        {
+          "type": "h2",
+          "text": "4.2 Sealevel Runtime & Gulf Stream"
+        },
+        {
+          "type": "para",
+          "text": "Sealevel is a parallel smart contracts runtime that executes transactions concurrently by declaring read/write account locks. Gulf Stream forwards transactions to leaders without a mempool.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Solana Block Engine Pipeline"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Protocol Component",
+              "Purpose",
+              "Core Benefit"
+            ],
+            [
+              "Proof of History",
+              "Cryptographic clock",
+              "Removes network time coordination latency"
+            ],
+            [
+              "Sealevel",
+              "Parallel VM runtime",
+              "Processes thousands of txs concurrently"
+            ],
+            [
+              "Gulf Stream",
+              "Mempool-less forwarding",
+              "Reduces memory load and execution queues"
+            ],
+            [
+              "Turbine",
+              "Block propagation protocol",
+              "Splits blocks into packets, reduces bandwidth bottleneck"
+            ]
+          ],
+          "headers": [
+            "Solana Protocol Core",
+            "Operational Role",
+            "Key Performance Benefit"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Solana achieves web-scale performance by scheduling validator tasks based on the PoH clock and executing stateless programs in parallel.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between Ethereum's EVM and Solana's Sealevel.",
+          "answer": "The EVM is single-threaded and executes transactions sequentially. Sealevel is multi-threaded and processes transactions in parallel by analyzing transaction signatures to lock only the declared read-write accounts."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a mock transaction scheduler in JS that schedules 10 transactions concurrently based on the accounts they read or write, ensuring no overlapping writes execute together.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Network Congestion due to Arbitrage Bots",
+          "text": "Arbitrage bots flooded the network with millions of transactions per second during a popular token launch, overloading the scheduler. This led to the introduction of localized fee markets.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Specify accurate account read/write locks in transaction instructions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Validate recent blockhashes to prevent replay attacks.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Incorrect Account Locking: Marking a read-only account as write-only reduces transaction throughput by blocking other parallel executions.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **PoH**: Proof of History, the network clock.\n• **Tower BFT**: Solana's PBFT consensus optimization leveraging PoH.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "5",
+      "title": "Solana Terminologies",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explains Solana accounts, owners, authorities, signers, rent, and PDA concepts."
+        },
+        {
+          "type": "h2",
+          "text": "5.1 Accounts, Owners & Signers"
+        },
+        {
+          "type": "para",
+          "text": "In Solana, everything is an account. Accounts store data and have an 'owner' program that has exclusive rights to modify the account's data.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Account Structure Fields"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Field name",
+              "Type",
+              "Description"
+            ],
+            [
+              "lamports",
+              "u64",
+              "The lamports balance of the account"
+            ],
+            [
+              "data",
+              "Vec<u8>",
+              "Byte array storing account state"
+            ],
+            [
+              "owner",
+              "Pubkey",
+              "Program address authorized to write to this account"
+            ],
+            [
+              "executable",
+              "bool",
+              "True if the account contains executable SBF code"
+            ],
+            [
+              "rent_epoch",
+              "u64",
+              "Epoch after which account must pay rent (deprecated for rent-exempt)"
+            ]
+          ],
+          "headers": [
+            "Account Data Struct",
+            "Type Definition",
+            "Description"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "5.2 Rent & System Program"
+        },
+        {
+          "type": "para",
+          "text": "Solana accounts must pay rent to store data. Keeping a minimum amount of lamports (2 years of rent equivalent) makes the account 'rent-exempt'.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Only the owner program can modify account data. Signers authorize operations, and rent-exempt accounts preserve storage state indefinitely.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Can a user program modify the lamports balance of an account it does not own?",
+          "answer": "No. A program can only subtract lamports from an account it owns, though it can credit (add) lamports to any account."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Calculate the minimum rent-exempt lamports requirement for a custom account storing a 100-byte profile struct.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Data Reallocation Panic",
+          "text": "A program attempted to write data to an account but panicked because the account data size was too small. SREs fixed this by calling the realloc instruction and funding additional lamports.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Check that accounts are rent-exempt before initialization.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Validate signer flags before modifying balances.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Forgetting Rent Exemption: Initializing an account with insufficient lamports causes transactions to fail or get purged during rent collections.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Signer**: Keypair that signed the transaction.\n• **Writable**: Account whose data is locked for editing.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "6",
+      "title": "Program Derived Addresses (PDA)",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores PDAs, bump seeds, PDA generation, CPIs, and security implications."
+        },
+        {
+          "type": "h2",
+          "text": "6.1 PDA Concept & Generation"
+        },
+        {
+          "type": "para",
+          "text": "PDAs are public keys that do not have private keys. They are derived from seeds and a program ID, pushed off the Ed25519 curve using a 'bump seed' (255 down to 0).",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "PDA Derivation Code in Rust"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "let (pda_pubkey, bump) = Pubkey::find_program_address(",
+            "    &[b\"escrow\", user.key().as_ref()],",
+            "    program_id",
+            ");"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "6.2 PDA Security & CPIs"
+        },
+        {
+          "type": "para",
+          "text": "PDAs allow programs to programmatically sign transactions via Cross-Program Invocations (CPI) by providing the seeds used to derive the address.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "PDAs enable secure state containment and trustless escrow control, signing CPI transactions using program seeds.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why is it important to validate the bump seed of a PDA?",
+          "answer": "Failing to validate the bump seed allows attackers to pass arbitrary unvalidated public keys as target PDAs, leading to key spoofing or unauthorized state modification.",
+          "id": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a script that derives a user profile PDA using the user's public key as a seed and asserts the bump matches the highest valid value.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Escrow Drain PDA Exploit",
+          "text": "An escrow program accepted arbitrary bumps without validation. The attacker passed a forged PDA that pointed to their own wallet, causing the program to sign a token transfer to them.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Always use find_program_address or validate the bump seed passed in instructions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Ensure PDA seeds are unique to prevent collisions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Using Weak Seeds: Deriving a global state PDA using a static seed without a unique identifier allows anyone to overwrite or initialize the state.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **PDA**: Program Derived Address.\n• **find_program_address**: Finds the highest bump seed to push the key off the Ed25519 curve.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "7",
+      "title": "Solana Web3.js & Gill",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section covers Solana client integration using @solana/web3.js, building instructions, RPC queries, and transaction pipelines."
+        },
+        {
+          "type": "h2",
+          "text": "7.1 Solana Web3.js Connection & API"
+        },
+        {
+          "type": "para",
+          "text": "Clients interact with Solana validators via JSON-RPC. We initialize a Connection class to submit transactions and query state.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "TypeScript Token Transfer Instruction Builder"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "import { Connection, PublicKey, Transaction, SystemProgram, Keypair, sendAndConfirmTransaction } from '@solana/web3.js';",
+            "",
+            "async function transferSol() {",
+            "    const connection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');",
+            "    const fromKeypair = Keypair.generate();",
+            "    const toPublicKey = new PublicKey('DEVOPS_PUBKEY_TEST');",
+            "    ",
+            "    const transaction = new Transaction().add(",
+            "        SystemProgram.transfer({",
+            "            fromPubkey: fromKeypair.publicKey,",
+            "            toPubkey: toPublicKey,",
+            "            lamports: 10000000, // 0.01 SOL",
+            "        })",
+            "    );",
+            "    ",
+            "    await sendAndConfirmTransaction(connection, transaction, [fromKeypair]);",
+            "}"
+          ],
+          "lang": "typescript"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Solana web3.js compiles transactions into serializable packets. RPC nodes submit them to validators and poll finality signatures.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between preflightCommitment and commitment in Connection configurations?",
+          "answer": "• preflightCommitment: Checks local validator simulation level.\n• commitment: The state level required to return data (e.g. processed, confirmed, finalized)."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a script that queries a wallet balance, retrieves its recent transaction signatures, and decodes the instruction data.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "RPC Rate Limiting",
+          "text": "During a token launch, the frontend crashed with HTTP 429 rate limit errors because it was querying account data on every mouse click. The solution was using WebSockets (onAccountChange).",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Never commit keypair private key JSON files to version control.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Always handle signature timeouts gracefully.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Blocking Event Loops: Querying large block structures synchronously slows down node processes.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Connection**: JSON-RPC connection client.\n• **SystemProgram**: Built-in program managing account creation and transfers.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "8",
+      "title": "Wallet Integration",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores integrating wallets using Solana Wallet Adapter, signing transactions, and building dashboards."
+        },
+        {
+          "type": "h2",
+          "text": "8.1 Wallet Adapter Framework"
+        },
+        {
+          "type": "para",
+          "text": "The wallet adapter framework provides unified interfaces for connecting to phantom, solflare, and other browser wallet extensions.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Next.js Wallet Provider Setup"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "import React, { useMemo } from 'react';",
+            "import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';",
+            "import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';",
+            "import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';",
+            "",
+            "export const Wallet = ({ children }) => {",
+            "    const wallets = useMemo(() => [new PhantomWalletAdapter()], []);",
+            "    return (",
+            "        <ConnectionProvider endpoint=\"http://localhost:8899\">",
+            "            <WalletProvider wallets={wallets} autoConnect>",
+            "                <WalletModalProvider>{children}</WalletModalProvider>",
+            "            </WalletProvider>",
+            "        </ConnectionProvider>",
+            "    );",
+            "};"
+          ],
+          "lang": "typescript"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Unified providers handle wallet connection state and sign payloads securely outside of target application domains.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why should your dapp use signMessage instead of signTransaction to verify user identity?",
+          "answer": "signMessage only requests a cryptographic signature on a string payload (avoiding network fees), whereas signTransaction requests signing a live transaction payload meant for execution."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Create a simple dashboard that shows the user's wallet public key and a button to sign a login message.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Dapp Phishing Hack",
+          "text": "A compromised frontend substituted a token drain transaction when users clicked a 'Claim Reward' button, stealing thousands of SPL tokens because users did not check instruction details.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Verify transaction instructions in the wallet popup before signing.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Validate wallet disconnect state to clear local caches.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Storing Private Keys: Attempting to handle raw seed phrases in client-side code instead of delegating to wallet providers.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **autoConnect**: Reconnects wallet automatically on page refresh.\n• **signMessage**: Proves ownership of a public key.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "9",
+      "title": "Solana Data Model",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores accounts serialization, Borsh parsing, memory layouts, and state management in Solana."
+        },
+        {
+          "type": "h2",
+          "text": "9.1 Borsh Serialization"
+        },
+        {
+          "type": "para",
+          "text": "Borsh (Binary Octet Serialized State) is a highly efficient serialization format designed for deterministic state management on Solana.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Solana Custom Struct Borsh Representation"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "use borsh::{BorshSerialize, BorshDeserialize};",
+            "",
+            "#[derive(BorshSerialize, BorshDeserialize, Debug)]",
+            "pub struct UserProfileState {",
+            "    pub version: u8,",
+            "    pub active: bool,",
+            "    pub user_id: u64,",
+            "    pub username: String,",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Borsh ensures binary consistency, allowing reliable data serialization and deserialization between Rust smart contracts and clients.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why is JSON serialization avoided inside Solana smart contracts?",
+          "answer": "JSON is not deterministic (keys can order differently) and consumes significant compute budgets due to string processing. Borsh is binary, extremely fast, and deterministic."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a JS script using 'borsh-js' to serialize a UserProfileState object and output the raw byte length.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "State Deserialization Exploit",
+          "text": "A program did not validate account data size. Attackers passed smaller accounts, causing the deserializer to read memory out of bounds, which crashed the validator process.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Validate account data lengths before attempting deserialization.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Add a version discriminator prefix to distinguish state types.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Variable Length Strings: String sizes must be accounted for during initialization, otherwise data writes will overflow the account size.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Borsh**: Binary format preserving strict ordering.\n• **Discriminator**: Identifies account data types in Anchor.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "10",
+      "title": "Token Program",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section teaches the SPL Token Program, Mint accounts, Associated Token Accounts (ATA), minting, burning, and freezing."
+        },
+        {
+          "type": "h2",
+          "text": "10.1 Mint & Associated Token Accounts"
+        },
+        {
+          "type": "para",
+          "text": "A Mint Account defines a token (supply, authority, decimals). A Token Account holds a specific user's balance. Associated Token Accounts derive predictably from the wallet and mint address.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Rust Program Mint CPI Example"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "let cpi_accounts = MintTo {",
+            "    mint: ctx.accounts.token_mint.to_account_info(),",
+            "    to: ctx.accounts.user_token_account.to_account_info(),",
+            "    authority: ctx.accounts.mint_authority.to_account_info(),",
+            "};",
+            "let cpi_program = ctx.accounts.token_program.to_account_info();",
+            "let cpi_ctx = CpiContext::new(cpi_program, cpi_accounts);",
+            "anchor_spl::token::mint_to(cpi_ctx, amount)?;"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "The SPL Token program manages all token supply lifecycle commands. Associated Token Accounts standardize user wallet mappings.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between a Token Mint and a Token Account?",
+          "answer": "A Token Mint defines the token itself (e.g. decimals, total supply, freeze authority). A Token Account holds actual token balances belonging to a specific owner public key."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Use the Solana CLI to create a new token mint, create an associated token account, and mint 1,000 tokens to your wallet.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Missing Associated Token Account validation",
+          "text": "A launchpad distributed tokens directly to uninitialized accounts, causing transactions to fail. They refactored to check and create ATAs before distribution.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Validate that token mint and token account owners match the Token Program address.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Ensure mint authority is revoked or transferred to multisigs for immutable supply assets.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Direct SOL Transfers to Token Accounts: Sending SOL to an SPL token account freezes the funds permanently. Use wrapped SOL (WSOL) instead.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Decimals**: Fraction precision.\n• **ATA**: Associated Token Account derived via PDA seeds.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "11",
+      "title": "DeFi Fundamentals",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section introduces Automated Market Makers (AMMs), order books, LP tokens, slippage, and Impermanent Loss."
+        },
+        {
+          "type": "h2",
+          "text": "11.1 Liquidity Pools & AMMs"
+        },
+        {
+          "type": "para",
+          "text": "Traditional markets use limit order books. Automated Market Makers (AMMs) use liquidity pools where traders swap against smart contract reserves.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Constant Product AMM Model"
+        },
+        {
+          "type": "para",
+          "text": "The core formula governing constant product pools is x * y = k. Trades change pool reserves but preserve the constant value k:",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "ammCurve"
+        },
+        {
+          "type": "h2",
+          "text": "11.2 Impermanent Loss (IL)"
+        },
+        {
+          "type": "para",
+          "text": "Impermanent Loss is the difference between holding assets in a wallet versus depositing them in an AMM liquidity pool when price ratio shifts.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "DeFi protocols use AMM algorithms to guarantee liquidity, allocating LP tokens to reward liquidity providers with swap fees.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the concept of Slippage in AMM swaps.",
+          "answer": "Slippage is the difference between the expected price of a trade and the actual execution price. It occurs because the pool reserves shift during trade execution, especially for large orders."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a script simulating a swap on a pool with 1,000 X and 10,000 Y. Calculate the output of swapping 10 X, factoring in a 0.3% protocol fee.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Sandwich Attack Arbitrage",
+          "text": "An MEV bot detected a large pending buy order on a DEX. It placed a buy transaction before (frontrun) and a sell transaction after (backrun), pocketing $4k in slippage arbitrage.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Verify slippage tolerance limits are enforced in client swap calls.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce minimum output constraints to prevent sandwich exploitation.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Incorrect Price Oracle: Querying AMM pool reserves directly for price feeds enables flash loan price manipulation attacks.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **x * y = k**: AMM invariant.\n• **LP Tokens**: Repress liquidity shares.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "12",
+      "title": "DEX Engineering",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores DEX architectures: Constant Product AMM, Concentrated Liquidity (CLMM), and DLMM."
+        },
+        {
+          "type": "h2",
+          "text": "12.1 Building a DEX from Scratch"
+        },
+        {
+          "type": "para",
+          "text": "We implement a Constant Product swap program. The program takes user input, applies the x * y = k formula, subtracts fees, updates pool reserves, and mints LP tokens.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Anchor Swap Instruction Implementation"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "#[derive(Accounts)]",
+            "pub struct Swap<'info> {",
+            "    pub pool: Account<'info, PoolState>,",
+            "    pub user: Signer<'info>,",
+            "    #[account(mut)]",
+            "    pub pool_token_x: Account<'info, TokenAccount>,",
+            "    #[account(mut)]",
+            "    pub pool_token_y: Account<'info, TokenAccount>,",
+            "    #[account(mut)]",
+            "    pub user_token_x: Account<'info, TokenAccount>,",
+            "    #[account(mut)]",
+            "    pub user_token_y: Account<'info, TokenAccount>,",
+            "    pub token_program: Program<'info, Token>,",
+            "}",
+            "",
+            "pub fn process_swap(ctx: Context<Swap>, amount_in: u64) -> Result<()> {",
+            "    let pool = &mut ctx.accounts.pool;",
+            "    let x_reserve = ctx.accounts.pool_token_x.amount;",
+            "    let y_reserve = ctx.accounts.pool_token_y.amount;",
+            "    let amount_out = (y_reserve * amount_in) / (x_reserve + amount_in);",
+            "    // Perform token CPI transfers...",
+            "    Ok(())",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "DEX programs calculate trade routing using constant product invariants. Advanced architectures pool liquidity into target price bins.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How does Concentrated Liquidity (CLMM) improve capital efficiency?",
+          "answer": "CLMM allows liquidity providers to specify a tight price range for their tokens instead of distributing them from 0 to infinity. This concentrates capital where most trading activity occurs, generating higher fees."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Implement the mathematical formula to calculate concentrated liquidity pool reserves within a defined tick range.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Tick Range Math Overflow",
+          "text": "A CLMM protocol paused swaps because a round-off error during square root tick calculations caused state variables to overflow, rejecting swap inputs.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Protect against rounding errors (always round in favor of the pool state).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Assert that reserve account balances match recorded states.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Division before Multiplication: Doing division first in swap math drops decimal values, causing transaction balance mismatches.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **CLMM**: Concentrated Liquidity Market Maker.\n• **DLMM**: Discretized Liquidity Market Maker.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "13",
+      "title": "CEX Engineering",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section covers Centralized Exchange (CEX) matching engines, limit/market orders, and high-frequency systems."
+        },
+        {
+          "type": "h2",
+          "text": "13.1 CEX Matching Engine Architecture"
+        },
+        {
+          "type": "para",
+          "text": "Centralized exchanges rely on low-latency limit order books (LOB) to match bids and asks. The matching engine must process trades within microseconds.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Matching Engine Pipeline"
+        },
+        {
+          "type": "para",
+          "text": "Orders are ingested via API/WebSockets, organized in price-time priority lists, and pushed to settlement engines:",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "matchingEngine"
+        },
+        {
+          "type": "h3",
+          "text": "Rust High-Performance Order Matcher"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "#[derive(Debug)]",
+            "pub struct Order {",
+            "    pub id: u64,",
+            "    pub is_buy: bool,",
+            "    pub price: u64,",
+            "    pub amount: u32,",
+            "}",
+            "",
+            "pub struct OrderBook {",
+            "    pub bids: Vec<Order>, // Sorted descending",
+            "    pub asks: Vec<Order>, // Sorted ascending",
+            "}",
+            "",
+            "impl OrderBook {",
+            "    pub fn match_order(&mut self, mut new_order: Order) -> Vec<Order> {",
+            "        let mut matches = vec![];",
+            "        // Match bids and asks based on price-time priority...",
+            "        matches",
+            "    }",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Centralized exchange architectures trade blockchain trust for microsecond execution latency, leveraging memory databases.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do CEX platforms handle security and custody differently than DEXs?",
+          "answer": "CEX platforms hold custody of user funds in hot/cold wallet systems managed by internal databases. DEXs are non-custodial; smart contracts execute swaps directly on-chain."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a simple matching loop in JS that matches market buy orders against a sorted array of limit sell orders.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Out of Memory Matching Crash",
+          "text": "A CEX engine crashed because it ran out of memory. Millions of spam limit orders filled the database. The team resolved this by enforcing minimum tick requirements.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce minimum order sizes to prevent DDoS spam on matching systems.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify cold storage limits and multi-sig authorization pipelines.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Async DB Writes on Matches: Blocking matching threads to write trade logs directly to SQL databases causes latency latency spikes.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Hot Wallet**: Online custody vault.\n• **Cold Storage**: Offline wallet system.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "14",
+      "title": "Rust for Blockchain",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores Rust core concepts for blockchain engineering: ownership, borrowing, lifetimes, generics, and macros."
+        },
+        {
+          "type": "h2",
+          "text": "14.1 Rust Memory Safety (Ownership & Borrowing)"
+        },
+        {
+          "type": "para",
+          "text": "Rust enforces memory safety without a garbage collector using compile-time rules. A value has a single owner. We reference values via references (& or &mut).",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Rust Borrow Checker Example"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "fn process_ledger(data: &mut Vec<u8>) {",
+            "    data.push(1); // Modifies the vector",
+            "}",
+            "",
+            "fn main() {",
+            "    let mut ledger_state = vec![0];",
+            "    process_ledger(&mut ledger_state);",
+            "    println!(\"State: {:?}\", ledger_state);",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Rust's compile-time safety prevents data races and memory leaks, providing the foundations for secure blockchain runtime engineering.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between Arc and Rc in Rust.",
+          "answer": "• Rc (Reference Counted) is for single-threaded heap pointer sharing.\n• Arc (Atomic Reference Counted) is thread-safe and can be shared across multiple threads."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a generic Struct that wraps blockchain state data and implements a Trait defining a 'hash' verification function.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Lifetimes Compiler Error",
+          "text": "A program failed to compile because the transaction struct references outlived the memory buffer containing account data. The team fixed this by declaring explicit lifetimes.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Avoid using unsafe blocks unless absolutely necessary for low-level performance.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Validate memory boundaries during slices and deserializations.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Thread Blocks in Async: Invoking blocking system calls inside an async runtime thread stalls the execution pipeline.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Borrow Checker**: Validates references at compile time.\n• **Lifetimes**: Assures data references are valid.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "15",
+      "title": "Anchor Framework",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section covers the Anchor framework: account structures, constraints, context, events, and custom error validation."
+        },
+        {
+          "type": "h2",
+          "text": "15.1 Anchor Context & Constraints"
+        },
+        {
+          "type": "para",
+          "text": "Anchor wraps boilerplate code, parsing instruction accounts into Context structs. Constraints check signer flags, seeds, and mutability.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Anchor Program Escrow Initialization"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "use anchor_lang::prelude::*;",
+            "",
+            "declare_id!(\"DEV1111111111111111111111111111111111111112\");",
+            "",
+            "#[program]",
+            "pub mod anchor_escrow {",
+            "    use super::*;",
+            "    pub fn initialize(ctx: Context<Initialize>, amount: u64) -> Result<()> {",
+            "        let escrow = &mut ctx.accounts.escrow_account;",
+            "        escrow.amount = amount;",
+            "        escrow.authority = ctx.accounts.initializer.key();",
+            "        Ok(())",
+            "    }",
+            "}",
+            "",
+            "#[derive(Accounts)]",
+            "pub struct Initialize<'info> {",
+            "    #[account(init, payer = initializer, space = 8 + 32 + 8, seeds = [b\"escrow\", initializer.key().as_ref()], bump)]",
+            "    pub escrow_account: Account<'info, EscrowState>,",
+            "    #[account(mut)]",
+            "    pub initializer: Signer<'info>,",
+            "    pub system_program: Program<'info, System>,",
+            "}",
+            "",
+            "#[account]",
+            "pub struct EscrowState {",
+            "    pub authority: Pubkey,",
+            "    pub amount: u64,",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Anchor converts Rust constraints into validation logic, exporting an Interface Definition Language (IDL) JSON representation.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What does the 'init' constraint do under the hood in Anchor?",
+          "answer": "The 'init' constraint calls the System Program to create the account, allocates memory space, funds rent-exempt lamports, sets the owner to the current program ID, and writes the account discriminator."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write an Anchor context validation struct for a counter account, enforcing that only the creator can update the value.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Re-initialization Exploit",
+          "text": "An Anchor program missed checking whether an account was already initialized. Attackers called the init instruction repeatedly to clear the state variables, resetting deposits to 0.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Verify space allocation limits (include discriminator prefix size of 8 bytes).",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Validate signer bounds for every state modification.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Missing Spacer Allocation: Under-allocating account memory space prevents adding secondary fields in program updates.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **IDL**: Interface Definition Language.\n• **CpiContext**: Context required for Cross-Program Invocations.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "16",
+      "title": "Common Smart Contracts",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores implementation patterns for core smart contracts: Staking, Escrow, Vesting, and DAOs."
+        },
+        {
+          "type": "h2",
+          "text": "16.1 Smart Contract Architectures"
+        },
+        {
+          "type": "para",
+          "text": "We write secure smart contracts by separating custody accounts (PDAs) from program logic, applying strict access controls.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Vesting Contract Account Setup"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "#[derive(Accounts)]",
+            "pub struct ClaimVestedTokens<'info> {",
+            "    #[account(mut, seeds = [b\"vesting\", beneficiary.key().as_ref()], bump)]",
+            "    pub vesting_account: Account<'info, VestingState>,",
+            "    #[account(mut)]",
+            "    pub beneficiary_token_account: Account<'info, TokenAccount>,",
+            "    #[account(mut)]",
+            "    pub vault_token_account: Account<'info, TokenAccount>,",
+            "    pub beneficiary: Signer<'info>,",
+            "    pub token_program: Program<'info, Token>,",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Smart contracts secure token flows by defining custody pools, lockup times, and multi-sig voter consensus structures.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why are staking reward distributions computed lazily in smart contracts?",
+          "answer": "Calculating staking rewards for thousands of users in a single transaction exceeds block execution limits. Lazy calculations evaluate user rewards dynamically only when they claim or harvest.",
+          "id": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Draft an Anchor program layout for a crowdfunding portal that locks deposits until a target goal is achieved.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Unchecked Timestamp Vesting",
+          "text": "A vesting protocol evaluated time periods using local system clocks instead of block timestamps. Attackers exploited this by spoofing time values to unlock tokens early.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Always use Clock::get()?.unix_timestamp for time verification.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce constraints checking token vault balances.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Incorrect Authority check: Allowing anyone to call administrative functions on state accounts.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Vesting**: Incremental token unlocks.\n• **Escrow**: Safe custody of trade assets.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "17",
+      "title": "Indexing & Data Layers",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section teaches blockchain indexers, event listener processes, subgraphs, and data pipelines."
+        },
+        {
+          "type": "h2",
+          "text": "17.1 Blockchain Indexers"
+        },
+        {
+          "type": "para",
+          "text": "Querying transaction histories directly from RPC nodes is slow and expensive. Indexers parse block logs and structure them in traditional databases (PG/Redis).",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Node.js Web3 Event Listener Indexer"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "import { Connection, PublicKey } from '@solana/web3.js';",
+            "",
+            "async function indexProgramEvents() {",
+            "    const connection = new Connection('https://api.mainnet-beta.solana.com', 'confirmed');",
+            "    const programId = new PublicKey('DEV1111111111111111111111111111111111111112');",
+            "    ",
+            "    connection.onLogs(programId, (logs, ctx) => {",
+            "        console.log('Indexed Logs:', logs.logs);",
+            "        // Parse event signatures and insert into PostgreSQL...",
+            "    }, 'confirmed');",
+            "}"
+          ],
+          "lang": "typescript"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Indexers consume raw blockchain logs, parse transaction payloads, and expose REST/GraphQL APIs for frontend interfaces.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do indexers handle block reorganizations (reorgs)?",
+          "answer": "Indexers track block confirmation depths. If a reorg occurs, the indexer queries the new canonical fork, identifies orphan blocks, rolls back database transactions, and re-indexes."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Design a database schema in SQL to store mint events, token amounts, and caller wallet addresses.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Indexer Delay Panic",
+          "text": "A DeFi dashboard showed incorrect token balances because the indexer node ran out of memory. Developers added secondary failover instances to prevent sync lag.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Validate log signatures to confirm events originate from valid programs.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce database indexes on transaction hashes and block heights.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Missing Reorg Handlers: Directly inserting unconfirmed block records into production database tables without rollback tracking.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **onLogs**: WebSockets log listener.\n• **GraphQL**: API format for querying indexed states.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "18",
+      "title": "MPC & Shamir Secret Sharing",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section teaches multi-party computation, Shamir's Secret Sharing mathematics, and threshold cryptography."
+        },
+        {
+          "type": "h2",
+          "text": "18.1 Shamir's Secret Sharing (SSS)"
+        },
+        {
+          "type": "para",
+          "text": "SSS divides a secret (such as a seed phrase) into N unique shares. A minimum threshold T of shares is required to reconstruct the original secret.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Threshold Cryptography Mathematics"
+        },
+        {
+          "type": "para",
+          "text": "SSS uses polynomial interpolation. A polynomial of degree T-1 requires T points to reconstruct its coefficients:",
+          "options": {}
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Threshold (T)",
+              "Shares Created (N)",
+              "Polynomial Degree",
+              "Reconstruction Math"
+            ],
+            [
+              "2-of-3",
+              "3 shares",
+              "1 (Linear: y = ax + b)",
+              "Lagrange polynomial interpolation"
+            ],
+            [
+              "3-of-5",
+              "5 shares",
+              "2 (Quadratic: y = ax^2 + bx + c)",
+              "Lagrange polynomial interpolation"
+            ],
+            [
+              "4-of-7",
+              "7 shares",
+              "3 (Cubic)",
+              "Lagrange polynomial interpolation"
+            ]
+          ],
+          "headers": [
+            "Threshold Rules",
+            "Total Shares",
+            "Polynomial Degree",
+            "Math Tool"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "18.2 Multi-Party Computation (MPC) Wallets"
+        },
+        {
+          "type": "para",
+          "text": "Unlike SSS, where the private key is reconstructed in memory to sign, MPC protocols allow nodes to sign transactions cooperatively without assembling the private key.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Rust Shamir secret Sharing mock"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "pub struct Share {",
+            "    pub x: u8,",
+            "    pub y: u8,",
+            "}",
+            "",
+            "pub fn reconstruct_secret(shares: &[Share]) -> u8 {",
+            "    // Perform Lagrange interpolation modulo prime...",
+            "    0",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "MPC wallets remove single points of failure by distributing signing authority across independent network nodes.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the primary security advantage of MPC over standard Multi-sig contracts?",
+          "answer": "MPC occurs off-chain (producing a single standard signature), which hides participant details and reduces blockchain transaction gas fees. Multi-sig is executed on-chain, exposing owners and costing more gas."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Calculate the lagrange coefficients to reconstruct a secret with coordinates (1, 3) and (2, 8) under modulo 11.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Memory Key Reconstruction Leak",
+          "text": "A custodian reconstructs wallet seed phrases in memory before signing transactions. A hacker dumped memory logs and stole the private keys, showing why MPC is superior to SSS.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Verify that node communication channels use TLS/noise protocols.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce key rotation policies periodically across MPC nodes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Reconstructing on Single Nodes: Temporarily combining secret shares in a single computer memory space defeats the security of SSS.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **T-of-N**: Secret sharing threshold requirements.\n• **MPC**: Multi-Party Computation signing.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "19",
+      "title": "Web2 + Web3 Integration",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section covers integrating Web2 APIs (Next.js, PostgreSQL, Redis) with Web3 protocols."
+        },
+        {
+          "type": "h2",
+          "text": "19.1 Next.js & Solana CPI State Management"
+        },
+        {
+          "type": "para",
+          "text": "We build fullstack Web3 architectures by combining client-side wallet adapters with Next.js api routes, using PostgreSQL to cache transaction states.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "PostgreSQL DB schema for LearnXChain Certificates"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "CREATE TABLE IF NOT EXISTS certificates (",
+            "    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),",
+            "    student_pubkey VARCHAR(44) NOT NULL,",
+            "    course_id VARCHAR(50) NOT NULL,",
+            "    tx_signature VARCHAR(88) NOT NULL UNIQUE,",
+            "    minted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+            ");"
+          ],
+          "lang": "sql"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Caching transactions in SQL databases reduces RPC network loading, while Redis manages high-speed websocket connections.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why shouldn't you trust frontend web3 transactions blindly in your Next.js backend API?",
+          "answer": "Users can submit forged transaction signatures or call alternative instructions. Next.js APIs must query RPC nodes to confirm transaction logs and status independently."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Build a Next.js API route that accepts a Solana transaction signature, calls connection.getTransaction, and returns status details.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Redis Cache desynchronization",
+          "text": "A web3 app displayed stale user NFT profiles because the Redis cache did not clear after a token transfer instruction. Developers fixed this by calling Redis DEL on NFT updates.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Validate blockchain state signatures on backend API inputs.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Prevent SQL injections using prepared statements.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Direct DB Updates: Updating backend state immediately upon user signature submit without verifying RPC confirmations.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Redis**: High-speed RAM database/cache.\n• **Next.js API**: Serverless routes executing secure RPC commands.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "20",
+      "title": "Partially Centralized Systems",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section teaches hybrid architectures, off-chain storage, oracles, and Oracle networks (Chainlink)."
+        },
+        {
+          "type": "h2",
+          "text": "20.1 Oracles & Decentralized Feeds"
+        },
+        {
+          "type": "para",
+          "text": "Blockchains are isolated and cannot query external Web APIs natively. Oracles bridge this gap by pushing real-world data feeds onto smart contracts.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Chainlink price Feed Integration"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "import \"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol\";",
+            "",
+            "contract PriceConsumerV3 {",
+            "    AggregatorV3Interface internal priceFeed;",
+            "    ",
+            "    constructor() {",
+            "        priceFeed = AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306);",
+            "    }",
+            "    ",
+            "    function getLatestPrice() public view returns (int) {",
+            "        (,int price,,,) = priceFeed.latestRoundData();",
+            "        return price;",
+            "    }",
+            "}"
+          ],
+          "lang": "solidity"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Decentralized Oracle Networks verify and push external data feeds, protecting protocols from single-oracle point failures.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why are decentralized oracle networks required instead of a single API oracle?",
+          "answer": "A single API oracle is a centralized point of failure. If the target API is compromised, returns stale values, or goes offline, the smart contract executes incorrect values."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Create a mock oracle program in JS that listens to weather APIs and updates a Solana account balance periodically.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Oracle Price Feed Manipulation",
+          "text": "A lending protocol queried AMM pools for token prices. An attacker used a flash loan to pump the pool price, borrowed millions of dollars against inflated collateral, and defaulted.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Validate data freshness timestamps in latestRoundData calls.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce backup oracle sources for high-value liquidation protocols.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Missing Freshness Check: Using price feeds without validating timestamps allows old pricing states to execute.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Chainlink**: Decentralized oracle system.\n• **IPFS/Arweave**: Decentralized off-chain metadata storage.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "21",
+      "title": "Smart Contract Security",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores core smart contract security vulnerabilities: reentrancy, integer overflows, PDA attacks, and flash loans."
+        },
+        {
+          "type": "h2",
+          "text": "21.1 Reentrancy & PDA Owner Attacks"
+        },
+        {
+          "type": "para",
+          "text": "Reentrancy occurs when a contract transfers funds before updating state variables. In Solana, common exploits target account owner validation checks.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Solana Unchecked Account Owner Vulnerability"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// INSECURE:",
+            "pub fn process_admin_action(program_id: &Pubkey, accounts: &[AccountInfo]) -> ProgramResult {",
+            "    let account_info_iter = &mut accounts.iter();",
+            "    let config_account = next_account_info(account_info_iter)?;",
+            "    // Missing: if config_account.owner != program_id { return Err(...) }",
+            "    let mut data = config_account.try_borrow_mut_data()?;",
+            "    data[0] = 1; // Arbitrary write",
+            "    Ok(())",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Security-first protocol design requires validating account owners, signer flags, rent limits, and integer operations.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you prevent integer overflows in Solana smart contracts?",
+          "answer": "Solana programs prevent integer overflows by using Rust's built-in checked math operations (e.g. checked_add, checked_mul) or using the Anchor framework, which compiles with overflow protection."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Identify the vulnerability in a code snippet where signature verification is skipped for admin parameters.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Solana Account Spoofing Exploit",
+          "text": "A Solana protocol allowed users to withdraw funds by passing a user state account. The program did not verify the account owner, allowing attackers to construct a custom account and drain $3M.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Always assert account.owner == program_id.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify account.is_signer is true for administrative instructions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Missing Signer Check: Forgetting to verify is_signer allows users to invoke instructions using someone else's public key.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **checked_sub**: Prevents underflow crashes.\n• **Checks-Effects-Interactions**: Design pattern preventing reentrancy.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "22",
+      "title": "Smart Contract Auditing",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section teaches the manual auditing workflow, static analysis tools, threat modeling, and audit report generation."
+        },
+        {
+          "type": "h2",
+          "text": "22.1 Manual Auditing & Threat Modeling"
+        },
+        {
+          "type": "para",
+          "text": "Auditing is a systematic analysis of code. We perform threat modeling to identify entrypoints, trust zones, and data validation bounds.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Audit Report Template Structure"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Severity",
+              "Impact Level",
+              "Remediation Rule"
+            ],
+            [
+              "Critical",
+              "Funds can be drained, state frozen",
+              "Immediate fix, halt deployment"
+            ],
+            [
+              "High",
+              "Unauthorized state modification",
+              "Fix before mainnet release"
+            ],
+            [
+              "Medium",
+              "Potential Dos, edge case leaks",
+              "Recommend code modifications"
+            ],
+            [
+              "Low",
+              "Gas inefficiency, code style",
+              "Advisory note updates"
+            ]
+          ],
+          "headers": [
+            "Severity Classification",
+            "Operational Impact",
+            "Action Required"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Auditors combine static analysis tools (Slither, Mythril) with exhaustive manual reviews of business logic paths to secure protocols.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between static analysis and dynamic analysis (fuzzing)?",
+          "answer": "• Static analysis inspects code syntax and logic path structures without execution.\n• Dynamic analysis (fuzzing) runs the code with millions of random inputs to identify crash states."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Review a simple staking contract and write a formal audit issue report classifying a missing validation bug.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Unchecked Reentrancy Audit Catch",
+          "text": "An audit caught a missing reentrancy guard in a lending pool deposit method. The developers fixed it before launching on mainnet, preventing a potential $10M hack.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Run cargo-clippy and cargo-audit on Rust projects.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Confirm all administrative functions verify caller identity.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Relying Solely on Linters: Automatic tools miss logical design flaws. Manual audit review is always required.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Threat Model**: Mapping vulnerabilities.\n• **Slither**: Solidity static analyzer.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "23",
+      "title": "Tokenomics",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section covers token supply models, inflation, deflation, vesting schedules, and treasury management."
+        },
+        {
+          "type": "h2",
+          "text": "23.1 Token Supply & Utility Mechanics"
+        },
+        {
+          "type": "para",
+          "text": "Tokenomics describes the economic models governing token supply, utility, emission rates, and buyback/burn loops.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Vesting Schedule Struct"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "pub struct VestingSchedule {",
+            "    pub start_time: i64,",
+            "    pub cliff_time: i64,",
+            "    pub duration: i64,",
+            "    pub total_amount: u64,",
+            "    pub amount_released: u64,",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Economic stability requires balancing token emissions with utility demand, locking tokens in multi-year vesting structures.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between inflationary and deflationary token mechanics.",
+          "answer": "• Inflationary tokens emit new supply over time (e.g. SOL to fund staking yield).\n• Deflationary tokens reduce circulating supply via burn mechanisms (e.g. ETH EIP-1559 base fee burning)."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Design a vesting distribution chart for a team locking 10,000,000 tokens with a 1-year cliff and 3-year linear unlock.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Hyperinflation Death Spiral",
+          "text": "A play-to-earn game emitted millions of reward tokens daily without utility demand, causing the token price to drop 99.8% in 30 days.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce hard supply caps if advertised.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Ensure vesting schedules are managed by audited immutable smart contracts.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Sudden Cliff Unlocks: Releasing massive supply fractions on a single day creates downward market pressure. Use linear daily unlocks instead.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Cliff**: Initial lockup period.\n• **Emission Rate**: Supply growth rate.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "24",
+      "title": "DAO Engineering",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section explores Decentralized Autonomous Organizations, governance tokens, voting mechanics, and timelocks."
+        },
+        {
+          "type": "h2",
+          "text": "24.1 Voting Mechanics & Proposals"
+        },
+        {
+          "type": "para",
+          "text": "DAOs allow decentralized coordination. Governance tokens represent voting shares. Proposals require reaching a specific quorum of votes to pass.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Anchor DAO Proposal state Struct"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "#[account]",
+            "pub struct Proposal {",
+            "    pub creator: Pubkey,",
+            "    pub target_program: Pubkey,",
+            "    pub execution_data: Vec<u8>,",
+            "    pub votes_for: u64,",
+            "    pub votes_against: u64,",
+            "    pub end_time: i64,",
+            "    pub executed: bool,",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "DAOs automate treasury management and code upgrades by translating governance votes directly into smart contract execution payloads.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why is a timelock required in DAO governance systems?",
+          "answer": "A timelock delays the execution of passed proposals, giving dissenting users time to exit the system (sell tokens) if they disagree with a proposed state change."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Implement a governance voting function in Rust that aggregates voter token weights and checks quorum limits.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Flash Loan Governance Takeover",
+          "text": "An attacker borrowed $20M in tokens using a flash loan, voted to approve a proposal draining the DAO treasury, executed the transaction instantly, and repaid the loan.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce snapshot voting to prevent voting with borrowed flash loan tokens.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Assert minimum timelock intervals (e.g. 3 days) for treasury executions.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Missing Vote Delegation limits: Allowing unbounded delegation of vote weight can result in governance centralized around a single entity.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Quorum**: Minimum votes required.\n• **Timelock**: Deferred execution safety global.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "25",
+      "title": "Prediction Markets",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section covers prediction markets, Polymarket-style architecture, binary outcome tokens, resolution, and oracle disputation."
+        },
+        {
+          "type": "h2",
+          "text": "25.1 Binary Outcome Tokens & Resolution"
+        },
+        {
+          "type": "para",
+          "text": "Prediction markets allow trading on the outcomes of real-world events. Markets issue 'YES' and 'NO' outcome tokens that settle to $1.00 or $0.00.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Polymarket-style Settlement Logic"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "pub fn resolve_market(ctx: Context<ResolveMarket>, final_outcome: u8) -> Result<()> {",
+            "    let market = &mut ctx.accounts.market;",
+            "    require!(!market.resolved, MarketError::AlreadyResolved);",
+            "    market.outcome = final_outcome;",
+            "    market.resolved = true;",
+            "    Ok(())",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Prediction markets manage user capital by holding deposits in pools and distributing rewards based on authenticated oracle outcomes.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do prediction markets resolve disputes if the oracle publishes incorrect outcome data?",
+          "answer": "Protocols establish decentralized dispute windows. Users lock deposit collateral to challenge outcomes. Challenges are evaluated by token holder votes or secondary oracle arrays.",
+          "id": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Draft a database design schema tracking user positions, bids, yes/no balances, and resolution states.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Ambiguous Market Outcome Dispute",
+          "text": "A market resolving 'Will rain fall on New York on June 1st' was disputed because rain fell at the airport but not in Manhattan. Resolving this required strict definitions in the contract rules.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Specify unambiguous settlement resolution sources.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Validate oracle public keys before resolving outcomes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Invariant Slippage: Using simple AMMs to price yes/no tokens without enforcing pricing bounds between $0 and $1.00.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Outcome Tokens**: YES/NO balance assets.\n• **Oracle Disputing**: Decentralized validation systems.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "26",
+      "title": "Advanced DeFi",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section covers lending protocols (Aave model), perpetuals, virtual AMMs, and liquidation architecture."
+        },
+        {
+          "type": "h2",
+          "text": "26.1 Lending Pools & Collateralization"
+        },
+        {
+          "type": "para",
+          "text": "Lending pools allow users to deposit tokens to earn interest or borrow assets. Borrowing requires over-collateralization based on Loan-to-Value (LTV) ratios.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Aave Lending Pool Architecture"
+        },
+        {
+          "type": "para",
+          "text": "Deposited collateral secures borrowed debt. If collateral value falls below the Liquidation Threshold, liquidators buy the asset at a discount to repay the debt:",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "lendingPool"
+        },
+        {
+          "type": "h3",
+          "text": "Rust Liquidation Health Factor Math"
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "pub fn calculate_health_factor(",
+            "    collateral_value: u64,",
+            "    borrowed_value: u64,",
+            "    liq_threshold: u64",
+            ") -> u64 {",
+            "    if borrowed_value == 0 { return u64::MAX; }",
+            "    (collateral_value * liq_threshold) / (borrowed_value * 100)",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Advanced DeFi protocols manage risk dynamically using mathematical health factor equations and flash liquidator bots.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is a virtual AMM (vAMM) used in perpetual protocols like Drift?",
+          "answer": "A vAMM does not store real token pools. It uses the Constant Product equation (x * y = k) to calculate leverage prices, using user collateral deposited in secondary vaults to settle profits/losses."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write a health check script in JS that flags accounts whose collateral ratio falls below 120% for liquidation.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Bad Debt Accumulation",
+          "text": "During a market crash, the price of an asset dropped so quickly that liquidation transactions failed due to congested blocks. The pool accumulated $1.2M in bad debt.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce safe collateral factor bounds.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify liquidation rewards do not exceed pool reserves.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Missing Oracle Validation: Relying on prices without verifying update latency during market crashes causes stale liquidations.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Health Factor**: Risk index; liquidatable if < 1.0.\n• **Perpetuals**: Futures contracts without expiration.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "27",
+      "title": "Complete Web3 System Design",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section presents comprehensive, production-grade system design blueprints for DEXs, Wallets, and Certification networks."
+        },
+        {
+          "type": "h2",
+          "text": "27.1 Architecture Design Blueprints"
+        },
+        {
+          "type": "para",
+          "text": "We analyze the components required to build highly secure, scalable Web3 protocols. Each system combines frontend nodes, RPC routers, smart contracts, and database caches.",
+          "options": {}
+        },
+        {
+          "type": "h3",
+          "text": "Solana Certification Network (LearnXChain)"
+        },
+        {
+          "type": "para",
+          "text": "LearnXChain uses a decentralized verification flow. Certificates are minted to individual student PDAs, and can be queried instantly by employers without central APIs:",
+          "options": {}
+        },
+        {
+          "type": "diagram",
+          "name": "certArchitecture"
+        },
+        {
+          "type": "h3",
+          "text": "Architectural Comparison"
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "System Model",
+              "Primary Database",
+              "Smart Contract Layer",
+              "Scaling Solution"
+            ],
+            [
+              "Jupiter Aggregator",
+              "Redis (cache routings)",
+              "Solana CPI routers",
+              "RPC multi-threading"
+            ],
+            [
+              "Phantom Wallet",
+              "SQLite (local encrypted)",
+              "SBF / Web3.js validation",
+              "Hardware vault integration"
+            ],
+            [
+              "LearnXChain Certs",
+              "PostgreSQL (logs state)",
+              "Anchor PDA records",
+              "Serverless Next.js functions"
+            ]
+          ],
+          "headers": [
+            "Web3 Protocol",
+            "Cache & Data Storage",
+            "On-Chain execution",
+            "Scalability Optimization"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Web3 system design integrates local cryptography databases with globally distributed smart contracts, optimizing latency using caching engines.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you protect your Next.js indexing database from displaying false state changes?",
+          "answer": "By subscribing to RPC confirmations. Database records are marked as 'pending' until the target transaction signature reaches 'finalized' block commitment."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Draw a block diagram mapping the data flow of a user connecting to a wallet, executing a swap, and updating the database.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "RPC Node Endpoint Failure",
+          "text": "A protocol frontend failed because its single RPC endpoint went offline. The design was refactored to rotate between 3 public and private RPC providers automatically.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Validate blockchain state signatures on database writes.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Enforce database read replication to prevent database locks during high traffic.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Direct RPC queries on Client render: Querying RPC nodes for block metadata inside react hooks causes rate limit failures.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **RPC Router**: Load balancer for blockchain connections.\n• **PDA State**: Immutable records stored directly on the ledger.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "28",
+      "title": "Production Projects",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section presents detailed, end-to-end design specifications for 10 production-grade Web3 projects."
+        },
+        {
+          "type": "h2",
+          "text": "28.1 The 10 Core Production Projects"
+        },
+        {
+          "type": "para",
+          "text": "We analyze the specifications, schemas, smart contracts, and testing strategies for each project:",
+          "options": {}
+        },
+        {
+          "type": "numbered",
+          "text": "1. Non-Custodial Wallet (Phantom-style)",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "2. Token Launcher Portal",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "3. NFT Marketplace",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "4. Constant Product AMM DEX",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "5. Centralized Matcher Exchange",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "6. Full DAO Governance Platform",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "7. Staking Reward Protocol",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "8. Prediction Market (Polymarket Clone)",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "9. Custom Solana Block Explorer",
+          "level": 0
+        },
+        {
+          "type": "numbered",
+          "text": "10. LearnXChain Certificate Verification Network",
+          "level": 0
+        },
+        {
+          "type": "h2",
+          "text": "28.2 Building a DEX from Scratch (Detailed Walkthrough)"
+        },
+        {
+          "type": "para",
+          "text": "• **Architecture**: Client UI → Solana RPC → Anchor Program (custody vault PDA)",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **State design**: Pool state account storing reserves, mints, and fee parameters.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **Database schema**: PostgreSQL tables caching pool stats and trade volumes.",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "// Anchor swap code snippet",
+            "pub fn swap(ctx: Context<Swap>, amount_in: u64) -> Result<()> {",
+            "    let pool = &ctx.accounts.pool;",
+            "    let output = (pool.y_res * amount_in) / (pool.x_res + amount_in);",
+            "    // Perform token CPI calls...",
+            "    Ok(())",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "28.3 Building LearnXChain Certificates on Solana"
+        },
+        {
+          "type": "para",
+          "text": "• **Architecture**: Next.js API certifies completion → Solana Anchor program initializes certificate PDA.",
+          "options": {}
+        },
+        {
+          "type": "para",
+          "text": "• **PDA Derivation**: seeds = [b\"certificate\", student_pubkey, course_id]",
+          "options": {}
+        },
+        {
+          "type": "codeBlock",
+          "code": [
+            "#[derive(Accounts)]",
+            "#[instruction(course_id: String)]",
+            "pub struct IssueCertificate<'info> {",
+            "    #[account(init, payer = authority, space = 8 + 32 + 32 + 50, seeds = [b\"cert\", student.key().as_ref(), course_id.as_bytes()], bump)]",
+            "    pub cert_account: Account<'info, CertState>,",
+            "    #[account(mut)]",
+            "    pub authority: Signer<'info>,",
+            "    pub student: SystemAccount<'info>,",
+            "    pub system_program: Program<'info, System>,",
+            "}"
+          ],
+          "lang": "rust"
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Production protocols require comprehensive unit tests, security audits, Docker deployments, and Kubernetes monitoring tools.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How do you verify your smart contract state locally before deploying to mainnet?",
+          "answer": "By using Solana's local validator test suite ('anchor test'). It spins up a local network node, deploys the program, initializes accounts, and runs integration tests."
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Write an integration test suite in TypeScript that initializes the certificate program, mints a certificate PDA, and queries the data.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Mainnet Deploy Rent Crash",
+          "text": "A project failed to deploy on mainnet because they did not allocate enough funds for the program account rent-exempt balance, requiring $2.4 SOL to deploy.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Run cargo test on contract updates.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify that program ID keys match mainnet configurations.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Testing in Production: Deploying un-audited programs straight to mainnet instead of using devnet testing pipelines.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **anchor test**: Runs local test nodes.\n• **Devnet**: Solana's testing blockchain network.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "29",
+      "title": "Web3 Interview Preparation",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section compiles key interview questions and answers, categorized from beginner to protocol levels."
+        },
+        {
+          "type": "h2",
+          "text": "29.1 Core Technical Interview Q&As"
+        },
+        {
+          "type": "para",
+          "text": "We detail the answers to common questions asked during blockchain architecture and smart contract audits.",
+          "options": {}
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the Solana Account Ownership rule?",
+          "answer": "Only the owner program of an account can write data to it. The system program owns all standard user wallets. Programs own their custom state accounts."
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain flash loans and how they are exploited.",
+          "answer": "Flash loans allow users to borrow millions of dollars without collateral, provided the funds are returned within the same transaction. Exploits use this capital to manipulate price oracles or voting weights."
+        },
+        {
+          "type": "interviewCard",
+          "question": "How does the Anchor framework prevent reentrancy?",
+          "answer": "Anchor does not use raw Solidity call execution context. Solana program execution is compartmentalized, and CPIs execute synchronously without reentry loops unless explicitly allowed."
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the purpose of the rent-exempt balance?",
+          "answer": "It ensures accounts keep enough lamports to fund storage on-chain indefinitely, preventing node storage exhaustions."
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Mastering web3 interviews requires a deep understanding of memory management, cryptography math, consensus, and security patterns.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Perform a mock audit of a simple program and write a 2-page report documenting any security issues found.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Fumbled Technical Interview",
+          "text": "A candidate was rejected because they could not explain the difference between a Signer and a Writable account on Solana, failing to show basic security knowledge.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Review the Solana Security Guidelines.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Verify core understanding of cryptographic primitives.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Giving Vague Answers: Saying 'gas is fee' without explaining base/priority calculation formulas.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Signer**: Transaction authorizer.\n• **Writable**: Account balance/data locked for writing.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "30",
+      "title": "365 Day Web3 Roadmap",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This section lays out a comprehensive weekly and monthly plan to take you from beginner to protocol engineer in 365 days."
+        },
+        {
+          "type": "h2",
+          "text": "30.1 Monthly Milestone Breakdown"
+        },
+        {
+          "type": "para",
+          "text": "We map out your progression over 12 months, detailing goals, projects, and milestones:",
+          "options": {}
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Timeframe",
+              "Focus Area",
+              "Key Project",
+              "Milestone"
+            ],
+            [
+              "Month 1-3",
+              "Blockchain, Cryptography & Rust",
+              "Build simplified Bitcoin node",
+              "Master Rust borrowing"
+            ],
+            [
+              "Month 4-6",
+              "Solana, Anchor & Wallets",
+              "Build token launcher & escrow",
+              "Deploy first program to Devnet"
+            ],
+            [
+              "Month 7-9",
+              "DeFi, DEX & Security",
+              "AMM constant product clone",
+              "Audit a DEX code repository"
+            ],
+            [
+              "Month 10-12",
+              "Protocol Design & Auditing",
+              "LearnXChain Cert verification",
+              "Publish complete audited system"
+            ]
+          ],
+          "headers": [
+            "Months",
+            "Study Focus",
+            "Core Project",
+            "Milestone Goal"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "A systematic 365-day program helps you build the theoretical foundations and practical code portfolio needed to succeed.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Why is it recommended to learn Rust before Anchor?",
+          "answer": "Anchor is built on Rust. Attempting to write Anchor programs without understanding Rust's lifetimes, ownership, and structs leads to compiler errors.",
+          "id": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Set up your local Solana development environment (Solana CLI, Rust, Anchor, Yarn) and execute 'solana-test-validator'.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Fast-Track Failure",
+          "text": "A developer jumped straight to writing DeFi contracts without learning cryptography or security basics, resulting in a deploy that was hacked within 2 hours.",
+          "calloutType": "warning"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Set weekly study targets and write code daily.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Contribute to open-source smart contract audits to build experience.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Tutorial Hell: Watching videos without writing code. You must build projects from scratch to learn.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **Week 1-12**: Cryptography foundations.\n• **Week 13-52**: Advanced protocol engineering.",
+          "options": {}
+        }
+      ]
+    },
+    {
+      "num": "31",
+      "title": "Final Master Cheat Sheet",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This final section provides a comprehensive synthesis reference for commands, math, and security patterns."
+        },
+        {
+          "type": "h2",
+          "text": "31.1 Quick Reference Guides"
+        },
+        {
+          "type": "para",
+          "text": "A synthesis of essential tools, math equations, and security rules:",
+          "options": {}
+        },
+        {
+          "type": "table",
+          "rows": [
+            [
+              "Domain",
+              "Key Formula / Command",
+              "Quick Summary"
+            ],
+            [
+              "AMM Math",
+              "x * y = k",
+              "Constant product balance formula"
+            ],
+            [
+              "Solana CLI",
+              "solana-test-validator",
+              "Spins up local test validator"
+            ],
+            [
+              "Anchor CLI",
+              "anchor test",
+              "Runs local typescript tests"
+            ],
+            [
+              "Health Factor",
+              "HF = (Collateral * LiqThreshold) / Debt",
+              "Liquidation risk checker"
+            ],
+            [
+              "PDA Hashing",
+              "SHA256(seeds + bump + program_id)",
+              "Predictable PDA keys derivation"
+            ]
+          ],
+          "headers": [
+            "Core Category",
+            "Command / Equation",
+            "Reference Summary"
+          ],
+          "colWidths": []
+        },
+        {
+          "type": "h2",
+          "text": "Summary"
+        },
+        {
+          "type": "para",
+          "text": "Keep these formulas, CLI commands, and security checklists near you when writing smart contracts.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the most critical Solana CLI command during program upgrades?",
+          "answer": "solana program deploy --program-id <KEYPAIR> ensures you are writing the update package to the correct program slot.",
+          "id": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Practical Assignment"
+        },
+        {
+          "type": "para",
+          "text": "Create a single-page cheatsheet summary including the 10 most common Solana CLI configurations.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Real Production Scenario"
+        },
+        {
+          "type": "callout",
+          "title": "Fumbled Mainnet CLI Upgrade",
+          "text": "A team ran an upgrade without specifying the program ID, deploying it to a new address. This broke all frontend references until they re-deployed correctly.",
+          "calloutType": "info"
+        },
+        {
+          "type": "h2",
+          "text": "Security Checklist"
+        },
+        {
+          "type": "bullet",
+          "text": "Run anchor build and anchor test before every release.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "bullet",
+          "text": "Confirm you are deploying to mainnet-beta, not devnet.",
+          "level": 0,
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Common Mistakes"
+        },
+        {
+          "type": "para",
+          "text": "• Hardcoded Public Keys: Putting test public keys directly in production files breaks mainnet deployments.",
+          "options": {}
+        },
+        {
+          "type": "h2",
+          "text": "Revision Notes"
+        },
+        {
+          "type": "para",
+          "text": "• **x * y = k**: AMM invariant.\n• **checked_add**: Secure math wrapper.",
+          "options": {}
+        }
+      ]
+    }
+  ],
+  "handbookToc": null
+}

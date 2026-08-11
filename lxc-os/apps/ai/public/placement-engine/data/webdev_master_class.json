@@ -1,0 +1,2279 @@
+{
+  "handbookData": [
+    {
+      "num": "0",
+      "title": "Computer Science Foundations",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Before writing a single line of HTML or JavaScript, every great web developer understands *how the internet actually works*. This section strips away the magic of frameworks to reveal the real protocols, packets, and pipelines that power every website on Earth. Think of this as your X-ray vision into the web."
+        },
+        {
+          "type": "callout",
+          "title": "Why This Matters",
+          "text": "Developers who understand DNS, TCP, and the browser rendering pipeline debug 10× faster and build more performant apps. This knowledge separates juniors from seniors.",
+          "calloutType": "tip"
+        },
+        {
+          "type": "h2",
+          "text": "0.1 How the Internet Works — The Full Journey"
+        },
+        {
+          "type": "para",
+          "text": "The internet is a global network of billions of physically interconnected computers. Data travels across **fiber-optic cables** (light pulses at 200,000 km/s), **satellite transceivers** (high latency, global reach), and **copper telephone wires** (DSL). When data is sent, it is broken into **small packets** (typically 1500 bytes max — called the MTU: Maximum Transmission Unit) and each packet is independently routed through intermediate nodes using the IP protocol."
+        },
+        {
+          "type": "para",
+          "text": "Think of the internet like a postal system: your letter (data) is split into postcards (packets), each postcard travels independently through different post offices (routers), and they are reassembled at the destination (your browser). If a postcard gets lost, the sender re-mails only that one."
+        },
+        {
+          "type": "h3",
+          "text": "What Happens When You Type a URL? (Step by Step)"
+        },
+        {
+          "type": "para",
+          "text": "When you type `https://learnxchain.com/index.html` into your browser and press Enter, a precise 8-step sequence fires:"
+        },
+        {
+          "type": "numbered",
+          "items": [
+            "**URL Parsing**: The browser splits the URL into components: protocol (`https`), hostname (`learnxchain.com`), port (`443` default for HTTPS), path (`/index.html`), and optional query string/fragment.",
+            "**Cache Check**: The browser checks its DNS cache, then the OS cache, then the router cache for a known IP address for the hostname.",
+            "**DNS Lookup**: If not cached, a DNS resolver (usually your ISP's) traverses the DNS hierarchy: Root Server → TLD Server (.com) → Authoritative Name Server → returns IP address (e.g., `104.26.2.22`). This takes 20–120ms.",
+            "**TCP Connection (3-Way Handshake)**: The browser opens a TCP connection on port 443 using SYN → SYN-ACK → ACK packets. This takes 1 RTT (Round-Trip Time).",
+            "**TLS Handshake**: For HTTPS, the client and server negotiate TLS version, cipher suites, and session keys by verifying the server's SSL certificate. TLS 1.3 does this in 1 RTT.",
+            "**HTTP Request**: The browser sends `GET /index.html HTTP/2` with headers (Host, Accept, Cookie, User-Agent).",
+            "**Server Processing**: NGINX receives the request, passes it to the app server, which queries a database if needed, and returns `200 OK` with the HTML body.",
+            "**Browser Rendering**: HTML is parsed → DOM built → CSS parsed → CSSOM built → Render Tree constructed → Layout → Paint → Composite layers → display on screen."
+          ]
+        },
+        {
+          "type": "diagram",
+          "name": "dnsFlowchart"
+        },
+        {
+          "type": "diagram",
+          "name": "tcpHandshake"
+        },
+        {
+          "type": "h2",
+          "text": "0.2 DNS & Networking Protocols Deep Dive"
+        },
+        {
+          "type": "para",
+          "text": "**DNS (Domain Name System)** is the phone book of the internet. It maps human-readable hostnames like `google.com` to machine-routable IP addresses like `142.250.80.46`. DNS uses **UDP port 53** for fast, connectionless queries. Responses are cached using TTL (Time-To-Live) values set by domain owners."
+        },
+        {
+          "type": "h3",
+          "text": "DNS Record Types — Complete Reference"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Record",
+            "Purpose",
+            "Example"
+          ],
+          "rows": [
+            [
+              "**A**",
+              "Maps hostname → IPv4 address",
+              "`learnxchain.com → 104.26.2.22`"
+            ],
+            [
+              "**AAAA**",
+              "Maps hostname → IPv6 address",
+              "`learnxchain.com → 2606:4700::...`"
+            ],
+            [
+              "**CNAME**",
+              "Alias (one hostname → another hostname)",
+              "`www → learnxchain.com`"
+            ],
+            [
+              "**MX**",
+              "Mail server for the domain",
+              "`mail.learnxchain.com priority=10`"
+            ],
+            [
+              "**TXT**",
+              "Arbitrary text (SPF, DKIM, domain verification)",
+              "`v=spf1 include:sendgrid.net ~all`"
+            ],
+            [
+              "**NS**",
+              "Name servers authoritative for domain",
+              "`ns1.cloudflare.com`"
+            ],
+            [
+              "**SOA**",
+              "Start of Authority — primary zone info",
+              "Zone admin, serial, refresh TTL"
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "TCP vs UDP — The Core Transport Layer Choice"
+        },
+        {
+          "type": "para",
+          "text": "At Layer 4 (Transport Layer) of the OSI model, all internet traffic uses either **TCP** (reliable, ordered, connection-based) or **UDP** (fast, fire-and-forget). The right choice depends on whether you need guaranteed delivery or raw speed."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Feature",
+            "TCP (Transmission Control Protocol)",
+            "UDP (User Datagram Protocol)"
+          ],
+          "rows": [
+            [
+              "Connection",
+              "Connection-oriented (3-way handshake required)",
+              "Connectionless (send and forget)"
+            ],
+            [
+              "Reliability",
+              "✅ 100% reliable — lost packets are retransmitted (ARQ)",
+              "❌ Packets may be lost, duplicated, or arrive out of order"
+            ],
+            [
+              "Order",
+              "✅ Packets reassembled in correct sequence",
+              "❌ No ordering guarantee"
+            ],
+            [
+              "Speed",
+              "Slower — congestion control, headers = 20–60 bytes",
+              "Faster — minimal headers = 8 bytes, no handshake"
+            ],
+            [
+              "Flow Control",
+              "✅ Yes — prevents overwhelming slow receivers",
+              "❌ None — sender determines speed"
+            ],
+            [
+              "Use Cases",
+              "HTTP/HTTPS, SSH, FTP, database connections, email",
+              "DNS, live video/audio streaming, VoIP, gaming, WebRTC"
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "HTTP/3 Uses UDP!",
+          "text": "HTTP/3 (used by 30%+ of the web) is built on QUIC, a protocol that runs over UDP. QUIC implements its own reliability, ordering, and encryption — getting UDP's speed with TCP's guarantees. It eliminates 'head-of-line blocking' that plagued HTTP/2.",
+          "calloutType": "tip"
+        },
+        {
+          "type": "h3",
+          "text": "HTTP vs HTTPS & SSL/TLS In Depth"
+        },
+        {
+          "type": "para",
+          "text": "**HTTP** (HyperText Transfer Protocol) transmits data as **plain text**. Anyone on your network (your router, ISP, or a hacker on the same WiFi) can read your data with a packet sniffer like Wireshark. **HTTPS** wraps HTTP inside **TLS (Transport Layer Security)** — an encryption layer that makes data unreadable to third parties."
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "**Confidentiality**: TLS encrypts data so only the intended recipient can read it.",
+            "**Integrity**: A MAC (Message Authentication Code) ensures data wasn't tampered with in transit.",
+            "**Authentication**: The server's SSL Certificate (signed by a trusted CA like Let's Encrypt) proves the server is who it claims to be, preventing impersonation.",
+            "**SEO Boost**: Google ranks HTTPS sites higher. Chrome marks HTTP sites as 'Not Secure'."
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "TLS 1.3 Speed Optimization",
+          "text": "TLS 1.3 reduces the handshake from 2 RTTs to 1 RTT by combining key exchange and cipher negotiation. It also supports '0-RTT resumption' for returning users — no handshake overhead at all on repeat visits.",
+          "calloutType": "tip"
+        },
+        {
+          "type": "h2",
+          "text": "0.3 Browser Rendering Pipeline — Critical Path"
+        },
+        {
+          "type": "para",
+          "text": "Once the browser receives the raw HTML bytes from the server, the **rendering engine** (Blink in Chrome/Edge, Gecko in Firefox, WebKit in Safari) executes the **Critical Rendering Path (CRP)** — a precise sequence of steps to paint pixels on screen."
+        },
+        {
+          "type": "numbered",
+          "items": [
+            "**Bytes → Characters**: HTML bytes decoded using charset (UTF-8) into individual characters.",
+            "**Characters → Tokens**: HTML Parser tokenizes characters into start tags, end tags, attributes, and text nodes.",
+            "**Tokens → Nodes**: Each token becomes a Node object (HTMLElement, TextNode, CommentNode).",
+            "**Nodes → DOM Tree**: Nodes are linked into a parent-child tree — the Document Object Model.",
+            "**CSS → CSSOM**: CSS files are parsed into the CSS Object Model — a parallel tree of style rules.",
+            "**DOM + CSSOM → Render Tree**: The DOM and CSSOM are combined. Display:none elements are excluded. Each visible node gets its computed styles.",
+            "**Layout (Reflow)**: The browser calculates the exact position (x, y) and size (width, height) of every element on the viewport.",
+            "**Paint**: Rendering instructions (fill, stroke, text, shadow) are recorded for each layer.",
+            "**Composite**: The GPU composites layers together. CSS transforms and opacity changes happen here — GPU-accelerated and very fast."
+          ]
+        },
+        {
+          "type": "diagram",
+          "name": "renderingPipeline"
+        },
+        {
+          "type": "callout",
+          "title": "Performance Warning: Avoid Layout Thrashing",
+          "text": "Reading layout properties (offsetWidth, getBoundingClientRect) then writing style in a loop forces repeated reflows — a 'layout thrash'. Always batch reads, then batch writes. Use CSS transforms (translateX) instead of changing top/left — they skip Layout and go straight to Composite (GPU layer).",
+          "calloutType": "caution"
+        },
+        {
+          "type": "h2",
+          "text": "0.4 Web Infrastructure: Servers, CDNs & Caching"
+        },
+        {
+          "type": "para",
+          "text": "A **Web Server** (like NGINX or Caddy) handles HTTP connections, serves static files, and acts as a **reverse proxy** — forwarding dynamic requests to an application server (Node.js, Python, Java). A **CDN (Content Delivery Network)** like Cloudflare or AWS CloudFront maintains hundreds of **edge nodes** worldwide, caching your static assets (JS, CSS, images) close to users — reducing latency from 300ms to under 10ms."
+        },
+        {
+          "type": "h3",
+          "text": "Complete Cache-Control Header Reference"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Header Value",
+            "Meaning",
+            "Best For"
+          ],
+          "rows": [
+            [
+              "`no-store`",
+              "Never cache — re-fetch fresh copy every time",
+              "Bank data, health records, checkout pages"
+            ],
+            [
+              "`no-cache`",
+              "Cache it, but always revalidate with server (ETag check) before serving",
+              "Pages that change frequently but can tolerate stale briefly"
+            ],
+            [
+              "`public, max-age=31536000, immutable`",
+              "Cache for 1 year, never re-check. `immutable` tells browser the content will never change",
+              "Versioned JS/CSS bundles (`main.abc123.js`)"
+            ],
+            [
+              "`private, max-age=3600`",
+              "Cache on the user's browser only (not on CDNs), for 1 hour",
+              "Logged-in user dashboards"
+            ],
+            [
+              "`stale-while-revalidate=60`",
+              "Serve stale copy immediately, re-fetch in background within 60s",
+              "API responses where slight staleness is acceptable"
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Cache Busting Strategy",
+          "text": "Set `Cache-Control: public, max-age=31536000, immutable` on your assets — but include a content hash in the filename (e.g., `main.a3f9bc.js`). When the code changes, Vite/Webpack generates a new hash, forcing browsers to download the new file while still getting maximum caching for unchanged files.",
+          "calloutType": "tip"
+        },
+        {
+          "type": "h2",
+          "text": "0.5 Web State & Storage Mechanisms"
+        },
+        {
+          "type": "para",
+          "text": "HTTP is a **stateless protocol** — each request is completely independent. The server has no memory of previous requests. To persist state across requests (login sessions, user preferences, shopping carts), developers use several storage mechanisms:"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Type",
+            "Capacity",
+            "Lifetime",
+            "Sent with HTTP?",
+            "Accessible by JS?",
+            "Best Use"
+          ],
+          "rows": [
+            [
+              "**Cookies**",
+              "4 KB",
+              "Developer-set expiry",
+              "✅ Yes (automatic)",
+              "Only if not HttpOnly",
+              "Session tokens, auth (set HttpOnly + Secure + SameSite=Strict)"
+            ],
+            [
+              "**LocalStorage**",
+              "5–10 MB",
+              "Until manually cleared",
+              "❌ No",
+              "✅ Yes",
+              "User preferences, draft data, cached responses"
+            ],
+            [
+              "**SessionStorage**",
+              "5–10 MB",
+              "Until tab/global closes",
+              "❌ No",
+              "✅ Yes",
+              "Wizard step data, temporary form state"
+            ],
+            [
+              "**IndexedDB**",
+              "Hundreds of MB",
+              "Until manually cleared",
+              "❌ No",
+              "✅ Yes (async API)",
+              "Offline apps, large structured data, PWAs"
+            ],
+            [
+              "**JWT in Cookie**",
+              "Varies (~1–4KB)",
+              "Encoded in payload",
+              "✅ Yes",
+              "No (if HttpOnly)",
+              "Stateless auth token, microservices"
+            ],
+            [
+              "**Cache API**",
+              "Browser quota",
+              "Manual or service worker",
+              "❌ No",
+              "✅ Yes",
+              "PWA offline caching, network-first strategies"
+            ]
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// LocalStorage — simple key-value\nlocalStorage.setItem('theme', 'dark');\nconst theme = localStorage.getItem('theme'); // 'dark'\nlocalStorage.removeItem('theme');\n\n// Store objects (must JSON-stringify)\nconst user = { id: 1, name: 'Rajneesh' };\nlocalStorage.setItem('user', JSON.stringify(user));\nconst loaded = JSON.parse(localStorage.getItem('user'));\n\n// Cookies — Set via HTTP header for security\n// Server sets: Set-Cookie: sessionId=abc; HttpOnly; Secure; SameSite=Strict; Path=/\n\n// Client-side cookie (NOT for auth tokens!):\ndocument.cookie = 'uiTheme=dark; max-age=86400; path=/';"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: Computer Science Foundations"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the difference between LocalStorage and Cookies. When would you use each?",
+          "answer": "LocalStorage (5-10MB) stores data client-side only — it is never automatically sent to the server. Use it for UI preferences (dark mode, language), cached API responses, or draft content.\n\nCookies (4KB) are sent automatically with every HTTP request to the domain. If configured with `HttpOnly`, JS cannot access them — making them safe against XSS. Use `Secure` (HTTPS only) and `SameSite=Strict` (block CSRF). Use cookies for authentication session tokens.\n\nKey rule: Never store sensitive data (passwords, tokens) in LocalStorage. Always use HttpOnly cookies for auth."
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between TCP's 3-way handshake and the TLS handshake?",
+          "answer": "TCP 3-way handshake (Transport Layer — Layer 4):\n1. Client → Server: SYN (sequence number=100)\n2. Server → Client: SYN-ACK (seq=200, ack=101)\n3. Client → Server: ACK (ack=201)\nThis establishes a reliable, ordered connection. It does NOT encrypt anything.\n\nTLS handshake (Presentation Layer — Layer 6, happens AFTER TCP):\n1. Client Hello: Supported TLS versions + cipher suites\n2. Server Hello: Chosen cipher + SSL Certificate\n3. Client verifies certificate against trusted CAs\n4. Key exchange (ECDHE): Both sides compute shared secret\n5. Session keys derived. Encrypted channel begins.\n\nTLS 1.3 compresses this to 1 RTT vs TLS 1.2's 2 RTTs."
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the Critical Rendering Path and how do you optimize it?",
+          "answer": "The CRP is the sequence of steps the browser takes from receiving HTML bytes to displaying pixels: HTML→DOM, CSS→CSSOM, DOM+CSSOM→Render Tree, Layout, Paint, Composite.\n\nOptimizations:\n1. Eliminate render-blocking resources: add `defer` or `async` to <script> tags\n2. Inline critical CSS (above-the-fold styles) in <head>\n3. Lazy-load below-the-fold images: `<img loading='lazy'>`\n4. Preload key resources: `<link rel='preload' href='font.woff2' as='font'>`\n5. Use CSS transforms (GPU composited) instead of animating top/left (triggers Layout)\n6. Minimize DOM size — large DOMs (10,000+ nodes) slow layout calculations"
+        }
+      ]
+    },
+    {
+      "num": "1",
+      "title": "HTML Masterclass",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "HTML is not just tags — it is a **contract between your content, search engines, and assistive technologies**. Modern HTML written correctly is semantic, accessible, and SEO-optimized by default. This chapter covers everything from document structure to advanced form validation, ARIA landmarks, and Web Components."
+        },
+        {
+          "type": "h2",
+          "text": "1.1 HTML Document Structure — The Skeleton"
+        },
+        {
+          "type": "para",
+          "text": "Every HTML page starts with a DOCTYPE declaration and follows a strict hierarchy. Understanding this structure is foundational before writing any content."
+        },
+        {
+          "type": "diagram",
+          "name": "domTree"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "html": "<!DOCTYPE html>  <!-- Tells browser: use HTML5 standard -->\n<html lang=\"en\">  <!-- lang attribute is critical for screen readers + SEO -->\n<head>\n  <!-- Everything here is METADATA — not visible on page -->\n  <meta charset=\"UTF-8\">        <!-- Character encoding -->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  \n  <title>LearnXChain | Full Stack Handbook</title>\n  <meta name=\"description\" content=\"...\">\n  \n  <!-- Preload critical fonts before render -->\n  <link rel=\"preload\" href=\"/fonts/inter.woff2\" as=\"font\" type=\"font/woff2\" crossorigin>\n  \n  <!-- Critical CSS inline, rest deferred -->\n  <style>/* above-fold critical styles here */</style>\n  <link rel=\"stylesheet\" href=\"/style.css\">\n  \n  <!-- Scripts deferred to not block parsing -->\n  <script defer src=\"/app.js\"></script>\n</head>\n<body>\n  <!-- Everything here is CONTENT — visible on page -->\n  <header>\n    <nav aria-label=\"Main navigation\">\n      <a href=\"/\">Home</a>\n    </nav>\n  </header>\n  \n  <main id=\"main-content\">\n    <h1>Welcome to LearnXChain</h1>\n    <article>...</article>\n  </main>\n  \n  <footer>...</footer>\n</body>\n</html>"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "1.2 Semantic HTML — Meaning Over Markup"
+        },
+        {
+          "type": "para",
+          "text": "**Semantic elements** clearly describe their *meaning* to both the browser and developer tools. They improve SEO (search engines weight semantic content), accessibility (screen readers announce element roles), and developer experience (self-documenting code). The rule: **use the element whose name matches the content's purpose**."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Semantic Element",
+            "Purpose",
+            "ARIA Role (Implicit)",
+            "Non-Semantic Equivalent"
+          ],
+          "rows": [
+            [
+              "`<header>`",
+              "Site or section header. Contains logo, nav, search.",
+              "banner",
+              "`<div class='header'>`"
+            ],
+            [
+              "`<nav>`",
+              "Primary navigation links block",
+              "navigation",
+              "`<div class='nav'>`"
+            ],
+            [
+              "`<main>`",
+              "Primary content of the page (only one per page!)",
+              "main",
+              "`<div class='main'>`"
+            ],
+            [
+              "`<article>`",
+              "Self-contained, independently distributable content (blog post, tweet, product card)",
+              "article",
+              "`<div class='article'>`"
+            ],
+            [
+              "`<section>`",
+              "Thematic grouping of related content with its own heading",
+              "region",
+              "`<div class='section'>`"
+            ],
+            [
+              "`<aside>`",
+              "Tangential/supplementary content (sidebars, related links, ads)",
+              "complementary",
+              "`<div class='sidebar'>`"
+            ],
+            [
+              "`<footer>`",
+              "Footer of a page or section (copyright, links)",
+              "contentinfo",
+              "`<div class='footer'>`"
+            ],
+            [
+              "`<figure>`",
+              "Self-contained content with optional caption (images, code, charts)",
+              "figure",
+              "`<div class='figure'>`"
+            ],
+            [
+              "`<figcaption>`",
+              "Caption for the parent `<figure>`",
+              "–",
+              "`<p class='caption'>`"
+            ],
+            [
+              "`<time datetime='2024-01-15'>`",
+              "Machine-readable date/time",
+              "–",
+              "`<span>`"
+            ],
+            [
+              "`<mark>`",
+              "Highlighted/relevant text (search result emphasis)",
+              "–",
+              "`<span class='highlight'>`"
+            ],
+            [
+              "`<abbr title='...'>`",
+              "Abbreviation with expanded title",
+              "–",
+              "`<span>`"
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "The Div Soup Anti-Pattern",
+          "text": "Overusing <div> and <span> for everything is called 'div soup' — it creates inaccessible, non-semantic markup that screen readers cannot interpret and search engines cannot understand. Always reach for the most specific semantic element first.",
+          "calloutType": "caution"
+        },
+        {
+          "type": "h2",
+          "text": "1.3 Accessibility (a11y) — Building for Everyone"
+        },
+        {
+          "type": "para",
+          "text": "**Accessibility (a11y)** means making websites usable by people with visual, motor, auditory, and cognitive disabilities. It's not optional — the ADA (Americans with Disabilities Act) mandates it for many organizations. Accessible sites also rank higher in SEO and convert better with all users."
+        },
+        {
+          "type": "h3",
+          "text": "WCAG 2.1 Compliance Checklist (Level AA)"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "**Keyboard Navigation**: All interactive elements (links, buttons, forms, modals) must be reachable via `Tab` and operable via `Enter`/`Space`. No keyboard traps.",
+            "**Focus Indicators**: Visible focus rings on all focusable elements. Never use `outline: none` without a custom focus style replacement.",
+            "**Color Contrast**: Text must have a minimum 4.5:1 contrast ratio against background (3:1 for large text ≥18px). Test with WebAIM Contrast Checker.",
+            "**Alternative Text**: All meaningful images need descriptive `alt` text. Decorative images use `alt=\"\"` (empty, not omitted).",
+            "**Form Labels**: Every input must have a visible `<label>` associated via `for`/`id` matching, or `aria-label` for icon-only controls.",
+            "**Error Messages**: Form errors must be announced to screen readers using `role=\"alert\"` or `aria-live=\"polite\"`.",
+            "**Heading Hierarchy**: Use `<h1>` → `<h2>` → `<h3>` in logical order. Never skip levels (h1 → h3). Only one `<h1>` per page.",
+            "**Link Purpose**: Link text must be descriptive. Never use 'click here' or 'read more' alone — screen readers list all links out of context.",
+            "**Language Attribute**: `<html lang='en'>` tells assistive tech the page language for correct pronunciation.",
+            "**Responsive/Zoomable**: Content must be usable at 200% zoom. No disabling of pinch-to-zoom."
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "ARIA Attributes — Complete Practical Reference"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Attribute",
+            "What It Does",
+            "Example"
+          ],
+          "rows": [
+            [
+              "`aria-label`",
+              "Provides accessible name for elements with no visible text",
+              "`<button aria-label=\"Close dialog\"><svg.../></button>`"
+            ],
+            [
+              "`aria-labelledby`",
+              "Points to another element's ID as the label",
+              "`<section aria-labelledby='section-heading'>`"
+            ],
+            [
+              "`aria-describedby`",
+              "Associates helper/error text with an input field",
+              "`<input aria-describedby='email-error'>`"
+            ],
+            [
+              "`aria-required`",
+              "Marks field as required for screen readers",
+              "`<input aria-required='true'>`"
+            ],
+            [
+              "`aria-invalid`",
+              "Marks field as having a validation error",
+              "`<input aria-invalid='true'>`"
+            ],
+            [
+              "`aria-expanded`",
+              "Indicates if a collapsible element is open",
+              "`<button aria-expanded='false'>Menu</button>`"
+            ],
+            [
+              "`aria-hidden`",
+              "Hides decorative elements from screen readers",
+              "`<span aria-hidden='true'>★</span>`"
+            ],
+            [
+              "`role='alert'`",
+              "Announces content immediately when it appears (errors)",
+              "`<p role='alert'>Invalid email format</p>`"
+            ],
+            [
+              "`role='dialog'`",
+              "Marks a modal overlay as a dialog",
+              "`<div role='dialog' aria-modal='true'>`"
+            ],
+            [
+              "`role='tabpanel'`",
+              "Associates tab content panels with tab buttons",
+              "`<div role='tabpanel' aria-labelledby='tab-1'>`"
+            ],
+            [
+              "`aria-live='polite'`",
+              "Announces dynamic content changes when idle",
+              "Chat messages, stock updates"
+            ],
+            [
+              "`tabindex='0'`",
+              "Makes non-focusable element keyboard-focusable",
+              "`<div tabindex='0' role='button'>`"
+            ]
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "html": "<!-- ✅ Fully accessible form with validation -->\n<form action=\"/api/register\" method=\"POST\" novalidate>\n  <div class=\"form-group\">\n    <label for=\"email\" class=\"form-label\">\n      Email Address\n      <span class=\"required\" aria-hidden=\"true\"> *</span>\n    </label>\n    \n    <input \n      type=\"email\" \n      id=\"email\"\n      name=\"email\"\n      autocomplete=\"email\"\n      required\n      aria-required=\"true\"\n      aria-invalid=\"true\"\n      aria-describedby=\"email-hint email-error\"\n      placeholder=\"you@example.com\"\n    />\n    \n    <span id=\"email-hint\" class=\"hint-text\">\n      We'll send a verification link here.\n    </span>\n    \n    <!-- role='alert' = announced immediately by screen reader -->\n    <span id=\"email-error\" class=\"error-message\" role=\"alert\">\n      Please enter a valid email address.\n    </span>\n  </div>\n  \n  <button type=\"submit\">Create Account</button>\n</form>"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "1.4 HTML Forms — Complete Mastery"
+        },
+        {
+          "type": "para",
+          "text": "Forms are how users interact with your application. HTML5 provides **built-in validation** that works without JavaScript, improves performance, and is more accessible than custom JS validators."
+        },
+        {
+          "type": "h3",
+          "text": "Input Types — The Complete HTML5 Reference"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Input Type",
+            "What It Does",
+            "Mobile Keyboard"
+          ],
+          "rows": [
+            [
+              "`type='text'`",
+              "General single-line text",
+              "Default QWERTY"
+            ],
+            [
+              "`type='email'`",
+              "Email with @ validation, autocomplete support",
+              "Keyboard with @ key"
+            ],
+            [
+              "`type='password'`",
+              "Masked input, browser password manager integration",
+              "Default"
+            ],
+            [
+              "`type='number'`",
+              "Numeric input with min/max/step attributes",
+              "Numeric keypad"
+            ],
+            [
+              "`type='tel'`",
+              "Telephone number (no validation, just hint)",
+              "Phone dial pad"
+            ],
+            [
+              "`type='url'`",
+              "URL with protocol validation",
+              "URL keyboard with / and .com"
+            ],
+            [
+              "`type='search'`",
+              "Search input with clear button on some browsers",
+              "Search keyboard"
+            ],
+            [
+              "`type='date'`",
+              "Date picker — returns YYYY-MM-DD",
+              "Native date picker"
+            ],
+            [
+              "`type='time'`",
+              "Time picker — returns HH:MM",
+              "Native time picker"
+            ],
+            [
+              "`type='file'`",
+              "File upload — accepts MIME types",
+              "File picker"
+            ],
+            [
+              "`type='checkbox'`",
+              "Boolean toggle",
+              "N/A"
+            ],
+            [
+              "`type='radio'`",
+              "Single selection from a group",
+              "N/A"
+            ],
+            [
+              "`type='range'`",
+              "Slider between min and max values",
+              "Slider"
+            ],
+            [
+              "`type='color'`",
+              "Color picker — returns hex value",
+              "Color picker"
+            ],
+            [
+              "`type='hidden'`",
+              "Invisible field — submits data without user input",
+              "N/A"
+            ]
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "html": "<!-- Advanced form with HTML5 validation constraints -->\n<form id=\"signup-form\" novalidate>\n  <!-- Email with pattern + custom error -->\n  <input type=\"email\" name=\"email\" required\n    pattern=\"[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$\"\n    minlength=\"5\" maxlength=\"100\"\n    aria-required=\"true\"\n    placeholder=\"student@school.edu\">\n  \n  <!-- Password with strength requirements -->\n  <input type=\"password\" name=\"password\" required\n    minlength=\"8\"\n    pattern=\"(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}\"\n    title=\"Must contain: 1 uppercase, 1 lowercase, 1 number, 8+ chars\">\n  \n  <!-- Number with range -->\n  <input type=\"number\" name=\"age\" min=\"18\" max=\"100\" step=\"1\" required>\n  \n  <!-- File upload — images only -->\n  <input type=\"file\" name=\"avatar\"\n    accept=\"image/png, image/jpeg, image/webp\"\n    multiple>\n  \n  <!-- Datalist — searchable dropdown -->\n  <input list=\"frameworks\" name=\"framework\" placeholder=\"Choose framework\">\n  <datalist id=\"frameworks\">\n    <option value=\"React\">\n    <option value=\"Vue\">\n    <option value=\"Angular\">\n    <option value=\"Svelte\">\n  </datalist>\n</form>",
+            "javascript": "// Custom validation with Constraint Validation API\nconst form = document.getElementById('signup-form');\n\nform.addEventListener('submit', (e) => {\n  e.preventDefault();\n  \n  if (!form.checkValidity()) {\n    // Show custom error messages\n    [...form.elements].forEach(el => {\n      if (!el.validity.valid) {\n        el.setAttribute('aria-invalid', 'true');\n        showError(el, getErrorMessage(el));\n      }\n    });\n    return;\n  }\n  \n  // Form is valid — submit\n  submitForm(new FormData(form));\n});\n\nfunction getErrorMessage(input) {\n  if (input.validity.valueMissing) return 'This field is required';\n  if (input.validity.typeMismatch) return 'Please enter a valid email';\n  if (input.validity.tooShort) return `Min ${input.minLength} characters`;\n  if (input.validity.patternMismatch) return input.title;\n  return 'Invalid value';\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "1.5 SEO & Meta Tags — Complete Reference"
+        },
+        {
+          "type": "para",
+          "text": "SEO (Search Engine Optimization) determines how search engines discover, index, and rank your pages. Modern SEO goes beyond keywords — it includes **structured data (JSON-LD)**, **Core Web Vitals** (LCP, FID, CLS), **Open Graph** tags for social sharing, and **Twitter Cards**."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "html": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <!-- ═══ CORE SEO ═══ -->\n  <title>LearnXChain | Full Stack Web Development Masterclass</title>\n  <meta name=\"description\" content=\"Master HTML, CSS, JavaScript, React, Node.js and system design with 40+ chapters of in-depth content.\">\n  <meta name=\"robots\" content=\"index, follow, max-snippet:-1\">\n  <link rel=\"canonical\" href=\"https://learnxchain.com/webdev\">\n  \n  <!-- ═══ OPEN GRAPH (Facebook, LinkedIn, WhatsApp, Slack) ═══ -->\n  <meta property=\"og:type\" content=\"website\">\n  <meta property=\"og:url\" content=\"https://learnxchain.com/webdev\">\n  <meta property=\"og:title\" content=\"LearnXChain | Full Stack Web Dev\">\n  <meta property=\"og:description\" content=\"40+ chapters. 20 full-stack projects. Production code.\">\n  <meta property=\"og:image\" content=\"https://learnxchain.com/og/webdev.png\">\n  <meta property=\"og:image:width\" content=\"1200\">\n  <meta property=\"og:image:height\" content=\"630\">\n  \n  <!-- ═══ TWITTER CARD ═══ -->\n  <meta name=\"twitter:card\" content=\"summary_large_image\">\n  <meta name=\"twitter:site\" content=\"@learnxchain\">\n  <meta name=\"twitter:title\" content=\"LearnXChain | Full Stack Web Dev\">\n  <meta name=\"twitter:image\" content=\"https://learnxchain.com/og/webdev.png\">\n  \n  <!-- ═══ JSON-LD STRUCTURED DATA ═══ -->\n  <script type=\"application/ld+json\">\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"Course\",\n    \"name\": \"Full Stack Web Development Masterclass\",\n    \"description\": \"Comprehensive course from HTML basics to production system design\",\n    \"provider\": {\n      \"@type\": \"Organization\",\n      \"name\": \"LearnXChain\",\n      \"url\": \"https://learnxchain.com\"\n    },\n    \"hasCourseInstance\": {\n      \"@type\": \"CourseInstance\",\n      \"courseMode\": \"online\"\n    }\n  }\n  </script>\n</head>"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "1.6 HTML Performance Best Practices"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "**Place `<script>` before `</body>` or use `defer`/`async`** — Inline scripts block HTML parsing. `defer` downloads in parallel, executes after parsing. `async` downloads in parallel, executes immediately when ready.",
+            "**Use `<link rel='preload'>` for critical resources** — Fonts, hero images, and critical JS should be preloaded to reduce LCP (Largest Contentful Paint).",
+            "**Lazy-load off-screen images**: `<img loading='lazy' src='photo.jpg' alt='...'>` — Built into browsers, defers loading until user scrolls near the image.",
+            "**Use `<picture>` for responsive images** — Serve WebP to modern browsers, JPEG as fallback. Serve appropriately-sized images using `srcset` and `sizes`.",
+            "**Use `loading='lazy'` on iframes** — Especially for YouTube embeds, maps, and third-party widgets.",
+            "**Preconnect to external origins**: `<link rel='preconnect' href='https://fonts.googleapis.com'>` — Establishes the TCP+TLS connection before the resource is actually needed."
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "html": "<!-- Responsive images with WebP + JPEG fallback -->\n<picture>\n  <source\n    type=\"image/webp\"\n    srcset=\"hero-400.webp 400w, hero-800.webp 800w, hero-1200.webp 1200w\"\n    sizes=\"(max-width: 600px) 400px, (max-width: 1024px) 800px, 1200px\">\n  <source\n    type=\"image/jpeg\"\n    srcset=\"hero-400.jpg 400w, hero-800.jpg 800w, hero-1200.jpg 1200w\"\n    sizes=\"(max-width: 600px) 400px, (max-width: 1024px) 800px, 1200px\">\n  <img\n    src=\"hero-800.jpg\"\n    alt=\"Students learning to code on LearnXChain platform\"\n    width=\"800\" height=\"450\"\n    loading=\"eager\"\n    fetchpriority=\"high\">\n</picture>\n\n<!-- Script loading strategies -->\n<script src=\"analytics.js\" async></script>   <!-- Non-critical: load whenever -->\n<script src=\"app.js\" defer></script>          <!-- Critical: load parallel, exec after DOM -->\n<script src=\"critical.js\"></script>           <!-- Blocking: only for above-fold critical JS -->"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: HTML Masterclass"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between `defer` and `async` attributes on a `<script>` tag?",
+          "answer": "Both attributes allow the HTML parser to continue building the DOM while the script downloads in parallel — preventing render-blocking.\n\n`async`: Script executes immediately when downloaded, regardless of where the parser is. Order is not guaranteed. Use for independent scripts like analytics where order and DOM access don't matter.\n\n`defer`: Script executes after the full HTML document is parsed, in the order they appear in the HTML. Use for app scripts that depend on the DOM being ready.\n\nNeither attribute works on inline <script> tags — only on external scripts with a src attribute."
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between `id` and `class` attributes in HTML?",
+          "answer": "`id` must be UNIQUE per page — only one element can have a given id. It creates the highest specificity in CSS (0,1,0,0) and is targeted with `#id` in CSS and `document.getElementById()` in JS. Use for page landmarks (main navigation, main content area).\n\n`class` can be reused on multiple elements. It has lower specificity (0,0,1,0) and is targeted with `.className` in CSS and `querySelectorAll()` in JS. Use for reusable component styles.\n\nIn modern web dev, avoid id selectors in CSS — they make styles hard to override. Prefer class-based styling with BEM methodology."
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the Document Object Model (DOM) and how is it different from HTML?",
+          "answer": "HTML is a text file — a string of markup that you write. The DOM is the live, in-memory tree of objects that the browser builds from parsing that HTML.\n\nThe DOM is a programming interface: you can read it (document.querySelector('.btn').textContent), modify it (element.classList.add('active')), and delete from it (element.remove()). These changes update what's displayed on screen in real-time.\n\nKey difference: If your HTML has an error (unclosed tag), the browser may auto-correct it in the DOM. The DOM represents the browser's interpretation, not your raw HTML text. DevTools Elements panel shows the DOM, not your source HTML."
+        }
+      ]
+    },
+    {
+      "num": "2",
+      "title": "CSS Masterclass",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "CSS is the language that transforms raw HTML structure into beautiful, responsive, animated interfaces. Mastering CSS means understanding the **cascade**, **specificity**, **layout engines**, and the **GPU-accelerated animation pipeline**. This chapter gives you complete command over visual design — from box models to complex grid layouts to dark mode theming."
+        },
+        {
+          "type": "h2",
+          "text": "2.1 The CSS Cascade — How Browsers Decide What Wins"
+        },
+        {
+          "type": "para",
+          "text": "When multiple CSS rules target the same element with the same property, the browser must determine which one wins. This decision follows a **cascade** of 4 criteria in order:"
+        },
+        {
+          "type": "numbered",
+          "items": [
+            "**Origin & Importance**: `!important` rules > Author styles > User Agent (browser default) styles",
+            "**Specificity**: Higher specificity score wins (see table below)",
+            "**Order of Appearance**: When specificity ties, the *last* rule in source order wins",
+            "**Inheritance**: If no rule applies, some properties (color, font-size) inherit from parent elements"
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "CSS Specificity Score Table"
+        },
+        {
+          "type": "para",
+          "text": "Specificity is calculated as a 4-column score `[Importance, ID, Class/Pseudo-class/Attr, Element]`. Higher leftmost column wins."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Selector",
+            "Example",
+            "Score",
+            "Beats"
+          ],
+          "rows": [
+            [
+              "`!important`",
+              "`color: red !important`",
+              "10,0,0,0 (nuclear option)",
+              "Everything"
+            ],
+            [
+              "Inline styles",
+              "`style=\"color:red\"`",
+              "1,0,0,0",
+              "All stylesheet rules"
+            ],
+            [
+              "ID selector",
+              "`#submit-btn`",
+              "0,1,0,0",
+              "Classes, elements"
+            ],
+            [
+              "Class / Pseudo-class / Attr",
+              "`.btn-primary` / `:hover` / `[disabled]`",
+              "0,0,1,0",
+              "Element selectors"
+            ],
+            [
+              "Element / Pseudo-element",
+              "`div` / `p` / `::before`",
+              "0,0,0,1",
+              "Only universal"
+            ],
+            [
+              "Universal / Combinators",
+              "`*` / `+` / `~` / `>`",
+              "0,0,0,0",
+              "Nothing"
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "title": "Specificity Trap",
+          "text": "Avoid using ID selectors in CSS — they're almost impossible to override without !important. Stick to class selectors. If you need to override a library's styles, use a more specific class chain: `.my-app .component .element {}` instead of `!important`.",
+          "calloutType": "caution"
+        },
+        {
+          "type": "h2",
+          "text": "2.2 The CSS Box Model — Every Element is a Box"
+        },
+        {
+          "type": "para",
+          "text": "Every HTML element is rendered as a rectangular **box**. The box has 4 layers from inside out: **Content → Padding → Border → Margin**. Understanding this model is critical for accurate layout calculations."
+        },
+        {
+          "type": "diagram",
+          "name": "boxModel"
+        },
+        {
+          "type": "callout",
+          "title": "Always Use border-box",
+          "text": "By default, `width: 300px` means the content area is 300px — padding and border are ADDED ON TOP, making the total element wider than 300px. This is confusing and causes layout bugs. Fix it globally:\n\n*, *::before, *::after { box-sizing: border-box; }\n\nNow `width: 300px` includes padding + border. Total element width = exactly 300px. This is how every major CSS framework works.",
+          "calloutType": "tip"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "css": "/* ✅ The global box-sizing fix — add to every project */\n*, *::before, *::after {\n  box-sizing: border-box;\n  margin: 0;\n  padding: 0;\n}\n\n/* Box model demonstration */\n.card {\n  width: 320px;          /* Total width = 320px (with border-box) */\n  padding: 20px 24px;    /* 20px top/bottom, 24px left/right */\n  border: 2px solid #6366f1;\n  margin: 16px auto;     /* center horizontally, 16px top/bottom */\n  border-radius: 12px;   /* rounded corners */\n}\n\n/* Margin collapse — a common gotcha! */\n/* When two vertical margins meet, they COLLAPSE to the larger value */\n.section-title { margin-bottom: 24px; }\n.first-paragraph { margin-top: 16px; }\n/* Result: gap = 24px (not 40px!) — the margins collapsed */\n\n/* Prevent margin collapse with: padding, border, overflow:hidden, or flex/grid */\n.no-collapse {\n  display: flex;         /* flex/grid containers don't collapse children margins */\n  flex-direction: column;\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "2.3 Flexbox — One-Dimensional Layouts"
+        },
+        {
+          "type": "para",
+          "text": "Flexbox (Flexible Box Layout) is the perfect tool for **one-dimensional layouts** — arranging items in a row OR column. It excels at: navbars, centering elements, distributing space between cards, aligning button groups, and building responsive sidebars."
+        },
+        {
+          "type": "diagram",
+          "name": "flexboxLayout"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "css": "/* ═══ FLEX CONTAINER PROPERTIES ═══ */\n.navbar {\n  display: flex;\n  \n  /* Main axis direction */\n  flex-direction: row;         /* row | row-reverse | column | column-reverse */\n  \n  /* Main axis alignment (horizontal in row) */\n  justify-content: space-between; /* flex-start | center | flex-end | space-between | space-around | space-evenly */\n  \n  /* Cross axis alignment (vertical in row) */\n  align-items: center;         /* flex-start | center | flex-end | stretch | baseline */\n  \n  /* Allow items to wrap to next line */\n  flex-wrap: wrap;             /* nowrap | wrap | wrap-reverse */\n  \n  /* Shorthand: flex-flow = flex-direction + flex-wrap */\n  flex-flow: row wrap;\n  \n  /* Spacing between flex items */\n  gap: 16px;                   /* row-gap: 16px; column-gap: 8px; */\n}\n\n/* ═══ FLEX ITEM PROPERTIES ═══ */\n.nav-logo {\n  flex: 0 0 auto;   /* Don't grow, don't shrink, auto size */\n}\n\n.nav-links {\n  flex: 1;          /* Shorthand for flex: 1 1 0 — grow to fill space */\n}\n\n.nav-actions {\n  flex: 0 0 200px;  /* Fixed 200px, never grows or shrinks */\n}\n\n/* Perfect centering — the most common use case */\n.center-everything {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  min-height: 100vh;\n}\n\n/* Override individual item alignment */\n.badge {\n  align-self: flex-start; /* This item aligns to top, others to center */\n  margin-left: auto;      /* Push to far right within flex container */\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "2.4 CSS Grid — Two-Dimensional Layouts"
+        },
+        {
+          "type": "para",
+          "text": "CSS Grid is the most powerful layout system in CSS. Unlike Flexbox (1D), Grid controls **both rows and columns simultaneously**. Use it for: page layouts, dashboards, image galleries, card grids, and any complex 2D arrangement."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "css": "/* ═══ DEFINING GRID COLUMNS & ROWS ═══ */\n.gallery {\n  display: grid;\n  \n  /* Fixed columns */\n  grid-template-columns: 200px 1fr 1fr;    /* 1st: fixed, 2nd & 3rd: equal flexible */\n  \n  /* Responsive auto-fit grid — NO MEDIA QUERIES NEEDED */\n  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));\n  /* Cards are min 280px, max 1fr. Auto-creates as many columns as fit! */\n  \n  /* Named rows */\n  grid-template-rows: 60px 1fr auto;  /* header: 60px, main: flexible, footer: auto */\n  \n  gap: 24px;  /* Space between all cells */\n}\n\n/* ═══ DASHBOARD LAYOUT WITH NAMED AREAS ═══ */\n.dashboard {\n  display: grid;\n  grid-template-columns: 240px 1fr;    /* sidebar + main */\n  grid-template-rows: 60px 1fr 50px;  /* header + content + footer */\n  grid-template-areas:\n    \"sidebar  topbar\"\n    \"sidebar  content\"\n    \"sidebar  footer\";\n  min-height: 100vh;\n}\n\n.sidebar  { grid-area: sidebar; }\n.topbar   { grid-area: topbar; }\n.content  { grid-area: content; }\n.footer   { grid-area: footer; }\n\n/* ═══ SPANNING CELLS ═══ */\n.featured-card {\n  grid-column: 1 / 3;    /* Span from column line 1 to line 3 (2 columns wide) */\n  grid-row: span 2;       /* Span 2 rows tall */\n}\n\n/* ═══ RESPONSIVE GRID WITH MEDIA QUERIES ═══ */\n.card-grid {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 16px;\n}\n\n@media (max-width: 768px) {\n  .card-grid { grid-template-columns: 1fr 1fr; }  /* 2 columns on tablet */\n}\n\n@media (max-width: 480px) {\n  .card-grid { grid-template-columns: 1fr; }       /* 1 column on mobile */\n}"
+          }
+        },
+        {
+          "type": "callout",
+          "title": "Flexbox vs Grid Decision Guide",
+          "text": "Use FLEXBOX when: laying out items in a single row or column, centering content, distributing navigation items, or when item sizes determine the layout.\n\nUse GRID when: you need to control both rows AND columns, creating page-level layouts (sidebar + main + header), image galleries, or when the layout determines item sizes.",
+          "calloutType": "tip"
+        },
+        {
+          "type": "h2",
+          "text": "2.5 CSS Variables & Design Systems"
+        },
+        {
+          "type": "para",
+          "text": "**CSS Custom Properties** (CSS variables) are one of the most powerful features of modern CSS. They enable design systems, dynamic theming (dark/light mode), and component customization without JavaScript."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "css": "/* ═══ DEFINE VARIABLES ON :root (global scope) ═══ */\n:root {\n  /* Color tokens */\n  --color-bg-primary: #0f172a;\n  --color-bg-card: #1e293b;\n  --color-text: #f8fafc;\n  --color-text-muted: #94a3b8;\n  --color-accent: #6366f1;\n  --color-accent-hover: #818cf8;\n  \n  /* Spacing scale */\n  --space-1: 4px;\n  --space-2: 8px;\n  --space-3: 12px;\n  --space-4: 16px;\n  --space-6: 24px;\n  --space-8: 32px;\n  \n  /* Typography */\n  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;\n  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;\n  --font-size-sm: 14px;\n  --font-size-base: 16px;\n  --font-size-lg: 18px;\n  --font-size-xl: 24px;\n  \n  /* Border radius */\n  --radius-sm: 6px;\n  --radius-md: 12px;\n  --radius-lg: 20px;\n  \n  /* Shadows */\n  --shadow-sm: 0 1px 3px rgba(0,0,0,0.2);\n  --shadow-md: 0 4px 20px rgba(0,0,0,0.3);\n}\n\n/* ═══ AUTOMATIC LIGHT/DARK MODE ═══ */\n@media (prefers-color-scheme: light) {\n  :root {\n    --color-bg-primary: #ffffff;\n    --color-bg-card: #f8fafc;\n    --color-text: #0f172a;\n    --color-text-muted: #64748b;\n  }\n}\n\n/* ═══ MANUAL THEME SWITCHING ═══ */\n[data-theme=\"light\"] {\n  --color-bg-primary: #ffffff;\n  --color-text: #0f172a;\n}\n\n/* ═══ USE VARIABLES ═══ */\n.card {\n  background: var(--color-bg-card);\n  color: var(--color-text);\n  border-radius: var(--radius-md);\n  padding: var(--space-6);\n  box-shadow: var(--shadow-md);\n  font-family: var(--font-sans);\n}\n\n/* Fallback value */\n.element { color: var(--undefined-var, #6366f1); }"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "2.6 CSS Animations & Transitions"
+        },
+        {
+          "type": "para",
+          "text": "Animations make interfaces feel alive. CSS provides two animation systems: **transitions** (simple A→B state changes triggered by events) and **keyframe animations** (complex multi-step sequences that run automatically)."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "css": "/* ═══ TRANSITIONS — triggered by state change ═══ */\n.btn {\n  background: #6366f1;\n  color: white;\n  transform: translateY(0);\n  box-shadow: 0 4px 16px rgba(99,102,241,0.3);\n  \n  /* transition: property duration easing delay */\n  transition:\n    background 0.2s ease,\n    transform 0.2s ease,\n    box-shadow 0.2s ease;\n}\n\n.btn:hover {\n  background: #818cf8;\n  transform: translateY(-2px);  /* GPU composited — no layout reflow! */\n  box-shadow: 0 8px 24px rgba(99,102,241,0.5);\n}\n\n.btn:active {\n  transform: translateY(0);\n  box-shadow: none;\n}\n\n/* ═══ KEYFRAME ANIMATIONS — run automatically ═══ */\n@keyframes fadeInUp {\n  from {\n    opacity: 0;\n    transform: translateY(20px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n@keyframes pulse {\n  0%, 100% { transform: scale(1); opacity: 1; }\n  50%       { transform: scale(1.05); opacity: 0.8; }\n}\n\n@keyframes shimmer {\n  0%   { background-position: -200% center; }\n  100% { background-position: 200% center; }\n}\n\n/* Apply animations */\n.card-enter {\n  animation: fadeInUp 0.4s ease forwards;\n}\n\n.loading-skeleton {\n  background: linear-gradient(\n    90deg,\n    #1e293b 25%,\n    #334155 50%,\n    #1e293b 75%\n  );\n  background-size: 200% 100%;\n  animation: shimmer 1.5s infinite;\n}\n\n/* ═══ RESPECT USER PREFERENCES ═══ */\n@media (prefers-reduced-motion: reduce) {\n  *, *::before, *::after {\n    animation-duration: 0.01ms !important;\n    transition-duration: 0.01ms !important;\n  }\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "2.7 CSS Architecture & BEM Methodology"
+        },
+        {
+          "type": "para",
+          "text": "**BEM (Block, Element, Modifier)** is a CSS naming methodology that prevents style conflicts in large codebases. It creates component-scoped styles without Shadow DOM, making CSS predictable and scalable across teams."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "css": "/* BEM Naming: .block__element--modifier */\n\n/* ═══ BLOCK: standalone component ═══ */\n.course-card {\n  border: 1px solid var(--border-color);\n  background: var(--color-bg-card);\n  border-radius: var(--radius-md);\n  overflow: hidden;\n  transition: transform 0.2s ease, box-shadow 0.2s ease;\n}\n\n.course-card:hover {\n  transform: translateY(-4px);\n  box-shadow: var(--shadow-md);\n}\n\n/* ═══ ELEMENTS: children of the block (double underscore) ═══ */\n.course-card__thumbnail {\n  width: 100%;\n  aspect-ratio: 16 / 9;\n  object-fit: cover;\n}\n\n.course-card__body {\n  padding: var(--space-4);\n}\n\n.course-card__title {\n  font-size: var(--font-size-lg);\n  font-weight: 700;\n  color: var(--color-text);\n  margin-bottom: var(--space-2);\n}\n\n.course-card__meta {\n  display: flex;\n  align-items: center;\n  gap: var(--space-2);\n  color: var(--color-text-muted);\n  font-size: var(--font-size-sm);\n}\n\n.course-card__badge {\n  display: inline-flex;\n  align-items: center;\n  padding: 2px 8px;\n  border-radius: 99px;\n  font-size: 12px;\n  font-weight: 600;\n}\n\n/* ═══ MODIFIERS: variations (double dash) ═══ */\n.course-card__badge--active {\n  background: #dcfce7;\n  color: #15803d;\n}\n\n.course-card__badge--popular {\n  background: #dbeafe;\n  color: #1d4ed8;\n}\n\n.course-card__badge--new {\n  background: #fef9c3;\n  color: #854d0e;\n}\n\n.course-card--featured {\n  border-color: var(--color-accent);\n  box-shadow: 0 0 0 2px var(--color-accent);\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "2.8 Responsive Design & Media Queries"
+        },
+        {
+          "type": "para",
+          "text": "Responsive design ensures your UI works on screens from 320px (small phones) to 2560px+ (4K monitors). Use a **mobile-first** approach: write base styles for mobile, then use `min-width` breakpoints to add complexity for larger screens."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "css": "/* ═══ MOBILE-FIRST APPROACH ═══ */\n/* Start: mobile base styles (no media query) */\n.hero {\n  padding: 40px 16px;\n  text-align: center;\n  flex-direction: column;\n}\n\n.hero-title {\n  font-size: 28px;\n  line-height: 1.2;\n}\n\n/* Tablet: 640px+ */\n@media (min-width: 640px) {\n  .hero {\n    padding: 60px 32px;\n  }\n  .hero-title { font-size: 36px; }\n}\n\n/* Laptop: 1024px+ */\n@media (min-width: 1024px) {\n  .hero {\n    padding: 100px 64px;\n    text-align: left;\n    flex-direction: row;\n  }\n  .hero-title { font-size: 52px; }\n}\n\n/* Wide: 1280px+ */\n@media (min-width: 1280px) {\n  .hero { max-width: 1200px; margin: 0 auto; }\n  .hero-title { font-size: 64px; }\n}\n\n/* ═══ MODERN CONTAINER QUERIES (CSS 2023) ═══ */\n/* Respond to the PARENT container size, not viewport! */\n.card-container {\n  container-type: inline-size;\n  container-name: card;\n}\n\n@container card (min-width: 400px) {\n  .card { flex-direction: row; }\n  .card-title { font-size: 18px; }\n}\n\n/* ═══ USEFUL MEDIA FEATURES ═══ */\n@media (prefers-color-scheme: dark) { /* Dark mode */ }\n@media (prefers-reduced-motion: reduce) { /* Reduce animations */ }\n@media (hover: none) { /* Touch devices — no hover */ }\n@media print { .sidebar, .nav { display: none; } }"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: CSS Mastery"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between position: relative, absolute, fixed, and sticky?",
+          "answer": "`relative`: Element stays in normal flow. Can be offset with top/left/right/bottom (relative to its own original position). Creates a containing block for absolute children.\n\n`absolute`: Removed from normal flow. Positioned relative to its nearest ancestor with position !== static. Use for dropdowns, tooltips, overlays.\n\n`fixed`: Removed from normal flow. Positioned relative to the VIEWPORT — doesn't scroll with the page. Use for sticky headers, floating buttons, cookie banners.\n\n`sticky`: Hybrid — stays in normal flow until it hits a scroll threshold, then acts like `fixed`. Use for section headings that stick while their section is visible, or table headers."
+        },
+        {
+          "type": "interviewCard",
+          "question": "What causes layout thrashing and how do you fix it?",
+          "answer": "Layout thrashing (forced synchronous layouts) happens when you interleave DOM reads and writes in a loop, forcing the browser to recalculate layout repeatedly:\n\n// BAD — causes thrashing\nelements.forEach(el => {\n  const h = el.offsetHeight;    // READ — forces layout calculation\n  el.style.height = h + 'px';  // WRITE — invalidates layout for next read\n});\n\nFix: Batch all reads first, then all writes:\n// GOOD — read everything first\nconst heights = elements.map(el => el.offsetHeight);\n// Then write all changes\nelements.forEach((el, i) => el.style.height = heights[i] + 'px');\n\nAlternatively, use CSS transforms (translateX/Y/scale) instead of top/left/width — transforms are GPU-composited and bypass Layout and Paint entirely."
+        }
+      ]
+    },
+    {
+      "num": "3",
+      "title": "JavaScript Complete Guide",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "JavaScript is the only programming language that runs natively in every web browser on Earth. Understanding JavaScript at a deep level — its **execution model**, **type system**, **prototype chain**, **closures**, and **asynchronous runtime** — is the foundation of all modern web development. This chapter builds that foundation from the ground up."
+        },
+        {
+          "type": "h2",
+          "text": "3.1 JavaScript Fundamentals — Variables, Types & Scope"
+        },
+        {
+          "type": "para",
+          "text": "JavaScript is a **dynamically typed**, **interpreted** (JIT-compiled in V8), **prototype-based**, **single-threaded** language with a **non-blocking event loop**. Let's break down each of these characteristics."
+        },
+        {
+          "type": "h3",
+          "text": "Variables: var vs let vs const"
+        },
+        {
+          "type": "diagram",
+          "name": "jsEventLoop"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Feature",
+            "`var`",
+            "`let`",
+            "`const`"
+          ],
+          "rows": [
+            [
+              "Scope",
+              "Function-scoped (leaks out of blocks)",
+              "Block-scoped `{}`",
+              "Block-scoped `{}`"
+            ],
+            [
+              "Hoisting",
+              "Hoisted and initialized as `undefined`",
+              "Hoisted but in TDZ (Temporal Dead Zone)",
+              "Hoisted but in TDZ"
+            ],
+            [
+              "Re-assignment",
+              "✅ Yes",
+              "✅ Yes",
+              "❌ No (binding is constant)"
+            ],
+            [
+              "Re-declaration",
+              "✅ Yes (same scope)",
+              "❌ No",
+              "❌ No"
+            ],
+            [
+              "Attached to `global`?",
+              "✅ `var x = 1` → `global.x === 1`",
+              "❌ No",
+              "❌ No"
+            ],
+            [
+              "Use today?",
+              "❌ Avoid — use in legacy code only",
+              "✅ For mutable values",
+              "✅ Default choice always"
+            ]
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ DATA TYPES ═══\n// Primitive (stored by value, immutable)\nconst str    = 'Hello World';          // string\nconst num    = 42;                      // number (64-bit IEEE 754 float)\nconst bool   = true;                   // boolean\nconst nil    = null;                   // null (intentional empty value)\nconst undef  = undefined;             // undefined (variable not assigned)\nconst sym    = Symbol('id');          // symbol (unique identifier)\nconst bigInt = 9007199254740993n;     // BigInt (integers beyond 2^53-1)\n\n// Reference (stored by reference)\nconst obj   = { name: 'Rajneesh', age: 25 };  // object\nconst arr   = [1, 2, 3];                       // array (object type)\nconst fn    = function() {};                   // function (callable object)\n\n// ═══ TYPE CHECKING ═══\ntypeof 'hello'      // 'string'\ntypeof 42           // 'number'\ntypeof true         // 'boolean'\ntypeof null         // 'object' ← famous JS bug (historical)\ntypeof undefined    // 'undefined'\ntypeof {}           // 'object'\ntypeof []           // 'object' ← use Array.isArray() instead!\ntypeof function(){} // 'function'\n\nArray.isArray([1, 2])           // true ← correct way\nobj instanceof Object           // true\n\n// ═══ TYPE COERCION — implicit conversion ═══\n'5' + 2       // '52'  ← + triggers string concatenation\n'5' - 2       // 3     ← - triggers numeric conversion\n'5' * '2'     // 10    ← numeric\ntrue + 1      // 2     ← true coerces to 1\nnull + 1      // 1     ← null coerces to 0\n\n// Always use strict equality ===\n5 == '5'      // true  ← coerces (BAD)\n5 === '5'     // false ← strict type check (GOOD)"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "3.2 Functions — First-Class Citizens"
+        },
+        {
+          "type": "para",
+          "text": "In JavaScript, functions are **first-class objects** — they can be assigned to variables, passed as arguments, returned from other functions, and stored in arrays. This enables powerful patterns like **callbacks**, **closures**, **higher-order functions**, and **currying**."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ FUNCTION DECLARATION (hoisted — available before definition) ═══\nfunction greet(name) {\n  return `Hello, ${name}!`;\n}\n\n// ═══ FUNCTION EXPRESSION (not hoisted) ═══\nconst greet = function(name) {\n  return `Hello, ${name}!`;\n};\n\n// ═══ ARROW FUNCTION (ES6 — lexical `this` binding) ═══\nconst greet = (name) => `Hello, ${name}!`;\nconst add = (a, b) => a + b;          // implicit return\nconst double = n => n * 2;            // single param, no parens needed\nconst noArgs = () => 'constant';      // no args = empty parens required\n\n// ═══ DEFAULT PARAMETERS ═══\nfunction createUser(name, role = 'student', active = true) {\n  return { name, role, active };\n}\n\n// ═══ REST PARAMETERS ═══\nfunction sum(...numbers) {            // numbers = array of all args\n  return numbers.reduce((acc, n) => acc + n, 0);\n}\nsum(1, 2, 3, 4, 5);  // 15\n\n// ═══ CLOSURES ═══\nfunction makeCounter(initial = 0) {\n  let count = initial;  // private variable — not accessible from outside\n  \n  return {\n    increment: () => ++count,\n    decrement: () => --count,\n    reset: () => { count = initial; },\n    getCount: () => count\n  };\n}\n\nconst counter = makeCounter(10);\ncounter.increment(); // 11\ncounter.increment(); // 12\ncounter.decrement(); // 11\ncounter.getCount();  // 11\n// count variable is INACCESSIBLE directly — encapsulated!\n\n// ═══ HIGHER-ORDER FUNCTIONS ═══\nconst students = [\n  { name: 'Raj', score: 92, passed: true },\n  { name: 'Priya', score: 78, passed: true },\n  { name: 'Sam', score: 45, passed: false },\n];\n\nconst passed = students.filter(s => s.passed);        // filter\nconst names = students.map(s => s.name);              // transform\nconst avg = students.reduce((sum, s) => sum + s.score, 0) / students.length; // fold\nconst top = students.find(s => s.score > 90);         // first match\nconst anyFailed = students.some(s => !s.passed);      // boolean test\nconst allPassed = students.every(s => s.passed);      // boolean test"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "3.3 Objects, Prototypes & ES6 Classes"
+        },
+        {
+          "type": "para",
+          "text": "JavaScript is **prototype-based** — objects inherit from other objects via a prototype chain. ES6 `class` syntax is syntactic sugar over this prototype system — there are no real 'classes' in JavaScript, only objects linked via prototypes."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ OBJECT CREATION PATTERNS ═══\n\n// Object literal (most common)\nconst user = {\n  name: 'Rajneesh',\n  age: 25,\n  address: {\n    city: 'Delhi',\n    pincode: '110001'\n  },\n  greet() {   // method shorthand\n    return `Hi, I'm ${this.name}`;\n  }\n};\n\n// ═══ DESTRUCTURING ═══\nconst { name, age, address: { city } } = user;\nconst { name: userName, role = 'student' } = user;  // rename + default\n\n// Array destructuring\nconst [first, second, ...rest] = [1, 2, 3, 4, 5];\nconst [,, third] = [10, 20, 30];  // skip elements\n\n// ═══ SPREAD & REST ═══\nconst base = { theme: 'dark', lang: 'en' };\nconst updated = { ...base, lang: 'hi', newProp: true };  // merge + override\n\nconst nums = [1, 2, 3];\nconst moreNums = [...nums, 4, 5];  // [1, 2, 3, 4, 5]\nMath.max(...nums);                 // 3\n\n// ═══ ES6 CLASS ═══\nclass Animal {\n  #sound;  // private field (ES2022)\n  \n  constructor(name, sound) {\n    this.name = name;\n    this.#sound = sound;\n  }\n  \n  speak() {\n    return `${this.name} says ${this.#sound}`;\n  }\n  \n  static create(name, sound) {  // factory static method\n    return new Animal(name, sound);\n  }\n}\n\nclass Dog extends Animal {\n  constructor(name) {\n    super(name, 'Woof');  // must call super() first!\n    this.tricks = [];\n  }\n  \n  learn(trick) {\n    this.tricks.push(trick);\n    return this;  // enables method chaining\n  }\n  \n  speak() {\n    return super.speak() + '!';\n  }\n}\n\nconst dog = new Dog('Bruno');\ndog.learn('sit').learn('shake');  // method chaining\nconsole.log(dog.speak());        // 'Bruno says Woof!'"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "3.4 Array Methods — The Complete Toolkit"
+        },
+        {
+          "type": "para",
+          "text": "Mastering array methods is essential for writing functional, readable JavaScript. These methods are the backbone of data transformation in React and backend APIs."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "const courses = [\n  { id: 1, title: 'HTML', level: 'beginner', rating: 4.8, students: 1200 },\n  { id: 2, title: 'React', level: 'advanced', rating: 4.9, students: 850 },\n  { id: 3, title: 'CSS', level: 'beginner', rating: 4.7, students: 950 },\n  { id: 4, title: 'Node.js', level: 'intermediate', rating: 4.6, students: 600 },\n];\n\n// ─── TRANSFORMATION ───\ncourses.map(c => c.title);                    // ['HTML', 'React', 'CSS', 'Node.js']\ncourses.map(c => ({ ...c, enrolled: false })); // add field to each object\n\n// ─── FILTERING ───\ncourses.filter(c => c.level === 'beginner');  // only beginner courses\ncourses.filter(c => c.rating >= 4.8);        // highly rated\n\n// ─── FINDING ───\ncourses.find(c => c.id === 2);               // React course object\ncourses.findIndex(c => c.id === 3);          // 2 (index of CSS)\n\n// ─── AGGREGATION ───\nconst totalStudents = courses.reduce((sum, c) => sum + c.students, 0); // 3600\nconst avgRating = courses.reduce((sum, c) => sum + c.rating, 0) / courses.length;\n\n// ─── SORTING ───\n[...courses].sort((a, b) => b.rating - a.rating);    // highest rated first\n[...courses].sort((a, b) => a.title.localeCompare(b.title)); // alphabetical\n\n// ─── CHAINING ───\nconst topBeginner = courses\n  .filter(c => c.level === 'beginner')\n  .sort((a, b) => b.rating - a.rating)\n  .slice(0, 1)           // top 1\n  .map(c => c.title)[0]; // 'HTML'\n\n// ─── TESTING ───\ncourses.every(c => c.rating > 4);     // true — all above 4\ncourses.some(c => c.students > 1000); // true — at least one\ncourses.includes({ id: 1 });          // false — reference check!\n\n// ─── FLATTENING ───\n[[1, 2], [3, 4]].flat();              // [1, 2, 3, 4]\n[[1, [2, 3]]].flat(Infinity);         // [1, 2, 3] — deep flatten\n[1, 2, 3].flatMap(n => [n, n * 2]);   // [1, 2, 2, 4, 3, 6]\n\n// ─── CREATING ARRAYS ───\nArray.from({ length: 5 }, (_, i) => i + 1); // [1, 2, 3, 4, 5]\nArray.from('hello');                          // ['h', 'e', 'l', 'l', 'o']\nArray.from(new Set([1, 1, 2, 3]));           // [1, 2, 3] — deduplicate"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "3.5 DOM Manipulation — From Static to Interactive"
+        },
+        {
+          "type": "para",
+          "text": "The DOM (Document Object Model) is the browser's in-memory representation of your HTML. JavaScript can read, modify, create, and delete DOM nodes to create interactive experiences. Every React or Vue framework ultimately calls these browser APIs under the hood."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ SELECTING ELEMENTS ═══\ndocument.getElementById('main-nav');               // By ID (fastest)\ndocument.querySelector('.card');                   // First CSS match\ndocument.querySelectorAll('.card');               // All CSS matches (NodeList)\ndocument.querySelector('#form input[required]');  // Complex CSS selector\ndocument.querySelector('[data-id=\"42\"]');         // Data attribute\n\n// ═══ READING PROPERTIES ═══\nconst el = document.querySelector('.card');\nel.textContent;          // Text content (safe, no HTML)\nel.innerHTML;            // HTML string (XSS risk if from user input!)\nel.getAttribute('href'); // Attribute value\nel.dataset.userId;       // data-user-id attribute\nel.classList;            // DOMTokenList\nel.style.color;          // Inline style\n\n// ═══ MODIFYING THE DOM ═══\nel.textContent = 'New Text';          // Replace text\nel.innerHTML = '<strong>Bold</strong>'; // Replace HTML (sanitize user input!)\nel.setAttribute('aria-expanded', 'true');\nel.dataset.active = 'true';           // Sets data-active attribute\n\n// Class manipulation\nel.classList.add('active', 'visible');\nel.classList.remove('loading');\nel.classList.toggle('open');          // Add if absent, remove if present\nel.classList.replace('old', 'new');\nel.classList.contains('active');      // boolean\n\n// Style\nel.style.setProperty('--accent', '#6366f1');  // Set CSS variable\nel.style.transform = 'translateY(-4px)';\n\n// ═══ CREATING & INSERTING ELEMENTS ═══\nconst card = document.createElement('div');\ncard.className = 'course-card';\ncard.innerHTML = `\n  <h3 class=\"card__title\">${course.title}</h3>\n  <p class=\"card__desc\">${course.description}</p>\n`;\n\ncontainer.appendChild(card);                    // Add to end\ncontainer.prepend(card);                        // Add to start\nitem.before(newEl);                             // Insert before\nitem.after(newEl);                              // Insert after\nitem.replaceWith(newEl);                        // Replace\nitem.remove();                                  // Delete\n\n// ═══ EVENT LISTENERS ═══\nconst btn = document.querySelector('#submit-btn');\n\nbtn.addEventListener('click', handleClick);\nbtn.removeEventListener('click', handleClick);  // Always remove to avoid leaks\n\nfunction handleClick(event) {\n  event.preventDefault();    // Stop form submission / link navigation\n  event.stopPropagation();   // Stop event bubbling up to parent\n  \n  const target = event.target;       // Element that was clicked\n  const currentTarget = event.currentTarget; // Element with the listener\n}\n\n// ═══ EVENT DELEGATION — one listener for many children ═══\n// Instead of adding listeners to 100 cards, add ONE to the container\ndocument.querySelector('.card-grid').addEventListener('click', (e) => {\n  const card = e.target.closest('.course-card');\n  if (!card) return;\n  const courseId = card.dataset.courseId;\n  openCourse(courseId);\n});"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: JavaScript"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is a closure? Give a real-world use case.",
+          "answer": "A closure is when an inner function retains access to variables from its outer (enclosing) function's scope, even after the outer function has returned. The inner function 'closes over' the outer scope.\n\nReal-world use cases:\n1. Data privacy / encapsulation: module pattern hides private state\n2. Factory functions: create specialized functions with pre-set arguments (makeMultiplier(5))\n3. Memoization: cache function results using a closed-over Map\n4. React hooks: useState, useEffect closures capture the component's scope\n5. Event handlers: click handlers close over element references and state\n\nExample:\nfunction makeAdder(x) {\n  return (y) => x + y;  // closes over x\n}\nconst add5 = makeAdder(5);\nadd5(3); // 8 — x is still accessible"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between `==` and `===` in JavaScript?",
+          "answer": "`==` (Abstract Equality): Performs type coercion before comparing. JavaScript converts operands to the same type, then compares values.\n0 == false → true (false coerces to 0)\n'' == false → true\nnull == undefined → true\n1 == '1' → true\n\n`===` (Strict Equality): No type coercion. Both type AND value must match.\n0 === false → false (different types)\n1 === '1' → false (different types)\nnull === undefined → false\n\nAlways use === in production code. The only exception: if (value == null) catches both null and undefined in one check — a deliberate, well-known pattern."
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain hoisting in JavaScript.",
+          "answer": "Hoisting is JavaScript's behavior of moving declarations to the top of their scope before code execution. But only DECLARATIONS are hoisted — not initializations.\n\nvar declarations: Hoisted and initialized to undefined.\nconsole.log(x); // undefined (not ReferenceError!)\nvar x = 5;\n\nfunction declarations: Fully hoisted — can be called before definition.\ngreet(); // Works!\nfunction greet() { return 'hi'; }\n\nlet/const: Hoisted but NOT initialized — accessing before declaration throws ReferenceError (Temporal Dead Zone).\nconsole.log(y); // ReferenceError: Cannot access 'y' before initialization\nlet y = 10;\n\nBest practice: Always declare variables at the top of their scope. Use const/let, never var."
+        }
+      ]
+    },
+    {
+      "num": "4",
+      "title": "Advanced JavaScript Architecture",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This chapter covers the advanced JavaScript concepts that separate competent developers from outstanding ones: **prototypal inheritance**, **design patterns**, **memory management**, **the `this` keyword**, **iterators/generators**, and **ES2023+ features**."
+        },
+        {
+          "type": "h2",
+          "text": "4.1 The `this` Keyword — Context Binding"
+        },
+        {
+          "type": "para",
+          "text": "`this` is one of JavaScript's most confusing concepts. Unlike other languages, `this` in JavaScript is determined at **call time** — not at definition time. There are 4 binding rules in order of priority:"
+        },
+        {
+          "type": "numbered",
+          "items": [
+            "**new binding**: `new Constructor()` — `this` is the newly created object",
+            "**Explicit binding**: `.call(obj)`, `.apply(obj)`, `.bind(obj)` — `this` is explicitly set",
+            "**Implicit binding**: `obj.method()` — `this` is the object before the dot",
+            "**Default binding**: `func()` — `this` is `undefined` in strict mode, `global` in non-strict"
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ THE 4 BINDING RULES ═══\n\n// 1. Default binding — 'this' = global/undefined\nfunction whoAmI() {\n  console.log(this); // undefined in strict mode, global otherwise\n}\nwhoAmI();\n\n// 2. Implicit binding — 'this' = the calling object\nconst user = {\n  name: 'Raj',\n  greet() { return `Hi, I'm ${this.name}`; }\n};\nuser.greet(); // 'Hi, I'm Raj' — this = user\n\n// ⚠ Binding loss (common bug):\nconst greetFn = user.greet;  // extract the method\ngreetFn();                   // 'Hi, I'm undefined' — this is now global!\n\n// 3. Explicit binding\nfunction greet() { return `Hi, I'm ${this.name}`; }\ngreet.call({ name: 'Priya' });         // call: immediate\ngreet.apply({ name: 'Sam' }, []);      // apply: immediate, args as array\nconst boundGreet = greet.bind(user);  // bind: returns new function\nboundGreet();                          // 'Hi, I'm Raj'\n\n// 4. new binding\nfunction User(name) { this.name = name; }\nconst u = new User('Raj');  // this = new empty object {}\n\n// ═══ ARROW FUNCTIONS — Lexical 'this' ═══\n// Arrow functions do NOT have their own 'this'\n// They inherit 'this' from the surrounding scope at DEFINITION time\nclass Timer {\n  constructor() { this.count = 0; }\n  \n  start() {\n    // ❌ Regular function — 'this' lost in callback\n    setTimeout(function() {\n      this.count++;  // TypeError: Cannot set property of undefined\n    }, 1000);\n    \n    // ✅ Arrow function — 'this' inherited from start() scope\n    setTimeout(() => {\n      this.count++;  // Works! this = Timer instance\n    }, 1000);\n  }\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "4.2 JavaScript Design Patterns"
+        },
+        {
+          "type": "para",
+          "text": "Design patterns are proven, reusable solutions to common software design problems. Knowing when and how to apply them makes your code more maintainable, testable, and scalable."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ SINGLETON PATTERN — one instance ever ═══\nclass Database {\n  static #instance = null;\n  \n  constructor(url) {\n    if (Database.#instance) return Database.#instance;\n    this.url = url;\n    this.connected = false;\n    Database.#instance = this;\n  }\n  \n  connect() { this.connected = true; return this; }\n}\n\nconst db1 = new Database('postgres://localhost:5432/dev');\nconst db2 = new Database('other-url');  // returns same instance!\nconsole.log(db1 === db2);  // true\n\n// ═══ OBSERVER PATTERN — pub/sub event system ═══\nclass EventEmitter {\n  #listeners = new Map();\n  \n  on(event, callback) {\n    if (!this.#listeners.has(event)) this.#listeners.set(event, []);\n    this.#listeners.get(event).push(callback);\n    return () => this.off(event, callback);  // returns unsubscribe fn\n  }\n  \n  off(event, callback) {\n    this.#listeners.set(event,\n      this.#listeners.get(event)?.filter(cb => cb !== callback) ?? []);\n  }\n  \n  emit(event, data) {\n    this.#listeners.get(event)?.forEach(cb => cb(data));\n  }\n}\n\nconst bus = new EventEmitter();\nconst unsub = bus.on('user:login', ({ userId }) => {\n  console.log(`User ${userId} logged in`);\n});\nbus.emit('user:login', { userId: 42 });\nunsub();  // cleanup\n\n// ═══ FACTORY PATTERN — create objects without 'new' ═══\nfunction createNotification(type, message) {\n  const base = { id: crypto.randomUUID(), message, createdAt: Date.now() };\n  \n  const types = {\n    success: { ...base, icon: '✅', color: 'green', autoClose: 3000 },\n    error:   { ...base, icon: '❌', color: 'red', autoClose: 0 },\n    warning: { ...base, icon: '⚠️', color: 'yellow', autoClose: 5000 },\n  };\n  \n  return types[type] ?? { ...base, icon: 'ℹ️', color: 'blue', autoClose: 3000 };\n}\n\n// ═══ MODULE PATTERN — encapsulation ═══\nconst AuthModule = (() => {\n  let _token = null;  // private\n  \n  function _validateToken(t) { return t?.length > 20; }  // private\n  \n  return {  // public API\n    login(credentials) {\n      // fetch token from API...\n      _token = 'eyJ...'; \n    },\n    logout() { _token = null; },\n    isAuthenticated() { return _validateToken(_token); },\n    getToken() { return _token; }\n  };\n})();"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "4.3 Memory Management & Avoiding Leaks"
+        },
+        {
+          "type": "para",
+          "text": "JavaScript uses **automatic garbage collection** (mark-and-sweep algorithm). The GC identifies objects that are no longer **reachable** from any root (global, stack frame, event listeners) and frees their memory. Memory leaks occur when you accidentally keep references alive."
+        },
+        {
+          "type": "callout",
+          "title": "Memory Leak Danger",
+          "text": "The top 4 sources of memory leaks in JavaScript:\n1. Event listeners not removed when component unmounts\n2. setInterval/setTimeout not cleared\n3. Closures referencing large objects unintentionally\n4. Detached DOM nodes still referenced in variables",
+          "calloutType": "caution"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ❌ MEMORY LEAK — event listener never removed\nclass Component {\n  constructor() {\n    // This handler closes over 'this' — keeps Component alive forever\n    document.addEventListener('resize', this.handleResize);\n  }\n  handleResize() { /* ... */ }\n  // No cleanup! Window holds reference → Component never GC'd\n}\n\n// ✅ FIX — always clean up\nclass Component {\n  constructor() {\n    this.handleResize = this.handleResize.bind(this);\n    document.addEventListener('resize', this.handleResize);\n  }\n  handleResize() { /* ... */ }\n  destroy() {\n    document.removeEventListener('resize', this.handleResize);\n  }\n}\n\n// ❌ LEAK — interval not cleared\nconst id = setInterval(() => fetchData(), 5000);\n// Page navigates away — interval still firing!\n\n// ✅ FIX\nconst id = setInterval(() => fetchData(), 5000);\nreturn () => clearInterval(id);  // React useEffect cleanup\n\n// ✅ WeakMap — allows GC when key is no longer referenced\nconst cache = new WeakMap();\nfunction process(obj) {\n  if (cache.has(obj)) return cache.get(obj);\n  const result = expensiveCompute(obj);\n  cache.set(obj, result);  // Won't prevent GC of obj!\n  return result;\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "4.4 Iterators, Generators & Symbol.iterator"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ CUSTOM ITERATOR ═══\nconst range = {\n  from: 1,\n  to: 5,\n  [Symbol.iterator]() {\n    let current = this.from;\n    const last = this.to;\n    return {\n      next() {\n        return current <= last\n          ? { value: current++, done: false }\n          : { value: undefined, done: true };\n      }\n    };\n  }\n};\n\nfor (const n of range) console.log(n);  // 1, 2, 3, 4, 5\nconst nums = [...range];               // [1, 2, 3, 4, 5]\n\n// ═══ GENERATORS — pausable functions ═══\nfunction* fibonacci() {\n  let [a, b] = [0, 1];\n  while (true) {\n    yield a;           // pause here, return a\n    [a, b] = [b, a + b];\n  }\n}\n\nconst fib = fibonacci();\nfib.next().value;  // 0\nfib.next().value;  // 1\nfib.next().value;  // 1\nfib.next().value;  // 2\n\n// Take first 10 fibonacci numbers\nfunction take(gen, n) {\n  return Array.from({ length: n }, () => gen.next().value);\n}\ntake(fibonacci(), 10);  // [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]\n\n// ═══ ASYNC GENERATORS — stream processing ═══\nasync function* streamRecords(cursor) {\n  while (cursor.hasMore()) {\n    const batch = await cursor.next();\n    for (const record of batch) yield record;\n  }\n}\n\nfor await (const record of streamRecords(db.cursor())) {\n  await processRecord(record);\n}"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: Advanced JavaScript"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between `call`, `apply`, and `bind`?",
+          "answer": "All three explicitly set the `this` context for a function. The difference is in HOW they invoke the function:\n\n`.call(thisArg, arg1, arg2, ...)`: Calls the function immediately. Arguments passed individually.\ngreet.call(user, 'Hello', '!');\n\n`.apply(thisArg, [arg1, arg2])`: Calls the function immediately. Arguments passed as an array (useful when you have an array of args).\ngreet.apply(user, ['Hello', '!']);\nMath.max.apply(null, [1, 5, 3]);  // classic use case\n\n`.bind(thisArg, ...partialArgs)`: Does NOT call the function. Returns a NEW function with `this` permanently bound. Arguments can be partially applied.\nconst boundFn = greet.bind(user, 'Hello');\nboundFn('!');  // called later with pre-bound context"
+        }
+      ]
+    },
+    {
+      "num": "5",
+      "title": "Asynchronous JavaScript",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "JavaScript is **single-threaded** — it can only do one thing at a time. Yet we need to make network requests, read files, set timers, and handle user events without freezing the UI. This is achieved through the **Event Loop** — the engine behind all of JavaScript's non-blocking behavior."
+        },
+        {
+          "type": "diagram",
+          "name": "eventLoop"
+        },
+        {
+          "type": "h2",
+          "text": "5.1 The Event Loop — JavaScript's Heart"
+        },
+        {
+          "type": "para",
+          "text": "The JavaScript runtime consists of: a **Call Stack** (LIFO), a **Heap** (memory allocation), a **Web APIs layer** (browser APIs for setTimeout, fetch, DOM events), a **Microtask Queue** (Promise callbacks), and a **Task Queue** (setTimeout, setInterval callbacks). The Event Loop runs continuously checking: if the Call Stack is empty, it processes the Microtask Queue completely, then takes one task from the Task Queue."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// What order do these print?\nconsole.log('1');          // Call Stack — synchronous\n\nsetTimeout(() => {\n  console.log('2');        // Task Queue (macrotask)\n}, 0);\n\nPromise.resolve().then(() => {\n  console.log('3');        // Microtask Queue — ALWAYS before setTimeout!\n});\n\nqueueMicrotask(() => {\n  console.log('4');        // Also microtask\n});\n\nconsole.log('5');          // Call Stack — synchronous\n\n// Output: 1, 5, 3, 4, 2\n// Reasoning:\n// Sync first: 1, 5\n// Microtasks next (all of them): 3, 4\n// Task Queue last (one per loop): 2"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "5.2 Promises — Async Programming Done Right"
+        },
+        {
+          "type": "para",
+          "text": "A **Promise** is an object representing the eventual completion (or failure) of an asynchronous operation. It has 3 states: **Pending** (initial), **Fulfilled** (resolved with a value), **Rejected** (failed with a reason). Once settled, a Promise cannot change state."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ CREATING PROMISES ═══\nfunction fetchUser(userId) {\n  return new Promise((resolve, reject) => {\n    // Async operation (simulate DB query)\n    setTimeout(() => {\n      if (userId > 0) {\n        resolve({ id: userId, name: 'Rajneesh' });  // success\n      } else {\n        reject(new Error('Invalid user ID'));         // failure\n      }\n    }, 1000);\n  });\n}\n\n// ═══ CONSUMING PROMISES ═══\nfetchUser(42)\n  .then(user => {\n    console.log(user.name);   // Rajneesh\n    return fetchUserPosts(user.id);  // return another promise = chain!\n  })\n  .then(posts => console.log(posts))\n  .catch(err => console.error(err.message))  // catches ANY error in chain\n  .finally(() => hideLoadingSpinner());       // always runs\n\n// ═══ PROMISE COMBINATORS ═══\n// Run multiple promises CONCURRENTLY\nconst [user, posts, followers] = await Promise.all([\n  fetchUser(42),\n  fetchPosts(42),\n  fetchFollowers(42)\n]);\n// If ANY rejects → all rejects. Use for: parallel independent fetches\n\n// First to settle wins (resolve or reject)\nconst result = await Promise.race([\n  fetchFromServer1(),\n  fetchFromServer2(),\n  timeout(5000),  // reject after 5s\n]);\n\n// Returns ALL results — never rejects\nconst results = await Promise.allSettled([\n  fetchA(), fetchB(), fetchC()\n]);\nresults.forEach(r => {\n  if (r.status === 'fulfilled') console.log(r.value);\n  if (r.status === 'rejected') console.error(r.reason);\n});\n\n// Returns first FULFILLED result (skips rejections)\nconst fastest = await Promise.any([slow(), fast(), medium()]);"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "5.3 Async/Await — The Modern Way"
+        },
+        {
+          "type": "para",
+          "text": "`async/await` is syntactic sugar over Promises that makes asynchronous code look and behave like synchronous code. An `async` function always returns a Promise. `await` pauses execution inside the async function until the Promise settles — without blocking the main thread."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ BASIC ASYNC/AWAIT ═══\nasync function loadDashboard(userId) {\n  try {\n    // Sequential: each awaits the previous\n    const user = await fetchUser(userId);\n    const settings = await fetchSettings(userId);  // waits for user first\n    \n    return { user, settings };\n  } catch (error) {\n    console.error('Dashboard load failed:', error.message);\n    throw error;  // re-throw for caller to handle\n  } finally {\n    hideSpinner();\n  }\n}\n\n// ═══ PARALLEL WITH ASYNC/AWAIT ═══\nasync function loadDashboardFast(userId) {\n  // Start both simultaneously, await both\n  const [user, settings] = await Promise.all([\n    fetchUser(userId),\n    fetchSettings(userId)\n  ]);\n  return { user, settings };\n}\n\n// ═══ REAL-WORLD: fetch API with retry logic ═══\nasync function fetchWithRetry(url, maxRetries = 3) {\n  for (let attempt = 1; attempt <= maxRetries; attempt++) {\n    try {\n      const response = await fetch(url, {\n        headers: { 'Content-Type': 'application/json' },\n        signal: AbortSignal.timeout(5000)  // 5s timeout\n      });\n      \n      if (!response.ok) {\n        throw new Error(`HTTP ${response.status}: ${response.statusText}`);\n      }\n      \n      return await response.json();\n    } catch (error) {\n      if (attempt === maxRetries) throw error;\n      \n      const delay = Math.min(1000 * 2 ** attempt, 10000); // exponential backoff\n      await new Promise(r => setTimeout(r, delay));\n      console.log(`Retry ${attempt}/${maxRetries} after ${delay}ms`);\n    }\n  }\n}\n\n// ═══ ASYNC ITERATION ═══\nasync function processAllPages(endpoint) {\n  let cursor = null;\n  const results = [];\n  \n  do {\n    const { data, nextCursor } = await fetchPage(endpoint, cursor);\n    results.push(...data);\n    cursor = nextCursor;\n  } while (cursor);\n  \n  return results;\n}"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: Async JavaScript"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between microtasks and macrotasks in the Event Loop?",
+          "answer": "Macrotasks (Task Queue): setTimeout, setInterval, setImmediate, I/O callbacks, UI rendering. Only ONE macrotask is processed per Event Loop iteration.\n\nMicrotasks (Microtask Queue): Promise .then/.catch/.finally callbacks, queueMicrotask(), MutationObserver. ALL pending microtasks are processed to completion after each task, BEFORE the next macrotask runs.\n\nOrder:\n1. Execute current synchronous code\n2. Process ALL microtasks (including new microtasks added during this step)\n3. Render UI if needed\n4. Process ONE macrotask\n5. Repeat from step 2\n\nThis means: infinitely chaining Promise.resolve() would starve the rendering and setTimeout callbacks!"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What are the differences between Promise.all, Promise.allSettled, Promise.race, and Promise.any?",
+          "answer": "Promise.all([p1, p2, p3]): Waits for ALL to fulfill. If ANY rejects, immediately rejects. Use when you need all results and any failure should abort.\n\nPromise.allSettled([p1, p2, p3]): Waits for ALL to settle (fulfill or reject). Never rejects. Returns array of {status, value/reason}. Use when you need all results regardless of individual failures.\n\nPromise.race([p1, p2, p3]): Returns first to SETTLE (fulfill or reject). Use for timeout patterns or racing redundant requests.\n\nPromise.any([p1, p2, p3]): Returns first to FULFILL (ignores rejections). Only rejects if ALL reject (AggregateError). Use for fallback strategies — fastest successful result wins."
+        }
+      ]
+    },
+    {
+      "num": "6",
+      "title": "Node.js Masterclass",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Node.js brings JavaScript to the **server side** — enabling full-stack development in a single language. Built on Chrome's V8 engine with a non-blocking, event-driven architecture, Node.js excels at I/O-intensive tasks: APIs, real-time chat, stream processing, and microservices."
+        },
+        {
+          "type": "h2",
+          "text": "6.1 Node.js Architecture & Module System"
+        },
+        {
+          "type": "para",
+          "text": "Node.js uses **libuv** — a C library — to implement its event loop, thread pool, and non-blocking I/O. The main thread runs JavaScript, while libuv handles OS operations (file system, DNS, crypto) on a thread pool. This is how Node.js achieves non-blocking I/O without multi-threading in JavaScript."
+        },
+        {
+          "type": "h3",
+          "text": "CommonJS vs ES Modules"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Feature",
+            "CommonJS (CJS)",
+            "ES Modules (ESM)"
+          ],
+          "rows": [
+            [
+              "Syntax",
+              "`require()` / `module.exports`",
+              "`import` / `export`"
+            ],
+            [
+              "Loading",
+              "Synchronous (blocks thread)",
+              "Asynchronous (parsed statically)"
+            ],
+            [
+              "Tree-shaking",
+              "❌ Not supported",
+              "✅ Dead code eliminated by bundlers"
+            ],
+            [
+              "Top-level await",
+              "❌ Not supported",
+              "✅ Supported"
+            ],
+            [
+              "File extension",
+              "`.js` (implicit CJS)",
+              "`.mjs` or `\"type\": \"module\"` in package.json"
+            ],
+            [
+              "__dirname / __filename",
+              "✅ Available globally",
+              "❌ Must use `import.meta.url`"
+            ],
+            [
+              "Dynamic import",
+              "`require()` is always dynamic",
+              "`import()` function (both)"
+            ],
+            [
+              "Use today?",
+              "Legacy Node.js, older packages",
+              "✅ Modern standard — use this"
+            ]
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ MODULE SYSTEM ═══\n\n// CommonJS (legacy)\nconst fs = require('fs');\nconst { EventEmitter } = require('events');\nconst myLib = require('./utils');  // relative path\nmodule.exports = { doSomething };\nmodule.exports = function() {};  // export single thing\n\n// ES Modules (modern)\nimport fs from 'fs/promises';         // default import\nimport { readFile, writeFile } from 'fs/promises';  // named imports\nimport * as path from 'path';         // namespace import\nimport('./lazy-module.js');           // dynamic import (lazy loading)\n\nexport const PI = 3.14159;           // named export\nexport default class MyClass {}       // default export\nexport { foo, bar as baz };          // re-export with alias\n\n// ═══ CORE NODE.JS MODULES ═══\nimport { readFile, writeFile, mkdir, stat } from 'fs/promises';\nimport { createReadStream, createWriteStream } from 'fs';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\nimport os from 'os';\nimport crypto from 'crypto';\nimport { EventEmitter } from 'events';\nimport http from 'http';\nimport https from 'https';\nimport net from 'net';\nimport cluster from 'cluster';\nimport worker_threads from 'worker_threads';\n\n// ESM equivalent of __dirname\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = path.dirname(__filename);\n\n// ═══ FILE SYSTEM ═══\n// Non-blocking async read\nconst data = await readFile('./config.json', 'utf-8');\nconst config = JSON.parse(data);\n\n// Write file (creates or overwrites)\nawait writeFile('./output.json', JSON.stringify(result, null, 2));\n\n// Stream large files (memory efficient)\nconst readStream = createReadStream('./huge-file.csv', { encoding: 'utf-8' });\nconst writeStream = createWriteStream('./output.csv');\n\nfor await (const chunk of readStream) {\n  const processed = transformChunk(chunk);\n  writeStream.write(processed);\n}\nwriteStream.end();"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "6.2 Node.js Streams — Processing Large Data Efficiently"
+        },
+        {
+          "type": "callout",
+          "title": "Why Streams Matter",
+          "text": "Reading a 2GB CSV file with fs.readFile() loads it all into memory — potentially crashing your server. Streams read data in chunks (16KB default), process each chunk, and discard it — using constant memory regardless of file size.",
+          "calloutType": "tip"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// Stream types:\n// Readable: source of data (file read, HTTP request body, stdin)\n// Writable: destination (file write, HTTP response, stdout)\n// Transform: Readable + Writable (gzip compression, encryption, CSV parsing)\n// Duplex: Both Readable and Writable (TCP socket)\n\nimport { pipeline } from 'stream/promises';\nimport { createGzip } from 'zlib';\nimport { createReadStream, createWriteStream } from 'fs';\nimport { Transform } from 'stream';\n\n// ═══ pipeline() — the right way (handles backpressure + error propagation) ═══\nawait pipeline(\n  createReadStream('huge.csv'),           // Read source\n  new CSVParser(),                         // Transform: parse CSV\n  new DataFilter({ minAge: 18 }),         // Transform: filter rows\n  new JSONStringifier(),                   // Transform: to JSON\n  createGzip(),                            // Transform: compress\n  createWriteStream('output.json.gz')     // Write destination\n);\n\n// Custom Transform stream\nclass UpperCaseTransform extends Transform {\n  _transform(chunk, encoding, callback) {\n    this.push(chunk.toString().toUpperCase());\n    callback();  // signal ready for next chunk\n  }\n}\n\n// HTTP response as stream (memory-efficient file serving)\nimport http from 'http';\nhttp.createServer((req, res) => {\n  res.setHeader('Content-Type', 'video/mp4');\n  createReadStream('./video.mp4').pipe(res);  // stream file directly to response\n}).listen(3000);"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "6.3 Node.js Event System"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "import { EventEmitter } from 'events';\n\nclass OrderSystem extends EventEmitter {\n  async createOrder(data) {\n    const order = await db.orders.create(data);\n    \n    // Emit events for other parts of the system to react\n    this.emit('order:created', order);\n    this.emit('inventory:reserve', order.items);\n    this.emit('email:send', { \n      to: order.user.email,\n      template: 'order-confirmation',\n      data: order\n    });\n    \n    return order;\n  }\n}\n\nconst orders = new OrderSystem();\n\n// Different modules subscribe to events — decoupled architecture\norders.on('order:created', (order) => analytics.track('Purchase', order));\norders.on('email:send', (emailData) => emailService.send(emailData));\norders.on('inventory:reserve', (items) => warehouse.reserve(items));\n\n// Error handling — ALWAYS handle the error event or Node.js crashes!\norders.on('error', (err) => {\n  console.error('OrderSystem error:', err);\n  alertOpsTeam(err);\n});\n\n// One-time listener\norders.once('ready', () => console.log('Order system initialized'));\n\n// Async event with error boundary\norders.on('order:created', async (order) => {\n  try {\n    await notifications.send(order);\n  } catch (err) {\n    orders.emit('error', err);\n  }\n});"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: Node.js"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the Node.js Event Loop and how is it different from the browser's?",
+          "answer": "Node.js Event Loop phases (libuv):\n1. timers: executes setTimeout/setInterval callbacks\n2. pending callbacks: OS I/O error callbacks\n3. idle, prepare: internal use\n4. poll: retrieve new I/O events (waits here if nothing else pending)\n5. check: setImmediate() callbacks\n6. close callbacks: socket.on('close') etc.\n\nBetween each phase: microtasks (Promise callbacks) and process.nextTick() are drained completely.\n\nprocess.nextTick() runs BEFORE Promise microtasks — highest priority.\n\nBrowser Event Loop differences:\n- No setImmediate (use setTimeout(fn, 0) instead)\n- No process.nextTick\n- Browser adds a rendering phase between tasks\n- Browser API callbacks (click, fetch) go to macrotask queue\n- Both drain microtask queue after each macrotask"
+        }
+      ]
+    },
+    {
+      "num": "7",
+      "title": "HTTP & Express.js",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Building web APIs is the core of backend development. This chapter covers **HTTP protocol internals**, **Express.js architecture**, **middleware patterns**, **REST API design**, **error handling**, **input validation**, and **production-ready API patterns**."
+        },
+        {
+          "type": "h2",
+          "text": "7.1 HTTP Protocol Deep Dive"
+        },
+        {
+          "type": "diagram",
+          "name": "restApiFlow"
+        },
+        {
+          "type": "h3",
+          "text": "HTTP Methods — Semantics & Idempotency"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Method",
+            "Semantic Purpose",
+            "Body?",
+            "Idempotent?",
+            "Safe?"
+          ],
+          "rows": [
+            [
+              "`GET`",
+              "Retrieve a resource or collection",
+              "❌ No",
+              "✅ Yes",
+              "✅ Yes"
+            ],
+            [
+              "`POST`",
+              "Create a new resource or trigger action",
+              "✅ Yes",
+              "❌ No",
+              "❌ No"
+            ],
+            [
+              "`PUT`",
+              "Replace entire resource (full update)",
+              "✅ Yes",
+              "✅ Yes",
+              "❌ No"
+            ],
+            [
+              "`PATCH`",
+              "Partial update of a resource",
+              "✅ Yes",
+              "❌ No*",
+              "❌ No"
+            ],
+            [
+              "`DELETE`",
+              "Remove a resource",
+              "Optional",
+              "✅ Yes",
+              "❌ No"
+            ],
+            [
+              "`HEAD`",
+              "Same as GET but response body omitted — check headers",
+              "❌ No",
+              "✅ Yes",
+              "✅ Yes"
+            ],
+            [
+              "`OPTIONS`",
+              "Discover allowed methods (CORS preflight)",
+              "❌ No",
+              "✅ Yes",
+              "✅ Yes"
+            ]
+          ]
+        },
+        {
+          "type": "h3",
+          "text": "HTTP Status Codes — Complete Reference"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Code",
+            "Name",
+            "When to Use"
+          ],
+          "rows": [
+            [
+              "**2xx — Success**",
+              "",
+              ""
+            ],
+            [
+              "200",
+              "OK",
+              "Successful GET, PUT, PATCH, DELETE"
+            ],
+            [
+              "201",
+              "Created",
+              "Successful POST — resource was created. Include `Location` header"
+            ],
+            [
+              "204",
+              "No Content",
+              "Successful DELETE or action with no response body"
+            ],
+            [
+              "**3xx — Redirection**",
+              "",
+              ""
+            ],
+            [
+              "301",
+              "Moved Permanently",
+              "Permanent URL change — browser caches this"
+            ],
+            [
+              "302",
+              "Found (Temporary Redirect)",
+              "Temporary redirect — use for redirects after POST"
+            ],
+            [
+              "304",
+              "Not Modified",
+              "Browser cache is still valid — no body returned"
+            ],
+            [
+              "**4xx — Client Error**",
+              "",
+              ""
+            ],
+            [
+              "400",
+              "Bad Request",
+              "Invalid request syntax, malformed JSON, validation failure"
+            ],
+            [
+              "401",
+              "Unauthorized",
+              "Not authenticated — no valid token/session provided"
+            ],
+            [
+              "403",
+              "Forbidden",
+              "Authenticated but not authorized — lacks permission"
+            ],
+            [
+              "404",
+              "Not Found",
+              "Resource doesn't exist at this URL"
+            ],
+            [
+              "409",
+              "Conflict",
+              "Resource state conflict (duplicate email, version mismatch)"
+            ],
+            [
+              "422",
+              "Unprocessable Entity",
+              "Validation errors — request format is correct but semantically invalid"
+            ],
+            [
+              "429",
+              "Too Many Requests",
+              "Rate limit exceeded — include `Retry-After` header"
+            ],
+            [
+              "**5xx — Server Error**",
+              "",
+              ""
+            ],
+            [
+              "500",
+              "Internal Server Error",
+              "Unhandled exception — log the error, return generic message"
+            ],
+            [
+              "502",
+              "Bad Gateway",
+              "Upstream server returned invalid response (reverse proxy issue)"
+            ],
+            [
+              "503",
+              "Service Unavailable",
+              "Server overloaded or in maintenance — include `Retry-After`"
+            ]
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "7.2 Express.js — Production API Setup"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "import express from 'express';\nimport helmet from 'helmet';\nimport cors from 'cors';\nimport rateLimit from 'express-rate-limit';\nimport compression from 'compression';\nimport morgan from 'morgan';\nimport { z } from 'zod';\n\nconst app = express();\n\n// ═══ SECURITY MIDDLEWARE ═══\napp.use(helmet());  // Sets 11 security headers automatically\napp.use(cors({\n  origin: ['https://learnxchain.com', 'http://localhost:3000'],\n  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],\n  allowedHeaders: ['Content-Type', 'Authorization'],\n  credentials: true  // allow cookies with CORS\n}));\n\n// ═══ RATE LIMITING ═══\napp.use('/api/', rateLimit({\n  windowMs: 15 * 60 * 1000,  // 15 minutes\n  max: 100,                   // max 100 requests per global\n  message: { error: 'Too many requests. Please try again later.' },\n  standardHeaders: true,      // Return rate limit info in headers\n}));\n\n// ═══ BODY PARSING ═══\napp.use(express.json({ limit: '10kb' }));  // prevent large payload attacks\napp.use(express.urlencoded({ extended: true, limit: '10kb' }));\n\n// ═══ COMPRESSION ═══\napp.use(compression());  // gzip all responses automatically\n\n// ═══ LOGGING ═══\napp.use(morgan('combined'));  // Apache-style access logs\n\n// ═══ ROUTES ═══\napp.use('/api/v1/courses', coursesRouter);\napp.use('/api/v1/users', usersRouter);\napp.use('/api/v1/auth', authRouter);\n\n// ═══ GLOBAL ERROR HANDLER (must have 4 params) ═══\napp.use((err, req, res, next) => {\n  const statusCode = err.statusCode || 500;\n  const isOperational = err.isOperational || false;\n  \n  // Don't expose internal errors to client\n  const message = isOperational ? err.message : 'Internal Server Error';\n  \n  console.error(`[${new Date().toISOString()}] ${statusCode}: ${err.message}`);\n  \n  res.status(statusCode).json({\n    success: false,\n    error: message,\n    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })\n  });\n});\n\n// 404 handler\napp.use((req, res) => {\n  res.status(404).json({ success: false, error: `Route ${req.url} not found` });\n});\n\nexport default app;"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "7.3 REST API Design Patterns"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "import { Router } from 'express';\nimport { z } from 'zod';\n\nconst router = Router();\n\n// ═══ INPUT VALIDATION SCHEMA (Zod) ═══\nconst CreateCourseSchema = z.object({\n  title: z.string().min(3).max(100),\n  description: z.string().min(10).max(2000),\n  price: z.number().min(0).max(9999),\n  level: z.enum(['beginner', 'intermediate', 'advanced']),\n  tags: z.array(z.string()).max(5).optional()\n});\n\n// ═══ VALIDATION MIDDLEWARE ═══\nconst validate = (schema) => (req, res, next) => {\n  const result = schema.safeParse(req.body);\n  if (!result.success) {\n    return res.status(422).json({\n      success: false,\n      errors: result.error.flatten().fieldErrors\n    });\n  }\n  req.body = result.data;  // use parsed/sanitized data\n  next();\n};\n\n// ═══ ASYNC ERROR WRAPPER ═══\nconst asyncHandler = (fn) => (req, res, next) =>\n  Promise.resolve(fn(req, res, next)).catch(next);\n\n// ═══ REST ENDPOINTS ═══\n// GET /api/v1/courses?page=1&limit=20&level=beginner&sort=rating\nrouter.get('/', asyncHandler(async (req, res) => {\n  const { page = 1, limit = 20, level, sort = 'createdAt' } = req.query;\n  const skip = (page - 1) * limit;\n  \n  const [courses, total] = await Promise.all([\n    db.courses.findMany({\n      where: level ? { level } : {},\n      orderBy: { [sort]: 'desc' },\n      skip, take: Number(limit)\n    }),\n    db.courses.count({ where: level ? { level } : {} })\n  ]);\n  \n  res.json({\n    success: true,\n    data: courses,\n    meta: {\n      total, page: Number(page), limit: Number(limit),\n      totalPages: Math.ceil(total / limit)\n    }\n  });\n}));\n\n// GET /api/v1/courses/:id\nrouter.get('/:id', asyncHandler(async (req, res) => {\n  const course = await db.courses.findUnique({ where: { id: req.params.id } });\n  if (!course) throw Object.assign(new Error('Course not found'), { statusCode: 404, isOperational: true });\n  res.json({ success: true, data: course });\n}));\n\n// POST /api/v1/courses\nrouter.post('/', authenticate, authorize('instructor'), validate(CreateCourseSchema),\n  asyncHandler(async (req, res) => {\n    const course = await db.courses.create({\n      data: { ...req.body, instructorId: req.user.id }\n    });\n    res.status(201)\n      .header('Location', `/api/v1/courses/${course.id}`)\n      .json({ success: true, data: course });\n  })\n);\n\nexport default router;"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: Node.js & APIs"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is middleware in Express.js and how does it work?",
+          "answer": "Middleware are functions that have access to (req, res, next) and execute in sequence for every matching request. They form a pipeline — each middleware either ends the request cycle (sends a response) or calls next() to pass control to the next middleware.\n\nTypes:\n1. Application-level: app.use(fn) — runs for all routes\n2. Router-level: router.use(fn) — runs for routes in that router\n3. Error-handling: (err, req, res, next) — 4 params, only runs on errors\n4. Built-in: express.json(), express.static()\n5. Third-party: helmet, cors, morgan, compression\n\nOrder matters: middleware executes in the order registered. Always put error handlers LAST. Put security middleware (helmet, cors, rateLimit) FIRST."
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between authentication and authorization?",
+          "answer": "Authentication (AuthN): Verifying IDENTITY — 'Who are you?'\nValidates credentials (email+password, OAuth token, API key, certificate). Result: a verified user identity.\n\nAuthorization (AuthZ): Verifying PERMISSIONS — 'What are you allowed to do?'\nChecks if the authenticated user has permission to perform a specific action on a resource. Result: access granted or forbidden (403).\n\nIn an Express app:\n1. authenticate middleware: validates JWT, attaches user to req.user\n2. authorize('admin') middleware: checks req.user.role === 'admin'\n\nCommon auth patterns:\n- JWT (stateless): token contains claims, server validates signature\n- Sessions (stateful): server stores session, sends session ID cookie\n- OAuth 2.0: delegate auth to Google/GitHub (for social login)\n- API Keys: for machine-to-machine communication"
+        }
+      ]
+    },
+    {
+      "num": "8",
+      "title": "Databases Masterclass",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Every web application ultimately persists and retrieves data. The choice of database — **relational vs document**, **normalized vs denormalized**, **indexed vs unindexed** — determines your application's performance at scale. This chapter covers everything from SQL fundamentals to indexing strategies, transactions, and NoSQL trade-offs."
+        },
+        {
+          "type": "diagram",
+          "name": "sqlvsnosql"
+        },
+        {
+          "type": "h2",
+          "text": "8.1 Relational Databases & SQL"
+        },
+        {
+          "type": "para",
+          "text": "**Relational databases** store data in **tables** (rows and columns) with predefined schemas. Relationships between tables are defined using **foreign keys**. SQL (Structured Query Language) is the standard language for querying and manipulating relational data."
+        },
+        {
+          "type": "h3",
+          "text": "Database Design — Normalization"
+        },
+        {
+          "type": "para",
+          "text": "**Normalization** is the process of organizing a database to reduce data redundancy and improve integrity. The three most important Normal Forms (NF) are:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "**1NF (First Normal Form)**: Each column contains atomic (indivisible) values. No repeating groups. Each row is unique (has a primary key).",
+            "**2NF (Second Normal Form)**: Must be in 1NF. Every non-key column must depend on the ENTIRE primary key (no partial dependencies). Eliminates redundancy from composite keys.",
+            "**3NF (Third Normal Form)**: Must be in 2NF. No transitive dependencies — non-key columns must not depend on other non-key columns. Move dependent data to a separate table."
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "sql": "-- ═══ SCHEMA DESIGN — Normalized ═══\nCREATE TABLE users (\n  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  email       VARCHAR(255) NOT NULL UNIQUE,\n  name        VARCHAR(100) NOT NULL,\n  password_hash TEXT NOT NULL,\n  role        VARCHAR(20) NOT NULL DEFAULT 'student'\n                CHECK (role IN ('student', 'instructor', 'admin')),\n  created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);\n\nCREATE TABLE courses (\n  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  title         VARCHAR(200) NOT NULL,\n  description   TEXT,\n  price         DECIMAL(8,2) NOT NULL DEFAULT 0 CHECK (price >= 0),\n  level         VARCHAR(20) CHECK (level IN ('beginner', 'intermediate', 'advanced')),\n  instructor_id UUID NOT NULL REFERENCES users(id) ON DELETE RESTRICT,\n  published_at  TIMESTAMPTZ,\n  created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()\n);\n\nCREATE TABLE enrollments (\n  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n  user_id     UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,\n  course_id   UUID NOT NULL REFERENCES courses(id) ON DELETE CASCADE,\n  enrolled_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),\n  completed_at TIMESTAMPTZ,\n  UNIQUE(user_id, course_id)  -- prevent duplicate enrollments\n);\n\n-- ═══ INDEXES — the secret to fast queries ═══\nCREATE INDEX idx_courses_instructor ON courses(instructor_id);  -- FK lookups\nCREATE INDEX idx_courses_level ON courses(level);               -- filter by level\nCREATE INDEX idx_enrollments_user ON enrollments(user_id);      -- user's courses\nCREATE INDEX idx_courses_published ON courses(published_at DESC)  -- ordering\n  WHERE published_at IS NOT NULL;  -- partial index (only published!)\nCREATE INDEX idx_users_email ON users(email);                   -- login lookup"
+          }
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "sql": "-- ═══ SQL QUERIES — from basic to advanced ═══\n\n-- Simple SELECT with filtering\nSELECT title, price, level\nFROM courses\nWHERE level = 'beginner' AND price < 50\nORDER BY price ASC\nLIMIT 20 OFFSET 0;\n\n-- JOIN — get courses with instructor names\nSELECT \n  c.title,\n  c.price,\n  u.name AS instructor_name,\n  COUNT(e.id) AS enrolled_count\nFROM courses c\nINNER JOIN users u ON c.instructor_id = u.id\nLEFT JOIN enrollments e ON e.course_id = c.id\nGROUP BY c.id, c.title, c.price, u.name\nHAVING COUNT(e.id) > 10\nORDER BY enrolled_count DESC\nLIMIT 10;\n\n-- Subquery — users enrolled in 3+ courses\nSELECT name, email\nFROM users\nWHERE id IN (\n  SELECT user_id\n  FROM enrollments\n  GROUP BY user_id\n  HAVING COUNT(*) >= 3\n);\n\n-- CTE (Common Table Expression) — much more readable!\nWITH popular_courses AS (\n  SELECT course_id, COUNT(*) AS enrollment_count\n  FROM enrollments\n  GROUP BY course_id\n  HAVING COUNT(*) > 100\n),\nrecent_enrollments AS (\n  SELECT * FROM enrollments\n  WHERE enrolled_at > NOW() - INTERVAL '30 days'\n)\nSELECT c.title, pc.enrollment_count\nFROM popular_courses pc\nJOIN courses c ON c.id = pc.course_id\nWHERE c.id IN (SELECT course_id FROM recent_enrollments);"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "8.2 Database Indexing — The Performance Secret"
+        },
+        {
+          "type": "para",
+          "text": "A database **index** is a separate data structure (usually a **B-Tree**) that enables the database to find rows matching a WHERE condition in O(log n) time instead of O(n) full-table scan. Proper indexing is the most impactful performance optimization for most applications."
+        },
+        {
+          "type": "callout",
+          "title": "Index Selectivity Warning",
+          "text": "Indexes are most beneficial on high-selectivity columns (columns with many unique values like email, UUID, name). A boolean `is_active` column has only 2 values — an index on it may be slower than a full scan (the optimizer ignores it). Compound indexes must match the query's WHERE clause order — (user_id, course_id) won't be used by a query filtering only on course_id.",
+          "calloutType": "caution"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "sql": "-- ═══ INDEX TYPES ═══\n\n-- B-Tree (default) — equality and range queries, sorting\nCREATE INDEX idx_price ON courses(price);  -- WHERE price < 50, ORDER BY price\n\n-- Composite B-Tree — multiple columns (order matters!)\nCREATE INDEX idx_user_course ON enrollments(user_id, course_id);\n-- Used for: WHERE user_id = ? AND course_id = ?\n-- Used for: WHERE user_id = ?  (leading column)\n-- NOT used for: WHERE course_id = ?  (not leading)\n\n-- Partial index — only index rows matching a condition\nCREATE INDEX idx_published_courses ON courses(created_at DESC)\nWHERE published_at IS NOT NULL AND is_deleted = false;\n-- Smaller index, faster queries for this specific filter\n\n-- Covering index — includes all columns the query needs\nCREATE INDEX idx_course_cover ON courses(level, price)\nINCLUDE (title, instructor_id);\n-- Query can be answered from index alone (no table access!)\n\n-- Full-text search index\nCREATE INDEX idx_course_search ON courses\nUSING GIN(to_tsvector('english', title || ' ' || description));\n\n-- Search query with ranking\nSELECT title, ts_rank(to_tsvector('english', title), query) AS rank\nFROM courses, to_tsquery('english', 'javascript & react') query\nWHERE to_tsvector('english', title) @@ query\nORDER BY rank DESC;\n\n-- ═══ QUERY ANALYSIS ═══\nEXPLAIN ANALYZE SELECT * FROM courses WHERE level = 'beginner';\n-- Look for: Seq Scan (bad for large tables) vs Index Scan (good)\n-- Also check: rows estimate vs actual rows, execution time"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "8.3 ACID Transactions"
+        },
+        {
+          "type": "para",
+          "text": "**ACID** properties guarantee database reliability even when failures occur (crashes, network errors, concurrent access)."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Property",
+            "Meaning",
+            "Example"
+          ],
+          "rows": [
+            [
+              "**A**tomicity",
+              "All operations in a transaction succeed, or ALL are rolled back — no partial updates",
+              "Bank transfer: debit fails → credit is also rolled back"
+            ],
+            [
+              "**C**onsistency",
+              "Transaction brings DB from one valid state to another. Constraints never violated.",
+              "Can't enroll in a course that doesn't exist (FK constraint)"
+            ],
+            [
+              "**I**solation",
+              "Concurrent transactions don't see each other's intermediate states",
+              "Two users can't buy the last seat simultaneously"
+            ],
+            [
+              "**D**urability",
+              "Committed transactions survive crashes — written to disk (WAL log)",
+              "Payment committed at 2:00 PM is still there after server restart at 2:01 PM"
+            ]
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "sql": "-- ═══ TRANSACTION EXAMPLE — bank transfer ═══\nBEGIN;\n\nSELECT balance FROM accounts WHERE id = $sender_id FOR UPDATE;  -- pessimistic lock\n-- Ensure sender has sufficient funds\nUPDATE accounts SET balance = balance - $amount WHERE id = $sender_id;\nUPDATE accounts SET balance = balance + $amount WHERE id = $receiver_id;\nINSERT INTO transactions (from_id, to_id, amount, created_at)\n  VALUES ($sender_id, $receiver_id, $amount, NOW());\n\nCOMMIT;  -- Make all changes permanent atomically\n-- If ANY statement fails above, call ROLLBACK; instead"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: Databases"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the N+1 query problem and how do you fix it?",
+          "answer": "The N+1 problem occurs when you fetch N records, then make N additional queries to fetch related data for each record:\n\n// BAD: 1 query for courses + N queries for instructor (N+1 total)\nconst courses = await db.query('SELECT * FROM courses LIMIT 10');\nfor (const course of courses) {\n  course.instructor = await db.query('SELECT * FROM users WHERE id = $1', [course.instructor_id]);\n}\n\nFixes:\n1. JOIN query: Get everything in one query\nSELECT c.*, u.name as instructor_name\nFROM courses c JOIN users u ON c.instructor_id = u.id LIMIT 10;\n\n2. Eager loading (ORMs like Prisma):\nconst courses = await prisma.courses.findMany({\n  include: { instructor: true }\n});\n\n3. DataLoader (for GraphQL) — batch all individual IDs into one WHERE IN query."
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is database indexing? What are the trade-offs of adding too many indexes?",
+          "answer": "An index is a separate data structure (B-Tree by default) that stores a sorted copy of one or more columns with pointers to the original table rows. It speeds up SELECT queries from O(n) to O(log n).\n\nTrade-offs of too many indexes:\n1. Write penalty: Every INSERT, UPDATE, DELETE must also update ALL indexes on the table — can be 2-5x slower writes\n2. Storage: Each index takes disk space — a large table with 10 indexes might use more space for indexes than data\n3. Memory: Active indexes are loaded into buffer pool (RAM) — too many compete for memory\n4. Query planner overhead: Optimizer must evaluate more index options for each query\n\nRule: Create indexes based on actual slow queries (from EXPLAIN ANALYZE or slow query log). Don't pre-optimize — index when needed."
+        }
+      ]
+    },
+    {
+      "num": "9",
+      "title": "React Masterclass",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "React is the most widely used UI library in the world. Built on the **Virtual DOM**, **unidirectional data flow**, and a **component-based architecture**, React enables building complex, interactive UIs with predictable state management. This chapter covers React from fundamentals to production patterns."
+        },
+        {
+          "type": "diagram",
+          "name": "reactLifecycle"
+        },
+        {
+          "type": "h2",
+          "text": "9.1 React Fundamentals — Components, Props & JSX"
+        },
+        {
+          "type": "para",
+          "text": "React UIs are built from **components** — reusable, independent pieces of UI. Each component is a JavaScript function that takes **props** (input data) and returns **JSX** (HTML-like syntax that compiles to `React.createElement()` calls)."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ FUNCTIONAL COMPONENT WITH PROPS ═══\nfunction CourseCard({ title, instructor, price, rating, badge, onEnroll }) {\n  // Props are read-only — never mutate them!\n  return (\n    <article className=\"course-card\" role=\"listitem\">\n      <header className=\"course-card__header\">\n        {badge && <span className={`badge badge--${badge.type}`}>{badge.label}</span>}\n        <h3 className=\"course-card__title\">{title}</h3>\n        <p className=\"course-card__instructor\">by {instructor}</p>\n      </header>\n      \n      <footer className=\"course-card__footer\">\n        <div className=\"course-card__rating\">\n          <span aria-hidden=\"true\">⭐</span>\n          <span>{rating.toFixed(1)}</span>\n        </div>\n        \n        <div className=\"course-card__price\">\n          {price === 0 ? (\n            <span className=\"price-free\">Free</span>\n          ) : (\n            <span className=\"price-paid\">${price}</span>\n          )}\n        </div>\n        \n        <button\n          className=\"btn btn--primary\"\n          onClick={onEnroll}\n          aria-label={`Enroll in ${title}`}\n        >\n          Enroll Now\n        </button>\n      </footer>\n    </article>\n  );\n}\n\n// Default prop values\nCourseCard.defaultProps = {\n  badge: null,\n  price: 0,\n  rating: 0,\n};\n\n// TypeScript-style prop documentation (using JSDoc)\n/**\n * @param {{ title: string, instructor: string, price: number }} props\n */\n\n// ═══ RENDERING LISTS ═══\nfunction CourseGrid({ courses }) {\n  if (courses.length === 0) {\n    return <p className=\"empty-state\">No courses found.</p>;\n  }\n  \n  return (\n    <ul className=\"course-grid\" role=\"list\">\n      {courses.map((course) => (\n        // Key must be stable, unique, and from data (not array index!)\n        <li key={course.id}>\n          <CourseCard\n            title={course.title}\n            instructor={course.instructor.name}\n            price={course.price}\n            rating={course.rating}\n            onEnroll={() => handleEnroll(course.id)}\n          />\n        </li>\n      ))}\n    </ul>\n  );\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "9.2 useState & useEffect — Core Hooks"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "import { useState, useEffect, useRef, useCallback } from 'react';\n\nfunction CourseBrowser() {\n  // ═══ useState — local component state ═══\n  const [courses, setCourses] = useState([]);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState(null);\n  const [filters, setFilters] = useState({ level: 'all', search: '' });\n  const [page, setPage] = useState(1);\n  \n  // useRef — mutable value that doesn't trigger re-render\n  const abortControllerRef = useRef(null);\n  \n  // ═══ useEffect — side effects ═══\n  // Runs after render when [filters, page] changes\n  useEffect(() => {\n    // Cancel previous fetch (prevents race conditions!)\n    abortControllerRef.current?.abort();\n    abortControllerRef.current = new AbortController();\n    \n    const fetchCourses = async () => {\n      try {\n        setLoading(true);\n        setError(null);\n        \n        const params = new URLSearchParams({\n          page,\n          limit: 20,\n          ...(filters.level !== 'all' && { level: filters.level }),\n          ...(filters.search && { q: filters.search })\n        });\n        \n        const res = await fetch(`/api/v1/courses?${params}`, {\n          signal: abortControllerRef.current.signal\n        });\n        \n        if (!res.ok) throw new Error(`HTTP ${res.status}`);\n        const data = await res.json();\n        setCourses(data.data);\n      } catch (err) {\n        if (err.name !== 'AbortError') {  // ignore cancelled requests\n          setError(err.message);\n        }\n      } finally {\n        setLoading(false);\n      }\n    };\n    \n    fetchCourses();\n    \n    // Cleanup: abort on unmount or before next effect\n    return () => abortControllerRef.current?.abort();\n  }, [filters, page]);  // dependencies array\n  \n  // ═══ Derived state (no separate useState needed!) ═══\n  const hasCourses = courses.length > 0;\n  const filteredCount = courses.filter(c => c.price === 0).length;\n  \n  return (\n    <div>\n      {loading && <Spinner />}\n      {error && <ErrorBanner message={error} />}\n      {hasCourses && <CourseGrid courses={courses} />}\n    </div>\n  );\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "9.3 Custom Hooks — Reusable Logic"
+        },
+        {
+          "type": "para",
+          "text": "**Custom hooks** are functions starting with `use` that encapsulate stateful logic for reuse across components. They are the React equivalent of utility functions — but for stateful, lifecycle-aware logic."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ useFetch — reusable data fetching ═══\nfunction useFetch(url, options = {}) {\n  const [state, setState] = useState({ data: null, loading: true, error: null });\n  \n  useEffect(() => {\n    if (!url) return;\n    const controller = new AbortController();\n    \n    setState(prev => ({ ...prev, loading: true, error: null }));\n    \n    fetch(url, { ...options, signal: controller.signal })\n      .then(res => {\n        if (!res.ok) throw new Error(`HTTP ${res.status}`);\n        return res.json();\n      })\n      .then(data => setState({ data, loading: false, error: null }))\n      .catch(err => {\n        if (err.name !== 'AbortError') {\n          setState({ data: null, loading: false, error: err.message });\n        }\n      });\n    \n    return () => controller.abort();\n  }, [url]);\n  \n  return state;\n}\n\n// Usage\nfunction UserProfile({ userId }) {\n  const { data: user, loading, error } = useFetch(`/api/users/${userId}`);\n  if (loading) return <Spinner />;\n  if (error) return <div>Error: {error}</div>;\n  return <div>{user.name}</div>;\n}\n\n// ═══ useLocalStorage — sync state with localStorage ═══\nfunction useLocalStorage(key, initialValue) {\n  const [value, setValue] = useState(() => {\n    try {\n      const stored = localStorage.getItem(key);\n      return stored ? JSON.parse(stored) : initialValue;\n    } catch { return initialValue; }\n  });\n  \n  const setStoredValue = useCallback((newValue) => {\n    const toStore = typeof newValue === 'function' ? newValue(value) : newValue;\n    setValue(toStore);\n    localStorage.setItem(key, JSON.stringify(toStore));\n  }, [key, value]);\n  \n  return [value, setStoredValue];\n}\n\n// ═══ useDebounce — delay expensive operations ═══\nfunction useDebounce(value, delay = 500) {\n  const [debounced, setDebounced] = useState(value);\n  \n  useEffect(() => {\n    const timer = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(timer);\n  }, [value, delay]);\n  \n  return debounced;\n}\n\n// Usage: only search API when user stops typing for 500ms\nfunction SearchBox() {\n  const [query, setQuery] = useState('');\n  const debouncedQuery = useDebounce(query, 500);\n  const { data: results } = useFetch(debouncedQuery ? `/api/search?q=${debouncedQuery}` : null);\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "9.4 State Management — Context API & External Stores"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ CONTEXT API — share state without prop drilling ═══\nimport { createContext, useContext, useReducer } from 'react';\n\n// 1. Create context\nconst AuthContext = createContext(null);\n\n// 2. Reducer for complex state\nfunction authReducer(state, action) {\n  switch (action.type) {\n    case 'LOGIN':\n      return { ...state, user: action.payload, isAuthenticated: true };\n    case 'LOGOUT':\n      return { ...state, user: null, isAuthenticated: false };\n    case 'UPDATE_PROFILE':\n      return { ...state, user: { ...state.user, ...action.payload } };\n    default:\n      throw new Error(`Unknown action: ${action.type}`);\n  }\n}\n\n// 3. Provider component\nexport function AuthProvider({ children }) {\n  const [state, dispatch] = useReducer(authReducer, {\n    user: null,\n    isAuthenticated: false,\n  });\n  \n  const login = async (credentials) => {\n    const user = await authService.login(credentials);\n    dispatch({ type: 'LOGIN', payload: user });\n  };\n  \n  const logout = async () => {\n    await authService.logout();\n    dispatch({ type: 'LOGOUT' });\n  };\n  \n  return (\n    <AuthContext.Provider value={{ ...state, login, logout }}>\n      {children}\n    </AuthContext.Provider>\n  );\n}\n\n// 4. Custom hook for consuming context\nexport function useAuth() {\n  const ctx = useContext(AuthContext);\n  if (!ctx) throw new Error('useAuth must be used within AuthProvider');\n  return ctx;\n}\n\n// 5. Usage — any deeply nested component\nfunction UserMenu() {\n  const { user, isAuthenticated, logout } = useAuth();\n  if (!isAuthenticated) return <LoginButton />;\n  return (\n    <div>\n      <span>Welcome, {user.name}!</span>\n      <button onClick={logout}>Logout</button>\n    </div>\n  );\n}"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: React"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the Virtual DOM and how does React's reconciliation algorithm work?",
+          "answer": "The Virtual DOM (VDOM) is a lightweight in-memory JavaScript representation of the real DOM tree. React maintains this tree and performs a 'diffing' algorithm to determine the minimal set of real DOM operations needed.\n\nReconciliation process:\n1. State/prop change triggers re-render of component subtree\n2. React calls the component function, generating a new VDOM tree\n3. React 'diffs' the new tree against the previous tree (fiber architecture)\n4. Differences are collected into a list of patches (insertions, updates, deletions)\n5. React applies ONLY the patches to the real DOM (batched, asynchronous in React 18)\n\nKey rules:\n- Elements of different types produce completely new trees (no reuse)\n- Elements of the same type are updated in-place\n- Lists use `key` prop to identify moved/added/removed items\n- Keys must be stable and unique (never use index as key for reorderable lists)"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between useMemo and useCallback?",
+          "answer": "Both are performance optimization hooks that memoize values to prevent unnecessary recalculations on re-renders.\n\nuseCallback(fn, deps): Memoizes a FUNCTION reference. Returns the same function instance between renders unless deps change.\nUse when: Passing callbacks to child components that use React.memo (prevents re-render when parent re-renders but function hasn't changed). Also for useEffect dependencies.\n\nconst handleClick = useCallback(() => {\n  setCount(c => c + 1);\n}, []);  // stable reference — created once\n\nuseMemo(fn, deps): Memoizes a COMPUTED VALUE. Re-runs the function only when deps change.\nUse when: Expensive calculations (filtering large arrays, complex transforms) that shouldn't rerun on every render.\n\nconst sortedCourses = useMemo(() =>\n  courses.sort((a, b) => b.rating - a.rating),\n[courses]);  // only re-sort when courses array changes\n\nKey: Don't overuse — the memoization itself has overhead. Profile first."
+        }
+      ]
+    },
+    {
+      "num": "10",
+      "title": "TypeScript Complete Guide",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "TypeScript adds **static type checking** to JavaScript, catching entire categories of bugs at compile time. It's not a different language — it compiles to plain JavaScript. TypeScript is the industry standard for professional React and Node.js development."
+        },
+        {
+          "type": "h2",
+          "text": "10.1 TypeScript Fundamentals"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "typescript": "// ═══ PRIMITIVE TYPES ═══\nlet name: string = 'Rajneesh';\nlet age: number = 25;\nlet isActive: boolean = true;\nlet score: number | null = null;    // union type\nlet id: string | number;            // either\nconst PI: number = 3.14159;\n\n// ═══ INTERFACES — shape of an object ═══\ninterface User {\n  readonly id: string;          // cannot be changed after creation\n  email: string;\n  name: string;\n  role: 'student' | 'instructor' | 'admin';  // literal union type\n  age?: number;                 // optional property\n  metadata: Record<string, unknown>;  // object with string keys, any values\n  createdAt: Date;\n}\n\n// ═══ TYPE ALIASES — name any type ═══\ntype UserId = string;\ntype Role = 'student' | 'instructor' | 'admin';\ntype ApiResponse<T> = { success: true; data: T } | { success: false; error: string };\n\n// ═══ GENERICS — type-safe reusable functions ═══\nfunction first<T>(arr: T[]): T | undefined {\n  return arr[0];\n}\n\nfirst([1, 2, 3]);       // TypeScript infers: returns number | undefined\nfirst(['a', 'b', 'c']); // TypeScript infers: returns string | undefined\n\nasync function fetchData<T>(url: string): Promise<ApiResponse<T>> {\n  const res = await fetch(url);\n  if (!res.ok) return { success: false, error: `HTTP ${res.status}` };\n  const data: T = await res.json();\n  return { success: true, data };\n}\n\nconst result = await fetchData<User[]>('/api/users');\nif (result.success) {\n  result.data;  // TypeScript knows this is User[]\n}\n\n// ═══ UTILITY TYPES ═══\ntype UserPreview = Pick<User, 'id' | 'name' | 'email'>;\ntype UpdateUser = Partial<User>;  // all fields optional\ntype ReadonlyUser = Readonly<User>;\ntype UserWithoutId = Omit<User, 'id' | 'createdAt'>;\ntype UserRecord = Record<UserId, User>;  // Map<string, User>\n\n// ═══ TYPE NARROWING ═══\nfunction processId(id: string | number) {\n  if (typeof id === 'string') {\n    return id.toUpperCase();  // TypeScript knows: string\n  }\n  return id.toFixed(2);       // TypeScript knows: number\n}\n\n// ═══ TYPE GUARDS ═══\nfunction isUser(value: unknown): value is User {\n  return (\n    typeof value === 'object' &&\n    value !== null &&\n    'id' in value &&\n    'email' in value\n  );\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "10.2 TypeScript with React"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "typescript": "import { useState, useEffect, FC, ReactNode, FormEvent } from 'react';\n\n// ═══ TYPED COMPONENT PROPS ═══\ninterface ButtonProps {\n  children: ReactNode;\n  variant?: 'primary' | 'secondary' | 'danger';\n  size?: 'sm' | 'md' | 'lg';\n  disabled?: boolean;\n  loading?: boolean;\n  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;\n  type?: 'button' | 'submit' | 'reset';\n  className?: string;\n  'aria-label'?: string;\n}\n\nconst Button: FC<ButtonProps> = ({\n  children,\n  variant = 'primary',\n  size = 'md',\n  disabled = false,\n  loading = false,\n  onClick,\n  type = 'button',\n  className,\n  'aria-label': ariaLabel,\n}) => {\n  return (\n    <button\n      type={type}\n      disabled={disabled || loading}\n      onClick={onClick}\n      aria-label={ariaLabel}\n      aria-busy={loading}\n      className={`btn btn--${variant} btn--${size} ${className ?? ''}`.trim()}\n    >\n      {loading ? <Spinner /> : children}\n    </button>\n  );\n};\n\n// ═══ TYPED HOOKS ═══\nfunction useForm<T extends Record<string, unknown>>(initialValues: T) {\n  const [values, setValues] = useState<T>(initialValues);\n  const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});\n  const [isSubmitting, setIsSubmitting] = useState(false);\n  \n  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    const { name, value } = e.target;\n    setValues(prev => ({ ...prev, [name]: value }));\n    // Clear error when user starts typing\n    if (errors[name as keyof T]) {\n      setErrors(prev => ({ ...prev, [name]: undefined }));\n    }\n  };\n  \n  const reset = () => {\n    setValues(initialValues);\n    setErrors({});\n  };\n  \n  return { values, errors, isSubmitting, handleChange, reset, setErrors, setIsSubmitting };\n}\n\n// Usage with TypeScript inference\ninterface LoginForm {\n  email: string;\n  password: string;\n}\n\nfunction LoginPage() {\n  const { values, errors, handleChange, isSubmitting } = useForm<LoginForm>({\n    email: '',\n    password: '',\n  });\n  // values.email is typed as string\n  // values.nonExistent would give TypeScript error!\n}"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: TypeScript"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between `interface` and `type` in TypeScript?",
+          "answer": "Both define the shape of an object. Key differences:\n\ninterface:\n- Can be extended: `interface Admin extends User { permissions: string[] }`\n- Can be merged (declaration merging): two interfaces with the same name merge\n- Better for defining object/class shapes (OOP-style)\n\ntype:\n- Can represent ANY type: primitives, unions, tuples, mapped types\n- Cannot be reopened/merged\n- type Result = 'success' | 'error';  // union\n- type Point = [number, number];       // tuple\n- type Id = string;                    // alias\n- type Callback<T> = (arg: T) => void; // generic alias\n\nGeneral rule: Use `interface` for object shapes (especially public APIs), use `type` for everything else (unions, aliases, utility types, complex generics)."
+        }
+      ]
+    },
+    {
+      "num": "11",
+      "title": "Next.js Masterclass",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Next.js is the production-grade React framework — it adds **Server-Side Rendering (SSR)**, **Static Site Generation (SSG)**, **API Routes**, **file-based routing**, **image optimization**, **middleware**, and **edge computing** to bare React. It's the default choice for production React applications."
+        },
+        {
+          "type": "h2",
+          "text": "11.1 Rendering Strategies — SSR vs SSG vs ISR vs CSR"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Strategy",
+            "When HTML is generated",
+            "Data freshness",
+            "Best for"
+          ],
+          "rows": [
+            [
+              "**SSG** (Static Site Generation)",
+              "At build time",
+              "Stale until rebuild",
+              "Blogs, docs, landing pages — rarely changing content"
+            ],
+            [
+              "**ISR** (Incremental Static Regeneration)",
+              "At build time + regenerates in background every N seconds",
+              "Fresh every N seconds",
+              "E-commerce, news, product pages that change periodically"
+            ],
+            [
+              "**SSR** (Server-Side Rendering)",
+              "On every request at runtime",
+              "Always fresh",
+              "Dashboards, personalized pages, real-time data"
+            ],
+            [
+              "**CSR** (Client-Side Rendering)",
+              "In the browser after JS loads",
+              "Fetched client-side",
+              "Authenticated SPAs, admin panels, highly interactive apps"
+            ],
+            [
+              "**RSC** (React Server Components)",
+              "Rendered on server, no JS sent to client",
+              "Always fresh, zero bundle size",
+              "Data-heavy UI, large components that don't need interactivity"
+            ]
+          ]
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ NEXT.JS APP ROUTER (Next.js 13+) ═══\n\n// app/courses/page.tsx — Server Component (default)\n// Runs on server — can access DB directly, no useEffect needed\nexport default async function CoursesPage() {\n  // Direct DB access — no API route needed!\n  const courses = await prisma.courses.findMany({\n    where: { publishedAt: { not: null } },\n    include: { instructor: { select: { name: true } } },\n    orderBy: { createdAt: 'desc' },\n    take: 20\n  });\n  \n  return (\n    <main>\n      <h1>All Courses</h1>\n      <CourseGrid courses={courses} />\n    </main>\n  );\n}\n\n// Metadata for SEO — exported from page.tsx\nexport const metadata = {\n  title: 'Courses | LearnXChain',\n  description: 'Browse 200+ courses from beginner to advanced',\n  openGraph: { title: 'LearnXChain Courses', type: 'website' }\n};\n\n// ═══ STATIC PARAMS — SSG for dynamic routes ═══\n// app/courses/[id]/page.tsx\nexport async function generateStaticParams() {\n  const courses = await prisma.courses.findMany({ select: { id: true } });\n  return courses.map(c => ({ id: c.id }));\n}\n\nexport const revalidate = 3600;  // ISR: regenerate every 1 hour\n\nexport default async function CoursePage({ params: { id } }) {\n  const course = await prisma.courses.findUnique({\n    where: { id },\n    include: { instructor: true, lessons: true }\n  });\n  \n  if (!course) notFound();  // renders 404 page\n  \n  return <CourseDetail course={course} />;\n}\n\n// ═══ CLIENT COMPONENT (opt-in) ═══\n// Add 'use client' directive for: useState, useEffect, event handlers, browser APIs\n'use client';\nimport { useState } from 'react';\n\nexport function EnrollButton({ courseId, initialEnrolled }) {\n  const [enrolled, setEnrolled] = useState(initialEnrolled);\n  const [loading, setLoading] = useState(false);\n  \n  const handleEnroll = async () => {\n    setLoading(true);\n    await fetch(`/api/enroll/${courseId}`, { method: 'POST' });\n    setEnrolled(true);\n    setLoading(false);\n  };\n  \n  return (\n    <button onClick={handleEnroll} disabled={enrolled || loading}>\n      {enrolled ? 'Enrolled ✓' : loading ? 'Enrolling...' : 'Enroll Now'}\n    </button>\n  );\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "11.2 Next.js API Routes"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// app/api/courses/route.ts — Next.js App Router API\nimport { NextRequest, NextResponse } from 'next/server';\nimport { z } from 'zod';\n\nexport async function GET(request: NextRequest) {\n  const { searchParams } = new URL(request.url);\n  const page = Number(searchParams.get('page') ?? '1');\n  const limit = Math.min(Number(searchParams.get('limit') ?? '20'), 100);\n  \n  const [courses, total] = await Promise.all([\n    prisma.courses.findMany({\n      skip: (page - 1) * limit,\n      take: limit,\n      include: { instructor: { select: { name: true } } }\n    }),\n    prisma.courses.count()\n  ]);\n  \n  return NextResponse.json({ courses, total, page, limit });\n}\n\nexport async function POST(request: NextRequest) {\n  const session = await getServerSession(authOptions);\n  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });\n  \n  const body = await request.json();\n  const schema = z.object({\n    title: z.string().min(3).max(100),\n    description: z.string().min(10),\n    price: z.number().min(0),\n    level: z.enum(['beginner', 'intermediate', 'advanced'])\n  });\n  \n  const parsed = schema.safeParse(body);\n  if (!parsed.success) {\n    return NextResponse.json(\n      { error: 'Validation failed', details: parsed.error.flatten() },\n      { status: 422 }\n    );\n  }\n  \n  const course = await prisma.courses.create({\n    data: { ...parsed.data, instructorId: session.user.id }\n  });\n  \n  return NextResponse.json(course, { status: 201 });\n}"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: Next.js"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between Server Components and Client Components in Next.js App Router?",
+          "answer": "Server Components (default in App Router):\n- Run on the server — never sent to the browser\n- Zero JavaScript bundle size contribution\n- Can directly access databases, file system, environment secrets\n- Can use async/await at component level\n- Cannot use: useState, useEffect, event handlers, browser APIs, or Context\n- Great for: data fetching, layouts, large components, SEO content\n\nClient Components ('use client' at top of file):\n- Run in both server (initial HTML) and browser (hydration)\n- Can use all React hooks, event handlers, browser APIs\n- Send JavaScript to the browser (increases bundle size)\n- Great for: interactive UI, forms, real-time updates, animations\n\nArchitecture pattern: Push interactivity to leaf components. Keep the tree as Server Components as much as possible. Compose: <ServerLayout> → <ClientInteractiveWidget />."
+        }
+      ]
+    },
+    {
+      "num": "12",
+      "title": "Authentication & Security",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Security is not optional — it's a fundamental requirement. This chapter covers **JWT authentication**, **session management**, **OAuth 2.0 / OIDC**, **password hashing**, **CSRF/XSS prevention**, **SQL injection**, and **security headers** — the complete production security toolkit."
+        },
+        {
+          "type": "h2",
+          "text": "12.1 JWT Authentication — Deep Dive"
+        },
+        {
+          "type": "para",
+          "text": "A **JSON Web Token (JWT)** is a compact, self-contained token that encodes claims (user data) signed with a secret. It enables **stateless authentication** — the server doesn't need to store session data, making it ideal for microservices and horizontal scaling."
+        },
+        {
+          "type": "para",
+          "text": "A JWT consists of 3 base64url-encoded parts separated by dots: `header.payload.signature`. The **header** specifies the algorithm (RS256 or HS256). The **payload** contains claims (sub, iat, exp, role). The **signature** is `HMAC_SHA256(base64(header) + '.' + base64(payload), secretKey)` — tamper-proof."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "import jwt from 'jsonwebtoken';\nimport bcrypt from 'bcryptjs';\n\n// ═══ PASSWORD HASHING (never store plaintext!) ═══\nconst SALT_ROUNDS = 12;  // bcrypt cost factor — 2^12 iterations\n\nasync function hashPassword(plaintext) {\n  return bcrypt.hash(plaintext, SALT_ROUNDS);\n}\n\nasync function verifyPassword(plaintext, hash) {\n  return bcrypt.compare(plaintext, hash);\n}\n\n// ═══ TOKEN GENERATION ═══\nfunction generateTokenPair(userId, role) {\n  const payload = { sub: userId, role };\n  \n  const accessToken = jwt.sign(payload, process.env.JWT_SECRET, {\n    expiresIn: '15m',   // short-lived — minimize attack global\n    issuer: 'learnxchain.com',\n    audience: 'learnxchain.com/api'\n  });\n  \n  const refreshToken = jwt.sign(\n    { sub: userId, type: 'refresh' },\n    process.env.JWT_REFRESH_SECRET,\n    { expiresIn: '7d' }\n  );\n  \n  return { accessToken, refreshToken };\n}\n\n// ═══ LOGIN ENDPOINT ═══\nasync function loginHandler(req, res) {\n  const { email, password } = req.body;\n  \n  // Always query user — even if not found, run bcrypt compare\n  // to prevent timing attacks (user enumeration)\n  const user = await db.users.findUnique({ where: { email } });\n  const DUMMY_HASH = '$2b$12$invalidhashtopreventtimingattacks';\n  const isValid = await verifyPassword(password, user?.passwordHash ?? DUMMY_HASH);\n  \n  if (!user || !isValid) {\n    return res.status(401).json({ error: 'Invalid credentials' });\n  }\n  \n  const { accessToken, refreshToken } = generateTokenPair(user.id, user.role);\n  \n  // Store refresh token (hash it first!) in DB for rotation/revocation\n  await db.refreshTokens.create({\n    data: { userId: user.id, tokenHash: await bcrypt.hash(refreshToken, 10) }\n  });\n  \n  // Set refresh token in HttpOnly cookie (XSS-safe)\n  res.cookie('refreshToken', refreshToken, {\n    httpOnly: true,\n    secure: process.env.NODE_ENV === 'production',\n    sameSite: 'strict',\n    maxAge: 7 * 24 * 60 * 60 * 1000  // 7 days in ms\n  });\n  \n  // Send access token in response body (stored in memory by client)\n  res.json({ accessToken, user: { id: user.id, name: user.name, role: user.role } });\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "12.2 Web Security Vulnerabilities"
+        },
+        {
+          "type": "h3",
+          "text": "XSS (Cross-Site Scripting)"
+        },
+        {
+          "type": "para",
+          "text": "**XSS** occurs when an attacker injects malicious JavaScript into your page that executes in other users' browsers. Types: **Stored XSS** (injected into DB, served to all users), **Reflected XSS** (in URL parameters), **DOM-based XSS** (client-side JS uses unsanitized input)."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ❌ VULNERABLE — directly injecting user input as HTML\nelement.innerHTML = userComment;  // attacker posts: <script>steal(document.cookie)</script>\n\n// ✅ FIX — use textContent (no HTML parsing)\nelement.textContent = userComment;\n\n// ✅ FIX — sanitize HTML if markup is needed (DOMPurify)\nimport DOMPurify from 'dompurify';\nelement.innerHTML = DOMPurify.sanitize(userComment, { \n  ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'a'],\n  ALLOWED_ATTR: ['href'] \n});\n\n// ✅ Content Security Policy header — last line of defense\n// Even if XSS occurs, CSP prevents scripts from running\n// Set this header on every response:\nres.setHeader('Content-Security-Policy',\n  \"default-src 'self'; \" +\n  \"script-src 'self' 'nonce-{random}'; \" +\n  \"style-src 'self' https://fonts.googleapis.com; \" +\n  \"img-src 'self' data: https:; \" +\n  \"connect-src 'self' https://api.learnxchain.com;\"\n);"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "CSRF (Cross-Site Request Forgery)"
+        },
+        {
+          "type": "para",
+          "text": "**CSRF** tricks an authenticated user's browser into sending a request to your API from a malicious third-party website. The browser automatically includes cookies (including session cookies), so the server sees an authenticated request it didn't expect."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// CSRF Prevention strategies:\n\n// ✅ Strategy 1: SameSite cookie attribute\nres.cookie('session', token, {\n  sameSite: 'strict',  // Cookie NOT sent on cross-site requests at all\n  httpOnly: true,\n  secure: true\n});\n\n// ✅ Strategy 2: CSRF token (double submit cookie)\n// Server generates random token, sends in cookie AND expects it in request header\nimport csrf from 'csrf';\nconst tokens = new csrf();\nconst secret = tokens.secretSync();\nconst csrfToken = tokens.create(secret);\n\n// Client includes CSRF token in every state-changing request:\n// fetch('/api/transfer', {\n//   method: 'POST',\n//   headers: { 'X-CSRF-Token': csrfToken }\n// })\n\n// ✅ Strategy 3: Check Origin/Referer header on state-changing requests\napp.use((req, res, next) => {\n  if (['POST','PUT','DELETE','PATCH'].includes(req.method)) {\n    const origin = req.headers.origin;\n    if (origin && !['https://learnxchain.com'].includes(origin)) {\n      return res.status(403).json({ error: 'CSRF: Origin not allowed' });\n    }\n  }\n  next();\n});"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "SQL Injection"
+        },
+        {
+          "type": "para",
+          "text": "**SQL Injection** occurs when user input is directly concatenated into SQL queries, allowing attackers to manipulate the query logic — reading unauthorized data, deleting tables, or bypassing auth."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ❌ VULNERABLE — never concatenate user input!\nconst user = await db.query(\n  `SELECT * FROM users WHERE email = '${req.body.email}'`\n);\n// Attacker sends: email = ' OR '1'='1\n// Query becomes: SELECT * FROM users WHERE email = '' OR '1'='1'\n// Returns ALL users!\n\n// ✅ FIX — parameterized queries (pg driver)\nconst result = await db.query(\n  'SELECT * FROM users WHERE email = $1 AND active = $2',\n  [req.body.email, true]  // driver handles escaping!\n);\n\n// ✅ FIX — ORM (Prisma handles this automatically)\nconst user = await prisma.users.findUnique({\n  where: { email: req.body.email }  // always parameterized\n});\n\n// ✅ FIX — raw SQL with ORM (when needed)\nconst result = await prisma.$queryRaw`\n  SELECT * FROM users WHERE email = ${req.body.email}\n`;"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: Security"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What security headers should every web application set?",
+          "answer": "Critical security headers (use `helmet` npm package for Express to set all automatically):\n\n1. Content-Security-Policy: Whitelist trusted script, style, image sources. Prevents XSS.\n2. X-Content-Type-Options: nosniff — Prevents MIME-type sniffing attacks.\n3. X-Frame-Options: DENY — Prevents your page from being embedded in iframes (clickjacking).\n4. Strict-Transport-Security: max-age=31536000; includeSubDomains — Forces HTTPS.\n5. Referrer-Policy: strict-origin-when-cross-origin — Controls what data is sent in Referer header.\n6. Permissions-Policy: Disables access to sensitive browser APIs (camera, microphone, geolocation) that your app doesn't need.\n7. Cross-Origin-Resource-Policy: same-origin — Prevents other sites from loading your resources.\n\nIn Express: app.use(helmet()) sets all of these with sensible defaults in one line."
+        }
+      ]
+    },
+    {
+      "num": "13",
+      "title": "System Design",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "System design is the art of **architecting scalable, reliable, and maintainable systems**. This chapter covers the fundamental building blocks of large-scale web systems: load balancing, caching, message queues, databases at scale, CDNs, and real-world case studies like designing Twitter, Netflix, and WhatsApp."
+        },
+        {
+          "type": "diagram",
+          "name": "systemDesignArch"
+        },
+        {
+          "type": "h2",
+          "text": "13.1 Scalability Fundamentals"
+        },
+        {
+          "type": "para",
+          "text": "**Scalability** is a system's ability to handle growing load without degrading performance. There are two strategies:"
+        },
+        {
+          "type": "bullet",
+          "items": [
+            "**Vertical Scaling (Scale Up)**: Upgrade the existing server to a more powerful machine (more CPU, RAM, faster disk). Simple — no code changes. Limited by the maximum hardware available. Single point of failure. Example: upgrading from 4-core to 32-core server.",
+            "**Horizontal Scaling (Scale Out)**: Add more servers behind a load balancer. Theoretically unlimited. Requires stateless application design (sessions in Redis, not local memory). More complex — requires distributed systems knowledge. Example: adding 10 more Node.js instances.",
+            "**Database Sharding**: Split a large database table across multiple database servers (shards) based on a shard key (e.g., user_id modulo 4). Each shard handles a subset of the data. Enables horizontal database scaling.",
+            "**Read Replicas**: One primary database for writes, multiple read-only replicas for reads. 80% of most app traffic is reads — distributing reads dramatically reduces primary load."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "13.2 Caching — The Performance Multiplier"
+        },
+        {
+          "type": "para",
+          "text": "**Caching** stores expensive computation results or database query results in fast memory (Redis) for subsequent reads. A well-designed cache can reduce database load by 80-90% and reduce API response times from 200ms to under 5ms."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "import Redis from 'ioredis';\n\nconst redis = new Redis(process.env.REDIS_URL);\n\n// ═══ CACHE-ASIDE PATTERN (most common) ═══\nasync function getCourse(courseId) {\n  const cacheKey = `course:${courseId}`;\n  \n  // 1. Check cache first (L1)\n  const cached = await redis.get(cacheKey);\n  if (cached) return JSON.parse(cached);  // Cache HIT — fast!\n  \n  // 2. Cache miss — fetch from database\n  const course = await prisma.courses.findUnique({\n    where: { id: courseId },\n    include: { instructor: true, lessons: true }\n  });\n  \n  if (!course) return null;\n  \n  // 3. Store in cache with TTL (time-to-live)\n  await redis.setex(cacheKey, 3600, JSON.stringify(course));  // 1 hour TTL\n  \n  return course;  // Cache MISS — slow, but next read is fast\n}\n\n// ═══ CACHE INVALIDATION — the hard problem ═══\nasync function updateCourse(courseId, data) {\n  const course = await prisma.courses.update({\n    where: { id: courseId },\n    data\n  });\n  \n  // Invalidate cache so stale data isn't served\n  await redis.del(`course:${courseId}`);\n  \n  // Also invalidate any list caches that include this course\n  await redis.del('courses:list:*');  // pattern delete\n  \n  return course;\n}\n\n// ═══ SESSION CACHING ═══\nasync function getSession(sessionId) {\n  const session = await redis.get(`session:${sessionId}`);\n  return session ? JSON.parse(session) : null;\n}\n\nasync function createSession(userId, data) {\n  const sessionId = crypto.randomUUID();\n  await redis.setex(`session:${sessionId}`, 86400, JSON.stringify({ userId, ...data }));\n  return sessionId;\n}\n\n// ═══ RATE LIMITING with Redis ═══\nasync function checkRateLimit(ip, limit = 100, windowSeconds = 900) {\n  const key = `rate:${ip}`;\n  const requests = await redis.incr(key);\n  if (requests === 1) await redis.expire(key, windowSeconds);  // Set TTL on first request\n  return requests <= limit;  // true = allowed, false = blocked\n}"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "13.3 Message Queues & Event-Driven Architecture"
+        },
+        {
+          "type": "para",
+          "text": "A **message queue** decouples producers (services that create work) from consumers (services that process work). This enables **asynchronous processing**, **load leveling**, **retry mechanisms**, and **service isolation** — the backbone of microservices architecture."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "javascript": "// ═══ BullMQ — Redis-based job queue ═══\nimport { Queue, Worker, QueueEvents } from 'bullmq';\n\n// Producer — add jobs to queue\nconst emailQueue = new Queue('email', { connection: redis });\n\nasync function sendWelcomeEmail(user) {\n  await emailQueue.add('welcome-email', {\n    to: user.email,\n    name: user.name,\n    templateId: 'welcome'\n  }, {\n    attempts: 3,          // retry up to 3 times on failure\n    backoff: { type: 'exponential', delay: 1000 },  // 1s, 2s, 4s\n    removeOnComplete: 100,  // keep last 100 completed jobs\n    removeOnFail: 50        // keep last 50 failed jobs\n  });\n}\n\n// Consumer — Worker processes jobs\nconst emailWorker = new Worker('email', async (job) => {\n  const { to, name, templateId } = job.data;\n  \n  await sendGrid.send({\n    to,\n    from: 'noreply@learnxchain.com',\n    templateId,\n    dynamicTemplateData: { name }\n  });\n  \n  console.log(`Email sent to ${to} (job ${job.id})`);\n}, {\n  connection: redis,\n  concurrency: 5  // process 5 emails simultaneously\n});\n\nemailWorker.on('failed', (job, err) => {\n  console.error(`Email job ${job.id} failed:`, err.message);\n  alertSlack(`Email delivery failed: ${job.data.to}`);\n});"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: System Design"
+        },
+        {
+          "type": "interviewCard",
+          "question": "How would you design a URL shortener like bit.ly?",
+          "answer": "Requirements: Accept long URLs, return short 6-char codes. Handle 100M URLs, 1B reads/day.\n\nAPI Design:\nPOST /shorten { url: 'https://...' } → { shortCode: 'abc123' }\nGET /{code} → 301 Redirect to original URL\n\nCore Algorithm (Base62 encoding):\n1. Assign auto-incrementing ID to each URL (e.g., ID = 12345678)\n2. Encode to base62: 12345678 → 'dnh75' (using 0-9, a-z, A-Z alphabet)\n3. Store mapping: { code: 'dnh75', url: 'https://...', createdAt, clicks }\n\nDatabase: PostgreSQL for URL storage. Index on (code) for O(log n) lookup.\n\nCaching: Redis cache for hot URLs (top 20% URLs = 80% of traffic). GET /{code} → check Redis first → fallback to DB.\n\nScaling: Horizontal web servers behind load balancer. Read replicas for DB. CDN for 301 responses (browser caches redirects for 24h). Counter service for click analytics (async, don't block redirects).\n\nCustom domains: CNAME to our servers, tenant lookup by Host header."
+        }
+      ]
+    },
+    {
+      "num": "14",
+      "title": "DevOps & Deployment",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "Shipping code to production reliably, repeatably, and safely is a core engineering skill. This chapter covers **Docker containerization**, **CI/CD pipelines**, **environment management**, **monitoring & alerting**, and **cloud deployment** — everything needed to go from `npm run dev` to production at scale."
+        },
+        {
+          "type": "h2",
+          "text": "14.1 Docker — Containerization"
+        },
+        {
+          "type": "para",
+          "text": "**Docker** packages your application and all its dependencies (runtime, libraries, config) into a **container** — a lightweight, portable, isolated environment that runs identically everywhere: your laptop, CI, staging, and production. Eliminates 'it works on my machine' forever."
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "dockerfile": "# ═══ PRODUCTION-GRADE DOCKERFILE ═══\n# Multi-stage build: separate build env from runtime\n\n# Stage 1: Dependencies\nFROM node:20-alpine AS deps\nWORKDIR /app\n\n# Copy package files first (Docker layer cache optimization)\nCOPY package.json package-lock.json ./\nRUN npm ci --only=production\n\n# Stage 2: Builder\nFROM node:20-alpine AS builder\nWORKDIR /app\nCOPY package.json package-lock.json ./\nRUN npm ci\nCOPY . .\nRUN npm run build\n\n# Stage 3: Production runner (smallest possible image)\nFROM node:20-alpine AS runner\nWORKDIR /app\n\n# Security: don't run as root\nRUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001\nUSER nextjs\n\n# Copy only what's needed for runtime\nCOPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules\nCOPY --from=builder --chown=nextjs:nodejs /app/.next ./.next\nCOPY --from=builder --chown=nextjs:nodejs /app/public ./public\nCOPY --from=builder --chown=nextjs:nodejs /app/package.json ./\n\n# Environment\nENV NODE_ENV=production\nENV PORT=3000\n\nEXPOSE 3000\n\n# Health check — Docker/K8s will restart if this fails\nHEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \\\n  CMD wget -q -O /dev/null http://localhost:3000/api/health || exit 1\n\nCMD [\"npm\", \"start\"]"
+          }
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "yaml": "# docker-compose.yml — Local development environment\nversion: '3.9'\n\nservices:\n  app:\n    build:\n      context: .\n      dockerfile: Dockerfile.dev\n    volumes:\n      - .:/app\n      - /app/node_modules  # don't override node_modules\n    ports:\n      - '3000:3000'\n    environment:\n      NODE_ENV: development\n      DATABASE_URL: postgresql://postgres:password@db:5432/learnxchain\n      REDIS_URL: redis://redis:6379\n    depends_on:\n      db:\n        condition: service_healthy\n      redis:\n        condition: service_started\n  \n  db:\n    image: postgres:16-alpine\n    volumes:\n      - postgres_data:/var/lib/postgresql/data\n      - ./init.sql:/docker-entrypoint-initdb.d/init.sql\n    environment:\n      POSTGRES_USER: postgres\n      POSTGRES_PASSWORD: password\n      POSTGRES_DB: learnxchain\n    healthcheck:\n      test: ['CMD-SHELL', 'pg_isready -U postgres']\n      interval: 10s\n      timeout: 5s\n      retries: 5\n  \n  redis:\n    image: redis:7-alpine\n    command: redis-server --save 60 1 --loglevel warning\n    volumes:\n      - redis_data:/data\n\nvolumes:\n  postgres_data:\n  redis_data:"
+          }
+        },
+        {
+          "type": "h2",
+          "text": "14.2 CI/CD Pipeline — GitHub Actions"
+        },
+        {
+          "type": "tabbedCodeBlock",
+          "codeMap": {
+            "yaml": "# .github/workflows/deploy.yml\nname: CI/CD Pipeline\n\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\nenv:\n  NODE_VERSION: '20'\n  REGISTRY: ghcr.io\n  IMAGE_NAME: ${{ github.repository }}\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    services:\n      postgres:\n        image: postgres:16\n        env:\n          POSTGRES_PASSWORD: test\n          POSTGRES_DB: testdb\n        options: >-\n          --health-cmd pg_isready\n          --health-interval 10s\n    \n    steps:\n      - uses: actions/checkout@v4\n      \n      - uses: actions/setup-node@v4\n        with:\n          node-version: ${{ env.NODE_VERSION }}\n          cache: 'npm'\n      \n      - run: npm ci\n      - run: npm run typecheck\n      - run: npm run lint\n      - run: npm run test:unit -- --coverage\n      - run: npm run test:e2e\n        env:\n          DATABASE_URL: postgresql://postgres:test@localhost:5432/testdb\n      \n      - uses: codecov/codecov-action@v3\n  \n  build-and-push:\n    needs: test\n    if: github.ref == 'refs/heads/main'\n    runs-on: ubuntu-latest\n    \n    steps:\n      - uses: actions/checkout@v4\n      \n      - uses: docker/login-action@v3\n        with:\n          registry: ${{ env.REGISTRY }}\n          username: ${{ github.actor }}\n          password: ${{ secrets.GITHUB_TOKEN }}\n      \n      - uses: docker/build-push-action@v5\n        with:\n          context: .\n          push: true\n          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}\n          cache-from: type=gha\n          cache-to: type=gha,mode=max\n  \n  deploy:\n    needs: build-and-push\n    runs-on: ubuntu-latest\n    environment: production\n    \n    steps:\n      - name: Deploy to production\n        run: |\n          kubectl set image deployment/app \\\n            app=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}\n          kubectl rollout status deployment/app --timeout=5m"
+          }
+        },
+        {
+          "type": "h3",
+          "text": "Interview Questions: DevOps"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between horizontal and vertical scaling? When do you use each?",
+          "answer": "Vertical Scaling (Scale Up): Increase the resources of a single machine (more CPU cores, more RAM, faster SSD).\n- Pros: Simple — no code changes, no distributed systems complexity\n- Cons: Hardware limits exist. Single point of failure. Downtime needed to resize. Expensive at high end.\n- Use for: Databases (easier than distributed DB), when you haven't yet exhausted vertical options, small applications\n\nHorizontal Scaling (Scale Out): Add more machines running the same application behind a load balancer.\n- Pros: Theoretically unlimited. No single point of failure. Cost-effective (commodity hardware). Can scale individual services independently.\n- Cons: Application must be stateless (sessions in Redis, not memory). More complex. Need load balancer, service discovery.\n- Use for: Stateless web servers, microservices, read-heavy workloads\n\nPractical approach: Start vertical (simpler), switch to horizontal when you hit limits or need high availability."
+        }
+      ]
+    },
+    {
+      "num": "15",
+      "title": "Interview Preparation",
+      "content": [
+        {
+          "type": "chapterIntro",
+          "text": "This chapter consolidates the most commonly asked web development interview questions across all major companies — FAANG, top startups, and mid-size companies. Organized by topic with comprehensive answers and code examples."
+        },
+        {
+          "type": "h2",
+          "text": "15.1 Frontend Interview Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is event delegation and why is it important?",
+          "answer": "Event delegation is the technique of attaching a single event listener to a PARENT element instead of multiple listeners to each child element.\n\nHow it works: Events bubble up from child to parent in the DOM tree. The parent listener can inspect event.target to determine which child was clicked.\n\nWhy it matters:\n1. Performance: 1 listener vs 1000 listeners (for a list of 1000 items)\n2. Dynamic content: New children added later automatically work (no re-binding)\n3. Memory: Less event listeners = less memory usage\n\nExample:\n// BAD: 100 listeners for 100 buttons\nbuttons.forEach(btn => btn.addEventListener('click', handler));\n\n// GOOD: 1 listener on container\ncontainer.addEventListener('click', (e) => {\n  const btn = e.target.closest('[data-action]');\n  if (!btn) return;\n  handleAction(btn.dataset.action);\n});"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What are Web Workers and when would you use them?",
+          "answer": "Web Workers run JavaScript in a background thread — separate from the main thread. Since JavaScript is single-threaded, heavy computation on the main thread blocks UI rendering and user interactions.\n\nWeb Workers:\n- Have no access to the DOM\n- Communicate via postMessage() / onmessage\n- Run in a completely isolated context\n\nWhen to use:\n1. Image/video processing (pixel manipulation, compression)\n2. Cryptography operations (key generation, hashing)\n3. Parsing large datasets (CSV, JSON)\n4. Complex physics/game simulations\n5. Real-time code syntax highlighting\n\nExample:\n// main.js\nconst worker = new Worker('/workers/crypto.js');\nworker.postMessage({ action: 'hash', data: largeFile });\nworker.onmessage = (e) => console.log('Hash:', e.data.result);\n\n// workers/crypto.js\nself.onmessage = async (e) => {\n  const hash = await crypto.subtle.digest('SHA-256', e.data.data);\n  self.postMessage({ result: hex(hash) });\n};"
+        },
+        {
+          "type": "interviewCard",
+          "question": "Explain the browser's same-origin policy and CORS.",
+          "answer": "Same-Origin Policy (SOP): Browsers prevent JavaScript on page A from making requests to a different origin than page A. Origin = protocol + hostname + port.\nhttps://learnxchain.com:443 ≠ https://api.learnxchain.com:443 (different subdomain)\nhttps://learnxchain.com ≠ http://learnxchain.com (different protocol)\n\nCORS (Cross-Origin Resource Sharing): The server explicitly tells the browser which origins are allowed to make cross-origin requests via response headers.\n\nSimple requests (GET, POST with form-data): Browser adds `Origin: https://learnxchain.com`. Server must respond with `Access-Control-Allow-Origin: https://learnxchain.com` (or *). If missing → browser blocks the response.\n\nPreflight requests: For requests with custom headers, JSON bodies, or non-GET/POST methods, browser first sends OPTIONS request. Server responds with allowed methods, headers, and max cache time for preflight. Then browser sends actual request.\n\nCredentials (cookies): Requires both `credentials: 'include'` on fetch AND `Access-Control-Allow-Credentials: true` with a non-wildcard origin."
+        },
+        {
+          "type": "h2",
+          "text": "15.2 Backend & System Design Quick Questions"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the difference between SQL JOINs?",
+          "answer": "INNER JOIN: Returns only rows where there is a match in BOTH tables. Non-matching rows from either table are excluded.\nSELECT * FROM orders INNER JOIN users ON orders.user_id = users.id;\n→ Only orders with a valid user_id that exists in users table\n\nLEFT JOIN: Returns ALL rows from the LEFT table, with matching rows from right table. If no match in right table → NULL values.\n→ All orders, with user info if available (orders with deleted users still appear)\n\nRIGHT JOIN: Opposite of LEFT JOIN. All rows from RIGHT table.\n→ All users, even those with no orders\n\nFULL OUTER JOIN: All rows from BOTH tables. NULLs where no match.\n→ Combination of LEFT and RIGHT JOIN results\n\nCROSS JOIN: Cartesian product — every row from table A combined with every row from table B. 10 × 10 = 100 rows.\n→ Generating all combinations (rare, usually accidental)\n\nSELF JOIN: Join a table with itself using an alias.\n→ Hierarchical data: employees.manager_id references employees.id"
+        },
+        {
+          "type": "interviewCard",
+          "question": "What is the CAP Theorem?",
+          "answer": "CAP Theorem (Eric Brewer, 2000): A distributed data system can only guarantee 2 of 3 properties simultaneously:\n\nC — Consistency: Every read receives the most recent write or an error. All nodes see the same data at the same time.\n\nA — Availability: Every request receives a response (not necessarily with the latest data). The system is always operational.\n\nP — Partition Tolerance: The system continues operating even if network partitions (message loss between nodes) occur.\n\nIn reality, network partitions ALWAYS happen — so it's always CP vs AP:\n\nCP (Consistent + Partition Tolerant): Returns error rather than stale data. Use for: banking, payment systems (ZooKeeper, HBase, MongoDB in default mode)\n\nAP (Available + Partition Tolerant): Returns best-effort data that may be stale. Use for: DNS, social feeds, product catalog (Cassandra, CouchDB, DynamoDB)\n\nCAP is often oversimplified — PACELC theorem extends it to also consider latency vs consistency tradeoffs during normal operation."
+        },
+        {
+          "type": "h2",
+          "text": "15.3 Core Concepts Quick Reference"
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Concept",
+            "One-Line Definition",
+            "Key Example"
+          ],
+          "rows": [
+            [
+              "**REST**",
+              "HTTP API design using resources and standard methods",
+              "GET /users, POST /courses, DELETE /posts/1"
+            ],
+            [
+              "**GraphQL**",
+              "Query language for APIs — clients request exactly what they need",
+              "`query { user { name courses { title } } }`"
+            ],
+            [
+              "**WebSockets**",
+              "Persistent bidirectional connection — server can push data",
+              "Real-time chat, live notifications, collaborative editing"
+            ],
+            [
+              "**Microservices**",
+              "Application split into small, independent, deployable services",
+              "Auth service + Order service + Notification service"
+            ],
+            [
+              "**Load Balancer**",
+              "Distributes incoming requests across multiple server instances",
+              "Round-robin, least-connections, weighted algorithms"
+            ],
+            [
+              "**CDN**",
+              "Network of edge servers caching content close to users worldwide",
+              "Cloudflare, AWS CloudFront — 10ms vs 300ms latency"
+            ],
+            [
+              "**Redis**",
+              "In-memory key-value store for caching, sessions, rate limiting",
+              "GET → cache hit → 1ms vs DB query → 200ms"
+            ],
+            [
+              "**Message Queue**",
+              "Async buffer between producer services and consumer workers",
+              "Email queue, video processing queue, payment processing"
+            ],
+            [
+              "**OAuth 2.0**",
+              "Authorization framework — delegate access without sharing passwords",
+              "'Login with Google' button — Google issues token"
+            ],
+            [
+              "**JWT**",
+              "Compact signed token encoding user claims for stateless auth",
+              "`eyJ...` — contains userId, role, expiry, signature"
+            ],
+            [
+              "**Webhook**",
+              "HTTP callback — server notifies your URL when an event occurs",
+              "Stripe sends POST to /webhook on payment.succeeded"
+            ],
+            [
+              "**Rate Limiting**",
+              "Restrict requests per user/IP in a time global",
+              "100 API requests per 15 minutes per IP"
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "handbookToc": null
+}
